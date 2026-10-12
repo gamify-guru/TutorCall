@@ -93,7 +93,8 @@ const W=[
 const E=Object.fromEntries(W.map(w=>[w.en,w.em]));
 const CODES=['SEED','SUN','RAIN','ROOT','LEAF','SOIL','BEE','CROP'],BONUS='GOLD';
 const KEY='tutorcall-food-grows-v1';
-let S=JSON.parse(localStorage.getItem(KEY)||'null')||{codes:{},done:{},gate:false,hw:false,refl:null};
+let S=JSON.parse(localStorage.getItem(KEY)||'null')||{codes:{},done:{},gate:false,hw:false,refl:null};S.a=S.a||{};
+const A=(k,d)=>(S.a[k]??=d);
 const save=()=>localStorage.setItem(KEY,JSON.stringify(S));
 const $=(s,r=document)=>r.querySelector(s);
 const h=(t,a={},...c)=>{const e=document.createElement(t);for(const k in a){if(k.startsWith('on'))e.addEventListener(k.slice(2),a[k]);else if(k==='html')e.innerHTML=a[k];else e.setAttribute(k,a[k])}c.flat().forEach(x=>e.append(x));return e};
@@ -126,7 +127,7 @@ function start(){
  h('div',{class:'row'},h('button',{class:'green',id:'startBtn',onclick:()=>go('map')},'▶ Начать приключение'),h('button',{class:'sec',onclick:reset},'🔄 Начать заново')));
  panel('🌾 Слова урока','Посмотри и послушай каждое слово. Как оно растёт?',h('div',{class:'cardsgrid'},...W.map(wordCard)));
 }
-function reset(){if(!confirm('Начать заново? Все коды пропадут.'))return;localStorage.removeItem(KEY);S={codes:{},done:{},gate:false,hw:false,refl:null};renderBar();go('start')}
+function reset(){if(!confirm('Начать заново? Все коды пропадут.'))return;localStorage.removeItem(KEY);S={codes:{},done:{},gate:false,hw:false,refl:null,a:{}};renderBar();go('start')}
 function map(){
  const n=Object.keys(S.codes).length;
  panel('🗺️ Карта фермы','Выбери задание. Собрано кодов: <b>'+n+' из 8</b>.',
@@ -140,9 +141,10 @@ function map(){
 function s1(){
  const fb=h('div',{class:'fb'});let selW=null,selP=null,left=8;
  const words=h('div',{class:'grid'}),pics=h('div',{class:'grid'}),out=h('div');
- const check=()=>{if(!selW||!selP)return;if(selW.dataset.w===selP.dataset.w){[selW,selP].forEach(e=>{e.classList.remove('sel');e.classList.add('ok')});say(selW.dataset.w);fb.className='fb ok';fb.textContent='Верно! 👍';if(--left===0){S.done.s1=1;out.append(giveCode(0))}}else{[selW,selP].forEach(e=>{e.classList.add('bad');e.classList.remove('sel');setTimeout(()=>e.classList.remove('bad'),400)});fb.className='fb bad';fb.textContent='Ой, не пара. Попробуй ещё!'}selW=selP=null};
+ const check=()=>{if(!selW||!selP)return;if(selW.dataset.w===selP.dataset.w){[selW,selP].forEach(e=>{e.classList.remove('sel');e.classList.add('ok')});say(selW.dataset.w);A('s1',[]).includes(selW.dataset.w)||(S.a.s1.push(selW.dataset.w),save());fb.className='fb ok';fb.textContent='Верно! 👍';if(--left===0){S.done.s1=1;out.append(giveCode(0))}}else{[selW,selP].forEach(e=>{e.classList.add('bad');e.classList.remove('sel');setTimeout(()=>e.classList.remove('bad'),400)});fb.className='fb bad';fb.textContent='Ой, не пара. Попробуй ещё!'}selW=selP=null};
  shuffle(W).forEach(w=>words.append(h('div',{class:'tile','data-w':w.en,'data-k':'w',onclick(){if(this.classList.contains('ok'))return;selW&&selW.classList.remove('sel');selW=this;this.classList.add('sel');check()}},w.en)));
  shuffle(W).forEach(w=>pics.append(h('div',{class:'tile','data-w':w.en,'data-k':'p',onclick(){if(this.classList.contains('ok'))return;selP&&selP.classList.remove('sel');selP=this;this.classList.add('sel');check()}},h('span',{class:'em'},w.em))));
+ A('s1',[]).forEach(w=>{[words,pics].forEach(g=>{const t=g.querySelector('[data-w="'+w+'"]');t&&t.classList.add('ok')});left--});if(left===0){S.done.s1=1;out.append(giveCode(0))}
  panel('1. Найди пару 🧺','Нажми на <b>слово</b>, а потом на <b>картинку</b>, которая ему подходит. Найди все 8 пар!',h('h3',{},'Words'),words,h('h3',{},'Pictures'),pics,fb,out,backRow());
 }
 // Stage 2: listen and choose
@@ -150,16 +152,17 @@ function s2(){
  const out=h('div'),box=h('div');let ok=0;
  shuffle(W).forEach((w,i)=>{const opts=shuffle([w,...shuffle(W.filter(x=>x!==w)).slice(0,2)]);
   const it=h('div',{class:'item','data-ans':w.en},h('div',{class:'row'},h('b',{},(i+1)+'.'),h('button',{onclick:()=>say(w.en)},'🔊 Послушать')),
-   h('div',{class:'opts'},...opts.map(o=>h('button',{class:'big','data-w':o.en,'aria-label':o.en,onclick(){if(it.classList.contains('ok'))return;if(o===w){this.classList.add('ok');it.classList.add('ok');if(++ok===8){S.done.s2=1;out.append(giveCode(1))}}else{this.classList.add('bad');say(w.en)}}},o.em))));box.append(it)});
+   h('div',{class:'opts'},...opts.map(o=>h('button',{class:'big','data-w':o.en,'aria-label':o.en,onclick(){if(it.classList.contains('ok'))return;if(o===w){this.classList.add('ok');it.classList.add('ok');A('s2',[]).includes(w.en)||(S.a.s2.push(w.en),save());if(++ok===8){S.done.s2=1;out.append(giveCode(1))}}else{this.classList.add('bad');say(w.en)}}},o.em))));box.append(it);if(A('s2',[]).includes(w.en)){it.classList.add('ok');const c=it.querySelector('[data-w="'+w.en+'"]');c&&c.classList.add('ok');ok++}});if(ok===8){S.done.s2=1;out.append(giveCode(1))}
  panel('2. Послушай и выбери 👂','Нажми <b>🔊</b>, послушай слово и выбери нужную картинку.',h('img',{class:'crop',src:'farm.jpg',alt:''}),box,out,backRow());
 }
 // Stage 3: sort drag&drop + tap
 function s3(){
  const out=h('div'),fb=h('div',{class:'fb'}),pool=h('div',{class:'pool'});let sel=null,left=8;
  const bins={fruit:h('div',{class:'bin','data-t':'fruit'},h('h3',{},'🍎 Fruits')),veg:h('div',{class:'bin','data-t':'veg'},h('h3',{},'🥕 Vegetables'))};
- const drop=(chip,bin)=>{if(!chip)return;if(chip.dataset.t===bin.dataset.t){chip.classList.remove('sel');chip.draggable=false;bin.append(chip);say(chip.dataset.w);fb.className='fb ok';fb.textContent='Правильно!';if(--left===0){S.done.s3=1;out.append(giveCode(2))}}else{chip.classList.add('bad');setTimeout(()=>chip.classList.remove('bad'),400);fb.className='fb bad';fb.textContent='Подумай ещё: это фрукт или овощ?'}sel=null};
+ const drop=(chip,bin)=>{if(!chip)return;if(chip.dataset.t===bin.dataset.t){chip.classList.remove('sel');chip.draggable=false;bin.append(chip);A('s3',[]).includes(chip.dataset.w)||(S.a.s3.push(chip.dataset.w),save());say(chip.dataset.w);fb.className='fb ok';fb.textContent='Правильно!';if(--left===0){S.done.s3=1;out.append(giveCode(2))}}else{chip.classList.add('bad');setTimeout(()=>chip.classList.remove('bad'),400);fb.className='fb bad';fb.textContent='Подумай ещё: это фрукт или овощ?'}sel=null};
  shuffle(W).forEach(w=>{const c=h('div',{class:'chip',draggable:'true','data-t':w.ty,'data-w':w.en,onclick(){if(this.parentNode!==pool)return;sel&&sel.classList.remove('sel');sel=this;this.classList.add('sel')},ondragstart(e){e.dataTransfer.setData('text',w.en);sel=this}},w.em+' '+w.en);pool.append(c)});
  Object.values(bins).forEach(b=>{b.addEventListener('dragover',e=>{e.preventDefault();b.classList.add('over')});b.addEventListener('dragleave',()=>b.classList.remove('over'));b.addEventListener('drop',e=>{e.preventDefault();b.classList.remove('over');drop(sel,b)});b.addEventListener('click',()=>sel&&drop(sel,b))});
+ A('s3',[]).forEach(w=>{const c=pool.querySelector('[data-w="'+w+'"]');if(c){c.draggable=false;bins[c.dataset.t].append(c);left--}});if(left===0){S.done.s3=1;out.append(giveCode(2))}
  panel('3. Фрукты или овощи? 🧺','Перетащи каждое слово в нужную корзину. На планшете: <b>нажми на слово</b>, потом <b>на корзину</b>.<br><small>Подсказка учителю: на уроке считаем «по-кухонному» — сладкое = fruit.</small>',pool,h('div',{class:'bins'},bins.fruit,bins.veg),fb,out,backRow());
 }
 // Stage 4: gaps (part A, code 4) + phrase building (part B, code 5)
@@ -170,11 +173,11 @@ function s4(){
  const bank=h('div',{class:'instr'},'Word bank: ',W.map(w=>w.en).join(' · '));
  GAPS.forEach(([s,ans],i)=>{const inp=h('input',{type:'text','aria-label':'gap '+(i+1),'data-ans':ans,autocomplete:'off',autocapitalize:'off',spellcheck:'false'});const it=h('div',{class:'item'});
   const chk=()=>{if(it.classList.contains('ok'))return;if(norm(inp.value)===ans.toLowerCase()){inp.classList.add('ok');inp.disabled=true;it.classList.add('ok');if(++okA===GAPS.length){S.done.s4a=1;outA.append(giveCode(3))}}else{inp.classList.add('bad');setTimeout(()=>inp.classList.remove('bad'),500)}};
-  inp.addEventListener('keydown',e=>e.key==='Enter'&&chk());
-  const [p1,p2]=s.split('___');it.append(h('div',{class:'row'},(i+1)+'. '+p1,inp,p2,h('button',{onclick:chk},'✔')));a.append(it)});
+  inp.addEventListener('keydown',e=>e.key==='Enter'&&chk());inp.addEventListener('input',()=>{A('s4a',{})[i]=inp.value;save()});const sv=A('s4a',{})[i];
+  const [p1,p2]=s.split('___');it.append(h('div',{class:'row'},(i+1)+'. '+p1,inp,p2,h('button',{onclick:chk},'✔')));a.append(it);if(sv){inp.value=sv;if(norm(sv)===ans.toLowerCase())chk()}});
  PHR.forEach((p,i)=>{const it=h('div',{class:'item','data-ans':p}),ansBox=h('div',{class:'answer'}),pool=h('div',{class:'pool'}),fb=h('div',{class:'fb'});
   shuffle(p.split(' ')).forEach(w=>{const c=h('div',{class:'chip',onclick(){if(it.classList.contains('ok'))return;(this.parentNode===pool?ansBox:pool).append(this)}},w);pool.append(c)});
-  it.append(h('div',{class:'row'},h('b',{},(i+1)+'.'),h('button',{class:'sec',onclick:()=>say(p)},'🔊'),h('button',{onclick(){const got=[...ansBox.children].map(c=>c.textContent).join(' ');if(got===p){it.classList.add('ok');fb.className='fb ok';fb.textContent='Отлично! Теперь скажи вслух 🗣️';say(p);if(++okB===PHR.length){S.done.s4b=1;outB.append(giveCode(4))}}else{fb.className='fb bad';fb.textContent='Порядок не тот. Нажми на слово, чтобы вернуть его.'}}},'✔ Проверить')),ansBox,pool,fb);b.append(it)});
+  it.append(h('div',{class:'row'},h('b',{},(i+1)+'.'),h('button',{class:'sec',onclick:()=>say(p)},'🔊'),h('button',{onclick(){const got=[...ansBox.children].map(c=>c.textContent).join(' ');if(got===p){it.classList.add('ok');fb.className='fb ok';fb.textContent='Отлично! Теперь скажи вслух 🗣️';A('s4b',[]).includes(i)||(S.a.s4b.push(i),save());if(!this.dataset.r)say(p);if(++okB===PHR.length){S.done.s4b=1;outB.append(giveCode(4))}}else{fb.className='fb bad';fb.textContent='Порядок не тот. Нажми на слово, чтобы вернуть его.'}}},'✔ Проверить',)),ansBox,pool,fb);b.append(it);if(A('s4b',[]).includes(i)){p.split(' ').forEach(w=>{const c=[...pool.children].find(x=>x.textContent===w);c&&ansBox.append(c)});const cb=it.querySelector('.row button:last-child');cb.dataset.r=1;cb.click();delete cb.dataset.r}});
  panel('4A. Заполни пропуски ✏️','Впиши слово из банка слов в каждое предложение и нажми ✔. Все 8 верно — код!',bank,a,outA);
  panel('4B. Собери фразу 🧩','Нажимай на слова по порядку, чтобы собрать предложение. Потом <b>произнеси его вслух</b> учителю!',b,outB,backRow());
 }
@@ -183,16 +186,16 @@ function s5(){
  const parts=[['grapes','lemon','potato'],['peas','pepper','beans'],['coconut','watermelon']];
  const p=panel('5. Диктант фермера 🎧✍️','Нажми <b>🔊</b> (или посмотри на картинку), напиши слово по-английски и нажми <b>Проверить</b>. Код дают только за <b>правильное написание</b> всех слов части!',h('img',{class:'crop',src:'farm.jpg',alt:''}));
  parts.forEach((ws,pi)=>{const out=h('div'),box=h('div',{class:'item'},h('h3',{},'Часть '+(pi+1)));const inps=[];
-  ws.forEach((w,i)=>{const inp=h('input',{type:'text','data-ans':w,'aria-label':'dictation '+w,autocomplete:'off',autocapitalize:'off',spellcheck:'false'});inps.push(inp);
+  ws.forEach((w,i)=>{const inp=h('input',{type:'text','data-ans':w,'aria-label':'dictation '+w,autocomplete:'off',autocapitalize:'off',spellcheck:'false'});inps.push(inp);inp.addEventListener('input',()=>{(A('s5',{})[pi]??=[])[i]=inp.value;save()});const v5=(A('s5',{})[pi]||[])[i];if(v5)inp.value=v5;
    box.append(h('div',{class:'row'},h('button',{class:'sec',onclick:()=>say(w)},'🔊'),h('button',{class:'sec',onclick(){this.textContent=E[w]}},'🖼️ картинка'),inp))});
   const fb=h('div',{class:'fb'});
-  box.append(h('button',{class:'green',onclick(){let ok=0;inps.forEach(i=>{const g=norm(i.value)===i.dataset.ans;i.classList.toggle('ok',g);i.classList.toggle('bad',!g);ok+=g});if(ok===inps.length){inps.forEach(i=>i.disabled=true);fb.className='fb ok';fb.textContent='Всё написано верно! ✨';if(!out.firstChild)out.append(giveCode(5+pi))}else{fb.className='fb bad';fb.textContent='Верно: '+ok+' из '+inps.length+'. Исправь красные слова. Можно заглянуть в Словарь!'}}},'✔ Проверить'),fb,out);p.append(box)});
+  box.append(h('button',{class:'green',onclick(){let ok=0;inps.forEach(i=>{const g=norm(i.value)===i.dataset.ans;i.classList.toggle('ok',g);i.classList.toggle('bad',!g);ok+=g});if(ok===inps.length){inps.forEach(i=>i.disabled=true);fb.className='fb ok';fb.textContent='Всё написано верно! ✨';if(!out.firstChild)out.append(giveCode(5+pi))}else{fb.className='fb bad';fb.textContent='Верно: '+ok+' из '+inps.length+'. Исправь красные слова. Можно заглянуть в Словарь!'}}},'✔ Проверить'),fb,out);p.append(box);if(inps.every(x=>norm(x.value)===x.dataset.ans))box.querySelector('button.green').click()});
  p.append(backRow());
 }
 // Gate
 function gate(){
  const g=h('div',{class:'gate'+(S.gate?' open':'')},S.gate?'🏞️':'🚧🔒🚧'),ins=h('div',{class:'codesin'}),fb=h('div',{class:'fb'}),out=h('div');
- CODES.forEach((c,i)=>ins.append(h('input',{type:'text','aria-label':'code '+(i+1),placeholder:'Код '+(i+1),autocomplete:'off'})));
+ CODES.forEach((c,i)=>{const e=h('input',{type:'text','aria-label':'code '+(i+1),placeholder:'Код '+(i+1),autocomplete:'off'});e.value=A('gate',[])[i]||'';e.addEventListener('input',()=>{S.a.gate[i]=e.value;save()});ins.append(e)});
  const refl=()=>h('div',{class:'panel'},h('h2',{},'💭 Подумай'),h('div',{class:'instr'},'Как прошёл урок? Выбери смайлик и назови учителю 3 слова, которые ты запомнил.'),
   h('div',{class:'opts'},...[['😄','Всё понятно!'],['🙂','Почти всё'],['🤔','Нужно повторить']].map(([e,t])=>h('button',{class:S.refl===e?'ok':'',onclick(){S.refl=e;save();[...this.parentNode.children].forEach(x=>x.classList.remove('ok'));this.classList.add('ok')}},e+' '+t))),
   h('p',{},'How does a potato grow? — It grows under the ground. 🥔'),
@@ -206,8 +209,8 @@ function gate(){
 function hw(){
  const items=[],out=h('div');let ok=0;const total=7;
  const done=it=>{if(it.classList.contains('ok'))return;it.classList.add('ok');if(++ok===total){S.hw=true;save();renderBar();out.innerHTML='';out.append(h('div',{class:'reward',id:'bonus'},'⭐ Домашняя миссия выполнена! Золотой бонус-код:',h('br'),h('b',{class:'code'},BONUS),h('br'),'Покажи его учителю на следующем уроке!'))}};
- const choice=(q,opts,ans)=>{const it=h('div',{class:'item'},h('div',{html:q}));it.append(h('div',{class:'opts'},...opts.map(o=>h('button',{'data-o':o,onclick(){if(it.classList.contains('ok'))return;if(o===ans){this.classList.add('ok');done(it)}else this.classList.add('bad')}},o))));return it};
- const typed=(q,ans)=>{const inp=h('input',{type:'text',autocomplete:'off',autocapitalize:'off'}),it=h('div',{class:'item'},h('div',{html:q}));it.append(h('div',{class:'row'},inp,h('button',{onclick(){const g=Array.isArray(ans)?ans.includes(norm(inp.value)):norm(inp.value)===ans;inp.classList.toggle('ok',g);inp.classList.toggle('bad',!g);if(g){inp.disabled=true;done(it)}}},'✔')));return it};
+ let qi=0;const choice=(q,opts,ans)=>{const k=qi++;const it=h('div',{class:'item'},h('div',{html:q}));it.append(h('div',{class:'opts'},...opts.map(o=>h('button',{'data-o':o,onclick(){if(it.classList.contains('ok'))return;if(o===ans){this.classList.add('ok');A('hw',{})[k]=o;save();done(it)}else this.classList.add('bad')}},o))));it._r=()=>{const v=A('hw',{})[k];if(v!=null){const b=[...it.querySelectorAll('button')].find(b=>b.dataset.o===v);b&&b.click()}};return it};
+ const typed=(q,ans)=>{const k=qi++;const inp=h('input',{type:'text',autocomplete:'off',autocapitalize:'off'}),it=h('div',{class:'item'},h('div',{html:q}));inp.addEventListener('input',()=>{A('hw',{})[k]=inp.value;save()});const btn=h('button',{onclick(){const g=Array.isArray(ans)?ans.includes(norm(inp.value)):norm(inp.value)===ans;inp.classList.toggle('ok',g);inp.classList.toggle('bad',!g);if(g){inp.disabled=true;done(it)}}},'✔');it.append(h('div',{class:'row'},inp,btn));it._r=()=>{const v=A('hw',{})[k];if(v!=null){inp.value=v;const g=Array.isArray(ans)?ans.includes(norm(v)):norm(v)===ans;if(g)btn.click()}};return it};
  const list=[
   choice('1. <b>Правда или нет?</b> 🥔 «A potato grows on a tree.»',['True','False'],'False'),
   choice('2. <b>Лишнее слово.</b> Что НЕ растёт в стручке (pod)?',['peas','beans','lemon'],'lemon'),
@@ -216,8 +219,9 @@ function hw(){
   choice('5. <b>Какого цвета?</b> «A lemon is ___.»',['red','yellow','blue'],'yellow'),
   typed('6. <b>Ответь на вопрос</b> (одно слово): «Where does a coconut grow? On a palm ___.»','tree'),
   typed('7. <b>Напиши о себе:</b> закончи фразу «I like …» любым словом урока (например: <i>I like peas</i>).',W.flatMap(w=>['i like '+w.en,w.en]))];
+ list.forEach(it=>it._r&&it._r());
  panel('🏡 Домашняя миссия','Сделай дома 7 заданий. Сделаешь все — получишь <b>золотой бонус-код</b> ⭐! Можно пользоваться Словарём.',...list,out,backRow());
- if(S.hw)out.append(h('div',{class:'reward',id:'bonus'},'⭐ Бонус-код уже получен: ',h('b',{class:'code'},BONUS)));
+ if(S.hw&&!out.firstChild)out.append(h('div',{class:'reward',id:'bonus'},'⭐ Бонус-код уже получен: ',h('b',{class:'code'},BONUS)));
 }
 renderBar();go((location.hash||'#start').slice(1));
 window.LESSON={W,CODES,GAPS,PHR,BONUS};
