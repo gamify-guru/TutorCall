@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Farm Explorer: How the food grows — Unit 8 Lesson 1</title>
+<style>
+:root{--g:#3f9b3a;--g2:#2c7a2a;--y:#ffd23f;--o:#ff8c42;--r:#e94f37;--sky:#bfe9ff;--soil:#8b5a2b;--ink:#2d2a1f;--card:#fffdf4}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;color:var(--ink);background:linear-gradient(#bfe9ff 0,#e8f8ff 260px,#dff3c8 260px,#cdeaa9 100%);min-height:100vh}
+header{position:sticky;top:0;z-index:20;background:var(--g2);color:#fff;padding:8px 12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;box-shadow:0 3px 8px #0003}
+header h1{font-size:1.05rem;margin:0;flex:1 1 auto}
+.codebar{display:flex;gap:4px;flex-wrap:wrap}
+.slot{min-width:46px;height:30px;border-radius:8px;border:2px dashed #ffffff88;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:.8rem;background:#ffffff18}
+.slot.got{background:var(--y);color:var(--ink);border:2px solid #fff;animation:pop .5s}
+.slot.bonus{border-color:#ffd23f}
+@keyframes pop{0%{transform:scale(.3)}70%{transform:scale(1.25)}100%{transform:scale(1)}}
+button{font:inherit;cursor:pointer;border:none;border-radius:12px;padding:10px 16px;font-weight:bold;background:var(--y);color:var(--ink);box-shadow:0 3px 0 #c9a100;touch-action:manipulation}
+button:active{transform:translateY(2px);box-shadow:none}
+button.sec{background:#fff;box-shadow:0 3px 0 #bbb}
+button.green{background:var(--g);color:#fff;box-shadow:0 3px 0 #1d5a1b}
+main{max-width:900px;margin:0 auto;padding:14px}
+.panel{background:var(--card);border-radius:20px;padding:18px;margin:14px 0;box-shadow:0 6px 0 #9bc47a,0 8px 20px #0002;border:3px solid #fff}
+h2{margin:.2em 0 .4em;color:var(--g2)}
+.instr{background:#fff3c4;border-left:6px solid var(--o);padding:8px 12px;border-radius:10px;margin:8px 0 14px}
+.hero{width:100%;border-radius:16px;display:block;border:4px solid #fff;box-shadow:0 4px 12px #0003}
+.story{font-size:1.1rem;line-height:1.5}
+.map{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:12px}
+.map button{text-align:left;padding:12px;min-height:74px}
+.map button.done{background:#bdf0a8;box-shadow:0 3px 0 #6fb35a}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.tile{background:#fff;border:3px solid #e5dcc0;border-radius:14px;padding:10px;text-align:center;cursor:pointer;user-select:none;font-size:1.05rem;min-height:56px;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:.15s}
+.tile .em{font-size:2.4rem}
+.tile.sel{border-color:var(--o);background:#fff0de;transform:scale(1.04)}
+.tile.ok{border-color:var(--g);background:#dcf7d2;cursor:default}
+.tile.bad{border-color:var(--r);background:#ffe1dc;animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.item{background:#fff;border-radius:14px;padding:10px 12px;margin:8px 0;border:2px solid #eee4c8}
+.item.ok{border-color:var(--g);background:#effbea}
+.opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.opts button{background:#fff;box-shadow:0 3px 0 #ccc;border:2px solid #e5dcc0}
+.opts button.ok{background:#bdf0a8;border-color:var(--g)}
+.opts button.bad{background:#ffd0c8;border-color:var(--r)}
+input[type=text]{font:inherit;font-size:1.1rem;padding:9px 12px;border-radius:10px;border:3px solid #d8cba3;min-width:0;width:180px}
+input.ok{border-color:var(--g);background:#effbea}input.bad{border-color:var(--r);background:#fff0ee}
+.bins{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.bin{min-height:150px;border-radius:16px;border:4px dashed #b48a5a;background:#f6e7cf;padding:8px;display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start}
+.bin h3{width:100%;margin:2px 0 6px;text-align:center}
+.bin.over{background:#ffe9b0}
+.chip{background:#fff;border:3px solid #e5dcc0;border-radius:12px;padding:6px 10px;font-size:1.05rem;cursor:grab;user-select:none;touch-action:manipulation}
+.chip.sel{border-color:var(--o);background:#fff0de}
+.chip.bad{border-color:var(--r);animation:shake .35s}
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:50px;padding:8px;border-radius:12px;background:#fff8e0}
+.answer{min-height:48px;border-bottom:3px solid var(--soil);display:flex;flex-wrap:wrap;gap:6px;padding:6px;margin:6px 0}
+.reward{background:linear-gradient(135deg,#fff6c4,#ffe082);border:3px solid var(--y);border-radius:16px;padding:14px;text-align:center;font-size:1.15rem;margin-top:12px}
+.reward b.code{font-size:1.6rem;letter-spacing:3px;background:#fff;padding:2px 10px;border-radius:8px;display:inline-block;margin:4px}
+.fb{min-height:1.4em;font-weight:bold;margin:6px 0}.fb.ok{color:var(--g2)}.fb.bad{color:var(--r)}
+#dict{position:fixed;top:0;right:0;height:100%;width:min(420px,100%);background:#fffdf4;z-index:50;transform:translateX(105%);transition:.3s;overflow:auto;padding:14px;box-shadow:-6px 0 20px #0004}
+#dict.open{transform:none}
+.wcard{display:grid;grid-template-columns:64px 1fr;gap:10px;background:#fff;border-radius:14px;border:3px solid #dff0c8;padding:10px;margin:8px 0}
+.wcard .em{font-size:2.8rem;text-align:center}
+.wcard .en{font-size:1.25rem;font-weight:bold;color:var(--g2)}
+.wcard .tr{color:#7a6a4a;font-size:.95rem}
+.wcard .ru{font-weight:bold}.wcard .ex{font-style:italic;margin:4px 0}
+.wcard button{padding:6px 10px;font-size:.9rem}
+.cardsgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px}
+.gate{font-size:5rem;text-align:center;transition:1s}
+.gate.open{transform:scale(1.2)}
+.codesin{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+.codesin input{width:100%;text-transform:uppercase}
+.hidden{display:none!important}
+.crop{width:100%;max-height:220px;object-fit:cover;border-radius:14px;border:3px solid #fff;margin-bottom:8px}
+.big{font-size:2.6rem}
+@media(max-width:560px){header h1{font-size:.9rem}.slot{min-width:38px;font-size:.7rem}.bins{grid-template-columns:1fr}}
+</style></head>
+<body>
+<header>
+ <h1>🌱 Farm Explorer</h1>
+ <div class="codebar" id="codebar"></div>
+ <button id="dictBtn">📖 Словарь / Подсказка</button>
+ <button class="sec" id="homeBtn">🗺️ Карта</button>
+</header>
+<aside id="dict" aria-label="Словарь"><div class="row"><h2 style="flex:1">📖 Словарь фермы</h2><button class="sec" id="dictClose">✖</button></div><div id="dictCards"></div></aside>
+<main id="app"></main>
+<script>
+const W=[
+ {en:'beans',tr:'[biːnz]',ru:'фасоль, бобы',em:'🫘',ex:'Green beans grow in long pods.',ty:'veg'},
+ {en:'coconut',tr:'[ˈkəʊkənʌt]',ru:'кокос',em:'🥥',ex:'A coconut grows on a tall palm tree.',ty:'fruit'},
+ {en:'grapes',tr:'[ɡreɪps]',ru:'виноград',em:'🍇',ex:'Grapes grow on a vine.',ty:'fruit'},
+ {en:'lemon',tr:'[ˈlemən]',ru:'лимон',em:'🍋',ex:'A lemon is yellow. It grows on a tree.',ty:'fruit'},
+ {en:'peas',tr:'[piːz]',ru:'горох, горошек',em:'🟢',ex:'Peas are small and green. They grow in pods.',ty:'veg'},
+ {en:'pepper',tr:'[ˈpepə]',ru:'перец',em:'🫑',ex:'This pepper is red. It grows on a plant.',ty:'veg'},
+ {en:'potato',tr:'[pəˈteɪtəʊ]',ru:'картофель',em:'🥔',ex:'A potato grows under the ground.',ty:'veg'},
+ {en:'watermelon',tr:'[ˈwɔːtəmelən]',ru:'арбуз',em:'🍉',ex:'A watermelon is big. It grows on the ground.',ty:'fruit'}];
+const E=Object.fromEntries(W.map(w=>[w.en,w.em]));
+const CODES=['SEED','SUN','RAIN','ROOT','LEAF','SOIL','BEE','CROP'],BONUS='GOLD';
+const KEY='tutorcall-food-grows-v1';
+let S=JSON.parse(localStorage.getItem(KEY)||'null')||{codes:{},done:{},gate:false,hw:false,refl:null};
+const save=()=>localStorage.setItem(KEY,JSON.stringify(S));
+const $=(s,r=document)=>r.querySelector(s);
+const h=(t,a={},...c)=>{const e=document.createElement(t);for(const k in a){if(k.startsWith('on'))e.addEventListener(k.slice(2),a[k]);else if(k==='html')e.innerHTML=a[k];else e.setAttribute(k,a[k])}c.flat().forEach(x=>e.append(x));return e};
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function say(t){try{const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=.8;const v=speechSynthesis.getVoices().find(v=>v.lang&&v.lang.startsWith('en-US'));if(v)u.voice=v;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+const norm=s=>s.trim().toLowerCase().replace(/\s+/g,' ').replace(/[.!?]$/,'');
+// ---------- code bar
+function renderBar(){const b=$('#codebar');b.innerHTML='';CODES.forEach((c,i)=>b.append(h('div',{class:'slot'+(S.codes[i]?' got':''),title:'Код '+(i+1)},S.codes[i]?c:'🔒')));b.append(h('div',{class:'slot bonus'+(S.hw?' got':''),title:'Бонус'},S.hw?'⭐'+BONUS:'⭐'))}
+function giveCode(i){const first=!S.codes[i];S.codes[i]=true;save();renderBar();return h('div',{class:'reward'},first?'🎉 Ура! Ты нашёл код урожая №'+(i+1)+':':'Код урожая №'+(i+1)+':',h('br'),h('b',{class:'code','data-code':CODES[i]},CODES[i]),h('br'),'Запиши его — он откроет ворота фермы!')}
+// ---------- dictionary
+function wordCard(w){return h('div',{class:'wcard'},h('div',{class:'em'},w.em),h('div',{},h('div',{class:'en'},w.en+' ',h('span',{class:'tr'},w.tr)),h('div',{class:'ru'},w.ru),h('div',{class:'ex'},w.ex),h('button',{onclick:()=>say(w.en+'. '+w.ex)},'🔊 Послушать')))}
+$('#dictCards').append(...W.map(wordCard));
+$('#dictBtn').onclick=()=>$('#dict').classList.toggle('open');$('#dictClose').onclick=()=>$('#dict').classList.remove('open');
+$('#homeBtn').onclick=()=>go('map');
+// ---------- stages
+const STAGES=[
+ {id:'s1',title:'1. Найди пару',sub:'слово ↔ картинка',codes:[0]},
+ {id:'s2',title:'2. Послушай и выбери',sub:'аудио',codes:[1]},
+ {id:'s3',title:'3. Фрукты или овощи?',sub:'сортировка',codes:[2]},
+ {id:'s4',title:'4. Предложения',sub:'пропуски + фразы',codes:[3,4]},
+ {id:'s5',title:'5. Диктант фермера',sub:'слушай и пиши',codes:[5,6,7]}];
+const app=$('#app');
+function go(v){speechSynthesis&&speechSynthesis.cancel();app.innerHTML='';window.scrollTo(0,0);location.hash=v;({start,map,s1,s2,s3,s4,s5,gate,hw}[v]||start)()}
+function panel(title,instr,...c){const p=h('div',{class:'panel'},h('h2',{},title),instr?h('div',{class:'instr',html:instr}):'',...c);app.append(p);return p}
+function backRow(){return h('div',{class:'row'},h('button',{class:'sec',onclick:()=>go('map')},'⬅ На карту фермы'))}
+function start(){
+ panel('🚜 Юный исследователь фермы','',h('img',{class:'hero',src:'farm.jpg',alt:'Мальчик-исследователь на ферме'}),
+ h('p',{class:'story',html:'Привет, исследователь! 👋 Ты приехал на волшебную ферму. Здесь растут <b>grapes, lemons, peppers, potatoes, watermelons, peas, beans</b> и даже <b>coconuts</b>! Но ворота фермы закрыты на замок с <b>8 кодами урожая</b>. 🔐<br>Проходи задания, собирай коды и открой ворота! А в конце тебя ждёт <b>Домашняя миссия</b> с бонусным золотым кодом ⭐.'}),
+ h('div',{class:'instr',html:'Забыл слово? Нажми <b>📖 Словарь / Подсказка</b> сверху — там все карточки со звуком.'}),
+ h('div',{class:'row'},h('button',{class:'green',id:'startBtn',onclick:()=>go('map')},'▶ Начать приключение'),h('button',{class:'sec',onclick:reset},'🔄 Начать заново')));
+ panel('🌾 Слова урока','Посмотри и послушай каждое слово. Как оно растёт?',h('div',{class:'cardsgrid'},...W.map(wordCard)));
+}
+function reset(){if(!confirm('Начать заново? Все коды пропадут.'))return;localStorage.removeItem(KEY);S={codes:{},done:{},gate:false,hw:false,refl:null};renderBar();go('start')}
+function map(){
+ const n=Object.keys(S.codes).length;
+ panel('🗺️ Карта фермы','Выбери задание. Собрано кодов: <b>'+n+' из 8</b>.',
+  h('img',{class:'crop',src:'farm.jpg',alt:''}),
+  h('div',{class:'map'},...STAGES.map(s=>h('button',{class:s.codes.every(i=>S.codes[i])?'done':'',id:'go-'+s.id,onclick:()=>go(s.id)},(s.codes.every(i=>S.codes[i])?'✅ ':'')+s.title,h('br'),h('small',{},s.sub+' · кодов: '+s.codes.length))),
+   h('button',{class:'green',id:'go-gate',onclick:()=>go('gate')},'🚪 Ворота фермы',h('br'),h('small',{},'введи 8 кодов')),
+   h('button',{id:'go-hw',class:S.hw?'done':'',onclick:()=>go('hw')},'🏡 Домашняя миссия',h('br'),h('small',{},'бонус ⭐'))),
+  h('div',{class:'row'},h('button',{class:'sec',onclick:reset},'🔄 Начать заново')));
+}
+// Stage 1: match word-picture
+function s1(){
+ const fb=h('div',{class:'fb'});let selW=null,selP=null,left=8;
+ const words=h('div',{class:'grid'}),pics=h('div',{class:'grid'}),out=h('div');
+ const check=()=>{if(!selW||!selP)return;if(selW.dataset.w===selP.dataset.w){[selW,selP].forEach(e=>{e.classList.remove('sel');e.classList.add('ok')});say(selW.dataset.w);fb.className='fb ok';fb.textContent='Верно! 👍';if(--left===0){S.done.s1=1;out.append(giveCode(0))}}else{[selW,selP].forEach(e=>{e.classList.add('bad');e.classList.remove('sel');setTimeout(()=>e.classList.remove('bad'),400)});fb.className='fb bad';fb.textContent='Ой, не пара. Попробуй ещё!'}selW=selP=null};
+ shuffle(W).forEach(w=>words.append(h('div',{class:'tile','data-w':w.en,'data-k':'w',onclick(){if(this.classList.contains('ok'))return;selW&&selW.classList.remove('sel');selW=this;this.classList.add('sel');check()}},w.en)));
+ shuffle(W).forEach(w=>pics.append(h('div',{class:'tile','data-w':w.en,'data-k':'p',onclick(){if(this.classList.contains('ok'))return;selP&&selP.classList.remove('sel');selP=this;this.classList.add('sel');check()}},h('span',{class:'em'},w.em))));
+ panel('1. Найди пару 🧺','Нажми на <b>слово</b>, а потом на <b>картинку</b>, которая ему подходит. Найди все 8 пар!',h('h3',{},'Words'),words,h('h3',{},'Pictures'),pics,fb,out,backRow());
+}
+// Stage 2: listen and choose
+function s2(){
+ const out=h('div'),box=h('div');let ok=0;
+ shuffle(W).forEach((w,i)=>{const opts=shuffle([w,...shuffle(W.filter(x=>x!==w)).slice(0,2)]);
+  const it=h('div',{class:'item','data-ans':w.en},h('div',{class:'row'},h('b',{},(i+1)+'.'),h('button',{onclick:()=>say(w.en)},'🔊 Послушать')),
+   h('div',{class:'opts'},...opts.map(o=>h('button',{class:'big','data-w':o.en,'aria-label':o.en,onclick(){if(it.classList.contains('ok'))return;if(o===w){this.classList.add('ok');it.classList.add('ok');if(++ok===8){S.done.s2=1;out.append(giveCode(1))}}else{this.classList.add('bad');say(w.en)}}},o.em))));box.append(it)});
+ panel('2. Послушай и выбери 👂','Нажми <b>🔊</b>, послушай слово и выбери нужную картинку.',h('img',{class:'crop',src:'farm.jpg',alt:''}),box,out,backRow());
+}
+// Stage 3: sort drag&drop + tap
+function s3(){
+ const out=h('div'),fb=h('div',{class:'fb'}),pool=h('div',{class:'pool'});let sel=null,left=8;
+ const bins={fruit:h('div',{class:'bin','data-t':'fruit'},h('h3',{},'🍎 Fruits')),veg:h('div',{class:'bin','data-t':'veg'},h('h3',{},'🥕 Vegetables'))};
+ const drop=(chip,bin)=>{if(!chip)return;if(chip.dataset.t===bin.dataset.t){chip.classList.remove('sel');chip.draggable=false;bin.append(chip);say(chip.dataset.w);fb.className='fb ok';fb.textContent='Правильно!';if(--left===0){S.done.s3=1;out.append(giveCode(2))}}else{chip.classList.add('bad');setTimeout(()=>chip.classList.remove('bad'),400);fb.className='fb bad';fb.textContent='Подумай ещё: это фрукт или овощ?'}sel=null};
+ shuffle(W).forEach(w=>{const c=h('div',{class:'chip',draggable:'true','data-t':w.ty,'data-w':w.en,onclick(){if(this.parentNode!==pool)return;sel&&sel.classList.remove('sel');sel=this;this.classList.add('sel')},ondragstart(e){e.dataTransfer.setData('text',w.en);sel=this}},w.em+' '+w.en);pool.append(c)});
+ Object.values(bins).forEach(b=>{b.addEventListener('dragover',e=>{e.preventDefault();b.classList.add('over')});b.addEventListener('dragleave',()=>b.classList.remove('over'));b.addEventListener('drop',e=>{e.preventDefault();b.classList.remove('over');drop(sel,b)});b.addEventListener('click',()=>sel&&drop(sel,b))});
+ panel('3. Фрукты или овощи? 🧺','Перетащи каждое слово в нужную корзину. На планшете: <b>нажми на слово</b>, потом <b>на корзину</b>.<br><small>Подсказка учителю: на уроке считаем «по-кухонному» — сладкое = fruit.</small>',pool,h('div',{class:'bins'},bins.fruit,bins.veg),fb,out,backRow());
+}
+// Stage 4: gaps (part A, code 4) + phrase building (part B, code 5)
+const GAPS=[['A ___ grows under the ground.','potato'],['___ grow on a vine.','Grapes'],['A ___ is yellow and sour.','lemon'],['A ___ grows on a palm tree.','coconut'],['A ___ is big and green. It is red inside.','watermelon'],['Small green ___ grow in pods.','peas'],['This red ___ is not sweet.','pepper'],['Long green ___ grow on a plant.','beans']];
+const PHR=['I like grapes','Potatoes grow under the ground','The lemon is yellow','A coconut grows on a tree','I can see a big watermelon','Peas are small and green'];
+function s4(){
+ const outA=h('div'),outB=h('div'),a=h('div'),b=h('div');let okA=0,okB=0;
+ const bank=h('div',{class:'instr'},'Word bank: ',W.map(w=>w.en).join(' · '));
+ GAPS.forEach(([s,ans],i)=>{const inp=h('input',{type:'text','aria-label':'gap '+(i+1),'data-ans':ans,autocomplete:'off',autocapitalize:'off',spellcheck:'false'});const it=h('div',{class:'item'});
+  const chk=()=>{if(it.classList.contains('ok'))return;if(norm(inp.value)===ans.toLowerCase()){inp.classList.add('ok');inp.disabled=true;it.classList.add('ok');if(++okA===GAPS.length){S.done.s4a=1;outA.append(giveCode(3))}}else{inp.classList.add('bad');setTimeout(()=>inp.classList.remove('bad'),500)}};
+  inp.addEventListener('keydown',e=>e.key==='Enter'&&chk());
+  const [p1,p2]=s.split('___');it.append(h('div',{class:'row'},(i+1)+'. '+p1,inp,p2,h('button',{onclick:chk},'✔')));a.append(it)});
+ PHR.forEach((p,i)=>{const it=h('div',{class:'item','data-ans':p}),ansBox=h('div',{class:'answer'}),pool=h('div',{class:'pool'}),fb=h('div',{class:'fb'});
+  shuffle(p.split(' ')).forEach(w=>{const c=h('div',{class:'chip',onclick(){if(it.classList.contains('ok'))return;(this.parentNode===pool?ansBox:pool).append(this)}},w);pool.append(c)});
+  it.append(h('div',{class:'row'},h('b',{},(i+1)+'.'),h('button',{class:'sec',onclick:()=>say(p)},'🔊'),h('button',{onclick(){const got=[...ansBox.children].map(c=>c.textContent).join(' ');if(got===p){it.classList.add('ok');fb.className='fb ok';fb.textContent='Отлично! Теперь скажи вслух 🗣️';say(p);if(++okB===PHR.length){S.done.s4b=1;outB.append(giveCode(4))}}else{fb.className='fb bad';fb.textContent='Порядок не тот. Нажми на слово, чтобы вернуть его.'}}},'✔ Проверить')),ansBox,pool,fb);b.append(it)});
+ panel('4A. Заполни пропуски ✏️','Впиши слово из банка слов в каждое предложение и нажми ✔. Все 8 верно — код!',bank,a,outA);
+ panel('4B. Собери фразу 🧩','Нажимай на слова по порядку, чтобы собрать предложение. Потом <b>произнеси его вслух</b> учителю!',b,outB,backRow());
+}
+// Stage 5: dictation in 3 parts
+function s5(){
+ const parts=[['grapes','lemon','potato'],['peas','pepper','beans'],['coconut','watermelon']];
+ const p=panel('5. Диктант фермера 🎧✍️','Нажми <b>🔊</b> (или посмотри на картинку), напиши слово по-английски и нажми <b>Проверить</b>. Код дают только за <b>правильное написание</b> всех слов части!',h('img',{class:'crop',src:'farm.jpg',alt:''}));
+ parts.forEach((ws,pi)=>{const out=h('div'),box=h('div',{class:'item'},h('h3',{},'Часть '+(pi+1)));const inps=[];
+  ws.forEach((w,i)=>{const inp=h('input',{type:'text','data-ans':w,'aria-label':'dictation '+w,autocomplete:'off',autocapitalize:'off',spellcheck:'false'});inps.push(inp);
+   box.append(h('div',{class:'row'},h('button',{class:'sec',onclick:()=>say(w)},'🔊'),h('button',{class:'sec',onclick(){this.textContent=E[w]}},'🖼️ картинка'),inp))});
+  const fb=h('div',{class:'fb'});
+  box.append(h('button',{class:'green',onclick(){let ok=0;inps.forEach(i=>{const g=norm(i.value)===i.dataset.ans;i.classList.toggle('ok',g);i.classList.toggle('bad',!g);ok+=g});if(ok===inps.length){inps.forEach(i=>i.disabled=true);fb.className='fb ok';fb.textContent='Всё написано верно! ✨';if(!out.firstChild)out.append(giveCode(5+pi))}else{fb.className='fb bad';fb.textContent='Верно: '+ok+' из '+inps.length+'. Исправь красные слова. Можно заглянуть в Словарь!'}}},'✔ Проверить'),fb,out);p.append(box)});
+ p.append(backRow());
+}
+// Gate
+function gate(){
+ const g=h('div',{class:'gate'+(S.gate?' open':'')},S.gate?'🏞️':'🚧🔒🚧'),ins=h('div',{class:'codesin'}),fb=h('div',{class:'fb'}),out=h('div');
+ CODES.forEach((c,i)=>ins.append(h('input',{type:'text','aria-label':'code '+(i+1),placeholder:'Код '+(i+1),autocomplete:'off'})));
+ const refl=()=>h('div',{class:'panel'},h('h2',{},'💭 Подумай'),h('div',{class:'instr'},'Как прошёл урок? Выбери смайлик и назови учителю 3 слова, которые ты запомнил.'),
+  h('div',{class:'opts'},...[['😄','Всё понятно!'],['🙂','Почти всё'],['🤔','Нужно повторить']].map(([e,t])=>h('button',{class:S.refl===e?'ok':'',onclick(){S.refl=e;save();[...this.parentNode.children].forEach(x=>x.classList.remove('ok'));this.classList.add('ok')}},e+' '+t))),
+  h('p',{},'How does a potato grow? — It grows under the ground. 🥔'),
+  h('div',{class:'row'},h('button',{class:'green',onclick:()=>go('hw')},'🏡 Домашняя миссия'),h('button',{class:'sec',onclick:reset},'🔄 Начать заново')));
+ const open=()=>{S.gate=true;save();g.className='gate open';g.textContent='🏞️';out.innerHTML='';out.append(h('div',{class:'reward',id:'gateOpen'},'🎊 Ворота фермы открыты! Ты настоящий исследователь фермы! 🎊'),refl())};
+ panel('🚪 Ворота фермы','Введи все 8 кодов урожая (в любом порядке) и нажми <b>Открыть</b>. Собрано: <b>'+Object.keys(S.codes).length+' / 8</b>.',g,ins,
+  h('div',{class:'row'},h('button',{class:'green',id:'openGate',onclick(){const v=new Set([...ins.querySelectorAll('input')].map(i=>i.value.trim().toUpperCase()));const miss=CODES.filter(c=>!v.has(c)).length;if(!miss)open();else{fb.className='fb bad';fb.textContent='Замок не открылся: не хватает или неверно кодов — '+miss+'. Проверь коды в полосе сверху!'}}},'🔓 Открыть'),backRow()),fb,out);
+ if(S.gate)open();
+}
+// Homework
+function hw(){
+ const items=[],out=h('div');let ok=0;const total=7;
+ const done=it=>{if(it.classList.contains('ok'))return;it.classList.add('ok');if(++ok===total){S.hw=true;save();renderBar();out.innerHTML='';out.append(h('div',{class:'reward',id:'bonus'},'⭐ Домашняя миссия выполнена! Золотой бонус-код:',h('br'),h('b',{class:'code'},BONUS),h('br'),'Покажи его учителю на следующем уроке!'))}};
+ const choice=(q,opts,ans)=>{const it=h('div',{class:'item'},h('div',{html:q}));it.append(h('div',{class:'opts'},...opts.map(o=>h('button',{'data-o':o,onclick(){if(it.classList.contains('ok'))return;if(o===ans){this.classList.add('ok');done(it)}else this.classList.add('bad')}},o))));return it};
+ const typed=(q,ans)=>{const inp=h('input',{type:'text',autocomplete:'off',autocapitalize:'off'}),it=h('div',{class:'item'},h('div',{html:q}));it.append(h('div',{class:'row'},inp,h('button',{onclick(){const g=Array.isArray(ans)?ans.includes(norm(inp.value)):norm(inp.value)===ans;inp.classList.toggle('ok',g);inp.classList.toggle('bad',!g);if(g){inp.disabled=true;done(it)}}},'✔')));return it};
+ const list=[
+  choice('1. <b>Правда или нет?</b> 🥔 «A potato grows on a tree.»',['True','False'],'False'),
+  choice('2. <b>Лишнее слово.</b> Что НЕ растёт в стручке (pod)?',['peas','beans','lemon'],'lemon'),
+  typed('3. <b>Расшифруй слово:</b> P E A G R S → ?','grapes'),
+  choice('4. <b>Загадка.</b> «I am big. I am green outside and red inside. I grow on the ground.» What am I?',['🥥','🍉','🫑'],'🍉'),
+  choice('5. <b>Какого цвета?</b> «A lemon is ___.»',['red','yellow','blue'],'yellow'),
+  typed('6. <b>Ответь на вопрос</b> (одно слово): «Where does a coconut grow? On a palm ___.»','tree'),
+  typed('7. <b>Напиши о себе:</b> закончи фразу «I like …» любым словом урока (например: <i>I like peas</i>).',W.flatMap(w=>['i like '+w.en,w.en]))];
+ panel('🏡 Домашняя миссия','Сделай дома 7 заданий. Сделаешь все — получишь <b>золотой бонус-код</b> ⭐! Можно пользоваться Словарём.',...list,out,backRow());
+ if(S.hw)out.append(h('div',{class:'reward',id:'bonus'},'⭐ Бонус-код уже получен: ',h('b',{class:'code'},BONUS)));
+}
+renderBar();go((location.hash||'#start').slice(1));
+window.LESSON={W,CODES,GAPS,PHR,BONUS};
+</script></body></html>
