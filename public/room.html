@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Урок — видеозвонок</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+  <h1>Онлайн-урок</h1>
+  <div id="status">Подключение…</div>
+</header>
+<main>
+  <div class="videos">
+    <div class="tile"><video id="remote" autoplay playsinline></video><span>Собеседник</span></div>
+    <div class="tile small"><video id="local" autoplay playsinline muted></video><span>Вы</span></div>
+  </div>
+  <div class="link">Ссылка для собеседника: <input id="link" readonly> <button id="copy">Копировать</button></div>
+  <div class="controls">
+    <button id="mic">Выключить микрофон</button>
+    <button id="cam">Выключить камеру</button>
+    <button id="share">Показать экран</button>
+    <button id="leave" class="danger">Завершить</button>
+  </div>
+</main>
+<script src="/app.js"></script>
+</body>
+</html>

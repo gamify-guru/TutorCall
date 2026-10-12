@@ -1,0 +1,12 @@
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif;background:#f4f6fa;color:#222}
+header{display:flex;justify-content:space-between;align-items:center;padding:12px 24px;background:#fff;box-shadow:0 1px 4px #0001}
+h1{font-size:20px;margin:0}#status{color:#555}
+main{max-width:1000px;margin:20px auto;padding:0 16px}
+.videos{position:relative;background:#111;border-radius:12px;overflow:hidden;aspect-ratio:16/9}
+.tile video{width:100%;height:100%;object-fit:contain;background:#111}
+.tile{width:100%;height:100%}.tile span{position:absolute;left:10px;bottom:8px;color:#fff;font-size:13px;background:#0007;padding:2px 8px;border-radius:6px}
+.tile.small{position:absolute;right:12px;bottom:12px;width:24%;height:auto;aspect-ratio:4/3;border:2px solid #fff;border-radius:8px;overflow:hidden}
+.link{margin:14px 0;display:flex;gap:8px;align-items:center}.link input{flex:1;padding:6px}
+.controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+button{padding:10px 16px;border:0;border-radius:8px;background:#2f6fed;color:#fff;font-size:15px;cursor:pointer}
+button.off{background:#888}button.danger{background:#d9363e}button:disabled{opacity:.5}
