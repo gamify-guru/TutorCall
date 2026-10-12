@@ -96,7 +96,7 @@ $('cam').onclick = () => {
 $('share').onclick = () => (screenTrack ? stopShare() : startShare());
 
 async function startShare() {
-  if (!navigator.mediaDevices.getDisplayMedia) return alert('Демонстрация экрана не поддерживается (нужен HTTPS или localhost).');
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) return alert(window.isSecureContext ? 'Этот браузер не умеет показывать экран. На телефонах и планшетах показ экрана не поддерживается, зайдите с компьютера (Chrome, Edge или Firefox).' : 'Показ экрана работает только по HTTPS.');
   try {
     const s = await navigator.mediaDevices.getDisplayMedia({ video: true });
     screenTrack = s.getVideoTracks()[0];
@@ -104,7 +104,11 @@ async function startShare() {
     await videoSender()?.replaceTrack(screenTrack);
     $('local').srcObject = new MediaStream([screenTrack]);
     $('share').textContent = 'Остановить показ';
-  } catch (e) { console.warn(e); }
+  } catch (e) {
+    console.warn(e);
+    if (e.name === 'NotAllowedError') alert('Доступ к экрану не разрешён. Разрешите браузеру запись экрана в настройках системы и попробуйте снова.');
+    else if (e.name !== 'AbortError') alert('Не удалось начать показ экрана: ' + e.message);
+  }
 }
 async function stopShare() {
   if (!screenTrack) return;
