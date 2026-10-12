@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Домашнее расследование — The Case of the Silent Night</title>
+<meta name="theme-color" content="#1a110a">
+<link rel="stylesheet" href="fonts.css">
+<style>
+:root{--amber:#e9a13b;--amberbright:#f7c968;--brass:#c8a24e;--cream:#f5edda;--ink:#1a110a;--moss:#5f7d60;--mossdeep:#3f5a44;--nightblue:#26384e;--oxblood:#a63a2b;--paper:#f2e7cd;--wood:#2b1c10;--wood2:#3c2a18;--wood3:#52391f;
+--display:"Alfa Slab One",Georgia,serif;--type:"Special Elite","Courier New",monospace;--body:"Nunito","Segoe UI",sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:var(--body);color:var(--wood);background:var(--ink);min-height:100vh}
+.bg{position:fixed;inset:0;z-index:-1}.bg img{width:100%;height:100%;object-fit:cover;opacity:.25;filter:blur(2px)}.bg:after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(26,17,10,.85),rgba(26,17,10,.75),rgba(26,17,10,.95))}
+header{position:sticky;top:0;z-index:20;background:linear-gradient(#3c2a18,#2b1c10);border-bottom:3px solid var(--brass);box-shadow:0 8px 30px -10px #000}
+.hwrap{max-width:1000px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.logo{width:36px;height:36px;border-radius:50%;background:var(--oxblood);border:2px solid var(--amberbright);display:grid;place-items:center;font-size:17px}
+.ttl{font-family:var(--display);color:var(--amberbright);font-size:18px;line-height:1.1}.sub{font-family:var(--type);color:#cdbb98;font-size:11px;text-transform:uppercase;letter-spacing:.12em}
+.dots{display:flex;gap:6px;margin-left:auto;align-items:center}.dot{width:30px;height:30px;border-radius:50%;border:2px solid rgba(200,162,78,.35);display:grid;place-items:center;font-size:14px;color:rgba(245,237,218,.35);font-family:var(--type)}
+.dot.got{border-color:var(--amber);background:rgba(233,161,59,.18);color:var(--amberbright);box-shadow:0 0 12px rgba(233,161,59,.45)}
+.cnt{font-family:var(--type);color:#cdbb98;font-size:13px;margin-left:4px}
+.btn{font-family:var(--type);text-transform:uppercase;letter-spacing:.12em;font-size:13px;border-radius:8px;padding:10px 16px;cursor:pointer;border:2px solid transparent;transition:.15s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn.red{background:var(--oxblood);color:var(--cream);border-color:var(--amberbright);box-shadow:0 10px 30px -10px rgba(166,58,43,.9)}.btn.red:hover{background:#8e2f22;transform:translateY(-2px)}
+.btn.ghost{background:rgba(26,17,10,.4);color:var(--cream);border-color:rgba(245,237,218,.4)}.btn.ghost:hover{color:var(--amberbright);border-color:var(--amberbright)}
+.btn.amber{background:var(--amber);color:var(--wood);border-color:var(--amberbright)}
+.btn.wood{background:var(--wood);color:var(--amberbright);font-size:12px;padding:7px 12px}.btn.wood:hover{background:var(--wood2)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+main{max-width:860px;margin:0 auto;padding:28px 16px 90px}
+.card{position:relative;background:linear-gradient(#f5edda,#efe2c4);border:3px solid var(--wood3);border-radius:10px;padding:26px 24px;box-shadow:0 30px 60px -20px #000}
+.card:before,.card:after{content:"";position:absolute;top:-10px;width:76px;height:22px;background:rgba(233,161,59,.55);transform:rotate(-3deg)}.card:before{left:28px}.card:after{right:28px;transform:rotate(3deg)}
+.stamp{display:inline-block;font-family:var(--display);color:var(--oxblood);border:3px solid var(--oxblood);border-radius:6px;padding:2px 8px;font-size:13px;transform:rotate(-6deg);text-transform:uppercase;margin-right:10px}
+h1,h2{font-family:var(--display);font-weight:400;margin:0}h1{font-size:30px;color:var(--cream)}h2{font-size:26px;display:inline}
+.lead{font-size:15px;margin:12px 0 0;line-height:1.5}
+.sep{border:0;border-top:2px dashed rgba(166,58,43,.5);margin:18px 0}
+.hero{text-align:center;color:var(--cream);margin:10px 0 26px}.hero p{font-family:var(--type);color:var(--amberbright);letter-spacing:.3em;text-transform:uppercase;font-size:12px}
+.hero .story{font-family:var(--body);letter-spacing:0;text-transform:none;color:#e8dcc0;font-size:15px;max-width:620px;margin:10px auto 0;line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.file{cursor:pointer;text-align:left;background:linear-gradient(#f5edda,#e9d9b5);border:3px solid var(--wood3);border-radius:8px;padding:16px;position:relative;transition:.15s;font:inherit;color:inherit}
+.file:hover{transform:translateY(-3px) rotate(-.5deg);border-color:var(--amber)}
+.file .n{font-family:var(--type);font-size:11px;color:var(--oxblood);letter-spacing:.15em;text-transform:uppercase}.file .t{font-family:var(--display);font-size:19px;margin:4px 0}.file .f{font-size:13px;color:var(--wood3)}
+.file .ok{position:absolute;top:10px;right:10px;font-family:var(--type);font-size:11px;background:var(--moss);color:var(--cream);border-radius:4px;padding:3px 7px;display:none}.file.done .ok{display:block}.file.done{border-color:var(--moss)}
+.prog{font-family:var(--type);font-size:11px;color:var(--wood3);margin-top:8px}
+ol.items{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.it{border:2px solid rgba(82,57,31,.4);background:rgba(245,237,218,.6);border-radius:8px;padding:12px}.it.done{border-color:var(--moss);background:rgba(95,125,96,.12)}
+.q{font-weight:800;font-size:16px;display:flex;gap:8px;align-items:flex-start}.num{font-family:var(--type);font-size:12px;color:var(--wood3);min-width:18px;padding-top:3px}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.op{font-family:var(--type);font-size:15px;border:2px solid rgba(82,57,31,.45);background:var(--paper);border-radius:6px;padding:7px 12px;cursor:pointer;color:var(--wood)}
+.op:hover{border-color:var(--amber);background:rgba(233,161,59,.15)}.op.ok{background:var(--moss);border-color:var(--moss);color:var(--cream)}.op.sel{background:var(--nightblue);border-color:var(--nightblue);color:var(--cream)}
+.op:disabled{cursor:default}.op.dim{opacity:.45}
+.word{font-family:var(--type);font-size:17px;background:none;border:2px dashed transparent;border-radius:5px;padding:3px 5px;cursor:pointer;color:var(--wood)}.word:hover{border-color:var(--amber)}.word.bad{background:var(--oxblood);color:var(--cream);text-decoration:line-through}
+.shake{animation:sh .45s}.shake.op,.shake.word{border-color:var(--oxblood)!important;background:rgba(166,58,43,.12)}
+@keyframes sh{0%,100%{transform:none}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+.hint{margin-top:8px;font-family:var(--type);font-size:13px;color:var(--oxblood)}.good{margin-top:8px;font-family:var(--type);font-size:13px;color:var(--mossdeep)}
+.slots{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px;min-height:44px}.slot{width:36px;height:42px;border:2px dashed rgba(82,57,31,.5);border-radius:6px;display:grid;place-items:center;font-family:var(--display);font-size:20px;background:var(--paper);cursor:pointer}
+.slot.f{border-style:solid;border-color:var(--nightblue);color:var(--nightblue)}.it.done .slot{border-color:var(--moss);background:var(--moss);color:var(--cream)}
+.tiles{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.tile{width:38px;height:42px;font-family:var(--display);font-size:20px;border:2px solid var(--wood3);border-radius:6px;background:#fff8e6;cursor:pointer;color:var(--wood)}.tile:hover{border-color:var(--amber)}.tile.used{visibility:hidden}
+.memo{background:#fffaf0;border:2px solid var(--wood3);border-left:8px solid var(--oxblood);border-radius:6px;padding:14px 16px;font-size:15.5px;line-height:1.6;margin-bottom:16px;box-shadow:0 6px 18px -10px #000}
+.memo b{font-family:var(--type);color:var(--oxblood);font-weight:400;letter-spacing:.1em;text-transform:uppercase;font-size:12px;display:block;margin-bottom:4px}
+.say{background:none;border:none;cursor:pointer;font-size:16px;padding:0 4px}
+textarea{width:100%;min-height:160px;font-family:var(--type);font-size:16px;line-height:1.6;border:2px solid rgba(82,57,31,.4);border-radius:8px;background:#fffaf0;padding:12px;color:var(--wood)}
+textarea:focus{outline:none;border-color:var(--amber)}
+.fbline{font-size:14px;margin:4px 0;font-family:var(--type)}.fbline.ok{color:var(--mossdeep)}.fbline.no{color:var(--oxblood)}
+.bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:22px}.bar .sp{margin-left:auto}
+.tag{font-family:var(--type);font-size:12px;color:var(--wood3);text-transform:uppercase;letter-spacing:.12em}
+.reward{text-align:center}.badge{width:150px;height:150px;margin:6px auto 14px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f7c968,#c8a24e 60%,#8a6a2a);border:6px double var(--wood);display:grid;place-items:center;font-size:62px;box-shadow:0 10px 30px -8px rgba(0,0,0,.6);animation:pop .7s}
+@keyframes pop{0%{transform:scale(.3) rotate(-30deg);opacity:0}70%{transform:scale(1.1) rotate(6deg)}100%{transform:none;opacity:1}}
+.code{font-family:var(--display);font-size:30px;letter-spacing:.2em;color:var(--oxblood);border:3px dashed var(--oxblood);display:inline-block;padding:6px 16px;border-radius:8px;margin:8px 0}
+.big-stamp{font-family:var(--display);color:var(--oxblood);border:5px solid var(--oxblood);display:inline-block;padding:6px 18px;transform:rotate(-8deg);font-size:28px;border-radius:8px;opacity:.9}
+#tc-reset{position:fixed;left:10px;bottom:12px;z-index:50;font:600 12px/1 system-ui,sans-serif;padding:7px 10px;border-radius:999px;border:1px solid rgba(0,0,0,.2);background:rgba(255,255,255,.85);color:#333;cursor:pointer;opacity:.75}
+h1,h2,.file .t,.ttl{font-family:Georgia,"Times New Roman",serif;font-weight:700;letter-spacing:.01em}
+@media(max-width:560px){h2{font-size:21px}.card{padding:20px 14px}.dot{width:24px;height:24px;font-size:11px}}
+</style>
+</head>
+<body>
+<div class="bg"><img src="images/cover.jpg" alt=""></div>
+<header><div class="hwrap">
+ <div class="logo">🔍</div>
+ <div><div class="ttl">Домашнее расследование</div><div class="sub">The Silent Night · Case № 047</div></div>
+ <div class="dots" id="dots"></div>
+ <a class="btn ghost" href="./" style="padding:7px 12px;font-size:12px">← К делу</a>
+</div></header>
+<main id="app"></main>
+<button id="tc-reset" type="button" title="Удалить ответы домашнего задания">↺ Начать заново</button>
+<script>
+const KEY='tutorcall-silent-night-hw-v1';
+let S=load();function load(){try{return Object.assign({done:{},a:{},miss:0},JSON.parse(localStorage.getItem(KEY))||{})}catch(e){return{done:{},a:{},miss:0}}}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const A=(k,d)=>(S.a[k]??=d);
+const h=(t,a={},...c)=>{const e=document.createElement(t);for(const k in a){const v=a[k];if(k.startsWith('on'))e.addEventListener(k.slice(2),v);else if(k==='html')e.innerHTML=v;else if(k==='cls')e.className=v;else if(v!==false&&v!=null)e.setAttribute(k,v)}c.flat().forEach(x=>x!=null&&e.append(x));return e};
+const app=document.getElementById('app');
+function say(t){try{const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=.85;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+const sayBtn=t=>h('button',{cls:'say',title:'Послушать',onclick:e=>{e.stopPropagation();say(t)}},'🔊');
+function shake(el){el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');setTimeout(()=>el.classList.remove('shake'),460)}
+function miss(){S.miss++;save()}
+const norm=s=>s.toLowerCase().replace(/[’`]/g,"'").replace(/\s+/g,' ').trim();
+
+// ---------------- TASKS ----------------
+const T=[
+{id:'t1',icon:'📰',title:'Правда или ложь?',fmt:'Вспомни историю: правда или нет',
+ intro:'Вспомни, что случилось в доме Хартли прошлой ночью. Нажми <b>True</b>, если это правда, или <b>False</b>, если нет.',
+ items:[['Mum cooked dinner at six o\'clock.',true],['Grandpa played the drums for three hours.',false,'Grandpa played the drums for <b>one</b> hour.'],['Grandpa listened to the radio in his green armchair.',true],['Dad watched a football match on TV.',false,'Dad watched <b>the news</b>.'],['Little Lily tidied her room before bed.',true],['The cat jumped into Grandpa\'s tea.',true],['A burglar opened the safe and stole the drums.',false,'There was no burglar — <b>the cat</b> did it!'],['The family visited Grandma last Sunday.',true]]},
+{id:'t2',icon:'🕵️',title:'Лишняя улика',fmt:'Найди лишнее слово',
+ intro:'В каждой строке одна «улика» лишняя. Найди слово, которое <b>не подходит</b> к остальным, и нажми на него.',
+ items:[[['played','watched','play','cleaned'],'play','Остальные — в Past Simple, а <b>play</b> — нет.'],[['tidied','carried','jumped','hurried'],'jumped','tidied, carried, hurried: y → <b>-ied</b>. А jumped — просто -ed.'],[['danced','lived','walked','liked'],'walked','danced, lived, liked: глагол на -e → <b>+d</b>.'],[["didn't cook","didn't watch","didn't cleaned","didn't play"],"didn't cleaned","После didn't — <b>начальная форма</b>: didn't clean."],[['Did she visit?','Did Mum cooked?','Did he walk?','Did they watch?'],'Did Mum cooked?','После Did — <b>начальная форма</b>: Did Mum cook?'],[['last night','yesterday','tomorrow','two days ago'],'tomorrow','Tomorrow — это будущее, а не прошлое!'],[['drums','radio','armchair','jumped'],'jumped','drums, radio, armchair — предметы в комнате. Jumped — глагол.']]},
+{id:'t3',icon:'🔐',title:'Шифр сейфа',fmt:'Собери глагол из букв',
+ intro:'Дедушкин сейф закрыт шифром! Собери из букв <b>Past Simple</b> глагола. Нажимай на буквы по порядку. Ошибся? Нажми на букву в ячейке, чтобы вернуть её.',
+ items:[['cook','cooked'],['clean','cleaned'],['tidy','tidied'],['dance','danced'],['carry','carried'],['listen','listened'],['jump','jumped'],['watch','watched']]},
+{id:'t4',icon:'✋',title:'Поймай ошибку',fmt:'Нажми на неправильное слово',
+ intro:'Хитрый Босс снова оставил записки с ошибками! В каждом предложении <b>одно</b> неправильное слово. Найди его и нажми на него.',
+ items:[['Mum cook dinner at six o\'clock yesterday.','cook','cooked'],['Grandpa didn\'t played the drums after nine.','played','play'],['Did Lily tidied her room?','tidied','tidy'],['The cat jumpped on the kitchen table.','jumpped','jumped'],['Dad watch the news last night.','watch','watched'],['We visit Grandma last Sunday.','visit','visited'],['Lily carryed the cups to the kitchen.','carryed','carried'],['Did Grandpa listened to the radio?','listened','listen']]},
+{id:'t5',icon:'🗣️',title:'Показания соседки',fmt:'Прочитай и дай краткий ответ',
+ intro:'Прочитай показания соседки миссис Браун. Потом ответь на вопросы <b>кратким ответом</b>: выбери Yes/No, кто и did/didn\'t — например, <i>Yes, she did.</i>',
+ memo:'My name is Mrs Brown. I live next door to the Hartleys. Last night I was in my garden. At seven o\'clock I listened to Grandpa\'s drums — they were very loud! Then I watched Dad. He walked the dog in the street. At nine o\'clock the house was quiet. Little Lily opened her window and waved at me. At midnight I heard a big CRASH! Then I saw a little orange cat in the kitchen window. It looked very happy!',
+ items:[['Did Mrs Brown live next door?',['Yes','she','did']],['Did Grandpa play the drums quietly?',['No','he','didn\'t']],['Did Dad walk the dog?',['Yes','he','did']],['Did Lily open her window?',['Yes','she','did']],['Did Mrs Brown watch TV at seven o\'clock?',['No','she','didn\'t']],['Did the cat look sad?',['No','it','didn\'t']],['Did the Hartleys play football at nine o\'clock?',['No','they','didn\'t']]]},
+{id:'t6',icon:'✍️',title:'Моё алиби',fmt:'Напиши о своём вчерашнем дне',
+ intro:'Детектив спрашивает: <b>«What did you do yesterday?»</b> Напиши своё алиби — <b>минимум 6 предложений</b> о вчерашнем дне. Каждое предложение — с новой строки. Используй Past Simple (<i>I played…, I watched…</i>) и хотя бы <b>одно</b> отрицание (<i>I didn\'t…</i>).'}
+];
+// irregular past forms accepted in free writing (beyond the lesson's -ed verbs)
+const IRR='was were went had did saw ate made read got took came gave wrote drank slept ran swam sat met bought said told found left felt heard knew thought put rode sang flew drew fell won lost spoke woke broke caught brought taught sent spent kept built became began stood understood forgot hid hit cut let wore paid sold'.split(' ');
+const BASES='play watch tidy dance carry live call listen cook clean walk visit jump paint open practise practice like help start talk wash work want stay study finish look love hate climb kick'.split(' ');
+
+// ---------------- RENDER ----------------
+function dots(){const d=document.getElementById('dots');d.innerHTML='';T.forEach(t=>d.append(h('div',{cls:'dot'+(S.done[t.id]?' got':''),title:t.title},S.done[t.id]?'✓':t.icon)));d.append(h('span',{cls:'cnt'},Object.keys(S.done).length+'/'+T.length))}
+function go(v){app.innerHTML='';scrollTo(0,0);if(location.hash.slice(1)!==v)history.replaceState(null,'','#'+v);dots();(v==='reward'?reward:T.find(t=>t.id===v)?()=>task(T.find(t=>t.id===v)):map)()}
+window.addEventListener('hashchange',()=>go(location.hash.slice(1)));
+function map(){
+ const n=Object.keys(S.done).length;
+ app.append(h('div',{cls:'hero'},h('p',{},'Case № 047 · Homework'),h('h1',{},'Домашнее расследование'),
+  h('div',{cls:'story',html:'Дело «Тихой ночи» закрыто, но у шефа полиции ещё <b>6 секретных папок</b>. Раскрой каждую — и получишь <b>золотой значок детектива</b> и кодовое слово для учителя! 🐾'})));
+ app.append(h('div',{cls:'grid'},...T.map((t,i)=>{const p=progress(t);return h('button',{cls:'file'+(S.done[t.id]?' done':''),id:'open-'+t.id,onclick:()=>go(t.id)},h('span',{cls:'ok'},'✓ Solved'),h('div',{cls:'n'},'Папка '+(i+1)),h('div',{cls:'t'},t.icon+' '+t.title),h('div',{cls:'f'},t.fmt),h('div',{cls:'prog'},p))})));
+ app.append(h('div',{cls:'bar',style:'justify-content:center'},n===T.length?h('button',{cls:'btn red',onclick:()=>go('reward')},'🏅 Получить значок'):h('span',{cls:'tag',style:'color:#cdbb98'},'Раскрыто папок: '+n+' из '+T.length)));
+}
+function progress(t){if(t.id==='t6')return S.done.t6?'алиби принято':'0 / 6 предложений';const a=S.a[t.id]||{};const k=Object.values(a).filter(v=>v&&v.ok).length;return 'выполнено: '+k+' / '+t.items.length}
+function task(t){
+ const i=T.indexOf(t);
+ const card=h('div',{cls:'card'},h('div',{},h('span',{cls:'stamp'},'Папка '+(i+1)),h('h2',{},t.icon+' '+t.title)),h('p',{cls:'lead',html:t.intro}),h('hr',{cls:'sep'}));
+ const footer=h('div',{cls:'bar'});
+ const st=A(t.id,{});
+ const total=t.items?t.items.length:1;
+ const counter=h('span',{cls:'tag'});
+ const claim=h('button',{cls:'btn red',id:'claim',onclick:()=>{const first=!S.done[t.id];S.done[t.id]=1;save();go(first&&Object.keys(S.done).length===T.length?'reward':'map')}},'🔎 Закрыть папку');
+ const upd=()=>{const k=t.items?Object.values(st).filter(v=>v&&v.ok).length:(st.ok?1:0);counter.textContent=t.items?('Готово: '+k+' / '+total):'';claim.disabled=k<total;if(S.done[t.id]){claim.textContent='✓ Папка раскрыта — к папкам';claim.disabled=false}};
+ const done=(j,extra)=>{st[j]=Object.assign(st[j]||{},extra||{},{ok:1});save();upd()};
+ ({t1,t2,t3,t4,t5,t6})[t.id](t,card,st,done,upd);
+ footer.append(h('a',{cls:'btn wood',href:'#map'},'← Все папки'),counter,h('span',{cls:'sp'}),claim);card.append(footer);app.append(card);upd();
+}
+function list(){return h('ol',{cls:'items'})}
+// T1 true/false about the story
+function t1(t,card,st,done){const ol=list();t.items.forEach(([s,tr,fix],j)=>{const it=h('li',{cls:'it'}),fb=h('div');
+ const bs=['True','False'].map(lbl=>h('button',{cls:'op','data-v':lbl,onclick(){if(st[j]?.ok)return;if((lbl==='True')===tr){mark(lbl);done(j,{v:lbl})}else{shake(this);miss();fb.className='hint';fb.textContent='Хм… вспомни историю ещё раз!'}}},lbl==='True'?'✔ True':'✘ False'));
+ const mark=lbl=>{it.classList.add('done');bs.forEach(b=>{b.disabled=true;b.classList.toggle('ok',b.dataset.v===lbl);b.classList.toggle('dim',b.dataset.v!==lbl)});fb.className='good';fb.innerHTML=tr?'Верно — так и было!':'Верно, это неправда. '+(fix||'')};
+ it.append(h('div',{cls:'q'},h('span',{cls:'num'},j+1),h('span',{},s),sayBtn(s)),h('div',{cls:'opts'},...bs),fb);if(st[j]?.ok)mark(st[j].v);ol.append(it)});card.append(ol)}
+// T2 odd one out
+function t2(t,card,st,done){const ol=list();t.items.forEach(([opts,ans,why],j)=>{const it=h('li',{cls:'it'}),fb=h('div');
+ const bs=opts.map(o=>h('button',{cls:'op','data-v':o,onclick(){if(st[j]?.ok)return;if(o===ans){mark();done(j)}else{shake(this);miss();fb.className='hint';fb.textContent='Это слово подходит к остальным. Ищи дальше!'}}},o));
+ const mark=()=>{it.classList.add('done');bs.forEach(b=>{b.disabled=true;if(b.dataset.v===ans){b.classList.add('ok')}else b.classList.add('dim')});fb.className='good';fb.innerHTML='Лишнее: <b>'+ans+'</b>. '+why};
+ it.append(h('div',{cls:'q'},h('span',{cls:'num'},j+1),h('span',{},'Что лишнее?')),h('div',{cls:'opts'},...bs),fb);if(st[j]?.ok)mark();ol.append(it)});card.append(ol)}
+// T3 letter tiles (deterministic scramble, never equal to answer)
+function scr(w,seed){const a=[...w];let x=seed*9301+49297;for(let i=a.length-1;i>0;i--){x=(x*9301+49297)%233280;const j=Math.floor(x/233280*(i+1));[a[i],a[j]]=[a[j],a[i]]}if(a.join('')===w)a.push(a.shift());return a}
+function t3(t,card,st,done){const ol=list();t.items.forEach(([base,ans],j)=>{const it=h('li',{cls:'it'}),fb=h('div');const letters=scr(ans,j+3);
+ let used=(st[j]?.u)||[];// indices into letters
+ const slots=h('div',{cls:'slots'}),tiles=h('div',{cls:'tiles'});
+ const draw=()=>{slots.innerHTML='';tiles.innerHTML='';
+  for(let k=0;k<ans.length;k++){const li=used[k];slots.append(h('div',{cls:'slot'+(li!=null?' f':''),onclick:()=>{if(st[j]?.ok||li==null)return;used.splice(k,1);keep();draw()}},li!=null?letters[li]:''))}
+  if(st[j]?.ok)return;
+  letters.forEach((L,li)=>tiles.append(h('button',{cls:'tile'+(used.includes(li)?' used':''),onclick:()=>{if(used.includes(li))return;used.push(li);keep();draw();if(used.length===ans.length)check()}},L.toUpperCase())))};
+ const keep=()=>{st[j]=Object.assign(st[j]||{},{u:used});save()};
+ const check=()=>{const w=used.map(i=>letters[i]).join('');if(w===ans){it.classList.add('done');done(j,{u:used});fb.className='good';fb.innerHTML='🔓 Щёлк! <b>'+base+' → '+ans+'</b>';say(ans);draw()}else{shake(slots);miss();fb.className='hint';fb.textContent='Шифр не подошёл. Подсказка: слово начинается на «'+ans[0].toUpperCase()+'». Нажми на буквы в ячейках, чтобы вернуть их.'}};
+ it.append(h('div',{cls:'q'},h('span',{cls:'num'},j+1),h('span',{},base+' → ?'),h('span',{cls:'tag',style:'margin-left:auto'},ans.length+' букв')),slots,tiles,fb);draw();
+ if(st[j]?.ok){it.classList.add('done');fb.className='good';fb.innerHTML='🔓 <b>'+base+' → '+ans+'</b>'}ol.append(it)});card.append(ol)}
+// T4 tap the wrong word
+function t4(t,card,st,done){const ol=list();t.items.forEach(([s,bad,fix],j)=>{const it=h('li',{cls:'it'}),fb=h('div');
+ const toks=s.split(' ');const ws=toks.map(tok=>{const core=tok.replace(/[.,?!]$/,''),p=tok.slice(core.length);const b=h('button',{cls:'word','data-w':core,onclick(){if(st[j]?.ok)return;if(core===bad){mark();done(j);say(s.replace(bad,fix))}else{shake(this);miss();fb.className='hint';fb.textContent='«'+core+'» — здесь всё в порядке. Ищи другое слово!'}}},core);return h('span',{},b,p)});
+ const mark=()=>{it.classList.add('done');ws.forEach(w=>{const b=w.firstChild;b.disabled=true;if(b.dataset.w===bad)b.classList.add('bad')});fb.className='good';fb.innerHTML='Поймал! Правильно: <b>'+s.replace(bad,fix)+'</b>'};
+ it.append(h('div',{cls:'q'},h('span',{cls:'num'},j+1),h('span',{},...ws.flatMap(w=>[w,' '])) ),fb);if(st[j]?.ok)mark();ol.append(it)});card.append(ol)}
+// T5 read statement + build short answer from 3 selectors
+function t5(t,card,st,done){card.append(h('div',{cls:'memo'},h('b',{},'📝 Witness statement · Mrs Brown ',sayBtn(t.memo)),t.memo));const ol=list();
+ const groups=[['Yes','No'],['he','she','it','they'],['did',"didn't"]];
+ t.items.forEach(([q,ans],j)=>{const it=h('li',{cls:'it'}),fb=h('div');const pick=(st[j]?.p)||[null,null,null];
+  const rows=groups.map((g,gi)=>h('div',{cls:'opts',style:'margin-top:6px'},...g.map(o=>h('button',{cls:'op'+(pick[gi]===o?' sel':''),'data-v':o,onclick(){if(st[j]?.ok)return;pick[gi]=o;[...this.parentNode.children].forEach(b=>b.classList.toggle('sel',b===this));st[j]=Object.assign(st[j]||{},{p:pick});save();upd5()}},o))));
+  const out=h('div',{cls:'good',style:'font-size:16px'});
+  const chk=h('button',{cls:'btn wood',style:'margin-top:8px',onclick(){if(st[j]?.ok)return;if(pick.some(x=>!x)){fb.className='hint';fb.textContent='Выбери все три части ответа.';return}
+   if(pick.every((x,k)=>x===ans[k])){fin();done(j,{p:pick});say(txt())}else{shake(it);miss();fb.className='hint';fb.textContent=pick[0]===ans[0]&&pick[2]!==ans[2]&&pick[1]===ans[1]?'Yes → did, No → didn\'t!':pick[0]!==ans[0]?'Перечитай показания: так было или нет?':pick[1]!==ans[1]?'Кто это? he — он, she — она, it — кошка/предмет, they — они.':'Yes → did, No → didn\'t!'}}},'Проверить');
+  const txt=()=>pick[0]+', '+pick[1]+' '+pick[2]+'.';const upd5=()=>{out.textContent=pick.some(x=>!x)?'':'→ '+txt()};
+  const fin=()=>{it.classList.add('done');rows.forEach(r=>[...r.children].forEach(b=>{b.disabled=true;if(!b.classList.contains('sel'))b.classList.add('dim')}));chk.remove();fb.className='good';fb.innerHTML='✔ Верно: <b>'+txt()+'</b>'};
+  it.append(h('div',{cls:'q'},h('span',{cls:'num'},j+1),h('span',{},q),sayBtn(q)),...rows,out,chk,fb);upd5();if(st[j]?.ok)fin();ol.append(it)});card.append(ol)}
+// T6 free writing checker
+function analyse(line){const s=line.trim();if(!s)return null;const w=s.toLowerCase().replace(/[’`]/g,"'").match(/[a-z']+/g)||[];
+ if(w.length<3)return{ok:0,msg:'Слишком коротко — напиши целое предложение (3+ слова).'};
+ const di=w.findIndex(x=>x==="didn't"||x==='didnt');
+ if(di<0&&w.includes('did')&&w[w.indexOf('did')+1]==='not')return analyse(s.replace(/did not/i,"didn't"));
+ if(di>=0){const nx=w[di+1]||'';if(/ed$/.test(nx)&&!['need'].includes(nx))return{ok:0,msg:'После didn\'t — начальная форма: didn\'t '+nx.replace(/ied$/,'y').replace(/ed$/,'')+'.'};if(IRR.includes(nx))return{ok:0,msg:'После didn\'t — начальная форма глагола (не '+nx+').'};return{ok:1,neg:1,msg:'Отрицание — отлично!'}}
+ const past=w.find(x=>(/[a-z]{2,}ed$/.test(x)&&!['bed','red','need','shed','tired','bored'].includes(x))||IRR.includes(x));
+ if(past)return{ok:1,msg:'Past Simple: «'+past+'» ✔'};
+ const base=w.find(x=>BASES.includes(x)||BASES.includes(x.replace(/s$/,'')));
+ if(base)return{ok:0,msg:'Нужно прошедшее время: '+base+' → '+(base.replace(/s$/,'').replace(/([^aeiou])y$/,'$1i').replace(/e$/,''))+(/e$/.test(base)?'d':'ed')+'?'};
+ return{ok:0,msg:'Не вижу глагола в Past Simple (например: played, watched, went).'}}
+function t6(t,card,st,done,upd){const ta=h('textarea',{id:'alibi',placeholder:"Yesterday I played football with my friends.\nI didn't watch TV.\n…"});ta.value=st.text||'';
+ const res=h('div',{style:'margin-top:10px'}),fb=h('div');
+ const run=(final)=>{const lines=ta.value.split(/\n|(?<=[.!?])\s+/).map(x=>x.trim()).filter(Boolean);res.innerHTML='';let good=0,neg=0;
+  lines.forEach((l,k)=>{const r=analyse(l);if(!r)return;good+=r.ok;neg+=r.ok&&r.neg?1:0;res.append(h('div',{cls:'fbline '+(r.ok?'ok':'no')},(r.ok?'✔ ':'✘ ')+(k+1)+'. '+l+' — '+r.msg))});
+  if(!final)return;
+  if(good>=6&&neg>=1){st.ok=1;save();upd();fb.className='good';fb.innerHTML='🕵️ Алиби принято! Прочитай его учителю вслух на следующем уроке.'}
+  else{miss();fb.className='hint';fb.textContent='Пока принято предложений: '+good+' из 6'+(neg?'':' · нужно хотя бы одно предложение с didn\'t')+'. Исправь строки с ✘.'}};
+ ta.addEventListener('input',()=>{st.text=ta.value;save()});
+ card.append(h('div',{cls:'memo'},h('b',{},'🗒 Подсказки'),'Слова-помощники: yesterday · last night · in the morning · after school · then. Глаголы урока: play, watch, tidy, dance, carry, live, call, listen, cook, clean, walk, visit, jump, paint.'),ta,h('div',{cls:'bar',style:'margin-top:10px'},h('button',{cls:'btn amber',id:'checkAlibi',onclick:()=>run(true)},'🔎 Проверить алиби')),res,fb);
+ if(st.text)run(false);if(st.ok){fb.className='good';fb.innerHTML='🕵️ Алиби принято!'}}
+function reward(){if(Object.keys(S.done).length<T.length)return map();
+ const rank=S.miss<=5?'Master Detective':S.miss<=15?'Sharp Detective':'Junior Detective';
+ app.append(h('div',{cls:'card reward'},h('div',{cls:'big-stamp'},'HOMEWORK SOLVED'),h('div',{cls:'badge'},'🏅'),h('h2',{},'Золотой значок детектива!'),
+  h('p',{cls:'lead'},'Ты раскрыл все 6 секретных папок. Шеф полиции гордится тобой! Звание: ',h('b',{},rank),' (промахов: '+S.miss+').'),
+  h('p',{cls:'lead'},'Кодовое слово для учителя:'),h('div',{cls:'code',id:'codeword'},'WHISKERS'),
+  h('p',{cls:'lead'},'🐾 Покажи его на следующем уроке — и не забудь прочитать своё алиби!'),
+  h('div',{cls:'bar',style:'justify-content:center'},h('a',{cls:'btn wood',href:'#map'},'← К папкам'),h('a',{cls:'btn red',href:'./'},'К делу «Silent Night»'))))}
+document.getElementById('tc-reset').onclick=()=>{if(!confirm('Начать заново? Все ответы домашнего задания будут удалены.'))return;localStorage.removeItem(KEY);S=load();go('map')};
+go(location.hash.slice(1)||'map');
+window.HW={T};
+</script>
+</body></html>
