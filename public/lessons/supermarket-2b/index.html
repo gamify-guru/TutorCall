@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>At the supermarket (2b) — контейнеры и many/much/few/little</title>
+<link rel="icon" href="data:,">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Trebuchet MS","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;background:#fff7e6;color:#2b2118;font-size:17px;line-height:1.45;padding-bottom:90px;touch-action:manipulation}
+button{font:inherit;cursor:pointer;touch-action:manipulation}
+.wrap{max-width:900px;margin:0 auto;padding:0 12px}
+header.top{background:linear-gradient(135deg,#ff7a2f,#ffb02e);color:#fff;padding:10px 0 0;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.top .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-bottom:8px}
+.top h1{font-size:19px;margin:0;flex:1;min-width:180px;line-height:1.2;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+.top h1 small{display:block;font-size:12px;font-weight:600;opacity:.95}
+.pill{background:rgba(255,255,255,.95);color:#c4510b;border-radius:999px;padding:5px 12px;font-weight:800;font-size:14px;white-space:nowrap}
+.mute{border:0;background:#fff;color:#c4510b;width:40px;height:40px;border-radius:50%;font-size:20px;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.bar{height:8px;background:rgba(255,255,255,.4);border-radius:8px;overflow:hidden;margin-bottom:8px}.bar i{display:block;height:100%;background:#2ecc71;transition:width .4s}
+nav.tabs{display:flex;gap:6px;overflow-x:auto;padding:0 0 0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{flex:0 0 auto;border:0;background:rgba(255,255,255,.25);color:#fff;padding:9px 13px;border-radius:12px 12px 0 0;font-weight:700;font-size:15px}
+nav.tabs button.on{background:#fff7e6;color:#c4510b}
+main{padding:14px 0}
+h2{font-size:23px;margin:6px 0 8px;color:#c4510b}
+h3{font-size:19px;margin:14px 0 6px;color:#1a7f4b}
+p{margin:6px 0}
+.card{background:#fff;border-radius:18px;padding:14px;box-shadow:0 2px 8px rgba(120,70,0,.15);margin:12px 0;border:2px solid #ffe0b0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.vc{background:#fff;border-radius:16px;padding:12px;border:2px solid #ffd9a0;display:flex;flex-direction:column;gap:3px}
+.vc .em{font-size:34px;line-height:1}
+.vc .en{font-weight:800;font-size:18px;color:#1d4f9a}
+.vc .ipa{color:#777;font-size:15px}
+.vc .ru{font-weight:700}
+.vc .ex{font-size:15px;color:#444;font-style:italic}
+.vc .exru{font-size:13px;color:#888}
+.vc .sec{font-size:13px;color:#1a7f4b}
+.vc .btns{display:flex;gap:6px;margin-top:4px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chip{border:2px solid #ffb02e;background:#fff;color:#c4510b;border-radius:999px;padding:6px 12px;font-weight:700;font-size:15px}
+.chip.on{background:#ffb02e;color:#fff}
+.btn{border:0;background:#ff7a2f;color:#fff;font-weight:800;border-radius:12px;padding:10px 16px;font-size:16px;box-shadow:0 3px 0 #c4510b}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 #c4510b}
+.btn.g{background:#2ecc71;box-shadow:0 3px 0 #1a7f4b}
+.btn.w{background:#fff;color:#c4510b;border:2px solid #ffb02e;box-shadow:none}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.say{border:0;background:#e8f1ff;color:#1d4f9a;border-radius:10px;padding:6px 10px;font-size:15px;font-weight:700}
+.say.big{padding:9px 14px;font-size:16px}
+.dl{display:flex;gap:8px;margin:8px 0;align-items:flex-start}
+.dl .who{flex:0 0 66px;font-weight:800;font-size:14px;border-radius:10px;padding:4px 6px;text-align:center}
+.dl .who.h{background:#ffd9e6;color:#b01c5a}.dl .who.m{background:#d8ecff;color:#1d4f9a}
+.dl .t{flex:1;background:#fff;border:2px solid #ffe0b0;border-radius:14px;padding:8px 10px}
+.dl .t .ru{display:none;color:#1a7f4b;font-size:15px;margin-top:3px}
+.showru .dl .t .ru{display:block}
+.dl .t.open .ru{display:block}
+mark{background:#fff0a0;border-radius:4px;padding:0 2px}
+table.q{border-collapse:collapse;width:100%;font-size:15px;background:#fff}
+table.q th,table.q td{border:2px solid #ffd9a0;padding:6px 8px;text-align:left;vertical-align:top}
+table.q th{background:#ffe9c4}
+.tip{background:#e9fff3;border-left:6px solid #2ecc71;border-radius:10px;padding:8px 12px;margin:8px 0}
+.warn{background:#fff3d6;border-left:6px solid #ff9f1a;border-radius:10px;padding:8px 12px;margin:8px 0}
+.bad{background:#ffe9e9;border-left:6px solid #e74c3c;border-radius:10px;padding:8px 12px;margin:8px 0}
+.task h2{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.task .stars{font-size:20px;margin-left:auto;white-space:nowrap}
+.it{border-top:2px dashed #ffe0b0;padding:10px 0}
+.it:first-of-type{border-top:0}
+.it .q{font-weight:700;margin-bottom:6px}
+.it.ok{background:#f0fff6}.it.no{background:#fff2f2}
+.it .num{display:inline-block;background:#ffb02e;color:#fff;border-radius:50%;width:26px;height:26px;text-align:center;font-weight:800;margin-right:6px;font-size:15px;line-height:26px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{border:2px solid #ffd9a0;background:#fff;border-radius:12px;padding:9px 13px;font-weight:700;color:#2b2118;min-height:44px;text-align:left}
+.opt.sel{border-color:#ff7a2f;background:#fff0e0}
+.opt.right{border-color:#2ecc71;background:#d9ffe9}.opt.wrong{border-color:#e74c3c;background:#ffe0e0}
+.opt[disabled]{cursor:default}
+.gapw{display:inline-flex;flex-wrap:wrap;gap:4px;vertical-align:middle;margin:0 2px}
+.gapw .opt{padding:3px 9px;min-height:34px;font-size:16px}
+.line{margin:5px 0}
+.line b{color:#1d4f9a;margin-right:4px}
+.fb{margin-top:6px;font-size:15px}
+.fb.good{color:#17803f}.fb.bad2{color:#b3261e}
+.tiles{display:flex;flex-wrap:wrap;gap:7px;min-height:46px;padding:6px;border-radius:12px}
+.tiles.ans{background:#fffbe9;border:2px dashed #ffb02e;margin-bottom:8px}
+.tile{border:2px solid #1d4f9a;background:#e8f1ff;color:#1d4f9a;border-radius:10px;padding:8px 12px;font-weight:800;min-height:42px}
+.tile.in{background:#fff;border-color:#ff7a2f;color:#c4510b}
+.tile[disabled]{cursor:default}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:520px){.pair{gap:6px}}
+.mc{border:2px solid #ffd9a0;background:#fff;border-radius:12px;padding:8px;text-align:center;min-height:56px;font-weight:700;width:100%;margin-bottom:6px;color:#2b2118}
+.mc .em{font-size:28px;display:block;line-height:1.1}
+.mc.sel{border-color:#ff7a2f;background:#fff0e0}
+.mc.used{opacity:.45}
+.mc.right{border-color:#2ecc71;background:#d9ffe9;opacity:1}.mc.wrong{border-color:#e74c3c;background:#ffe0e0;opacity:1}
+.mc small{display:block;color:#1d4f9a;font-size:13px}
+.bins{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:8px}
+.bin{border:3px dashed #ffb02e;background:#fffdf4;border-radius:14px;padding:6px;min-height:84px;text-align:center;width:100%;color:#2b2118}
+.bin b{display:block;font-size:14px;color:#c4510b}
+.bin .in{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:4px}
+.sm{border:2px solid #1d4f9a;background:#e8f1ff;border-radius:9px;padding:3px 8px;font-size:14px;font-weight:700;color:#1d4f9a}
+.sm.right{border-color:#2ecc71;background:#d9ffe9;color:#17803f}.sm.wrong{border-color:#e74c3c;background:#ffe0e0;color:#b3261e}
+.sm.sel{background:#ff7a2f;border-color:#c4510b;color:#fff}
+.tick{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.tick .opt{padding:6px 14px;font-size:20px}
+input.tx,textarea.tx{font:inherit;border:2px solid #ffb02e;border-radius:10px;padding:8px 10px;width:100%;background:#fff;color:#2b2118}
+input.tx.s{width:170px;display:inline-block}
+textarea.tx{min-height:150px;resize:vertical}
+input.tx.right{border-color:#2ecc71;background:#eafff2}input.tx.wrong{border-color:#e74c3c;background:#fff0f0}
+.res{margin-top:10px;font-weight:800;font-size:18px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.fab{position:fixed;right:10px;z-index:900;border:0;border-radius:999px;padding:11px 15px;font-weight:800;font-size:15px;color:#fff;box-shadow:0 3px 8px rgba(0,0,0,.3)}
+#fabD{bottom:12px;background:#1d4f9a}#fabR{bottom:62px;background:#1a9f5b}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;display:flex;align-items:flex-end;justify-content:center}
+.ov .box{background:#fff7e6;width:100%;max-width:820px;max-height:88vh;overflow:auto;border-radius:20px 20px 0 0;padding:14px;position:relative}
+@media (min-width:700px){.ov{align-items:center}.ov .box{border-radius:20px}}
+.ov .x{position:sticky;top:0;float:right;border:0;background:#ff7a2f;color:#fff;width:38px;height:38px;border-radius:50%;font-size:18px;z-index:2}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:130px;background:#2b2118;color:#fff;padding:9px 16px;border-radius:12px;z-index:1200;font-size:15px;max-width:90vw}
+.cert{text-align:center;background:linear-gradient(135deg,#fff3c4,#ffe0b0);border:4px solid #ffb02e;border-radius:22px;padding:18px}
+.cert .big{font-size:60px}
+.hs{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dashed #ffd9a0;padding:5px 0;font-size:16px}
+.small{font-size:14px;color:#6a5a48}
+.chipres{display:inline-block;background:#fff;border:2px solid #ffd9a0;border-radius:10px;padding:2px 8px;margin:2px;font-size:15px}
+</style></head><body>
+<header class="top"><div class="wrap">
+ <div class="row"><h1>🛒 At the supermarket <small>Unit 2b · контейнеры и many / much / few / little</small></h1>
+  <span class="pill" id="starPill">⭐ 0</span><button class="mute" id="muteBtn" aria-label="Звук" title="Включить/выключить озвучку">🔊</button></div>
+ <div class="bar"><i id="prog" style="width:0%"></i></div>
+ <nav class="tabs" id="tabs"></nav>
+</div></header>
+<div class="wrap"><main id="main"></main></div>
+<button class="fab" id="fabR" data-a="open" data-v="rule">💡 Правило</button>
+<button class="fab" id="fabD" data-a="open" data-v="dict">📖 Словарь</button>
+<div id="modal"></div><div id="toast"></div>
+<script id="tc-persist">(function(){
+var K="tutorcall-supermarket-2b-ui-v1",EXTRA=[];
+function rev(v){if(v&&typeof v==="object"){if(v.__u===1)return void 0;if(v.__set)return new Set(v.__set);if(Array.isArray(v))return v.map(rev);var o={};for(var k in v)o[k]=rev(v[k]);return o}return v}
+function ser(v){if(v===void 0)return{__u:1};if(v instanceof Set)return{__set:Array.from(v)};if(v instanceof Map)return Object.fromEntries(v);return v}
+var d={};try{d=JSON.parse(localStorage.getItem(K))||{}}catch(e){}
+var TC={s:d.s||{},m:d.m||{},
+ save:function(){try{localStorage.setItem(K,JSON.stringify({v:1,t:Date.now(),s:TC.s,m:TC.m}))}catch(e){}},
+ get:function(k){return k in TC.m?rev(TC.m[k]):void 0},
+ set:function(k,v){TC.m[k]=JSON.parse(JSON.stringify(v,function(_,x){return ser(x)}));TC.save()},
+ del:function(k){delete TC.m[k];TC.save()},
+ clear:function(){TC.m={};TC.save()},
+ h:function(s){s=JSON.stringify(s)||"";var x=5381;for(var i=0;i<s.length;i++)x=(x*33^s.charCodeAt(i))>>>0;return x.toString(36)},
+ /* persistent useState: R=React */
+ use:function(R,k,init){var st=R.useState(function(){var v=TC.get(k);return v!==void 0?v:(typeof init==="function"?init():init)});(R.useLayoutEffect||R.useEffect)(function(){TC.set(k,st[0])},[k,st[0]]);return st},
+ reset:function(){if(!confirm("Начать заново? Все ответы и прогресс в этом уроке будут удалены."))return;try{localStorage.removeItem(K);EXTRA.forEach(function(x){localStorage.removeItem(x)})}catch(e){}TC.save=function(){};location.hash="";location.reload()}
+};
+window.__TC=TC;
+document.addEventListener("DOMContentLoaded",function(){var b=document.createElement("button");b.type="button";b.id="tc-reset";b.textContent="↺ Начать заново";b.title="Удалить сохранённые ответы и начать урок сначала";b.onclick=TC.reset;
+b.style.cssText="position:fixed;left:10px;bottom:12px;z-index:2147483000;font:600 12px/1 system-ui,sans-serif;padding:7px 10px;border-radius:999px;border:1px solid rgba(0,0,0,.2);background:rgba(255,255,255,.85);color:#333;cursor:pointer;opacity:.75;box-shadow:0 1px 4px rgba(0,0,0,.2)";
+b.onmouseenter=function(){b.style.opacity=1};b.onmouseleave=function(){b.style.opacity=.75};document.body.appendChild(b)});
+})();
+</script>
+<script>
+/* ===== VOCAB ===== */
+const V=[
+// containers (book Ex.1, items 1-12)
+{id:'c1',cat:'cont',em:'🍟',en:'a bag of crisps',ipa:'/ə bæɡ əv krɪsps/',ru:'пакет чипсов',ex:'I’d like a bag of crisps, please.',exru:'Мне, пожалуйста, пакет чипсов.',sec:'Sweets & snacks'},
+{id:'c2',cat:'cont',em:'🥫',en:'a tin of soup',ipa:'/ə tɪn əv suːp/',ru:'жестяная банка супа',ex:'We need two tins of soup.',exru:'Нам нужно две банки супа.',sec:'Tinned food'},
+{id:'c3',cat:'cont',em:'🍞',en:'a loaf of bread',ipa:'/ə ləʊf əv bred/',ru:'буханка хлеба',ex:'Let’s buy a loaf of bread.',exru:'Давай купим буханку хлеба.',sec:'Bakery'},
+{id:'c4',cat:'cont',em:'🍓',en:'a jar of jam',ipa:'/ə dʒɑː əv dʒæm/',ru:'стеклянная банка варенья',ex:'There is a jar of jam on the table.',exru:'На столе банка варенья.',sec:'Breakfast food'},
+{id:'c5',cat:'cont',em:'🥛',en:'a pot of yogurt',ipa:'/ə pɒt əv ˈjɒɡət/',ru:'стаканчик йогурта',ex:'She eats a pot of yogurt for breakfast.',exru:'Она ест стаканчик йогурта на завтрак.',sec:'Dairy products'},
+{id:'c6',cat:'cont',em:'🧃',en:'a carton of juice',ipa:'/ə ˈkɑːtn əv dʒuːs/',ru:'картонная упаковка сока',ex:'Can I have a carton of juice?',exru:'Можно мне пакет сока?',sec:'Drinks'},
+{id:'c7',cat:'cont',em:'🥣',en:'a box of cereal',ipa:'/ə bɒks əv ˈsɪəriəl/',ru:'коробка хлопьев',ex:'We have a box of cereal at home.',exru:'У нас дома есть коробка хлопьев.',sec:'Breakfast food'},
+{id:'c8',cat:'cont',em:'🍨',en:'a tub of ice cream',ipa:'/ə tʌb əv aɪs kriːm/',ru:'ведёрко мороженого',ex:'I’d like a tub of ice cream at the party.',exru:'Я хотел бы ведёрко мороженого на вечеринке.',sec:'Frozen food'},
+{id:'c9',cat:'cont',em:'🥤',en:'a bottle of cola',ipa:'/ə ˈbɒtl əv ˈkəʊlə/',ru:'бутылка колы',ex:'Two bottles of cola, please.',exru:'Две бутылки колы, пожалуйста.',sec:'Drinks'},
+{id:'c10',cat:'cont',em:'🥩',en:'a kilo of minced beef',ipa:'/ə ˈkiːləʊ əv mɪnst biːf/',ru:'килограмм говяжьего фарша',ex:'We need a kilo of minced beef.',exru:'Нам нужен килограмм говяжьего фарша.',sec:'Meat & fish'},
+{id:'c11',cat:'cont',em:'🍌',en:'a bunch of bananas',ipa:'/ə bʌntʃ əv bəˈnɑːnəz/',ru:'связка бананов',ex:'He buys a bunch of bananas.',exru:'Он покупает связку бананов.',sec:'Fruit & vegetables'},
+{id:'c12',cat:'cont',em:'🍫',en:'a bar of chocolate',ipa:'/ə bɑː əv ˈtʃɒklət/',ru:'плитка шоколада',ex:'She gives me a bar of chocolate.',exru:'Она даёт мне плитку шоколада.',sec:'Sweets & snacks'},
+// sections
+{id:'s1',cat:'sect',em:'🥤',en:'Drinks',ipa:'/drɪŋks/',ru:'напитки',ex:'Cola is in the drinks section.',exru:'Кола — в отделе напитков.'},
+{id:'s2',cat:'sect',em:'🍬',en:'Sweets & snacks',ipa:'/swiːts ənd snæks/',ru:'сладости и снеки',ex:'Crisps are in the sweets and snacks section.',exru:'Чипсы — в отделе сладостей и снеков.'},
+{id:'s3',cat:'sect',em:'🥩',en:'Meat & fish',ipa:'/miːt ənd fɪʃ/',ru:'мясо и рыба',ex:'We buy chicken in the meat and fish section.',exru:'Курицу мы покупаем в отделе мяса и рыбы.'},
+{id:'s4',cat:'sect',em:'🍎',en:'Fruit & vegetables',ipa:'/fruːt ənd ˈvedʒtəbəlz/',ru:'фрукты и овощи',ex:'Bananas are in the fruit and vegetables section.',exru:'Бананы — в отделе фруктов и овощей.'},
+{id:'s5',cat:'sect',em:'🥖',en:'Bakery',ipa:'/ˈbeɪkəri/',ru:'пекарня, хлебный отдел',ex:'We can find bread in the bakery.',exru:'Хлеб можно найти в хлебном отделе.'},
+{id:'s6',cat:'sect',em:'🧀',en:'Dairy products',ipa:'/ˈdeəri ˈprɒdʌkts/',ru:'молочные продукты',ex:'Milk and cheese are dairy products.',exru:'Молоко и сыр — молочные продукты.'},
+{id:'s7',cat:'sect',em:'🥞',en:'Breakfast food',ipa:'/ˈbrekfəst fuːd/',ru:'продукты для завтрака',ex:'Cereal is breakfast food.',exru:'Хлопья — продукты для завтрака.'},
+{id:'s8',cat:'sect',em:'🥫',en:'Tinned food',ipa:'/tɪnd fuːd/',ru:'консервы',ex:'Soup in a tin is tinned food.',exru:'Суп в жестяной банке — это консервы.'},
+{id:'s9',cat:'sect',em:'❄️',en:'Frozen food',ipa:'/ˈfrəʊzn fuːd/',ru:'замороженные продукты',ex:'Ice cream is frozen food.',exru:'Мороженое — замороженный продукт.'},
+// check these words
+{id:'k1',cat:'check',em:'🛒',en:'aisle',ipa:'/aɪl/',ru:'проход между рядами (полок) в магазине',ex:'The drinks are in aisle five.',exru:'Напитки — в пятом проходе.'},
+{id:'k2',cat:'check',em:'🤔',en:'What’s wrong?',ipa:'/wɒts rɒŋ/',ru:'Что случилось? Что не так?',ex:'You look sad. What’s wrong?',exru:'Ты выглядишь грустным. Что случилось?'},
+{id:'k3',cat:'check',em:'👛',en:'purse',ipa:'/pɜːs/',ru:'кошелёк (небольшой, для монет и денег)',ex:'I left my purse at home.',exru:'Я оставила кошелёк дома.'},
+// other dialogue / useful words
+{id:'d1',cat:'dlg',em:'🎂',en:'birthday party',ipa:'/ˈbɜːθdeɪ ˈpɑːti/',ru:'вечеринка по случаю дня рождения',ex:'It’s my birthday party today.',exru:'Сегодня моя вечеринка в честь дня рождения.'},
+{id:'d2',cat:'dlg',em:'🏠',en:'host family',ipa:'/həʊst ˈfæməli/',ru:'принимающая семья (в которой живёшь в поездке)',ex:'Maksim lives with a host family in the UK.',exru:'Максим живёт в Великобритании в принимающей семье.'},
+{id:'d3',cat:'dlg',em:'📦',en:'a packet of …',ipa:'/ə ˈpækɪt əv/',ru:'пачка, пакетик (чего-то)',ex:'We need 12 packets of crisps.',exru:'Нам нужно 12 пачек чипсов.'},
+{id:'d4',cat:'dlg',em:'🛍️',en:'shopping trip',ipa:'/ˈʃɒpɪŋ trɪp/',ru:'поход за покупками',ex:'We are on a shopping trip.',exru:'Мы в походе по магазинам.'},
+{id:'d5',cat:'dlg',em:'🍨',en:'ice cream',ipa:'/aɪs kriːm/',ru:'мороженое',ex:'I’d like some ice cream.',exru:'Я хотел бы мороженого.'},
+{id:'d6',cat:'dlg',em:'🍰',en:'cake',ipa:'/keɪk/',ru:'торт, пирожное, кекс',ex:'Let’s get some cakes.',exru:'Давай возьмём пирожных.'},
+{id:'d7',cat:'dlg',em:'🏪',en:'supermarket',ipa:'/ˈsuːpəmɑːkɪt/',ru:'супермаркет',ex:'The supermarket is big.',exru:'Супермаркет большой.'},
+{id:'d8',cat:'dlg',em:'💳',en:'pay',ipa:'/peɪ/',ru:'платить, оплачивать',ex:'Let’s go and pay now.',exru:'Пойдём заплатим.'},
+{id:'d9',cat:'dlg',em:'😮',en:'Oh gosh!',ipa:'/əʊ ɡɒʃ/',ru:'Ой, боже! (удивление, испуг)',ex:'Oh gosh! I forgot my bag!',exru:'Ой, боже! Я забыл сумку!'},
+{id:'d10',cat:'dlg',em:'😟',en:'I’m afraid …',ipa:'/aɪm əˈfreɪd/',ru:'боюсь, что… / к сожалению…',ex:'I’m afraid I have no money.',exru:'Боюсь, у меня нет денег.'},
+{id:'d11',cat:'dlg',em:'💷',en:'money',ipa:'/ˈmʌni/',ru:'деньги (неисчисляемое: much money)',ex:'I haven’t got much money.',exru:'У меня немного денег.'},
+{id:'d12',cat:'dlg',em:'🗄️',en:'cupboard',ipa:'/ˈkʌbəd/',ru:'шкаф (для продуктов, посуды)',ex:'There is some flour in the cupboard.',exru:'В шкафу есть немного муки.'},
+{id:'d13',cat:'dlg',em:'📝',en:'shopping list',ipa:'/ˈʃɒpɪŋ lɪst/',ru:'список покупок',ex:'Julie is making a shopping list.',exru:'Джули составляет список покупок.'},
+{id:'d14',cat:'dlg',em:'🍔',en:'junk food',ipa:'/ˈdʒʌŋk fuːd/',ru:'вредная еда (фастфуд)',ex:'I don’t eat much junk food.',exru:'Я ем не много вредной еды.'},
+{id:'d15',cat:'dlg',em:'🥤',en:'fizzy drinks',ipa:'/ˈfɪzi drɪŋks/',ru:'газированные напитки',ex:'Fizzy drinks have a lot of sugar.',exru:'В газировке много сахара.'},
+{id:'d16',cat:'dlg',em:'🍋',en:'lemonade',ipa:'/ˌleməˈneɪd/',ru:'лимонад',ex:'I drink a little lemonade.',exru:'Я пью немного лимонада.'},
+{id:'d17',cat:'dlg',em:'🍳',en:'omelette',ipa:'/ˈɒmlət/',ru:'омлет',ex:'We need four eggs for the omelette.',exru:'Нам нужно четыре яйца для омлета.'}
+];
+const CATS=[['all','Все'],['cont','Контейнеры 1–12'],['sect','Отделы магазина'],['check','Check these words'],['dlg','Из диалога']];
+
+/* ===== DIALOGUE ===== */
+const DLG=[
+['h','Right, that’s 12 packets of crisps and 12 bars of chocolate. What else do we need?','Так, это 12 пачек чипсов и 12 плиток шоколада. Что ещё нам нужно?'],
+['m','Well, there’s the drinks aisle. Let’s get a few cartons of fruit juice and some bottles of Coca-Cola.','Ну, вот же ряд с напитками. Давайте возьмём несколько пакетов фруктового сока и несколько бутылок кока-колы.'],
+['h','OK! Now, let’s go get some cakes.','Хорошо! Теперь пойдём возьмём пирожных.'],
+['m','How about some chocolate ones?','А как насчёт шоколадных?'],
+['h','Good idea!','Хорошая идея!'],
+['m','Do you have any ice cream at home, Mrs Hall?','У вас дома есть мороженое, миссис Холл?'],
+['h','Only a little. We can get a few tubs if you like.','Только немного. Можем взять несколько ведёрок, если хочешь.'],
+['m','Yes, I’d like to have some ice cream at the party.','Да, я хотел бы мороженое на вечеринке.'],
+['h','No problem at all! Let’s go and pay now… oh gosh!','Никаких проблем! Пойдём заплатим… ой, боже!'],
+['m','What’s wrong, Mrs Hall?','Что случилось, миссис Холл?'],
+['h','I’m afraid I left my purse at home. How much money do you have, Maksim?','Боюсь, я оставила кошелёк дома. Сколько у тебя денег, Максим?'],
+['m','Em, not much… only £5.','Э-э, немного… всего 5 фунтов.'],
+['h','Oh no! What are we going to do now?','О нет! Что же нам теперь делать?']
+];
+const QWORDS=[['a few','a few cartons… (счётное, мн. число)'],['some','some bottles / some cakes / some ice cream'],['any','any ice cream (вопрос, неисчисляемое)'],['only a little','only a little (ice cream — неисчисляемое)'],['much','How much money… / not much']];
+
+/* ===== TASKS ===== */
+const G=(o,a,note)=>({o,a,note});
+const TASKS={};
+const LESSON=['L1','L2','L3','L4','L5','L6','L7','L8','L9','L10'];
+const HW=['H1','H2','H3','H4'];
+
+TASKS.L1={t:'1. Подбери фразу к картинке',sub:'Нажми на картинку слева, потом на подходящую фразу справа. Нажми на готовую пару, чтобы разорвать её.',kind:'match',
+ items:[['c1','🍟','чипсы'],['c2','🥫','суп'],['c3','🍞','хлеб'],['c4','🍓','варенье'],['c5','🥛','йогурт'],['c6','🧃','сок'],['c7','🥣','хлопья'],['c8','🍨','мороженое']],
+ right:['c8','c3','c6','c1','c7','c5','c2','c4']};
+TASKS.L2={t:'2. В какой отдел супермаркета?',sub:'Нажми на продукт, потом на нужный отдел. Нажми на продукт внутри отдела, чтобы вернуть его обратно.',kind:'sort',
+ bins:[['s1','Drinks','🥤'],['s2','Sweets & snacks','🍬'],['s3','Meat & fish','🥩'],['s4','Fruit & vegetables','🍎'],['s5','Bakery','🥖'],['s6','Dairy products','🧀'],['s7','Breakfast food','🥞'],['s8','Tinned food','🥫'],['s9','Frozen food','❄️']],
+ items:[['a bag of crisps','🍟',['s2']],['a tin of soup','🥫',['s8']],['a loaf of bread','🍞',['s5']],['a carton of juice','🧃',['s1']],['a tub of ice cream','🍨',['s9']],['a kilo of minced beef','🥩',['s3']],['a bunch of bananas','🍌',['s4']],['a box of cereal','🥣',['s7']]],
+ expl:'Образец из учебника: We can usually find a loaf of bread in the bakery section.'};
+TASKS.L3={t:'3. Диалог: понимаем главное',sub:'Прочитай диалог на вкладке «Диалог» и ответь. Сначала главный вопрос — What is the problem?',kind:'items',
+ items:[
+ {k:'choice',q:'What is the problem?',o:['Mrs Hall has no purse with her, and Maksim has only £5.','The supermarket is closed.','There is no ice cream in the shop.','Maksim doesn’t like chocolate.'],a:[0],ex:'Миссис Холл оставила кошелёк дома (I left my purse at home), а у Максима всего £5 (not much… only £5). Платить нечем — это и есть проблема.'},
+ {k:'choice',q:'It is Maksim’s birthday today.',o:['True','False'],a:[0],ex:'Верно. В тексте перед диалогом: «It is his birthday today».'},
+ {k:'choice',q:'They need 12 bars of chocolate.',o:['True','False'],a:[0],ex:'Верно: «12 packets of crisps and 12 bars of chocolate».'},
+ {k:'choice',q:'Maksim wants to buy a few cartons of fruit juice.',o:['True','False'],a:[0],ex:'Верно: «Let’s get a few cartons of fruit juice».'},
+ {k:'choice',q:'Mrs Hall has a lot of ice cream at home.',o:['True','False'],a:[1],ex:'Неверно: «Only a little» — у неё дома лишь немного мороженого.'},
+ {k:'choice',q:'Maksim has a lot of money.',o:['True','False'],a:[1],ex:'Неверно: «not much… only £5» — денег у него немного.'},
+ {k:'choice',q:'Mrs Hall has her purse with her.',o:['True','False'],a:[1],ex:'Неверно: «I left my purse at home» — кошелёк остался дома.'}]};
+TASKS.L4={t:'4. Диалог: вставь слово',sub:'Выбери слово или фразу, которые стоят в диалоге.',kind:'items',
+ items:[
+ {k:'choice',q:'Let’s get ___ cartons of fruit juice.',o:['a few','a little','much','any'],a:[0],ex:'cartons — счётное, поэтому «a few cartons».'},
+ {k:'choice',q:'Do you have ___ ice cream at home?',o:['many','any','a few','a lot'],a:[1],ex:'Вопрос + неисчисляемое существительное → any.'},
+ {k:'choice',q:'We can get a few ___ if you like.',o:['tubs','tub of','tubs of ice','ice cream tubs of'],a:[0],ex:'a few + множественное число: a few tubs.'},
+ {k:'choice',q:'I’m afraid I left my ___ at home.',o:['aisle','purse','party','host'],a:[1],ex:'purse — кошелёк.'},
+ {k:'choice',q:'How ___ money do you have, Maksim?',o:['many','few','much','a few'],a:[2],ex:'money — неисчисляемое → How much.'},
+ {k:'choice',q:'Let’s go and ___ now.',o:['pay','wrong','aisle','get purse'],a:[0],ex:'pay — платить.'},
+ {k:'choice',q:'Only ___. (Mrs Hall about the ice cream at home)',o:['a little','a few','much','many'],a:[0],ex:'ice cream — неисчисляемое: only a little.'}]};
+TASKS.L5={t:'5. Ex.4 — Choose the correct word',sub:'Задание 4 из учебника. В каждом диалоге выбери правильное слово в каждом пропуске.',kind:'items',
+ items:[
+ {k:'gaps',lines:[['A','How ',G(['many','much'],[1]),' butter have we got?'],['B','Very ',G(['few','little'],[1]),'. Get some more.']],
+  ex:'Butter (масло) — неисчисляемое: нельзя посчитать «одно масло, два масла». Поэтому How much butter. «Very little» — очень мало (с неисчисляемым); very few — только со счётными.'},
+ {k:'gaps',lines:[['A','Is there ',G(['many','any'],[1]),' fruit?'],['B','There are ',G(['much','a lot of'],[1]),' bananas and apples, but there aren’t ',G(['some','many'],[1]),' oranges.']],
+  ex:'Вопрос → any. Bananas/apples — счётные во мн. числе; much с ними нельзя, в утверждении говорим a lot of. После отрицания aren’t: not many (some в отрицании не ставим).'},
+ {k:'gaps',lines:[['A','How ',G(['much','many'],[1]),' eggs do we need for the omelette?'],['B','Not ',G(['a lot','many'],[0,1],'В учебнике здесь подходят оба варианта: «Not a lot» и «Not many» — оба правильные и естественные. Засчитываем оба.'),'. Just three or four.']],
+  ex:'Eggs — счётные → How many. В ответе: Not a lot / Not many — оба варианта верны (⚠ вопрос с двумя ответами).'},
+ {k:'gaps',lines:[['A','There isn’t ',G(['some','much'],[1]),' flour left in the cupboard. Only half a bag.'],['B','OK. Get ',G(['some','few'],[0]),' more then.']],
+  ex:'Flour (мука) — неисчисляемое; в отрицании: There isn’t much. «Get some more» — просьба/предложение в утверждении: some. Few не стоит перед more и сочетается только со счётными.'},
+ {k:'gaps',lines:[['A','Do we need ',G(['some','any'],[1,0],'В вопросе стандартно any. Some тоже возможно, если ты ждёшь ответ «да» (как предложение). Засчитываем оба, но запомни: обычно в вопросе — any.'),' tomatoes?'],['B','Yes, there are only ',G(['a little','a few'],[1]),' left.']],
+  ex:'Вопрос → обычно any (⚠ some тоже допустимо, если ждёшь «да»). Tomatoes — счётные: a few, а не a little.'},
+ {k:'gaps',lines:[['A','There’s very ',G(['few','little'],[1]),' cheese left.'],['B','I’ll get some. How ',G(['many','much'],[1]),' do you want?']],
+  ex:'Cheese — неисчисляемое: very little, How much.'},
+ {k:'gaps',lines:[['A','There’s ',G(['many','no'],[1]),' bread left.'],['B','Let’s buy a loaf, then, and ',G(['some','any'],[0]),' biscuits.']],
+  ex:'There’s no bread left = хлеба совсем нет (many с неисчисляемым bread нельзя). В утверждении-предложении: some biscuits; any — для вопросов и отрицаний.'},
+ {k:'gaps',lines:[['A','There’s ',G(['too much','too many'],[0]),' sugar in my coffee. I can’t drink it.'],['B','Really? I always put ',G(['a lot of','much'],[0]),' sugar in my coffee.']],
+  ex:'Sugar — неисчисляемое → too much. В утверждении: a lot of (much в обычном утверждении почти не используется).'}]};
+TASKS.L6={t:'6. Счётные и неисчисляемые',sub:'Можно ли посчитать «один…, два…»? Нажми на слово, потом на нужную корзину.',kind:'sort',
+ bins:[['C','Countable · счётное (many, a few)','🔢'],['U','Uncountable · неисчисляемое (much, a little)','🥛']],
+ items:[['sweets','🍬',['C']],['milk','🥛',['U']],['tomatoes','🍅',['C']],['sugar','🧂',['U']],['eggs','🥚',['C']],['flour','🌾',['U']],['biscuits','🍪',['C']],['cheese','🧀',['U']]],
+ expl:'Счётные: sweets, tomatoes, eggs, biscuits (one egg, two eggs). Неисчисляемые: milk, sugar, flour, cheese (не говорим «two milks»; считаем контейнерами: two bottles of milk).'};
+const LISTEN=[
+['j','Tom, I’m making a shopping list for the dinner party.'],
+['t','OK. Do we need any chicken?'],
+['j','Yes, we need two kilos of chicken.'],
+['t','And eggs?'],
+['j','No, we don’t need any eggs. We have a lot at home.'],
+['t','What about drinks?'],
+['j','We need two bottles of cola. But we don’t need any apple juice. There’s a lot in the fridge.'],
+['t','Do we need cheese?'],
+['j','Yes, one kilo of cheese, please.'],
+['t','And rice?'],
+['j','No rice, thanks. There’s a whole bag in the cupboard.'],
+['t','What about crisps?'],
+['j','Yes! Three bags of crisps. And no sausages, please. Dad bought a lot yesterday.']];
+TASKS.L7={t:'7. Ex.5a — Julie’s shopping list (слушаем)',sub:'',kind:'items',listen:true,
+ items:[
+ {k:'tick',q:'2 kilos of chicken',a:true},{k:'tick',q:'2 bottles of cola',a:true},{k:'tick',q:'6 eggs',a:false},{k:'tick',q:'1 carton of apple juice',a:false},
+ {k:'tick',q:'1 kilo of cheese',a:true},{k:'tick',q:'1 bag of rice',a:false},{k:'tick',q:'3 bags of crisps',a:true},{k:'tick',q:'20 sausages',a:false}]};
+TASKS.L8={t:'8. Ex.5b — Вопрос и ответ по списку',sub:'Используем список покупок Джули (по тексту из задания 7). Собери вопрос из плиток или выбери ответ.',kind:'items',
+ items:[
+ {k:'tiles',q:'Спроси: сколько курицы ей нужно?',tiles:['How','much','chicken','does','she','need?'],acc:['How much chicken does she need']},
+ {k:'choice',q:'How much chicken does she need?',o:['She needs two kilos.','She doesn’t need any chicken.','She needs two eggs.','She needs a few chicken.'],a:[0],ex:'Курицу нужно: 2 kilos. Chicken — неисчисляемое, поэтому a few с ним нельзя.'},
+ {k:'tiles',q:'Спроси: сколько яиц ей нужно?',tiles:['How','many','eggs','does','she','need?'],acc:['How many eggs does she need']},
+ {k:'choice',q:'How many eggs does she need?',o:['She needs six eggs.','She doesn’t need any eggs.','She needs a little eggs.','She needs much eggs.'],a:[1],ex:'Яйца в списке перечёркнуты (✗): She doesn’t need any eggs.'},
+ {k:'tiles',q:'Спроси: сколько пакетов чипсов ей нужно?',tiles:['How','many','bags','of','crisps','does','she','need?'],acc:['How many bags of crisps does she need']},
+ {k:'tiles',q:'Ответь: Ей нужно три пакета чипсов.',tiles:['She','needs','three','bags','of','crisps.'],acc:['She needs three bags of crisps']},
+ {k:'tiles',q:'Ответь: Ей не нужны яйца.',tiles:['She','doesn’t','need','any','eggs.'],acc:['She doesn’t need any eggs']},
+ {k:'tiles',q:'Ответь: Ей нужен один килограмм сыра.',tiles:['She','needs','one','kilo','of','cheese.'],acc:['She needs one kilo of cheese']}]};
+TASKS.L9={t:'9. Ex.6 — Что ты ешь и пьёшь?',sub:'Строим вопросы и ответы о привычках в еде с many / much / a lot of / a little / very little.',kind:'items',
+ items:[
+ {k:'choice',q:'___ junk food do you eat each week?',o:['How much','How many'],a:[0],ex:'Junk food — неисчисляемое → How much.'},
+ {k:'choice',q:'___ eggs do you eat every week?',o:['How much','How many'],a:[1],ex:'Eggs — счётные → How many.'},
+ {k:'choice',q:'___ water do you drink every day?',o:['How much','How many'],a:[0],ex:'Water — неисчисляемое → How much.'},
+ {k:'choice',q:'___ vegetables do you eat?',o:['How much','How many'],a:[1],ex:'Vegetables — счётное во мн. числе → How many.'},
+ {k:'tiles',q:'Спроси: Сколько молока ты пьёшь каждый день?',tiles:['How','much','milk','do','you','drink','every','day?'],acc:['How much milk do you drink every day']},
+ {k:'tiles',q:'Ответь: Я ем много фруктов каждый день.',tiles:['I','eat','a','lot','of','fruit','every','day.'],acc:['I eat a lot of fruit every day','Every day I eat a lot of fruit'],note:'Принимаются оба порядка: наречие «every day» может стоять в конце или в начале.'},
+ {k:'tiles',q:'Ответь: Я пью очень мало кофе.',tiles:['I','drink','very','little','coffee.'],acc:['I drink very little coffee']},
+ {k:'choice',q:'— Do you eat much junk food?  — …',o:['I eat a little, but not too much.','I eat a few, but not too many.','I eat a little, but not too many.','I eat much, but not a little.'],a:[0],ex:'Junk food неисчисляемое: a little / not too much. A few и many — для счётных.'}]};
+TASKS.L10={t:'10. Ex.7 — Напиши 5 предложений',sub:'Напиши 5 предложений о том, что ты ешь и пьёшь. Используй слова: a lot of, too much/many, a few, a little, some, (very) few/little. Каждое предложение — с новой строки или с точкой.',kind:'write'};
+
+/* homework */
+TASKS.H1={t:'Д/з 1. Контейнеры: впиши слово',sub:'Впиши одно слово — контейнер. В скобках — подсказка по-русски.',kind:'items',
+ items:[
+ {k:'typed',q:'a ___ of crisps',h:'пакет',acc:['bag','packet']},
+ {k:'typed',q:'a ___ of soup',h:'жестяная банка',acc:['tin','can']},
+ {k:'typed',q:'a ___ of jam',h:'стеклянная банка',acc:['jar']},
+ {k:'typed',q:'a ___ of cereal',h:'коробка',acc:['box','packet']},
+ {k:'typed',q:'a ___ of bananas',h:'связка',acc:['bunch']},
+ {k:'typed',q:'a ___ of chocolate',h:'плитка',acc:['bar']},
+ {k:'typed',q:'a ___ of cola',h:'бутылка',acc:['bottle','can']},
+ {k:'typed',q:'a ___ of ice cream',h:'ведёрко',acc:['tub']}]};
+TASKS.H2={t:'Д/з 2. Впиши слово: many / much / any / some …',sub:'Впиши слово или фразу. Подсказки в скобках.',kind:'items',
+ items:[
+ {k:'typed',q:'How ___ sugar do you want in your tea?',acc:['much']},
+ {k:'typed',q:'How ___ apples are there in the bag?',acc:['many']},
+ {k:'typed',q:'There isn’t ___ milk in the fridge.',acc:['much','any'],note:'Подходят much и any.'},
+ {k:'typed',q:'I have very ___ friends here. (почти нет)',acc:['few']},
+ {k:'typed',q:'Can I have ___ water, please?',acc:['some']},
+ {k:'typed',q:'There are ___ eggs in the fridge. We can’t make an omelette! (совсем нет)',acc:['no']},
+ {k:'typed',q:'Is there ___ cheese on the table?',acc:['any']},
+ {k:'typed',q:'She eats ___ sweets. (много, 2–3 слова)',acc:['a lot of','lots of','too many'],note:'Подходят a lot of, lots of и too many.'}]};
+TASKS.H3={t:'Д/з 3. Собери предложение',sub:'Собери предложение из плиток. Если возможны разные правильные порядки слов — засчитываются все.',kind:'items',
+ items:[
+ {k:'tiles',q:'Сколько помидоров нам нужно?',tiles:['How','many','tomatoes','do','we','need?'],acc:['How many tomatoes do we need']},
+ {k:'tiles',q:'В холодильнике немного молока.',tiles:['There','isn’t','much','milk','in','the','fridge.'],acc:['There isn’t much milk in the fridge']},
+ {k:'tiles',q:'Нам нужно несколько пакетов сока.',tiles:['We','need','a','few','cartons','of','juice.'],acc:['We need a few cartons of juice']},
+ {k:'tiles',q:'В пакете есть яблоки?',tiles:['Are','there','any','apples','in','the','bag?'],acc:['Are there any apples in the bag']},
+ {k:'tiles',q:'Я ем много овощей каждый день.',tiles:['I','eat','a','lot','of','vegetables','every','day.'],acc:['I eat a lot of vegetables every day','Every day I eat a lot of vegetables'],note:'Оба порядка правильные.'},
+ {k:'tiles',q:'В моём чае слишком много сахара.',tiles:['There','is','too','much','sugar','in','my','tea.'],acc:['There is too much sugar in my tea','There’s too much sugar in my tea']}]};
+TASKS.H4={t:'Д/з 4. Найди ошибку',sub:'В каждом предложении есть ошибка. Выбери исправленный вариант.',kind:'items',
+ items:[
+ {k:'choice',q:'✗ How many milk do we need?',o:['How much milk do we need?','How many milks do we need?','How much milks do we need?'],a:[0],ex:'Milk — неисчисляемое → How much milk.'},
+ {k:'choice',q:'✗ There are much apples in the bag.',o:['There are a lot of apples in the bag.','There are much apple in the bag.','There is a lot of apples in the bag.'],a:[0],ex:'Apples — счётное мн. число; в утверждении — a lot of (или many).'},
+ {k:'choice',q:'✗ I have a few money.',o:['I have a little money.','I have a few moneys.','I have little moneys.'],a:[0],ex:'Money — неисчисляемое → a little.'},
+ {k:'choice',q:'✗ There isn’t some juice in the fridge.',o:['There isn’t any juice in the fridge.','There isn’t a juice in the fridge.','There isn’t many juice in the fridge.'],a:[0],ex:'В отрицании — any.'},
+ {k:'choice',q:'✗ She drinks too many coffee.',o:['She drinks too much coffee.','She drinks too many coffees a lot.','She drink too much coffee.'],a:[0],ex:'Coffee — неисчисляемое → too much.'},
+ {k:'choice',q:'✗ We have very little biscuits.',o:['We have very few biscuits.','We have very a few biscuits.','We have very much biscuits.'],a:[0],ex:'Biscuits — счётное → very few.'}]};
+
+/* ===== STATE ===== */
+const TC=window.__TC;
+let S=TC.get('s')||{};S.t=S.t||{};S.mute=!!S.mute;S.tab=S.tab||'words';S.showRu=!!S.showRu;S.hl=!!S.hl;S.vcat=S.vcat||'all';
+function save(){TC.set('s',S)}
+function T(id){return S.t[id]||(S.t[id]={a:{},checked:false,done:false,best:0,score:0})}
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+/* ===== SPEECH (en-GB) ===== */
+let token=0;
+function haveSpeech(){return 'speechSynthesis' in window&&typeof SpeechSynthesisUtterance!=='undefined'}
+function pickVoice(){try{const vs=speechSynthesis.getVoices()||[];return vs.find(v=>v.lang==='en-GB')||vs.find(v=>/^en[-_]GB/i.test(v.lang))||vs.find(v=>v.lang&&v.lang.toLowerCase().startsWith('en'))||null}catch(e){return null}}
+function raw(text,o){o=o||{};try{const u=new SpeechSynthesisUtterance(text);u.lang='en-GB';const v=pickVoice();if(v){try{u.voice=v}catch(e){}}u.rate=o.rate||.9;u.pitch=o.pitch||1;if(o.onend){u.onend=o.onend;u.onerror=o.onend}speechSynthesis.speak(u)}catch(e){o.onend&&o.onend()}}
+function say(text,o){token++;if(!haveSpeech()){toast('Озвучка недоступна в этом браузере');return}if(S.mute){toast('Звук выключен (кнопка 🔊 вверху)');return}try{speechSynthesis.cancel()}catch(e){}raw(text.replace(/…/g,'...'),o)}
+function playSeq(lines){if(!haveSpeech()){toast('Озвучка недоступна в этом браузере');return}if(S.mute){toast('Звук выключен (кнопка 🔊 вверху)');return}try{speechSynthesis.cancel()}catch(e){}const my=++token;let i=0;(function nx(){if(my!==token||i>=lines.length)return;const l=lines[i++];raw(l[1],{pitch:l[0]==='h'||l[0]==='j'?1.15:.85,onend:()=>setTimeout(nx,250)})})()}
+function stopSpeech(){token++;try{speechSynthesis.cancel()}catch(e){}}
+let tt;function toast(m){const el=$('#toast');el.innerHTML='<div class="toast">'+esc(m)+'</div>';clearTimeout(tt);tt=setTimeout(()=>el.innerHTML='',2200)}
+function setMute(){$('#muteBtn').textContent=S.mute?'🔇':'🔊';$('#muteBtn').setAttribute('aria-pressed',S.mute?'true':'false')}
+/* ===== NORMALISE ===== */
+const HOMO={'а':'a','е':'e','о':'o','р':'p','с':'c','у':'y','х':'x','к':'k','м':'m','т':'t','в':'b','н':'h','і':'i','ё':'e','А':'a','Е':'e','О':'o','Р':'p','С':'c','У':'y','Х':'x','К':'k','М':'m','Т':'t','В':'b','Н':'h'};
+const LAYOUT={'й':'q','ц':'w','у':'e','к':'r','е':'t','н':'y','г':'u','ш':'i','щ':'o','з':'p','х':'[','ъ':']','ф':'a','ы':'s','в':'d','а':'f','п':'g','р':'h','о':'j','л':'k','д':'l','ж':';','э':'\'','я':'z','ч':'x','с':'c','м':'v','и':'b','т':'n','ь':'m','б':',','ю':'.'};
+function basic(s){return String(s).toLowerCase().replace(/[’‘`´ʼ]/g,"'").replace(/[^a-z' ]+/g,' ').replace(/\s+/g,' ').trim()}
+function hasCyr(s){return /[\u0400-\u04FF]/.test(s)}
+function normHomo(s){return basic(String(s).replace(/[\u0400-\u04FF]/g,c=>HOMO[c]||c))}
+function layoutFix(s){return String(s).toLowerCase().replace(/[\u0400-\u04FF]/g,c=>LAYOUT[c]||c)}
+/* ===== helpers ===== */
+const stars=n=>'⭐'.repeat(n)+'☆'.repeat(3-n);
+function starsFor(s,n){return s===n?3:s/n>=.7?2:s/n>=.4?1:0}
+function totalStars(ids){return ids.reduce((a,i)=>a+(S.t[i]?S.t[i].best:0),0)}
+function permute(n,seed){const a=[...Array(n).keys()];let x=seed*9301+49297;for(let i=n-1;i>0;i--){x=(x*9301+49297)%233280;const j=Math.floor(x/233280*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function tilePerm(item,tid,idx){const n=item.tiles.length;let seed=tid.charCodeAt(1)*31+idx*7+n;let p=permute(n,seed);let k=0;while(p.every((v,i)=>v===i)&&k++<5)p=permute(n,seed+k);return p}
+/* ===== item eval ===== */
+function itemDone(it,a,tid,i){
+ if(it.k==='choice')return a!=null;
+ if(it.k==='gaps'){const g=gapsOf(it);return Array.isArray(a)&&g.every((_,j)=>a[j]!=null)}
+ if(it.k==='tiles')return Array.isArray(a)&&a.length===it.tiles.length;
+ if(it.k==='typed')return typeof a==='string'&&a.trim().length>0;
+ if(it.k==='tick')return a===true||a===false;
+ return true}
+function gapsOf(it){const r=[];it.lines.forEach(l=>l.forEach(p=>{if(p&&typeof p==='object')r.push(p)}));return r}
+function tileText(it,a){return a.map(i=>it.tiles[i]).join(' ')}
+function typedOK(it,a){const c1=normHomo(a),c2=basic(a);return it.acc.some(x=>x===c1||x===c2)}
+function itemOK(it,a){
+ if(it.k==='choice')return it.a.includes(a);
+ if(it.k==='gaps'){return gapsOf(it).every((g,j)=>g.a.includes(a[j]))}
+ if(it.k==='tiles'){const t=basic(tileText(it,a));return it.acc.some(x=>basic(x)===t)}
+ if(it.k==='typed')return typedOK(it,a);
+ if(it.k==='tick')return a===it.a;
+ return false}
+/* ===== render task ===== */
+function renderTask(id){const el=document.getElementById('task-'+id);if(!el)return;const d=TASKS[id],st=T(id);
+ let body='';
+ if(d.kind==='items')body=itemsBody(id,d,st);else if(d.kind==='match')body=matchBody(id,d,st);else if(d.kind==='sort')body=sortBody(id,d,st);else if(d.kind==='write')body=writeBody(id,d,st);
+ const hdr='<h2>'+esc(d.t)+'<span class="stars">'+stars(st.best)+'</span></h2>'+(d.sub?'<p class="small">'+esc(d.sub)+'</p>':'');
+ el.innerHTML='<div class="card task">'+hdr+(d.listen?listenBlock(st):'')+body+'</div>'}
+function resBlock(id,st,total,ready,left){
+ if(st.checked){const s=st.score;return '<div class="res"><span>Результат: '+s+' / '+total+'</span><span>'+stars(starsFor(s,total))+'</span><button class="btn w" data-a="retry" data-t="'+id+'">🔄 Ещё раз</button></div>'+(s===total?'<div class="tip">🎉 Отлично! Все верно.</div>':'')}
+ return '<div class="res"><button class="btn g" data-a="check" data-t="'+id+'"'+(ready?'':' disabled')+'>✅ Проверить</button>'+(ready?'':'<span class="small">Осталось ответить: '+left+'</span>')+'</div>'}
+function listenBlock(st){return '<div class="warn"><b>⚠ Об аудио.</b> Аудиозапись из учебника недоступна, поэтому я придумала короткий текст — это <b>не запись из учебника</b>. Список из книги такой же (2 kilos of chicken, 2 bottles of cola, 6 eggs, 1 carton of apple juice, 1 kilo of cheese, 1 bag of rice, 3 bags of crisps, 20 sausages), но в учебнике отмечены только <b>chicken ✓</b> и <b>eggs ✗</b>. Остальные ✓/✗ — по тексту ниже.</div>'+
+ '<p>Julie делает список покупок для ужина. Послушай (можно несколько раз) и поставь ✓ у того, что нужно, и ✗ у того, что не нужно.</p><div class="chips"><button class="btn" data-a="play">▶ Слушать диалог</button><button class="btn w" data-a="stop">⏹ Стоп</button><button class="btn w" data-a="showscript">'+(S.showScript?'🙈 Скрыть текст':'👀 Показать текст')+'</button></div>'+
+ (S.showScript?'<div class="card">'+LISTEN.map(l=>'<div class="line"><b>'+(l[0]==='j'?'Julie':'Tom')+':</b> '+esc(l[1])+'</div>').join('')+'</div>':'')}
+function itemsBody(id,d,st){let h='';let left=0;
+ d.items.forEach((it,i)=>{const a=st.a[i];const done=itemDone(it,a,id,i);if(!done)left++;
+  const ok=st.checked?itemOK(it,a):null;h+='<div class="it'+(ok===true?' ok':ok===false?' no':'')+'">'+itemHTML(id,it,i,a,st.checked,ok)+'</div>'});
+ return h+resBlock(id,st,d.items.length,left===0,left)}
+function itemHTML(id,it,i,a,chk,ok){
+ const num='<span class="num">'+(i+1)+'</span>';let h='';
+ if(it.k==='choice'){h=num+'<span class="q">'+esc(it.q)+'</span><div class="opts" style="margin-top:6px">'+it.o.map((o,j)=>{let c='opt';if(a===j)c+=' sel';if(chk){if(it.a.includes(j))c+=' right';else if(a===j)c+=' wrong'}return '<button class="'+c+'" data-a="opt" data-t="'+id+'" data-i="'+i+'" data-v="'+j+'"'+(chk?' disabled':'')+'>'+esc(o)+'</button>'}).join('')+'</div>';
+  if(chk)h+='<div class="fb '+(ok?'good':'bad2')+'">'+(ok?'✅ ':'❌ ')+esc(it.ex||'')+'</div>'}
+ else if(it.k==='gaps'){let gi=0;h=num+it.lines.map(l=>'<div class="line"><b>'+l[0]+':</b> '+l.slice(1).map(p=>{if(typeof p==='string')return esc(p);const g=gi++;return '<span class="gapw">'+p.o.map((o,j)=>{let c='opt';if(a&&a[g]===j)c+=' sel';if(chk){if(p.a.includes(j))c+=' right';else if(a&&a[g]===j)c+=' wrong'}return '<button class="'+c+'" data-a="gap" data-t="'+id+'" data-i="'+i+'" data-g="'+g+'" data-v="'+j+'"'+(chk?' disabled':'')+'>'+esc(o)+'</button>'}).join('')+'</span>'}).join('')+'</div>').join('');
+  if(chk){const notes=gapsOf(it).filter(g=>g.note).map(g=>'<div class="warn">⚠ '+esc(g.note)+'</div>').join('');h+='<div class="fb '+(ok?'good':'bad2')+'">'+(ok?'✅ ':'❌ ')+esc(it.ex)+'</div>'+notes+'<button class="say" data-a="sayitem" data-t="'+id+'" data-i="'+i+'">🔊 Послушать правильный вариант</button>'}}
+ else if(it.k==='tiles'){const used=Array.isArray(a)?a:[];const p=tilePerm(it,id,i);
+  h=num+'<span class="q">'+esc(it.q)+'</span><div class="tiles ans" aria-label="Твой ответ">'+(used.length?used.map(ti=>'<button class="tile in" data-a="tdel" data-t="'+id+'" data-i="'+i+'" data-v="'+ti+'"'+(chk?' disabled':'')+'>'+esc(it.tiles[ti])+'</button>').join(''):'<span class="small">нажимай на слова ниже…</span>')+'</div><div class="tiles">'+p.filter(ti=>!used.includes(ti)).map(ti=>'<button class="tile" data-a="tadd" data-t="'+id+'" data-i="'+i+'" data-v="'+ti+'"'+(chk?' disabled':'')+'>'+esc(it.tiles[ti])+'</button>').join('')+'</div>'+(chk?'':(used.length?'<button class="say" data-a="tclear" data-t="'+id+'" data-i="'+i+'">↺ Очистить</button>':''));
+  if(chk){h+='<div class="fb '+(ok?'good':'bad2')+'">'+(ok?'✅ ':'❌ Правильно: ')+(ok?esc(tileText(it,a)):esc(it.acc.join('  /  ')))+'</div>'+(it.note?'<div class="small">'+esc(it.note)+'</div>':'')+'<button class="say" data-a="saytxt" data-v="'+esc(it.acc[0])+'">🔊 Послушать</button>'}}
+ else if(it.k==='typed'){const v=typeof a==='string'?a:'';let fb='';
+  if(chk){if(ok)fb='<div class="fb good">✅ '+esc(it.acc[0])+(it.acc.length>1?' (подходят: '+esc(it.acc.join(', '))+')':'')+'</div>';else{const lf=hasCyr(v)?basic(layoutFix(v)):'';const lay=lf&&it.acc.some(x=>x===lf);fb='<div class="fb bad2">❌ '+(lay?'Похоже, включена русская раскладка — переключи клавиатуру на English и впиши ещё раз. ':'')+'Правильно: '+esc(it.acc.join(' / '))+'</div>'}if(it.note)fb+='<div class="small">'+esc(it.note)+'</div>'}
+  const parts=it.q.split('___');const inp='<input class="tx s'+(chk?(ok?' right':' wrong'):'')+'" type="text" inputmode="text" enterkeyhint="next" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" data-a="typed" data-t="'+id+'" data-i="'+i+'" value="'+esc(v)+'" aria-label="Ответ '+(i+1)+'"'+(chk?' disabled':'')+'>';
+  h=num+'<span class="q">'+(parts.length>1?esc(parts[0])+inp+esc(parts[1]):esc(it.q))+'</span>'+(it.h?' <span class="small">('+esc(it.h)+')</span>':'')+(parts.length>1?'':'<div>'+inp+'</div>')+fb}
+ else if(it.k==='tick'){h=num+'<span class="q">'+esc(it.q)+'</span><span class="tick" style="margin-left:8px">'+[[true,'✓'],[false,'✗']].map(([val,sym])=>{let c='opt';if(a===val)c+=' sel';if(chk){if(it.a===val)c+=' right';else if(a===val)c+=' wrong'}return '<button class="'+c+'" data-a="tick" data-t="'+id+'" data-i="'+i+'" data-v="'+(val?1:0)+'" aria-label="'+(val?'нужно':'не нужно')+'"'+(chk?' disabled':'')+'>'+sym+'</button>'}).join('')+'</span>'+(chk&&!ok?'<div class="fb bad2">❌ Правильно: '+(it.a?'✓ нужно':'✗ не нужно')+' — смотри текст (кнопка «Показать текст»).</div>':'')}
+ return h}
+/* match */
+function matchBody(id,d,st){const a=st.a;const used=Object.values(a);const left=d.items.length-Object.keys(a).length;
+ let L='',R='';
+ d.items.forEach((it,i)=>{const r=a[i];const p=V.find(v=>v.id===d.right[r]);const vv=V.find(v=>v.id===it[0]);let c='mc';if(st.sel===i)c+=' sel';if(st.checked)c+=(r!=null&&d.right[r]===it[0])?' right':' wrong';
+  L+='<button class="'+c+'" data-a="mleft" data-t="'+id+'" data-i="'+i+'"'+(st.checked?' disabled':'')+'><span class="em">'+it[1]+'</span>'+esc(it[2])+(r!=null?'<small>'+esc(p.en)+'</small>':'')+'</button>'});
+ d.right.forEach((vid,j)=>{const v=V.find(x=>x.id===vid);const isUsed=used.includes(j);R+='<button class="mc'+(isUsed?' used':'')+'" data-a="mright" data-t="'+id+'" data-i="'+j+'"'+(st.checked?' disabled':'')+'>'+esc(v.en)+'</button>'});
+ let fb='';if(st.checked){const wrong=d.items.map((it,i)=>[it,a[i]]).filter(([it,r])=>d.right[r]!==it[0]);if(wrong.length)fb='<div class="bad">Правильные пары:<br>'+d.items.map(it=>{const v=V.find(x=>x.id===it[0]);return it[1]+' '+esc(it[2])+' → <b>'+esc(v.en)+'</b>'}).join('<br>')+'</div>'}
+ return '<div class="pair"><div>'+L+'</div><div>'+R+'</div></div>'+fb+resBlock(id,st,d.items.length,left===0,left)}
+/* sort */
+function sortBody(id,d,st){const a=st.a;const un=d.items.map((_,i)=>i).filter(i=>a[i]==null);const left=un.length;
+ let h='<div class="chips pool" style="background:#fffbe9;border-radius:12px;padding:6px;min-height:46px;position:sticky;top:0;z-index:5;border:2px solid #ffe0b0;max-height:42vh;overflow:auto">'+(un.length?un.map(i=>chipx(d,st,i)).join(''):'<span class="small">все слова разложены ✔</span>')+'</div><div class="bins">';
+ d.bins.forEach(b=>{const inn=d.items.map((_,i)=>i).filter(i=>a[i]===b[0]);h+='<button class="bin" data-a="sbin" data-t="'+id+'" data-b="'+b[0]+'"'+(st.checked?' disabled':'')+'><b>'+b[2]+' '+esc(b[1])+'</b><div class="in">'+inn.map(i=>chipx(d,st,i,true)).join('')+'</div></button>'});
+ h+='</div>';
+ if(st.checked){const bad=d.items.filter((it,i)=>!it[2].includes(a[i]));h+='<div class="'+(bad.length?'bad':'tip')+'">'+(bad.length?'Правильно: '+d.items.map(it=>esc(it[0])+' → <b>'+esc(d.bins.find(b=>b[0]===it[2][0])[1].split(' · ')[0])+'</b>').join('; '):'')+(d.expl?'<div>'+esc(d.expl)+'</div>':'')+'</div>'}
+ return h+resBlock(id,st,d.items.length,left===0,left)}
+function chipx(d,st,i,inbin){const it=d.items[i],a=st.a;let c='sm'+(st.sel===i&&a[i]==null?' sel':'');if(st.checked)c+=it[2].includes(a[i])?' right':' wrong';return '<span role="button" tabindex="0" class="'+c+'" data-a="sitem" data-t="'+(d._id)+'" data-i="'+i+'">'+it[1]+' '+esc(it[0])+'</span>'}
+/* write */
+const QUANT=/\b(a lot of|lots of|a lot|too much|too many|much|many|a few|a little|few|little|some|any|no)\b/i;
+const UNC=['milk','water','juice','sugar','bread','cheese','butter','meat','rice','tea','coffee','food','fruit','cola','lemonade','chocolate','ice cream','flour','soup','jam'];
+const CNT=['sweets','eggs','apples','bananas','vegetables','biscuits','sandwiches','tomatoes','crisps','cakes','sausages','potatoes','oranges','drinks'];
+function analyse(text){const sents=text.split(/(?:[.!?]+\s+|[.!?]+$|\n+)/).map(s=>s.trim()).filter(s=>s.length>1);const out=[];let okc=0;
+ sents.forEach((s,i)=>{const w=[];const low=s.toLowerCase();
+  if(hasCyr(s))w.push('здесь русские буквы — пиши по-английски (проверь раскладку клавиатуры)');
+  else{if(!QUANT.test(s))w.push('не вижу слов количества (a lot of, much, many, a few, a little, some, any, no, very few / very little)');
+   UNC.forEach(u=>{const re=new RegExp('\\b(many|a few)\\s+(?:\\w+\\s+)?'+u+'\\b');if(re.test(low))w.push('«'+u+'» — неисчисляемое: вместо many / a few нужно much / a little / a lot of');const re2=new RegExp('\\b(too many|very few)\\s+'+u+'\\b');if(re2.test(low))w.push('«'+u+'» — неисчисляемое: нужно too much / very little')});
+   CNT.forEach(c=>{const re=new RegExp('\\b(a little|too much|very little)\\s+'+c+'\\b');if(re.test(low))w.push('«'+c+'» — счётное: вместо a little / too much нужно a few / too many / very few');const re3=new RegExp('\\bmuch\\s+'+c+'\\b');if(re3.test(low)&&!/\b(not|n't|how|too|so|very)\b/.test(low))w.push('«much» + счётное «'+c+'»: лучше many или a lot of')});
+   if(!/^[A-Z]/.test(s))w.push('начни предложение с большой буквы')}
+  if(!w.length)okc++;out.push({s,w,q:QUANT.test(s)&&!hasCyr(s)})});return{sents,out,okc,withQ:out.filter(o=>o.q).length}}
+function writeBody(id,d,st){const txt=st.text||'';let fb='';
+ if(st.res){const r=st.res;fb='<div class="card">'+(r.out.length?r.out.map((o,i)=>'<div class="fb '+(o.w.length?'bad2':'good')+'">'+(o.w.length?'🔸':'✅')+' <b>'+(i+1)+'.</b> '+esc(o.s)+(o.w.length?'<br><span class="small">'+o.w.map(esc).join('<br>')+'</span>':'')+'</div>').join(''):'<div class="small">Пока нет предложений.</div>')+'</div>'+(r.sents<5?'<div class="warn">Предложений: '+r.sents+'. Нужно минимум 5.</div>':'')+(r.withQ<r.sents?'<div class="warn">Не во всех предложениях есть слова количества. Добавь a lot of / a few / a little / some / any / no / much / many.</div>':'')+(st.score===3?'<div class="tip">🎉 Отлично! 5+ предложений, и в каждом есть слово количества.</div>':'<div class="small">Подсказки мягкие — это не оценка учителя, а проверка на слова количества. Исправь и нажми «Проверить» снова.</div>')}
+ return '<div class="tip">Образец: <i>I eat a lot of fruit every day. I drink a little coffee. I don’t eat much junk food. There are a few eggs in my fridge.</i></div><textarea class="tx" data-a="write" data-t="'+id+'" placeholder="I eat a lot of …" autocapitalize="sentences" autocorrect="off" spellcheck="false" aria-label="Твои предложения">'+esc(txt)+'</textarea><div class="res"><button class="btn g" data-a="wcheck" data-t="'+id+'">✅ Проверить текст</button>'+(st.done?'<span>'+stars(st.best)+'</span>':'')+'</div>'+fb}
+/* ===== pages ===== */
+const TABS=[['words','🛒 Слова'],['dialog','💬 Диалог'],['grammar','💡 Правила'],['tasks','✏️ Задания'],['hw','🏠 Домашка'],['final','🏆 Итог']];
+function vcard(v,compact){return '<div class="vc"><div class="em">'+v.em+'</div><div class="en">'+esc(v.en)+'</div><div class="ipa">'+esc(v.ipa)+'</div><div class="ru">'+esc(v.ru)+'</div>'+(v.sec?'<div class="sec">📍 Обычно в отделе: '+esc(v.sec)+'</div>':'')+'<div class="ex">“'+esc(v.ex)+'”</div><div class="exru">'+esc(v.exru||'')+'</div><div class="btns"><button class="say" data-a="saytxt" data-v="'+esc(v.en)+'" aria-label="Слушать '+esc(v.en)+'">🔊 слово</button><button class="say" data-a="saytxt" data-v="'+esc(v.ex)+'">🔊 пример</button></div></div>'}
+function pageWords(){const list=V.filter(v=>S.vcat==='all'||v.cat===S.vcat);
+ return '<h2>🛒 Новые слова</h2><p>Нажимай 🔊 — слушай британское произношение. Эти слова всегда под рукой в кнопке «📖 Словарь».</p><div class="card"><b>Контейнеры и порции (partitives)</b> — так мы считаем то, что нельзя посчитать: <i>a loaf of bread</i>, <i>a bottle of cola</i>. Образец из учебника: <i>We can usually find a loaf of bread in the bakery section.</i></div><div class="chips">'+CATS.map(c=>'<button class="chip'+(S.vcat===c[0]?' on':'')+'" data-a="vcat" data-v="'+c[0]+'">'+c[1]+'</button>').join('')+'</div><div class="grid">'+list.map(v=>vcard(v)).join('')+'</div>'}
+function hlText(t){if(!S.hl)return esc(t);return esc(t).replace(/\b(a few|some|any|only a little|a little|much)\b/g,'<mark>$1</mark>')}
+function pageDialog(){return '<h2>💬 Диалог: Maksim и Mrs Hall</h2><div class="card">Максим — школьник на каникулах в Великобритании. Сегодня у него <b>день рождения</b>, и мама его <b>принимающей семьи</b> (<i>host family</i>) идёт с ним в супермаркет за продуктами для праздника. <b>Вопрос: что случилось (What is the problem)?</b> Прочитай диалог, а потом ответь в «Заданиях» (задание 3).</div>'+
+ '<div class="chips"><button class="btn" data-a="playd">▶ Слушать весь диалог</button><button class="btn w" data-a="stop">⏹ Стоп</button><button class="btn w" data-a="toggleru">'+(S.showRu?'🙈 Скрыть перевод':'🇷🇺 Показать перевод')+'</button><button class="btn w" data-a="togglehl">'+(S.hl?'Убрать подсветку':'🖍 Подсветить many/much/some…')+'</button></div>'+
+ '<div class="'+(S.showRu?'showru':'')+'" id="dlgbox">'+DLG.map((l,i)=>'<div class="dl"><div class="who '+l[0]+'">'+(l[0]==='h'?'Mrs Hall':'Maksim')+'</div><div class="t" data-a="linetr" data-i="'+i+'">'+hlText(l[1])+' <button class="say" data-a="saytxt" data-v="'+esc(l[1])+'" data-p="'+l[0]+'" aria-label="Слушать реплику">🔊</button><div class="ru">'+esc(l[2])+'</div></div></div>').join('')+'</div>'+
+ '<p class="small">Подсказка: нажми на реплику, чтобы показать перевод только её.</p>'+
+ '<h3>Check these words (слова из учебника)</h3><div class="grid">'+V.filter(v=>v.cat==='check').map(vcard).join('')+'</div>'+
+ '<h3>Ищем количественные слова (Ex.3: find more examples)</h3><div class="card">'+QWORDS.map(q=>'<div class="line"><mark>'+esc(q[0])+'</mark> — '+esc(q[1])+'</div>').join('')+'<div class="tip">Заметь: <b>a few cartons / a few tubs</b> — счётные во мн. числе. <b>a little ice cream, much money</b> — неисчисляемые.</div></div>'}
+function gramHTML(short){return '<h3>1. Счётные и неисчисляемые</h3><p><b>Countable</b> — счётные: можно посчитать: <i>one sweet, two sweets</i>, <i>an egg, ten eggs</i>. <b>Uncountable</b> — неисчисляемые: «масса», которую не считаем по штукам: <i>milk, sugar, bread, cheese, butter, flour, rice, juice, money</i>. Мы не говорим «two milks» — у них нет мн. числа.</p>'+
+ '<h3>2. How many? / How much?</h3><p><b>How many</b> + счётное во мн. числе: <i>How many sweets are there?</i><br><b>How much</b> + неисчисляемое: <i>How much milk is there?</i></p>'+
+ '<h3>3. Таблица слов количества</h3><table class="q"><tr><th>Слово</th><th>Счётные (sweets)</th><th>Неисчисляемые (milk)</th></tr>'+
+ '<tr><td>too many / too much<br><span class="small">слишком много</span></td><td>There are <b>too many</b> sweets.</td><td>There is <b>too much</b> milk.</td></tr>'+
+ '<tr><td>a lot of / lots of<br><span class="small">много (в утверждении)</span></td><td>There are <b>a lot of</b> sweets.</td><td>There is <b>a lot of</b> milk.</td></tr>'+
+ '<tr><td>some / a few / a little<br><span class="small">немного, есть</span></td><td>There are <b>some / a few</b> sweets.</td><td>There is <b>some / a little</b> milk.</td></tr>'+
+ '<tr><td>(very) few / (very) little<br><span class="small">мало, почти нет</span></td><td>There are (very) <b>few</b> sweets.<br>There aren’t <b>many</b> sweets.</td><td>There is (very) <b>little</b> milk.<br>There isn’t <b>much</b> milk.</td></tr>'+
+ '<tr><td>any<br><span class="small">вопрос и отрицание</span></td><td>Are there <b>any</b> sweets?<br>There aren’t <b>any</b> sweets.</td><td>Is there <b>any</b> milk?<br>There isn’t <b>any</b> milk.</td></tr>'+
+ '<tr><td>no<br><span class="small">нет совсем</span></td><td>There are <b>no</b> sweets.</td><td>There is <b>no</b> milk.</td></tr></table>'+
+ '<div class="tip"><b>many / much</b> чаще всего в вопросах и отрицаниях: <i>How much…? I don’t have much money.</i> В обычном утверждении вместо них говорим <b>a lot of</b>: <i>I have a lot of money.</i> (А <i>too much / too many</i> — можно и в утверждении.)</div>'+
+ '<h3>4. few и a few, little и a little</h3><div class="card"><p><b>a few</b> (счётные) / <b>a little</b> (неисчисляемые) = <b>немного, но хватит</b> (спокойно, нейтрально): <i>I have a few friends.</i> <i>There is a little milk.</i></p><p><b>few</b> / <b>little</b> (без «a») = <b>мало, почти нет</b> (звучит как «не хватает»): <i>I have very few friends.</i> <i>There is very little milk.</i></p><p>Запомни: <b>few → countable</b> (few eggs), <b>little → uncountable</b> (little milk).</p></div>'+
+ '<h3>5. some / any / no</h3><div class="card"><p><b>some</b> — в утверждениях и предложениях/просьбах: <i>There are some apples. Would you like some tea?</i></p><p><b>any</b> — в вопросах и отрицаниях: <i>Are there any apples? There aren’t any apples.</i></p><p><b>no</b> = «not any», но глагол остаётся <b>утвердительным</b>: <i>There are no apples.</i> = <i>There aren’t any apples.</i> (Нельзя: <s>There aren’t no apples</s>.)</p></div>'+
+ '<h3>6. Контейнеры и порции (partitives)</h3><div class="card"><p>Неисчисляемое нельзя считать, поэтому считаем <b>упаковки</b>: <i>a loaf of bread → two loaves of bread</i>; <i>a bottle of cola → three bottles of cola</i>. Слово после <b>of</b> остаётся неисчисляемым (bread, cola), а контейнер становится счётным: <i>a few bottles of cola</i>, <i>a lot of cartons of juice</i>.</p><p>Контейнеры: bag (crisps), tin (soup), loaf (bread), jar (jam), pot (yogurt), carton (juice), box (cereal), tub (ice cream), bottle (cola), kilo (minced beef), bunch (bananas), bar (chocolate).</p></div>'}
+function pageGrammar(){return '<h2>💡 Правила: Quantifiers (слова количества)</h2>'+gramHTML()}
+function pageTasks(){const done=LESSON.filter(i=>T(i).done).length;return '<h2>✏️ Задания</h2><div class="card">Выполнено: <b>'+done+' / '+LESSON.length+'</b> · ⭐ '+totalStars(LESSON)+' / '+LESSON.length*3+'. Задание можно повторять сколько угодно — звёзды остаются лучшие.</div>'+LESSON.map(i=>'<div id="task-'+i+'"></div>').join('')}
+function pageHW(){const done=HW.filter(i=>T(i).done).length;return '<h2>🏠 Домашнее задание</h2><div class="card">Выполнено: <b>'+done+' / '+HW.length+'</b> · ⭐ '+totalStars(HW)+' / '+HW.length*3+'. В домашке — другие форматы: надо <b>вписывать слова сами</b>, собирать предложения и искать ошибки. Если запутался — открой «💡 Правило».</div>'+HW.map(i=>'<div id="task-'+i+'"></div>').join('')}
+function pageFinal(){const dl=LESSON.filter(i=>T(i).done).length,dh=HW.filter(i=>T(i).done).length;const st=totalStars(LESSON),sh=totalStars(HW);
+ let h='<h2>🏆 Итог</h2>';
+ if(dl<LESSON.length)h+='<div class="card">Осталось заданий в уроке: <b>'+(LESSON.length-dl)+'</b>. Выполни все задания — и получишь сертификат! 🌟</div>';
+ else h+='<div class="cert"><div class="big">🏅</div><h2>Supermarket Master!</h2><p>Ты выполнил(а) все задания урока <b>At the supermarket (2b)</b>.</p><p style="font-size:24px">⭐ '+st+' / '+LESSON.length*3+'</p><p>Теперь ты знаешь контейнеры, отделы супермаркета и many / much / a few / a little / some / any / no!</p></div>';
+ h+='<div class="card"><h3>Звёзды по заданиям</h3>'+LESSON.map(i=>'<div class="hs"><span>'+esc(TASKS[i].t)+'</span><span>'+(T(i).done?stars(T(i).best):'—')+'</span></div>').join('')+'</div><div class="card"><h3>Домашка</h3>'+HW.map(i=>'<div class="hs"><span>'+esc(TASKS[i].t)+'</span><span>'+(T(i).done?stars(T(i).best):'—')+'</span></div>').join('')+'<p>Домашка: '+dh+' / '+HW.length+' · ⭐ '+sh+' / '+HW.length*3+'</p></div>';
+ return h}
+function renderTabs(){$('#tabs').innerHTML=TABS.map(t=>'<button class="'+(S.tab===t[0]?'on':'')+'" data-a="tab" data-v="'+t[0]+'">'+t[1]+'</button>').join('')}
+function renderStat(){const all=[...LESSON,...HW];const s=totalStars(all);const d=all.filter(i=>T(i).done).length;$('#starPill').textContent='⭐ '+s;$('#prog').style.width=Math.round(d/all.length*100)+'%'}
+function renderMain(){renderTabs();const t=S.tab;const f={words:pageWords,dialog:pageDialog,grammar:pageGrammar,tasks:pageTasks,hw:pageHW,final:pageFinal}[t];$('#main').innerHTML=f();if(t==='tasks')LESSON.forEach(renderTask);if(t==='hw')HW.forEach(renderTask);renderStat()}
+function refreshTask(id){renderTask(id);renderStat()}
+/* ===== modals ===== */
+let lastFocus=null;
+function openModal(kind){lastFocus=document.activeElement;let h='';
+ if(kind==='dict'){h='<h2>📖 Словарь</h2><input class="tx" id="dq" type="text" inputmode="search" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="Поиск: english или по-русски" aria-label="Поиск по словарю"><div id="dres" style="margin-top:8px"></div>'}
+ else h='<h2>💡 Правило (шпаргалка)</h2>'+gramHTML();
+ $('#modal').innerHTML='<div class="ov" data-a="closeov"><div class="box" role="dialog" aria-modal="true"><button class="x" data-a="close" aria-label="Закрыть">✕</button>'+h+'</div></div>';document.body.style.overflow='hidden';if(kind==='dict')dictFill('')}
+function closeModal(){$('#modal').innerHTML='';document.body.style.overflow='';if(lastFocus&&lastFocus.focus)try{lastFocus.focus()}catch(e){}}
+function dictFill(q){const n=q.trim().toLowerCase();const l=V.filter(v=>!n||v.en.toLowerCase().includes(n)||v.ru.toLowerCase().includes(n));$('#dres').innerHTML=l.length?l.map(v=>'<div class="hs" style="align-items:center"><span><span style="font-size:22px">'+v.em+'</span> <b>'+esc(v.en)+'</b> <span class="small">'+esc(v.ipa)+'</span><br>'+esc(v.ru)+'</span><button class="say" data-a="saytxt" data-v="'+esc(v.en)+'" aria-label="Слушать '+esc(v.en)+'">🔊</button></div>').join(''):'<p>Ничего не найдено.</p>'}
+/* ===== events ===== */
+let lastTap=0;
+function doCheck(id){const d=TASKS[id],st=T(id);if(st.checked)return;let score=0,total=d.items.length;d.items.forEach((it,i)=>{if(d.kind==='match'){if(st.a[i]!=null&&d.right[st.a[i]]===it[0])score++;return}if(d.kind==='sort'){if(st.a[i]!=null&&it[2].includes(st.a[i]))score++;return}if(!itemDone(it,st.a[i]))return;if(itemOK(it,st.a[i]))score++});st.checked=true;st.score=score;st.done=true;st.best=Math.max(st.best,starsFor(score,total));save();refreshTask(id)}
+document.addEventListener('click',e=>{const el=e.target.closest('[data-a]');if(!el||el.disabled)return;const a=el.dataset.a,id=el.dataset.t,i=el.dataset.i!=null?+el.dataset.i:null,v=el.dataset.v;
+ if(a==='close'){closeModal();return}if(a==='closeov'){if(e.target===el)closeModal();return}
+ if(a==='open'){openModal(v);return}
+ if(a==='tab'){S.tab=v;save();renderMain();window.scrollTo(0,0);return}
+ if(a==='vcat'){S.vcat=v;save();renderMain();return}
+ if(a==='saytxt'){say(v,{pitch:el.dataset.p==='h'?1.15:el.dataset.p==='m'?.85:1});return}
+ if(a==='stop'){stopSpeech();return}
+ if(a==='play'){playSeq(LISTEN);return}
+ if(a==='playd'){playSeq(DLG.map(l=>[l[0],l[1].replace(/…/g,'...')]));return}
+ if(a==='showscript'){S.showScript=!S.showScript;save();refreshTask('L7');return}
+ if(a==='toggleru'){S.showRu=!S.showRu;save();renderMain();return}
+ if(a==='togglehl'){S.hl=!S.hl;save();renderMain();return}
+ if(a==='linetr'){if(e.target.closest('button'))return;el.classList.toggle('open');return}
+ if(a==='sayitem'){const it=TASKS[id].items[i];let gi=0;const txt=it.lines.map(l=>l.slice(1).map(p=>typeof p==='string'?p:p.o[p.a[0]]).join('')).join(' ');say(txt);return}
+ if(!id||!TASKS[id])return;const d=TASKS[id],st=T(id);
+ if(['tadd','tdel','mleft','mright','sitem','sbin','tclear'].includes(a)){const n=Date.now();if(n-lastTap<260)return;lastTap=n}
+ if(a==='mute'){return}
+ if(a==='retry'){st.a={};st.checked=false;st.sel=null;save();refreshTask(id);return}
+ if(a==='check'){doCheck(id);return}
+ if(st.checked)return;
+ if(a==='opt'||a==='tick'){st.a[i]=a==='tick'?v==='1':+v;save();refreshTask(id);return}
+ if(a==='gap'){const arr=Array.isArray(st.a[i])?st.a[i].slice():[];arr[+el.dataset.g]=+v;st.a[i]=arr;save();refreshTask(id);return}
+ if(a==='tadd'){const arr=Array.isArray(st.a[i])?st.a[i].slice():[];if(arr.includes(+v))return;arr.push(+v);st.a[i]=arr;save();refreshTask(id);return}
+ if(a==='tdel'){const arr=(st.a[i]||[]).filter(x=>x!==+v);st.a[i]=arr;save();refreshTask(id);return}
+ if(a==='tclear'){st.a[i]=[];save();refreshTask(id);return}
+ if(a==='mleft'){const cur=st.a[i];if(st.sel===i){st.sel=null}else{st.sel=i}save();refreshTask(id);return}
+ if(a==='mright'){const j=i;const owner=Object.keys(st.a).find(k=>st.a[k]===j);if(st.sel!=null){if(owner!=null)delete st.a[owner];st.a[st.sel]=j;st.sel=null}else if(owner!=null){delete st.a[owner]}save();refreshTask(id);return}
+ if(a==='sitem'){if(st.a[i]!=null){if(st.sel!=null&&st.sel!==i){st.a[st.sel]=st.a[i];st.sel=null}else{delete st.a[i];st.sel=i}}else st.sel=(st.sel===i?null:i);save();refreshTask(id);return}
+ if(a==='sbin'){if(st.sel!=null){st.a[st.sel]=el.dataset.b;st.sel=null;save();refreshTask(id)}return}
+ if(a==='wcheck'){const r=analyse(st.text||'');st.res={sents:r.sents.length,withQ:r.withQ,out:r.out};const ok=r.sents.length>=5&&r.withQ===r.sents.length;const good=ok&&r.okc===r.sents.length;st.score=good?3:ok?2:r.sents.length>=3&&r.withQ>=3?1:0;st.done=st.score>=2||st.done;st.best=Math.max(st.best,st.score);save();refreshTask(id);return}
+});
+document.addEventListener('input',e=>{const el=e.target;if(el.dataset.a==='typed'){const st=T(el.dataset.t);st.a[+el.dataset.i]=el.value;save();const b=document.querySelector('#task-'+el.dataset.t+' [data-a=check]');if(b){const d=TASKS[el.dataset.t];const left=d.items.filter((it,i)=>!itemDone(it,st.a[i])).length;b.disabled=left>0;const sp=b.parentNode.querySelector('.small');if(sp)sp.textContent=left?'Осталось ответить: '+left:'';if(sp&&!left)sp.remove()}}
+ else if(el.dataset.a==='write'){const st=T(el.dataset.t);st.text=el.value;save()}
+ else if(el.id==='dq'){dictFill(el.value)}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#modal').firstChild){closeModal();return}
+ if(e.key==='Enter'&&e.target.dataset&&e.target.dataset.a==='typed'){e.preventDefault();const all=[...document.querySelectorAll('#task-'+e.target.dataset.t+' input[data-a=typed]')];const k=all.indexOf(e.target);if(all[k+1])all[k+1].focus();else e.target.blur()}
+ if((e.key==='Enter'||e.key===' ')&&e.target.getAttribute&&e.target.getAttribute('role')==='button'){e.preventDefault();e.target.click()}});
+$('#muteBtn').addEventListener('click',()=>{S.mute=!S.mute;save();setMute();if(S.mute)stopSpeech();else toast('Звук включён')});
+try{if(haveSpeech())speechSynthesis.getVoices()}catch(e){}
+Object.keys(TASKS).forEach(k=>TASKS[k]._id=k);
+setMute();renderMain();
+
+</script></body></html>
