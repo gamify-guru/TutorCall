@@ -262,7 +262,45 @@ body.showkeys .key{display:block}
 .cert .tin{max-width:280px;text-align:center}
 .foot{text-align:center;color:#a89bd0;padding:20px;font-size:13px}
 #tc-reset{position:fixed;left:10px;bottom:10px;z-index:2147483000;font:600 12px/1 system-ui,sans-serif;padding:7px 10px;border-radius:999px;border:1px solid rgba(0,0,0,.2);background:rgba(255,255,255,.88);color:#333;cursor:pointer;opacity:.8;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.mi .av{flex:none;width:40px;height:40px;border-radius:50%;object-fit:cover;object-position:top;border:3px solid #ffd27a;background:#fff4e0}
+.ws button.rev{background:#ffe3a8}
+.wcards{background:#fff;border:2px solid #ffd9b0;border-radius:20px;padding:14px 16px;min-width:0}
+.cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:10px}
+.cw{position:relative;display:grid;min-width:0}
+.flip{grid-area:1/1;display:grid;border:0;background:none;padding:0;perspective:800px;text-align:center;min-width:0}
+.face{grid-area:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:2px solid #e3d3ff;border-radius:16px;padding:10px 8px 36px;min-height:210px;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform .45s;min-width:0;overflow-wrap:anywhere}
+.face.back{background:#fffdf8;transform:rotateY(180deg);border-color:#ffc27a}
+.flipped .face.front{transform:rotateY(180deg)}
+.flipped .face.back{transform:rotateY(0)}
+.flip:focus-visible{outline:3px solid #ff7a1a;outline-offset:2px;border-radius:16px}
+.cem{font-size:46px;line-height:1.1}.cem.s{font-size:30px}
+.face.front b{font:600 20px 'Fredoka',system-ui,sans-serif}
+.face small{font-size:10px;letter-spacing:.14em;font-weight:800;color:#6a3fc2;background:#fff;border-radius:99px;padding:2px 8px}
+.face .def{font-size:13px;line-height:1.3;font-weight:700}
+.face i{font-size:12px;color:#7a5a20;background:#fff3e0;border-radius:10px;padding:4px 6px}
+.face .wd2{font-size:11px;letter-spacing:.14em;color:#1a8fb0}
+.sayit{position:absolute;right:8px;bottom:8px;border:0;border-radius:99px;background:#1c0f3d;color:#ffd27a;font-weight:800;font-size:12px;padding:5px 10px;z-index:2}
+.lgrid{display:grid;grid-template-columns:1.1fr 1fr;gap:14px;align-items:start}
+.lpic{position:relative;border:3px solid #f0a35a;border-radius:16px;overflow:hidden}
+.lpic img{display:block;width:100%;height:auto}
+.hot{position:absolute;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;border:2px solid #fff;background:#ff7a1a;color:#fff;font-weight:800;font-size:15px;padding:0;box-shadow:0 2px 8px rgba(0,0,0,.5)}
+.hot.good{background:#27c06a}
+.lrows{display:grid;gap:8px}
+.lrow{display:flex;align-items:center;gap:8px;border:2px solid #ffe4c4;border-radius:14px;padding:5px 8px;background:#fffdf8;min-width:0}
+.lrow.good{border-color:#4cc77f;background:#f0fff6}
+.lrow .num{flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#1c0f3d;color:#ffd27a;font-weight:800;font-size:13px}
+.lrow .lem{flex:none;font-size:22px}
+.lrow .tin{padding:7px 8px;font-size:16px}
+.pf{display:flex;gap:14px;flex-wrap:wrap;align-items:center;padding:10px 16px;border-top:2px dashed #ffd9b0;background:#fdf1e0;font-weight:700;font-size:14px}
+.pf label{display:flex;align-items:center;gap:6px;min-width:0}
+.pf .ft{width:150px;padding:4px 8px;font-size:14px}
+.pf .pg{margin-left:auto;color:#ff7a1a;font-size:11px;letter-spacing:.1em}
 @media (max-width:760px){
+.cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+.lgrid{grid-template-columns:1fr}
+.pf .pg{margin-left:0;width:100%}
+.pf label{flex:1 1 140px}.pf .ft{width:100%}
+.wcards{padding:12px 10px}
 .hero-in,.intro,.mt{grid-template-columns:1fr}
 .mt{gap:10px}
 .story{flex-direction:column;align-items:flex-start}
@@ -281,7 +319,7 @@ body.showkeys .key{display:block}
 </style></head>
 <body>
 <header class="top"><div class="logo"><span>🎃</span><span>Halloween Candy Mystery</span></div>
-<nav class="nav" aria-label="Parts"><a href="#p1"><b>1</b><span>Halloween night</span></a><a href="#p2"><b>2</b><span>Cat &amp; map</span></a><a href="#p3"><b>3</b><span>Witch</span></a><a href="#p4"><b>4</b><span>Bat &amp; box</span></a><a href="#p5"><b>5</b><span>Trick or treat</span></a></nav>
+<nav class="nav" aria-label="Parts"><a href="#p1"><b>1</b><span>Halloween night</span></a><a href="#cards"><b>🔄</b><span>Word cards</span></a><a href="#p2"><b>2</b><span>Cat &amp; map</span></a><a href="#p3"><b>3</b><span>Witch</span></a><a href="#p4"><b>4</b><span>Bat &amp; box</span></a><a href="#p5"><b>5</b><span>Trick or treat</span></a></nav>
 <button class="tbtn" id="showkeys" type="button">💡 Show answers</button><button class="tbtn o" id="printbtn" type="button">🖨️ Print</button></header>
 <section class="hero"><div class="hero-in"><div>
 <span class="badge">🎃 HALLOWEEN · ENGLISH A1–A2 · GRADES 5–7</span>
@@ -304,8 +342,8 @@ body.showkeys .key{display:block}
 "use strict";
 var KEY="tutorcall-halloween-candy-mystery-v1";
 /* ---------- state ---------- */
-var S={v:1,d:{},t:{},name:""};
-try{var raw=JSON.parse(localStorage.getItem(KEY));if(raw&&typeof raw==="object"){S.d=(raw.d&&typeof raw.d==="object")?raw.d:{};S.t=(raw.t&&typeof raw.t==="object")?raw.t:{};S.name=typeof raw.name==="string"?raw.name:""}}catch(e){}
+var S={v:1,d:{},t:{},name:"",date:""};
+try{var raw=JSON.parse(localStorage.getItem(KEY));if(raw&&typeof raw==="object"){S.d=(raw.d&&typeof raw.d==="object")?raw.d:{};S.t=(raw.t&&typeof raw.t==="object")?raw.t:{};S.name=typeof raw.name==="string"?raw.name:"";S.date=typeof raw.date==="string"?raw.date:""}}catch(e){}
 var resetting=false;
 function save(){if(resetting)return;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 /* ---------- helpers ---------- */
@@ -404,7 +442,7 @@ function matchTask(pairs,order,opts){return function(body,st,ctx){
   else{busy=true;lb[l].classList.add("bad");rb[r].classList.add("bad");fbSet(fb,"Not a pair. Try again.",false);
    setTimeout(function(){busy=false;selL=selR=null;paint()},550)}}
  pairs.forEach(function(p,i){
-  var b=h("button",{type:"button",class:"mi"},h("span",{class:"em",text:p.em||""}),h("span",{text:p.l}));
+  var b=h("button",{type:"button",class:"mi"},p.img?h("img",{class:"av",src:"images/"+p.img,alt:""}):h("span",{class:"em",text:p.em||""}),h("span",{text:p.l}));
   if(opts.say){var sp=h("span",{class:"sp",role:"button","aria-label":"Say "+p.l,text:"🔊"});sp.addEventListener("click",function(e){e.stopPropagation();say(p.l)});b.appendChild(sp)}
   b.addEventListener("click",function(){if(busy||st.m.indexOf(i)>=0)return;selL=(selL===i)?null:i;tryPair();paint()});lb[i]=b});
  order.forEach(function(i){var b=h("button",{type:"button",class:"mi",text:pairs[i].r});
@@ -428,11 +466,12 @@ function codeTask(opt){return function(body,st,ctx){
 var GRID="HWNBSSGTJURUEDMLDHALLOWEENHESDUOBHCTIWADSTLBMJTRJMNSUSWEQWIGQGANQUZGDCYNZGRPUMPKINQTKSSOSCJXAVXGYILFHHOUSEAEOHTVBXNXPSLTKCBOSESZHOAEYRABFSNCYTLIIGDHMBHTHFBPMBJENSOSTMVNAZPRHMAYLRGDGOLLLKRZCVRUTDKL",N=14;
 var WORDS=["GHOST","CANDY","WITCH","PUMPKIN","BAT","BOX","MAP","HOUSE","DETECTIVE","HALLOWEEN"];
 function wsTask(body,st,ctx){
- st.f=Array.isArray(st.f)?st.f.filter(function(w){return WORDS.indexOf(w)>=0}):[];var first=null,fb=h("div",{class:"fb","aria-live":"polite"}),hints={};
+ st.f=Array.isArray(st.f)?st.f.filter(function(w){return WORDS.indexOf(w)>=0}):[];var first=null,fb=h("div",{class:"fb","aria-live":"polite"}),hints={},reveal=false;
  var grid=h("div",{class:"ws",role:"group","aria-label":"Word search"}),cells=[],chipsEl=h("div",{class:"words"});
  function pos(w){for(var r=0;r<N;r++)for(var c=0;c<N;c++)for(var dr=-1;dr<=1;dr++)for(var dc=-1;dc<=1;dc++){if(!dr&&!dc)continue;var er=r+dr*(w.length-1),ec=c+dc*(w.length-1);if(er<0||ec<0||er>=N||ec>=N)continue;var ok=true;for(var k=0;k<w.length;k++)if(GRID[(r+dr*k)*N+c+dc*k]!==w[k]){ok=false;break}if(ok){var a=[];for(k=0;k<w.length;k++)a.push((r+dr*k)*N+c+dc*k);return a}}return null}
  var P={};WORDS.forEach(function(w){P[w]=pos(w)});
  function paint(){cells.forEach(function(b){b.className=""});
+  if(reveal)WORDS.forEach(function(w){P[w].forEach(function(i){cells[i].className="rev"})});
   st.f.forEach(function(w){P[w].forEach(function(i){cells[i].className="fnd"})});
   if(first!=null)cells[first].className="sel";
   chipsEl.innerHTML="";WORDS.forEach(function(w){var f=st.f.indexOf(w)>=0;var c=h("button",{type:"button",class:"wd"+(f?" fnd":""),text:f||hints[w]?(f?w:w[0]+" "+Array(w.length).join("_")+" ("+w.length+")"):w});
@@ -452,7 +491,7 @@ function wsTask(body,st,ctx){
    else if(!w){shake(grid)}
    paint()});
   cells.push(b);grid.appendChild(b)})(i);
- body.appendChild(grid);body.appendChild(chipsEl);body.appendChild(h("p",{class:"hint",text:"Tap the first letter, then the last letter. Tap a word in the list for a hint."}));body.appendChild(fb);paint()}
+ body.appendChild(grid);body.appendChild(chipsEl);body.appendChild(h("div",{class:"row",style:"justify-content:center"},h("button",{class:"btn g",type:"button",text:"🔄 Reset",onclick:function(){if(isDone(ctx.id))return;st.f=[];first=null;reveal=false;hints={};save();paint()}}),h("button",{class:"btn g",type:"button",text:"👀 Reveal all",onclick:function(){reveal=!reveal;paint()}})));body.appendChild(h("p",{class:"hint",text:"Tap the first letter, then the last letter. Tap a word in the list for a hint. (Reveal all only shows the words — it does not finish the task.)"}));body.appendChild(fb);paint()}
 /* ===== Sentence builder ===== */
 function buildTask(items){return function(body,st,ctx){
  st.s=Array.isArray(st.s)?st.s:[];var fb=h("div",{class:"fb","aria-live":"polite"});
@@ -493,23 +532,29 @@ function gapTask(items){return function(body,st,ctx){
 /* ===== Label ===== */
 var LABELS=[{w:"ghost",img:"ghost.webp"},{w:"detective",img:"detective.webp"},{w:"cat",img:"cat.webp"},{w:"witch",img:"witch.webp"},{w:"bat",img:"bat.webp"},{w:"pumpkin",em:"🎃"}];
 var BANK=["ghost","detective","cat","witch","bat","pumpkin","box","map","house","candy"];
+var HOT=[[19,26],[38,46],[53,56],[76,34],[58,14],[79,58]];
+var LEM=["👻","🔍","🐈‍⬛","🧙‍♀️","🦇","🎃"];
 function labelTask(body,st,ctx){
- st.v=Array.isArray(st.v)?st.v:[];st.ok=Array.isArray(st.ok)?st.ok:[];var fb=h("div",{class:"fb","aria-live":"polite"}),ins=[],cards=[],cur=null;
- var g=h("div",{class:"lbl"});
+ st.v=Array.isArray(st.v)?st.v:[];st.ok=Array.isArray(st.ok)?st.ok:[];var fb=h("div",{class:"fb","aria-live":"polite"}),ins=[],rows=[],spots=[],cur=null,cnt=h("span",{class:"hint",style:"margin:0 6px"});
+ function count(){var n=st.ok.filter(Boolean).length;cnt.textContent=n+" / 6"}
  function check(){var all=true,empty=0;LABELS.forEach(function(l,i){if(st.ok[i])return;var v=ins[i].value;if(!v.trim()){empty++;all=false;return}
-  if(wordOK(v,l.w)){st.ok[i]=1;ins[i].value=l.w;st.v[i]=l.w;ins[i].readOnly=true;cards[i].classList.add("good")}else{all=false;shake(cards[i])}});save();
+  if(wordOK(v,l.w)){st.ok[i]=1;ins[i].value=l.w;st.v[i]=l.w;ins[i].readOnly=true;rows[i].classList.add("good");spots[i].classList.add("good")}else{all=false;shake(rows[i])}});save();count();
   var n=st.ok.filter(Boolean).length;
   if(n===LABELS.length){setDone(ctx.id);fbSet(fb,"All 6 labels are right! 🎉",true)}else fbSet(fb,n+" / 6 correct."+(empty?" Write a word in every box.":" Check the red ones and use the word bank."),false)}
- LABELS.forEach(function(l,i){var inp=txtIn("word",st.v[i]);inp.setAttribute("aria-label","Word "+(i+1));
+ var pic=h("div",{class:"lpic"},h("img",{src:"images/hero.webp",alt:"The detective, the ghost, the black cat, the witch and the bat in the haunted house"}));
+ var list=h("div",{class:"lrows"});
+ LABELS.forEach(function(l,i){var inp=txtIn("write the word",st.v[i]);inp.setAttribute("aria-label","Word "+(i+1));
   if(st.ok[i]){inp.readOnly=true;inp.value=l.w}
   inp.addEventListener("focus",function(){cur=i});inp.addEventListener("input",function(){st.v[i]=inp.value;save()});
   inp.addEventListener("keydown",function(e){if(noEnterComposing(e))check()});
-  var c=h("div",{class:"lc"+(st.ok[i]?" good":"")},h("span",{class:"num",text:String(i+1)}),l.img?h("img",{src:"images/"+l.img,alt:"Picture "+(i+1)}):h("div",{class:"big",text:l.em,role:"img","aria-label":"pumpkin picture"}),inp);
-  ins.push(inp);cards.push(c);g.appendChild(c)});
+  var sp=h("button",{type:"button",class:"hot"+(st.ok[i]?" good":""),text:String(i+1),style:"left:"+HOT[i][0]+"%;top:"+HOT[i][1]+"%","aria-label":"Picture label "+(i+1)});
+  sp.addEventListener("click",function(){if(!ins[i].readOnly)ins[i].focus();cur=i});spots.push(sp);pic.appendChild(sp);
+  var r=h("div",{class:"lrow"+(st.ok[i]?" good":"")},h("span",{class:"num",text:String(i+1)}),h("span",{class:"lem",text:LEM[i],"aria-hidden":"true"}),inp);
+  ins.push(inp);rows.push(r);list.appendChild(r)});
  var bank=h("div",{class:"chips"});BANK.forEach(function(w){var c=h("button",{type:"button",class:"chip",text:w});c.addEventListener("click",function(){
   var t=(cur!=null&&!st.ok[cur]&&!ins[cur].value)?cur:ins.findIndex(function(x,i){return !st.ok[i]&&!x.value});if(t<0&&cur!=null&&!st.ok[cur])t=cur;if(t<0)return;ins[t].value=w;st.v[t]=w;save();cur=t});bank.appendChild(c)});
- body.appendChild(g);body.appendChild(h("div",{class:"bank2"},h("b",{text:"WORD BANK"}),bank));
- body.appendChild(h("div",{class:"row"},h("button",{class:"btn",type:"button",text:"✓ Check",onclick:check})));body.appendChild(fb);
+ body.appendChild(h("div",{class:"lgrid"},pic,h("div",{},list,h("div",{class:"bank2"},h("b",{text:"WORD BANK"}),bank))));
+ body.appendChild(h("div",{class:"row"},h("button",{class:"btn",type:"button",text:"✓ Check",onclick:check}),h("button",{class:"btn g",type:"button",text:"🧽 Clear",onclick:function(){ins.forEach(function(x,i){if(!st.ok[i]){x.value="";st.v[i]=""}});save();fbSet(fb,"",true)}}),cnt));body.appendChild(fb);count();
  if(isDone(ctx.id))fbSet(fb,"All 6 labels are right! 🎉",true)}
 /* ===== Final box ===== */
 var LOCKS=[{n:5,w:"candy",l:"First letters (Code 1)",t:"p1t2"},{n:5,w:"ghost",l:"Number code (Code 2)",t:"p3t2"},{n:3,w:"box",l:"Symbol code (Code 3)",t:"p2t2"}];
@@ -535,6 +580,31 @@ function boxTask(body,st,ctx){
   var b=h("div",{class:"lk"+(st.o[i]?" open":"")},h("b",{text:(st.o[i]?"🔓 ":"🔒 ")+L.l}),inp);ins.push(inp);lk.push(b);locks.appendChild(b)});
  body.appendChild(locks);body.appendChild(h("div",{class:"row"},h("button",{class:"btn",type:"button",text:"🔓 Open the box",onclick:check})));body.appendChild(fb);body.appendChild(win);
  showWin();if(isDone(ctx.id))fbSet(fb,"3 of 3 locks are open! 🎉",true)}
+/* ===== Flip cards ===== */
+var CARDS=[["👻","Ghost","A white friend who flies and says “Boo!”","The ghost likes candy.","#dff1ff"],["🍬","Candy","Sweet food. Yum, yum!","There is a lot of candy.","#ffe6f0"],["🧙‍♀️","Witch","A girl with a magic hat.","The witch has a pumpkin.","#ece6ff"],["🎃","Pumpkin","A big orange fruit with a face.","The pumpkin is big and orange.","#ffe9d2"],["🦇","Bat","An animal with wings. It flies at night.","The bat is near the window.","#ece6ff"],["📦","Box","You can put candy in it.","The box is closed.","#ffeedd"],["🗺️","Map","A map shows the way.","The cat has a small map.","#e3f4ff"],["🏚️","House","A place to live. This house is haunted!","The ghost is in the house.","#e1fae9"],["🔍","Detective","A person who finds clues.","The detective is very clever.","#fff0dc"],["🌙","Halloween","A fun night in October.","It is Halloween night!","#ece6ff"]];
+function buildCards(){
+ var st=bump("cards");st.f=Array.isArray(st.f)?st.f.filter(function(x){return Number.isInteger(x)&&x>=0&&x<CARDS.length}):[];st.v=Array.isArray(st.v)?st.v.filter(function(x){return Number.isInteger(x)&&x>=0&&x<CARDS.length}):[];
+ var cnt=h("span",{class:"fmt"}),grid=h("div",{class:"cards"}),els=[];
+ function paint(){cnt.textContent=st.v.length+" / "+CARDS.length+" viewed"+(st.v.length===CARDS.length?" ✓":"");
+  els.forEach(function(e,i){var f=st.f.indexOf(i)>=0;e.w.classList.toggle("flipped",f);e.b.setAttribute("aria-pressed",f?"true":"false");e.b.setAttribute("aria-label",f?CARDS[i][1]+" — "+CARDS[i][2]+" Tap to flip back.":CARDS[i][1]+". Tap to flip.");e.sp.tabIndex=f?0:-1;e.sp.style.visibility=f?"visible":"hidden"})}
+ function setF(i,f){var k=st.f.indexOf(i);if(f&&k<0)st.f.push(i);if(!f&&k>=0)st.f.splice(k,1);if(f&&st.v.indexOf(i)<0)st.v.push(i)}
+ CARDS.forEach(function(c,i){
+  var b=h("button",{type:"button",class:"flip"},
+   h("span",{class:"face front",style:"background:linear-gradient(160deg,#fff,"+c[4]+")"},h("span",{class:"cem",text:c[0]}),h("b",{text:c[1]}),h("small",{text:"TAP TO FLIP"})),
+   h("span",{class:"face back"},h("span",{class:"cem s",text:c[0]}),h("span",{class:"def",text:c[2]}),h("i",{text:"“"+c[3]+"”"}),h("b",{class:"wd2",text:c[1].toUpperCase()})));
+  var sp=h("button",{type:"button",class:"sayit",text:"🔊 say it","aria-label":"Listen: "+c[1]});
+  sp.addEventListener("click",function(){say(c[1]+". "+c[3])});
+  var w=h("div",{class:"cw"},b,sp);
+  b.addEventListener("click",function(){setF(i,st.f.indexOf(i)<0);save();paint()});
+  els.push({w:w,b:b,sp:sp});grid.appendChild(w)});
+ var sec=h("div",{class:"wcards",id:"cards"},
+  h("div",{class:"th"},h("span",{class:"n",text:"🔄"}),h("h3",{text:"Story word cards"}),cnt),
+  h("p",{class:"ins",text:"Warm-up: tap a card to see the meaning and an example sentence. Tap 🔊 say it to hear the word. (These cards help you with the tasks below.)"}),
+  h("div",{class:"row"},h("button",{type:"button",class:"btn g",text:"🔄 Flip all",onclick:function(){CARDS.forEach(function(_,i){setF(i,true)});save();paint()}}),
+   h("button",{type:"button",class:"btn g",text:"🙈 Hide all",onclick:function(){st.f=[];save();paint()}}),
+   h("button",{type:"button",class:"btn",text:"🔊 Read all",onclick:function(){try{if(!window.speechSynthesis)return;speechSynthesis.cancel();CARDS.forEach(function(c){var u=new SpeechSynthesisUtterance(c[1]);u.lang="en-US";u.rate=.8;speechSynthesis.speak(u)})}catch(e){}}})),
+  grid);
+ save();paint();return sec}
 /* ================= TASK DEFINITIONS ================= */
 var A=function(a){return function(t){return a.some(function(r){return r.test(t)})}};
 /* P1 */
@@ -561,7 +631,7 @@ mk("p2t2",2,2,"Code 3 · Symbol code","CODE","The cat’s map has a symbol code.
   h("div",{},h("div",{class:"hint",text:"KEY"}),h("div",{class:"keyrow"},["★ = B","☾ = O","✈ = X"].map(function(t){return h("span",{class:"kc",text:t})})),h("div",{class:"bigs"},["★","☾","✈"].map(function(t){return h("span",{text:t})})))))}}));
 mk("p2t3",2,3,"Who says what?","MATCH","Tap a friend. Then tap what the friend says.",
  "Ghost → I like candy · Black Cat → I have a small map · Witch → I have a big orange pumpkin · Bat → Look in the big box! · Detective → I find the clues",
- matchTask([{em:"👻",l:"Ghost",r:"“I like candy.”"},{em:"🐈‍⬛",l:"Black Cat",r:"“I have a small map.”"},{em:"🧙‍♀️",l:"Witch",r:"“I have a big orange pumpkin.”"},{em:"🦇",l:"Bat",r:"“Look in the big box!”"},{em:"🔍",l:"Detective",r:"“I find the clues.”"}],[2,4,0,3,1],{}));
+ matchTask([{img:"ghost.webp",l:"Ghost",r:"“I like candy.”"},{img:"cat.webp",l:"Black Cat",r:"“I have a small map.”"},{img:"witch.webp",l:"Witch",r:"“I have a big orange pumpkin.”"},{img:"bat.webp",l:"Bat",r:"“Look in the big box!”"},{img:"detective.webp",l:"Detective",r:"“I find the clues.”"}],[2,4,0,3,1],{}));
 /* P3 */
 mk("p3t1",3,1,"Story questions","TYPE","Read part 3. Write short answers. A full sentence is OK too.",
  "1) to the kitchen · 2) a witch · 3) a big orange pumpkin",
@@ -598,8 +668,8 @@ mk("p5t1",5,1,"Story questions","TYPE","Read part 5. Write short answers. A full
  qType([{tag:"WHAT?",q:"What does the detective open?",ok:A([/\bbox\b/])},
   {tag:"WHAT?",q:"What is in the box?",ok:A([/\bcand(y|ies)\b/,/\bsweets?\b/])},
   {tag:"WHO?",q:"Who is happy? (3 friends)",ok:function(t,raw){return /\bghost\b/.test(t)&&/\bwitch\b/.test(t)&&/\bcat\b/.test(t)}}]));
-mk("p5t2",5,2,"Label the friends","LABEL","Look at the pictures. Write the word for each number. Use the word bank to help you.",
- "1 ghost · 2 detective · 3 cat · 4 witch · 5 bat · 6 pumpkin",labelTask);
+mk("p5t2",5,2,"Label the friends","LABEL","Look at the haunted house. Tap a number and write the word. Use the word bank if you need help.",
+ "1 ghost (on the ghost) · 2 detective · 3 cat · 4 witch · 5 bat · 6 pumpkin",labelTask);
 mk("p5t3",5,3,"Open the candy box!","OPEN","The box has three locks. Type the three magic words from your codes (parts 1, 2 and 3).",
  "CANDY · GHOST · BOX",boxTask);
 var PARTS=[
@@ -618,6 +688,7 @@ PARTS.forEach(function(P,pi){var p=pi+1;
  var sb=sec.querySelector(".sb");
  var sp=h("button",{type:"button",class:"say",text:"🔊 Listen",onclick:function(){say(P.txt)}});if(!window.speechSynthesis)sp.style.display="none";
  sb.appendChild(h("div",{class:"story"},h("img",{src:"images/"+P.img,alt:P.t,loading:"lazy"}),h("div",{class:"tx"},h("p",{text:P.txt}),sp)));
+ if(p===1)sb.appendChild(buildCards());
  TASKS.filter(function(t){return t.p===p}).forEach(function(T){
   var body=h("div",{class:"tb"});
   var art=h("article",{class:"task"+(isDone(T.id)?" done":""),id:"t-"+T.id},
@@ -626,6 +697,9 @@ PARTS.forEach(function(P,pi){var p=pi+1;
   var st=bump(T.id);
   try{T.render(body,st,{id:T.id})}catch(err){try{console.error(err)}catch(e){}delete S.t[T.id];st=bump(T.id);body.innerHTML="";try{T.render(body,st,{id:T.id})}catch(e2){body.textContent="Please press ↺ to restart the lesson."}}
   sb.appendChild(art)});
+ var nmI=txtIn("name",S.name);nmI.setAttribute("autocapitalize","words");nmI.setAttribute("aria-label","Name");nmI.className="tin ft";nmI.addEventListener("input",function(){S.name=nmI.value;save()});
+ var dtI=txtIn("date",S.date||"");dtI.className="tin ft";dtI.setAttribute("aria-label","Date");dtI.addEventListener("input",function(){S.date=dtI.value;save()});
+ sec.appendChild(h("div",{class:"pf"},h("label",{},"Name: ",nmI),h("label",{},"Date: ",dtI),h("span",{class:"pg",text:"PAGE "+p+" / 5 · HALLOWEEN CANDY MYSTERY"})));
  main.appendChild(sec)});
 function progress(){var tot=TASKS.length,n=TASKS.filter(function(t){return isDone(t.id)}).length;
  document.getElementById("pct").textContent=Math.round(n/tot*100)+"%";document.getElementById("barfill").style.width=(n/tot*100)+"%";document.getElementById("cnt-all").textContent=n+" / "+tot;
@@ -635,7 +709,7 @@ document.getElementById("showkeys").addEventListener("click",function(){var on=d
 document.getElementById("printbtn").addEventListener("click",function(){window.print()});
 /* nav highlight */
 var links=Array.from(document.querySelectorAll(".nav a"));
-function onScroll(){var cur=null;for(var p=1;p<=5;p++){var e=document.getElementById("p"+p);if(e&&e.getBoundingClientRect().top<140)cur=p}links.forEach(function(a,i){a.classList.toggle("on",cur===i+1)})}
+function onScroll(){var cur=null;for(var p=1;p<=5;p++){var e=document.getElementById("p"+p);if(e&&e.getBoundingClientRect().top<140)cur=p}links.forEach(function(a){a.classList.toggle("on",cur!=null&&a.getAttribute("href")==="#p"+cur)})}
 window.addEventListener("scroll",onScroll,{passive:true});onScroll();
 /* reset */
 var rb=h("button",{type:"button",id:"tc-reset",text:"↺ Начать заново",title:"Удалить сохранённые ответы и начать урок сначала"});
