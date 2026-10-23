@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:,">
+<title>The Vanished School Mascot — Shadow School</title>
+<style>
+  :root {
+    --bg: #0f0a1a;
+    --card: #1a1228;
+    --purple: #6b3fa0;
+    --orange: #ff7a2f;
+    --text: #f0e6ff;
+    --muted: #b8a8d0;
+    --accent: #c9a0ff;
+    --green: #4ade80;
+    --red: #f87171;
+  }
+  * { box-sizing: border-box; }
+  html, body { overflow-x: hidden; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    background-image: radial-gradient(circle at 20% 30%, rgba(107,63,160,0.15) 0%, transparent 40%),
+                      radial-gradient(circle at 80% 70%, rgba(255,122,47,0.08) 0%, transparent 40%);
+    -webkit-text-size-adjust: 100%;
+  }
+  .container { max-width: 820px; margin: 0 auto; padding: 20px; }
+  header { text-align: center; padding: 30px 20px 10px; }
+  h1 { color: var(--orange); margin: 0 0 8px; font-size: 2.1em; overflow-wrap: anywhere; }
+  .keys-bar {
+    display: flex; justify-content: center; gap: 8px; margin: 12px 0 20px;
+    font-size: 1.4em; flex-wrap: wrap;
+  }
+  .key { opacity: 0.25; transition: opacity 0.3s; }
+  .key.unlocked { opacity: 1; filter: drop-shadow(0 0 6px var(--orange)); }
+  .task {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 22px;
+    margin: 22px 0;
+    border: 1px solid rgba(201,160,255,0.15);
+    display: none;
+  }
+  .task.active { display: block; animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .task h2 { color: var(--orange); margin-top: 0; }
+  .instruction { background: rgba(107,63,160,0.25); padding: 12px 16px; border-radius: 8px; margin: 10px 0; font-style: italic; }
+  audio { width: 100%; margin: 10px 0; border-radius: 8px; }
+  input[type="text"], textarea, select {
+    background: #0f0a1a; border: 1px solid rgba(201,160,255,0.4); color: var(--text);
+    padding: 7px 10px; border-radius: 6px; font-family: inherit; width: 100%; font-size: 16px; max-width: 100%;
+  }
+  select { width: auto; }
+  textarea { min-height: 50px; }
+  .correct { border-color: var(--green) !important; background: rgba(74,222,128,0.1) !important; }
+  .wrong { border-color: var(--red) !important; }
+  button {
+    background: var(--orange); color: #1a0f0a; border: none; padding: 9px 16px;
+    border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 10px; margin-right: 8px;
+    font-family: inherit; font-size: 15px; touch-action: manipulation;
+  }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .feedback { margin-top: 8px; font-size: 0.95em; }
+  .clue-box { background: rgba(255,122,47,0.12); border-left: 3px solid var(--orange); padding: 10px 14px; margin-top: 10px; border-radius: 6px; display: none; }
+  .clue-box.show { display: block; }
+  .watermark { text-align: center; color: rgba(201,160,255,0.4); margin-top: 30px; font-size: 0.85em; }
+  /* TutorCall additions */
+  .tc-top { display:flex; justify-content:center; margin-top:8px; }
+  .tc-reset { background: transparent; color: var(--accent); border: 1px solid rgba(201,160,255,0.45); font-weight:600; margin:0; }
+  .tc-reset:hover { background: rgba(201,160,255,0.12); }
+  .src-note { font-size: 0.8em; color: var(--muted); margin: -6px 0 8px; }
+  .row { margin: 10px 0; }
+  .row label { display:block; }
+  .inl { display:inline-block; vertical-align: middle; }
+  .num { width: 64px !important; text-align:center; }
+  .gap { width: 140px !important; }
+  .gap2 { width: 180px !important; }
+  .tl { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:8px 0; }
+  .tl b { min-width: 48px; color: var(--accent); }
+  .tl select { flex: 1 1 200px; }
+  .pp { border:1px solid rgba(201,160,255,0.2); border-radius:10px; padding:10px 12px; margin:10px 0; }
+  .pp h3 { margin:0 0 6px; font-size:1em; color: var(--accent); }
+  .pp .grid { display:grid; grid-template-columns: 1fr 1fr; gap:8px; }
+  .pp .grid label { font-size: 0.85em; color: var(--muted); }
+  @media (max-width: 560px) { .pp .grid { grid-template-columns: 1fr; } .container { padding: 12px; } .task { padding: 16px; } h1 { font-size: 1.6em; } header { padding: 20px 8px 6px; } }
+  .reason { margin-top:4px; }
+  details.board { background: var(--card); border-radius: 12px; padding: 12px 16px; margin-bottom: 20px; border:1px solid rgba(201,160,255,0.15); }
+  details.board summary { cursor:pointer; font-weight:700; color: var(--orange); }
+  .bgrid { display:grid; grid-template-columns: 1fr 1fr; gap: 10px 18px; margin-top: 8px; }
+  @media (max-width: 560px) { .bgrid { grid-template-columns: 1fr; } }
+  .bgrid h4 { margin: 4px 0; color: var(--accent); }
+  .bgrid ul { margin: 0; padding-left: 20px; }
+  .done-banner { display:none; text-align:center; color: var(--green); font-weight:700; margin-top:6px; }
+  .done-banner.show { display:block; }
+  .hint-ru { color: var(--orange); }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>THE VANISHED SCHOOL MASCOT</h1>
+    <div style="color:var(--accent);">Shadow School Halloween Investigation</div>
+    <div class="keys-bar" id="keysBar">
+      <span class="key">🔑</span><span class="key">🔑</span><span class="key">🔑</span>
+      <span class="key">🔑</span><span class="key">🔑</span><span class="key">🔑</span>
+      <span class="key">🔑</span><span class="key">🔑</span><span class="key">🔑</span>
+    </div>
+    <div style="color:var(--muted); font-size:0.9em;">Collect keys by completing tasks · <span id="keyCount">0</span>/9</div>
+    <div class="done-banner" id="doneBanner">🦉 Case closed! You collected all 9 keys.</div>
+    <div class="tc-top"><button type="button" class="tc-reset" id="tcReset">↺ Начать заново</button></div>
+  </header>
+
+  <div class="mission" style="background:var(--card); padding:16px; border-radius:12px; border-left:4px solid var(--orange); margin-bottom:20px;">
+    <strong>Your Mission</strong><br>
+    Find Shadow the Owl before the Halloween parade. Listen, think, and collect evidence. Each correct task unlocks a key and a new clue.
+  </div>
+
+  <details class="board" id="board">
+    <summary>📌 Evidence Board</summary>
+    <div class="src-note" style="margin-top:6px">Use this board throughout the investigation. Update it after each task.</div>
+    <div class="bgrid">
+      <div><h4>WHAT WE KNOW</h4><ul>
+        <li>Owl last seen 5:45, Great Hall</li><li>Noise at 6:10</li><li>Shadow at 6:15</li>
+        <li>Cora in library 6:00–6:25</li><li>Ms Hollow in art room</li><li>Ben left at 5:40</li>
+        <li>Alex arrived 6:30</li><li>Note found on floor</li></ul></div>
+      <div><h4>SUSPECTS</h4><ul><li>Ms Hollow</li><li>Alex</li><li>Ben</li><li>Cora</li></ul>
+        <h4>EVIDENCE</h4><ul><li>Timeline</li><li>Shadow sighting</li><li>Note</li><li>Gloves</li><li>Art-room activity</li></ul></div>
+      <div><h4>QUESTIONS</h4><ul><li>Is the note true?</li><li>Did Ms Hollow leave the art room?</li><li>Whose gloves are they?</li></ul></div>
+      <div><h4>WHAT CHANGED (write here)</h4><textarea data-f="board_changed" aria-label="What changed"></textarea></div>
+    </div>
+  </details>
+
+  <!-- TASK 1 -->
+  <div class="task active" data-task="1">
+    <h2>Task 1. Listening Grid</h2>
+    <div>🎧 Listen first</div>
+    <audio controls preload="metadata" src="audio/mascot.mp3"></audio>
+    <div class="instruction">Complete the grid. Who saw the owl last, where, and when?</div>
+    <p>Person who last saw the owl: <input type="text" data-f="t1_person" data-m="person"></p>
+    <p>Time: <input type="text" data-f="t1_time" data-m="t545"></p>
+    <p>Place: <input type="text" data-f="t1_place" data-m="hall"></p>
+    <button type="button" class="chk" data-check="1">Check & Unlock</button>
+    <div class="feedback" id="fb1"></div>
+    <div class="clue-box" id="clue1">🗝️ Clue unlocked: The owl was still on its perch at 5:45.</div>
+  </div>
+
+  <!-- TASK 2 -->
+  <div class="task" data-task="2">
+    <h2>Task 2. Listen & Order</h2>
+    <audio controls preload="metadata" src="audio/mascot.mp3"></audio>
+    <div class="instruction">Put the events in the order you hear them (write 1–6).</div>
+    <p><input type="text" class="num inl" inputmode="numeric" maxlength="3" data-f="t2_A" data-ev="A"> Alex arrived and looked for his gloves.</p>
+    <p><input type="text" class="num inl" inputmode="numeric" maxlength="3" data-f="t2_B" data-ev="B"> Cora saw a shadow past the window.</p>
+    <p><input type="text" class="num inl" inputmode="numeric" maxlength="3" data-f="t2_C" data-ev="C"> Mrs Grey last saw the owl.</p>
+    <p><input type="text" class="num inl" inputmode="numeric" maxlength="3" data-f="t2_D" data-ev="D"> The lights flickered.</p>
+    <p><input type="text" class="num inl" inputmode="numeric" maxlength="3" data-f="t2_E" data-ev="E"> Ben finished cleaning and left.</p>
+    <p><input type="text" class="num inl" inputmode="numeric" maxlength="3" data-f="t2_F" data-ev="F"> There was a loud noise near the hall door.</p>
+    <button type="button" class="chk" data-check="2">Check & Unlock</button>
+    <div class="feedback" id="fb2"></div>
+    <div class="clue-box" id="clue2">🗝️ Clue unlocked: Timeline confirmed — noise at 6:10, shadow at 6:15.</div>
+  </div>
+
+  <!-- TASK 3 -->
+  <div class="task" data-task="3">
+    <h2>Task 3. Find the Clue</h2>
+    <audio controls preload="metadata" src="audio/mascot.mp3"></audio>
+    <div class="instruction">Write the four key details.</div>
+    <p>Time owl last seen: <input type="text" data-f="t3_time" data-m="t545"></p>
+    <p>What Cora saw: <input type="text" data-f="t3_cora" data-m="shadow"></p>
+    <p>Where Ms Hollow was: <input type="text" data-f="t3_hollow" data-m="artroom"></p>
+    <p>What Alex looked for: <input type="text" data-f="t3_alex" data-m="gloves"></p>
+    <button type="button" class="chk" data-check="3">Check & Unlock</button>
+    <div class="feedback" id="fb3"></div>
+    <div class="clue-box" id="clue3">🗝️ Clue unlocked: Ms Hollow was in the art room. Alex arrived late.</div>
+  </div>
+
+  <!-- TASK 4 (from the workbook) -->
+  <div class="task" data-task="4">
+    <h2>Task 4. Audio Timeline — “Reconstruct the Hour”</h2>
+    <div class="instruction">Use the information from the recordings. Put the events on the timeline.</div>
+    <div class="tl"><b>5:40</b><select data-f="t4_540" data-m="sel" data-a="ben"></select></div>
+    <div class="tl"><b>5:45</b><select data-f="t4_545" data-m="sel" data-a="owl"></select></div>
+    <div class="tl"><b>6:00</b><select data-f="t4_600" data-m="sel" data-a="lights"></select></div>
+    <div class="tl"><b>6:10</b><select data-f="t4_610" data-m="sel" data-a="noise"></select></div>
+    <div class="tl"><b>6:15</b><select data-f="t4_615" data-m="sel" data-a="shadow"></select></div>
+    <div class="tl"><b>6:30</b><select data-f="t4_630" data-m="sel" data-a="alex"></select></div>
+    <div class="src-note">Hint: Use the grid and the order task.</div>
+    <button type="button" class="chk" data-check="4">Check & Unlock</button>
+    <div class="feedback" id="fb4"></div>
+    <div class="clue-box" id="clue4">🗝️ Clue unlocked: Ben left at 5:40 — before the owl was last seen at 5:45.</div>
+  </div>
+
+  <!-- TASK 5 (from the workbook) -->
+  <div class="task" data-task="5">
+    <h2>Task 5. Evidence Passport — “Check Every Clue”</h2>
+    <div class="instruction">For each piece of evidence, complete the passport: source, fact, meaning and reliability.</div>
+    <div class="src-note">Hint: High = direct witness; Low = possible trick.</div>
+    <div id="passports"></div>
+    <button type="button" class="chk" data-check="5">Check & Unlock</button>
+    <div class="feedback" id="fb5"></div>
+    <div class="clue-box" id="clue5">🗝️ Clue unlocked: The witnesses are reliable. The note may be a trick.</div>
+  </div>
+
+  <!-- TASK 6 (Grammar focus) -->
+  <div class="task" data-task="6">
+    <h2>Task 6. Clue Unlock — Conditional 1</h2>
+    <div class="instruction">Complete the sentences. Correct answers unlock the next clue.</div>
+    <p>1. If we check the art room, we <input type="text" class="gap inl" data-f="t6_find" data-m="willfind"> (find) the owl.</p>
+    <p>2. Choose the correct time: The noise was at <select data-f="t6_noise" data-m="sel" data-a="6:10"><option value="">—</option><option>6:00</option><option>6:10</option><option>6:30</option></select>.</p>
+    <p>3. Write the person who was in the library: <input type="text" class="gap inl" data-f="t6_lib" data-m="cora"></p>
+    <p>4. True or False: Ben was still in the school at 6:15. <select data-f="t6_tf" data-m="sel" data-a="false"><option value="">—</option><option value="true">True</option><option value="false">False</option></select></p>
+    <p>5. If Alex finds his gloves, he <input type="text" class="gap inl" data-f="t6_show" data-m="willshow"> (show) them to us.</p>
+    <div class="src-note">Hint: Use will + verb for the conditionals.</div>
+    <button type="button" class="chk" data-check="6">Check & Unlock</button>
+    <div class="feedback" id="fb6"></div>
+    <div class="clue-box" id="clue6">🗝️ Clue unlocked: The art room is the most promising place to search.</div>
+  </div>
+
+  <!-- TASK 7 -->
+  <div class="task" data-task="7">
+    <h2>Task 7. Possible / Impossible</h2>
+    <div class="instruction">Choose Possible or Impossible. Give a short reason from the evidence.</div>
+    <div class="row">Ben took the owl after 6:00.
+      <select data-f="t7_1" data-m="sel" data-a="impossible"><option value="">—</option><option>possible</option><option>impossible</option></select>
+      <input type="text" class="reason" data-f="t7_1r" placeholder="Reason…" aria-label="Reason"></div>
+    <div class="row">Cora moved the owl while she was in the library.
+      <select data-f="t7_2" data-m="sel" data-a="impossible"><option value="">—</option><option>possible</option><option>impossible</option></select>
+      <input type="text" class="reason" data-f="t7_2r" placeholder="Reason…" aria-label="Reason"></div>
+    <div class="row">Ms Hollow moved the owl to the art room.
+      <select data-f="t7_3" data-m="sel" data-a="possible"><option value="">—</option><option>possible</option><option>impossible</option></select>
+      <input type="text" class="reason" data-f="t7_3r" placeholder="Reason…" aria-label="Reason"></div>
+    <div class="row">Alex hid the owl before 6:30.
+      <select data-f="t7_4" data-m="sel" data-a="impossible"><option value="">—</option><option>possible</option><option>impossible</option></select>
+      <input type="text" class="reason" data-f="t7_4r" placeholder="Reason…" aria-label="Reason"></div>
+    <div class="row">The lights flickering helped someone move the owl.
+      <select data-f="t7_5" data-m="sel" data-a="possible"><option value="">—</option><option>possible</option><option>impossible</option></select>
+      <input type="text" class="reason" data-f="t7_5r" placeholder="Reason…" aria-label="Reason"></div>
+    <div class="row">The note is completely true.
+      <select data-f="t7_6" data-m="sel" data-a="impossible"><option value="">—</option><option>possible</option><option>impossible</option></select>
+      <input type="text" class="reason" data-f="t7_6r" placeholder="Reason…" aria-label="Reason"></div>
+    <div class="src-note">Hint: Check the times first. Reasons are for discussion — they are not checked.</div>
+    <button type="button" class="chk" data-check="7">Check & Unlock</button>
+    <div class="feedback" id="fb7"></div>
+    <div class="clue-box" id="clue7">🗝️ Clue unlocked: Ben and Alex have strong alibis. Ms Hollow remains possible.</div>
+  </div>
+
+  <!-- TASK 8 (from the workbook, open) -->
+  <div class="task" data-task="8">
+    <h2>Task 8. Missing Piece — “What We Still Need”</h2>
+    <div class="instruction">For each question, write what information is still missing.</div>
+    <div class="row"><label>1. Did anyone see Ms Hollow leave the art room?<br>Missing: <input type="text" data-f="t8_1"></label></div>
+    <div class="row"><label>2. What exactly does the note say about the closet?<br>Missing: <input type="text" data-f="t8_2"></label></div>
+    <div class="row"><label>3. Are the black gloves Alex’s?<br>Missing: <input type="text" data-f="t8_3"></label></div>
+    <div class="row"><label>4. Was the perch empty or moved?<br>Missing: <input type="text" data-f="t8_4"></label></div>
+    <div class="src-note">Open task — discuss your answers with your teacher.</div>
+    <button type="button" class="nxt" data-next="8">Next ➜</button>
+  </div>
+
+  <!-- TASK 9 (from the workbook, open) -->
+  <div class="task" data-task="9">
+    <h2>Task 9. Motive — Evidence — Suspect — “Connect the Dots”</h2>
+    <div class="instruction">Choose the best evidence and suspect for each motive.</div>
+    <div id="dots"></div>
+    <div class="src-note">Open task — explain your choices to your teacher.</div>
+    <button type="button" class="nxt" data-next="9">Next ➜</button>
+  </div>
+
+  <!-- FINAL -->
+  <div class="task" data-task="final">
+    <h2>Final Verdict</h2>
+    <div class="instruction">Write your conclusion. Use at least two pieces of evidence. Reject the strongest wrong idea. Use one Conditional 1 sentence.</div>
+    <p>My conclusion:<br><textarea id="verdictText" data-f="fin_text"></textarea></p>
+    <p>Evidence 1: <input type="text" data-f="fin_ev1"></p>
+    <p>Evidence 2: <input type="text" data-f="fin_ev2"></p>
+    <p>I reject this idea because: <input type="text" data-f="fin_rej"></p>
+    <p>If we <input type="text" id="condIf" class="gap2 inl" data-f="fin_if">, we will <input type="text" id="condWill" class="gap2 inl" data-f="fin_will">.</p>
+    <button type="button" id="verdictBtn">Submit Verdict</button>
+    <div class="feedback" id="fbFinal"></div>
+    <div class="clue-box" id="clueFinal">
+      🗝️ Model conclusion: Ms Hollow most likely moved the owl to the art room to prepare a surprise.
+      Evidence: she was there all evening; Cora saw a shadow at 6:15.
+      Alex arrived too late. If we check the art room, we will find the owl.
+    </div>
+  </div>
+
+  <!-- REFLECTION (from the workbook) -->
+  <div class="task" data-task="reflect">
+    <h2>3-minute Reflection / Exit Ticket</h2>
+    <div class="row"><label>1. Which clue helped you most? Why?<textarea data-f="ref_1"></textarea></label></div>
+    <div class="row"><label>2. Write one Conditional 1 sentence about the case.<textarea data-f="ref_2"></textarea></label></div>
+    <div class="row"><label>3. What will you do first if you investigate another mystery?<textarea data-f="ref_3"></textarea></label></div>
+  </div>
+
+  <div class="watermark">@gamify_guru · Shadow School Investigation</div>
+</div>
+
+<script>
+(function(){
+'use strict';
+var KEY = 'tutorcall-vanished-school-mascot-v1';
+var ORDER = ['1','2','3','4','5','6','7','8','9','final','reflect'];
+var KEYED = {'1':1,'2':1,'3':1,'4':1,'5':1,'6':1,'7':1,'final':2};
+
+/* ---------- state ---------- */
+var S = {v:1, vals:{}, done:{}, fin:null};
+function load(){
+  try {
+    var raw = localStorage.getItem(KEY); if(!raw) return;
+    var d = JSON.parse(raw);
+    if(!d || typeof d !== 'object' || d.v !== 1) return;
+    if(d.vals && typeof d.vals === 'object') for(var k in d.vals){ if(typeof d.vals[k] === 'string' && d.vals[k].length < 5000) S.vals[k] = d.vals[k]; }
+    if(d.done && typeof d.done === 'object') for(var t in d.done){ if(d.done[t] === true && ORDER.indexOf(t) >= 0) S.done[t] = true; }
+    if(d.fin && typeof d.fin === 'object' && typeof d.fin.score === 'number') S.fin = {score: d.fin.score|0};
+  } catch(e) { try { localStorage.removeItem(KEY); } catch(_){} }
+}
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} }
+load();
+
+/* ---------- dynamic content (built before restore) ---------- */
+var EVENTS = [['ben','Ben finished cleaning and left'],['owl','The owl was last seen'],['lights','The lights flickered'],['noise','A loud noise near the hall door'],['shadow','Cora saw a shadow past the window'],['alex','Alex arrived and looked for his gloves']];
+var EV_SHUF = ['shadow','lights','alex','owl','noise','ben'];
+Array.prototype.forEach.call(document.querySelectorAll('.task[data-task="4"] select'), function(sel){
+  var h = '<option value="">— choose an event —</option>';
+  EV_SHUF.forEach(function(id){ var e = EVENTS.filter(function(x){return x[0]===id;})[0]; h += '<option value="'+id+'">'+e[1]+'</option>'; });
+  sel.innerHTML = h;
+});
+var PASS = [['last','1. Last sighting'],['shadow','2. Shadow past window'],['note','3. Note on the floor'],['gloves','4. Black gloves'],['art','5. Art-room painting']];
+document.getElementById('passports').innerHTML = PASS.map(function(p){
+  return '<div class="pp"><h3>'+p[1]+'</h3><div class="grid">'+
+    '<label>Source<input type="text" data-f="t5_'+p[0]+'_src" data-req="1"></label>'+
+    '<label>Fact<input type="text" data-f="t5_'+p[0]+'_fact" data-req="1"></label>'+
+    '<label>Meaning<input type="text" data-f="t5_'+p[0]+'_mean" data-req="1"></label>'+
+    '<label>Reliability<select data-f="t5_'+p[0]+'_rel" data-req="1"'+(p[0]==='note'?' data-m="sel" data-a="low"':'')+'><option value="">—</option><option value="high">High</option><option value="low">Low</option></select></label>'+
+    '</div></div>';
+}).join('');
+var DOTS = ['wanted a surprise decoration','late arrival and missing gloves','was cleaning and left early','was reading and saw a shadow','possible prank with a note'];
+var EVID = ['Timeline','Shadow sighting','Note','Gloves','Art-room activity'];
+var SUSP = ['Ms Hollow','Alex','Ben','Cora'];
+function opts(a){ return '<option value="">—</option>' + a.map(function(x){return '<option>'+x+'</option>';}).join(''); }
+document.getElementById('dots').innerHTML = DOTS.map(function(m,i){
+  return '<div class="pp"><h3>'+(i+1)+'. Motive: '+m+'</h3><div class="tl"><span>→ Evidence:</span><select data-f="t9_'+i+'_ev">'+opts(EVID)+'</select><span>→ Suspect:</span><select data-f="t9_'+i+'_su">'+opts(SUSP)+'</select></div></div>';
+}).join('');
+
+/* ---------- normalising & matching ---------- */
+var RU = 'йцукенгшщзхъфывапролджэячсмитьбюё', EN = "qwertyuiop[]asdfghjkl;'zxcvbnm,.`";
+function toEn(s){ var o=''; s = s.toLowerCase(); for(var i=0;i<s.length;i++){ var j = RU.indexOf(s[i]); o += j>=0 ? EN[j] : s[i]; } return o; }
+function hasCyr(s){ return /[\u0400-\u04FF]/.test(s); }
+function norm(s){
+  return String(s).toLowerCase()
+    .replace(/[\u2018\u2019\u02BC\u0060\u00B4]/g, "'")
+    .replace(/[\u201C\u201D"«»]/g, '')
+    .replace(/[\u2010-\u2015]/g, '-')
+    .replace(/\s+/g, ' ')
+    .replace(/^[\s.,!?;]+|[\s.,!?;]+$/g, '');
+}
+function plain(s){ return norm(s).replace(/[.,!?;]/g,' ').replace(/\s+/g,' ').trim(); }
+var M = {
+  person: function(v){ var s = plain(v).replace(/^(it was|she was|he was|the person was) /,'');
+    return /^((mrs|miss|ms|mrs\.) ?)?gr[ae]y( the caretaker)?$/.test(s) || /^(the )?caretaker( (mrs|ms|miss) gr[ae]y)?$/.test(s); },
+  t545: function(v){ var s = norm(v).replace(/^at /,'').replace(/\s*(p\.? ?m\.?|in the evening)$/,'').trim();
+    return /^(0?5|17) ?[:.,;\- ] ?45$/.test(s) || /^0?545$/.test(s) || /^five forty[- ]?five$/.test(s) || /^(a )?quarter to six$/.test(s); },
+  hall: function(v){ var s = plain(v); return /\bgreat hall\b/.test(s) || /^(in |at |on )?(the )?hall$/.test(s); },
+  shadow: function(v){ var s = plain(v); return /\bshadows?\b/.test(s) && !/\b(no|not|didn't|didnt)\b/.test(s); },
+  artroom: function(v){ var s = plain(v); return /\bart[- ]?room\b/.test(s); },
+  gloves: function(v){ var s = plain(v); return /\bgloves?\b/.test(s) && !/\b(white|red|blue|green|brown|yellow|pink)\b/.test(s); },
+  willfind: function(v){ var s = plain(v).replace(/^we ?/,''); return /^(will|'ll|ll) find( it| the owl)?$/.test(s); },
+  willshow: function(v){ var s = plain(v).replace(/^he ?/,''); return /^(will|'ll|ll) show( them( to us)?)?$/.test(s); },
+  cora: function(v){ var s = plain(v); return /^(it was |she was )?cora( was in the library)?$/.test(s); }
+};
+
+/* ---------- fields ---------- */
+var FIELDS = Array.prototype.slice.call(document.querySelectorAll('[data-f]'));
+function fieldByName(n){ for(var i=0;i<FIELDS.length;i++) if(FIELDS[i].getAttribute('data-f')===n) return FIELDS[i]; return null; }
+FIELDS.forEach(function(el){
+  var n = el.getAttribute('data-f');
+  if(Object.prototype.hasOwnProperty.call(S.vals, n)) {
+    if(el.tagName === 'SELECT') { var ok=false; for(var i=0;i<el.options.length;i++) if(el.options[i].value===S.vals[n]) ok=true; if(ok) el.value = S.vals[n]; }
+    else el.value = S.vals[n];
+  }
+  var h = function(){ S.vals[n] = el.value; el.classList.remove('wrong'); save(); };
+  el.addEventListener('input', h); el.addEventListener('change', h); el.addEventListener('compositionend', h);
+});
+var board = document.getElementById('board');
+if(S.vals.__board === '1') board.open = true;
+board.addEventListener('toggle', function(){ S.vals.__board = board.open ? '1' : '0'; save(); });
+
+function taskEl(id){ return document.querySelector('.task[data-task="'+id+'"]'); }
+function val(el){ return el.value; }
+
+/* ---------- task 2 (order) ---------- */
+var ORDERS = [
+  {C:1,D:2,F:3,B:4,E:5,A:6},  // order heard in the recording
+  {E:1,C:2,D:3,F:4,B:5,A:6},  // chronological order (hint: first event = earliest time)
+  {C:1,E:2,D:3,F:4,B:5,A:6}   // order in the original answer key
+];
+var WORDNUM = {one:1,two:2,three:3,four:4,five:5,six:6};
+function parseNum(v){ var s = plain(v); var m = s.match(/[1-6]/); if(/^[1-6](st|nd|rd|th)?$/.test(s)) return +m[0]; if(WORDNUM[s]) return WORDNUM[s]; return null; }
+
+function checkTask(num){
+  if(S.done[num]) return;
+  var task = taskEl(num), fb = document.getElementById('fb'+num);
+  var inputs = Array.prototype.slice.call(task.querySelectorAll('[data-m],[data-ev],[data-req]'));
+  var allOk = true, cyr = false, empty = false;
+  if(num === '2'){
+    var got = {}; inputs.forEach(function(el){ got[el.getAttribute('data-ev')] = parseNum(val(el)); if(hasCyr(val(el))) cyr = true; });
+    var best = null, bestN = -1;
+    ORDERS.forEach(function(o){ var n=0; for(var k in o) if(got[k]===o[k]) n++; if(n>bestN){bestN=n;best=o;} });
+    inputs.forEach(function(el){ var k = el.getAttribute('data-ev'); el.classList.remove('correct','wrong');
+      if(!val(el).trim()) { empty = true; allOk = false; }
+      else if(got[k]===best[k]) el.classList.add('correct'); else { el.classList.add('wrong'); allOk = false; } });
+    if(bestN !== 6) allOk = false;
+  } else {
+    inputs.forEach(function(el){
+      var m = el.getAttribute('data-m'), v = val(el), ok;
+      el.classList.remove('correct','wrong');
+      if(!String(v).trim()){ empty = true; allOk = false; return; }
+      if(!m){ ok = true; }
+      else if(m === 'sel'){ ok = v.toLowerCase() === el.getAttribute('data-a'); }
+      else {
+        ok = M[m](v);
+        if(!ok && hasCyr(v)){ var c = toEn(v); if(M[m](c)){ ok = true; el.value = c; S.vals[el.getAttribute('data-f')] = c; } else cyr = true; }
+      }
+      if(ok){ if(el.getAttribute('data-req') && !el.getAttribute('data-m')) {} else el.classList.add('correct'); }
+      else { el.classList.add('wrong'); allOk = false; }
+    });
+  }
+  if(allOk){
+    S.done[num] = true; save(); render(true);
+  } else {
+    var msg = '❌ Some answers need checking. Try again.';
+    if(num === '5' && empty) msg = '❌ Complete every part of the passport first.';
+    else if(num === '5') msg = '❌ Check the reliability of the note again.';
+    else if(empty) msg = '❌ Some answers are missing or need checking. Try again.';
+    if(cyr) msg += ' <span class="hint-ru">⌨️ Похоже, включена русская раскладка — переключись на английскую (EN).</span>';
+    fb.innerHTML = msg; fb.style.color = 'var(--red)';
+  }
+}
+
+/* ---------- final verdict ---------- */
+function scoreVerdict(){
+  var text = (S.vals.fin_text||'') + ' ' + (S.vals.fin_ev1||'') + ' ' + (S.vals.fin_ev2||'') + ' ' + (S.vals.fin_rej||'');
+  text = text.toLowerCase();
+  var score = 0;
+  if (text.indexOf('hollow')>=0 || /art[- ]?room/.test(text)) score++;
+  if (text.indexOf('shadow')>=0 || /6[:.]15/.test(text) || text.indexOf('evidence')>=0) score++;
+  if (text.indexOf('alex')>=0 && (text.indexOf('late')>=0 || /6[:.]30/.test(text))) score++;
+  return score;
+}
+function submitVerdict(){
+  var fb = document.getElementById('fbFinal');
+  var t = (S.vals.fin_text||'').trim(), ci = plain(S.vals.fin_if||'').replace(/^if /,''), cw = plain(S.vals.fin_will||'').replace(/^we will /,'').replace(/^will /,'');
+  if(!t){ fb.innerHTML = '✍️ Write your conclusion first.'; fb.style.color = 'var(--orange)'; return; }
+  if(!ci || !cw){ fb.innerHTML = '✍️ Complete the Conditional 1 sentence: If we …, we will … .'; fb.style.color = 'var(--orange)'; return; }
+  if(/\b(will|'ll)\b/.test(ci)){ fb.innerHTML = '💡 After <b>if</b> use Present Simple — no <b>will</b>: <i>If we check…</i>'; fb.style.color = 'var(--orange)'; return; }
+  S.fin = {score: scoreVerdict()}; S.done['final'] = true; save(); render(true);
+}
+
+/* ---------- render ---------- */
+function render(fresh){
+  var keys = 0;
+  for(var t in KEYED) if(S.done[t]) keys += KEYED[t];
+  var keyEls = document.querySelectorAll('.key');
+  for(var i=0;i<keyEls.length;i++) keyEls[i].classList.toggle('unlocked', i < keys);
+  document.getElementById('keyCount').textContent = keys;
+  document.getElementById('doneBanner').classList.toggle('show', keys >= 9);
+  var open = true;
+  ORDER.forEach(function(id){
+    var el = taskEl(id); if(!el) return;
+    el.classList.toggle('active', open);
+    if(!S.done[id]) open = false;
+    if(id === 'reflect') return;
+    if(id === 'final'){
+      var fb = document.getElementById('fbFinal');
+      if(S.done.final && S.fin){
+        var ok = S.fin.score >= 2;
+        fb.innerHTML = ok ? '✅ Strong verdict! You used evidence well.' : '💡 Good try. Look again at the art room and the timeline.';
+        fb.style.color = ok ? 'var(--green)' : 'var(--orange)';
+        document.getElementById('clueFinal').classList.add('show');
+        document.getElementById('verdictBtn').textContent = 'Update Verdict';
+      }
+      return;
+    }
+    if(S.done[id]){
+      var btn = el.querySelector('button'); if(btn) btn.disabled = true;
+      if(KEYED[id]){
+        var f = document.getElementById('fb'+id);
+        f.innerHTML = '✅ Correct! Key unlocked.'; f.style.color = 'var(--green)';
+        document.getElementById('clue'+id).classList.add('show');
+        Array.prototype.forEach.call(el.querySelectorAll('[data-m],[data-ev]'), function(x){ x.classList.remove('wrong'); x.classList.add('correct'); });
+        Array.prototype.forEach.call(el.querySelectorAll('[data-m],[data-ev],[data-req]'), function(x){ x.disabled = true; });
+      }
+    }
+  });
+}
+
+/* ---------- events ---------- */
+var lastClick = 0;
+document.addEventListener('click', function(e){
+  var b = e.target.closest ? e.target.closest('button') : null; if(!b || b.disabled) return;
+  var now = Date.now();
+  if(b.id === 'tcReset'){
+    if(window.confirm('Начать урок заново?\n\nВсе ответы и прогресс будут удалены.')){ try{ localStorage.removeItem(KEY); }catch(_){} location.reload(); }
+    return;
+  }
+  if(now - lastClick < 350){ e.preventDefault(); return; }
+  lastClick = now;
+  if(b.hasAttribute('data-check')) checkTask(b.getAttribute('data-check'));
+  else if(b.hasAttribute('data-next')){ var id = b.getAttribute('data-next'); if(!S.done[id]){ S.done[id] = true; save(); render(true); } }
+  else if(b.id === 'verdictBtn') submitVerdict();
+});
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Enter' && e.target && e.target.tagName === 'INPUT' && !e.isComposing){
+    var t = e.target.closest('.task'); var b = t && t.querySelector('button.chk'); if(b && !b.disabled){ e.preventDefault(); b.click(); }
+  }
+});
+// only one recording plays at a time
+Array.prototype.forEach.call(document.querySelectorAll('audio'), function(a){
+  a.addEventListener('play', function(){ Array.prototype.forEach.call(document.querySelectorAll('audio'), function(o){ if(o!==a) o.pause(); }); });
+});
+render(false);
+})();
+</script>
+</body>
+</html>
