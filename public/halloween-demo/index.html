@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Halloween Quests — Demo</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:#0f0720;color:#fff;line-height:1.5}
+header{padding:24px 16px;text-align:center;background:linear-gradient(160deg,#2b1659,#150a30)}
+header h1{margin:0 0 8px;font-size:clamp(28px,5vw,42px);background:linear-gradient(90deg,#ffa23a,#ff5fa8);-webkit-background-clip:text;background-clip:text;color:transparent}
+header p{color:#d9cff2;margin:0}
+.wrap{max-width:900px;margin:0 auto;padding:20px 16px 60px}
+.card{background:#1c0f3d;border:2px solid #4a2090;border-radius:20px;padding:20px;margin-bottom:24px}
+.card h2{margin:0 0 8px;color:#ffd27a}
+.card .meta{color:#cfc3ee;font-size:14px;margin-bottom:12px}
+.task{background:#fff;color:#2a1850;border-radius:14px;padding:16px;margin-top:12px}
+.task button,.task input{font:inherit;border-radius:10px;padding:8px 12px}
+.btn{background:#ff7a1a;color:#fff;border:0;font-weight:700;cursor:pointer}
+.btn:hover{opacity:.9}
+.ok{color:#1b9d52;font-weight:700}
+.bad{color:#c2410c}
+input[type=text]{border:2px dashed #e3b98a;width:100%;max-width:320px}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.options button{background:#efe6ff;border:2px solid #c9b8ee;cursor:pointer}
+.options button.good{background:#d8f8e4;border-color:#4cc77f}
+footer{text-align:center;padding:20px;color:#cfc3ee;font-size:14px}
+</style>
+</head>
+<body>
+<header>
+  <h1>🎃 Halloween Quests — Demo</h1>
+  <p>По одному заданию из каждого интерактивного квеста</p>
+</header>
+<div class="wrap">
+
+  <!-- 1. Halloween Candy Mystery -->
+  <div class="card">
+    <h2>1. Halloween Candy Mystery</h2>
+    <div class="meta">A1–A2 · 5–7 класс · Детектив + конфеты</div>
+    <p>It is Halloween night. A little ghost is in the haunted house. The ghost likes candy.</p>
+    <div class="task">
+      <strong>Задание:</strong> Where is the little ghost?<br>
+      <input type="text" id="q1" placeholder="напиши ответ">
+      <button class="btn" onclick="check1()">Проверить</button>
+      <div id="f1"></div>
+    </div>
+  </div>
+
+  <!-- 2. Friendly Halloween Village -->
+  <div class="card">
+    <h2>2. Friendly Halloween Village</h2>
+    <div class="meta">7–9 лет · Карта деревни · 36 заданий</div>
+    <p>Potion Lab: is / are</p>
+    <div class="task">
+      <strong>Задание:</strong> The pumpkin ___ orange.<br>
+      <div class="options">
+        <button onclick="check2(this,'is')">is</button>
+        <button onclick="check2(this,'are')">are</button>
+      </div>
+      <div id="f2"></div>
+    </div>
+  </div>
+
+  <!-- 3. Rescue Nora -->
+  <div class="card">
+    <h2>3. Rescue Nora — Ночь парада</h2>
+    <div class="meta">A2 · 6 класс · Грамматика + лифт</div>
+    <p>Present Simple vs Present Continuous</p>
+    <div class="task">
+      <strong>Задание:</strong> Nora usually ___ the lamps. (start)<br>
+      <input type="text" id="q3" placeholder="глагол">
+      <button class="btn" onclick="check3()">Проверить</button>
+      <div id="f3"></div>
+    </div>
+  </div>
+
+  <!-- 4. Vanished School Mascot -->
+  <div class="card">
+    <h2>4. Пропавший талисман школы</h2>
+    <div class="meta">Аудирование + Conditional 1 · Улики</div>
+    <p>If we find the owl, we ___ the parade.</p>
+    <div class="task">
+      <strong>Задание:</strong> Выбери правильную форму<br>
+      <div class="options">
+        <button onclick="check4(this,'will start')">will start</button>
+        <button onclick="check4(this,'start')">start</button>
+        <button onclick="check4(this,'started')">started</button>
+      </div>
+      <div id="f4"></div>
+    </div>
+  </div>
+
+  <!-- 5. Ravenhill Academy -->
+  <div class="card">
+    <h2>5. Ravenhill Academy: Пропавшая маска</h2>
+    <div class="meta">B1–B2 · 10 класс · Phrasal verbs + расследование</div>
+    <p>Phrasal verb: show up</p>
+    <div class="task">
+      <strong>Задание:</strong> Что значит «show up»?<br>
+      <div class="options">
+        <button onclick="check5(this,'arrive')">to arrive / appear</button>
+        <button onclick="check5(this,'leave')">to leave quickly</button>
+        <button onclick="check5(this,'prepare')">to prepare something</button>
+      </div>
+      <div id="f5"></div>
+    </div>
+  </div>
+
+</div>
+<footer>Это демо. Полные интерактивные уроки — в пакете «Хэллоуин-неделя».</footer>
+
+<script>
+function check1(){
+  const v=document.getElementById('q1').value.toLowerCase();
+  const f=document.getElementById('f1');
+  if(v.includes('house')||v.includes('haunted')){f.innerHTML='<span class="ok">✓ Верно! The ghost is in the haunted house.</span>';}
+  else{f.innerHTML='<span class="bad">Попробуй ещё. Подсказка: in the haunted house</span>';}
+}
+function check2(btn,ans){
+  const f=document.getElementById('f2');
+  if(ans==='is'){btn.classList.add('good');f.innerHTML='<span class="ok">✓ Правильно: The pumpkin is orange.</span>';}
+  else{f.innerHTML='<span class="bad">Неверно. Для единственного числа — is.</span>';}
+}
+function check3(){
+  const v=document.getElementById('q3').value.toLowerCase().trim();
+  const f=document.getElementById('f3');
+  if(v==='starts'||v==='start'){f.innerHTML='<span class="ok">✓ Верно! usually → Present Simple: starts</span>';}
+  else{f.innerHTML='<span class="bad">Почти. usually = Present Simple → starts</span>';}
+}
+function check4(btn,ans){
+  const f=document.getElementById('f4');
+  if(ans==='will start'){btn.classList.add('good');f.innerHTML='<span class="ok">✓ Отлично! Conditional 1: will start</span>';}
+  else{f.innerHTML='<span class="bad">Нет. Conditional 1: If + Present, will + V</span>';}
+}
+function check5(btn,ans){
+  const f=document.getElementById('f5');
+  if(ans==='arrive'){btn.classList.add('good');f.innerHTML='<span class="ok">✓ Правильно! show up = to arrive / appear</span>';}
+  else{f.innerHTML='<span class="bad">Не то. show up = to arrive or appear</span>';}
+}
+</script>
+</body>
+</html>
