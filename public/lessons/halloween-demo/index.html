@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Демо: квесты на Хэллоуин — по одному заданию из каждого квеста</title>
+<meta name="description" content="Попробуйте по одному настоящему заданию из каждого хэллоуинского квеста и откройте полный урок.">
+<link rel="icon" href="data:,">
+<style>
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/373a90ecd1.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/798ec6b6b8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/373a90ecd1.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/798ec6b6b8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(fonts/373a90ecd1.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(fonts/798ec6b6b8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(fonts/373a90ecd1.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(fonts/798ec6b6b8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Rubik Wet Paint';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/feed60cba9.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Rubik Wet Paint';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/77da825411.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+:root{--bg:#0d0718;--card:#1f1233;--card2:#2a1945;--ink:#f6ecff;--muted:#bba9d6;--orange:#ff8a1f;--orange2:#ffb347;--green:#7ee36b;--red:#ff5d73;--line:#4a2f6e}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:'Nunito',system-ui,sans-serif;color:var(--ink);background:radial-gradient(1200px 600px at 80% -10%,#3b1a5e 0,transparent 60%),radial-gradient(900px 500px at -10% 30%,#2a0f3f 0,transparent 60%),var(--bg);min-height:100vh;line-height:1.45}
+a{color:var(--orange2)}
+button,input{font:inherit}
+.wrap{max-width:900px;margin:0 auto;padding:0 14px 60px}
+header.hero{position:relative;overflow:hidden;padding:34px 18px 26px;margin:0 -14px 18px;text-align:center;background:linear-gradient(180deg,#14092a 0,#2b1250 70%,#3a1a52 100%);border-bottom:3px solid var(--orange)}
+.hero .moon{position:absolute;right:6%;top:14px;width:86px;height:86px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff7d6,#ffd36b 60%,#f2a93b);box-shadow:0 0 60px 18px rgba(255,200,90,.35);pointer-events:none}
+.hero svg.bats{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;opacity:.85}
+.hero .web{position:absolute;left:-6px;top:-6px;width:120px;height:120px;pointer-events:none;opacity:.35}
+.hero h1{position:relative;font-family:'Rubik Wet Paint','Nunito',cursive;font-weight:400;font-size:clamp(30px,6.4vw,54px);line-height:1.1;margin:8px 0 10px;color:var(--orange);text-shadow:0 0 18px rgba(255,138,31,.55),0 3px 0 #3a0f00}
+.hero .kick{position:relative;display:inline-block;font-weight:800;letter-spacing:.12em;font-size:12px;text-transform:uppercase;color:#1a0b2e;background:var(--green);padding:4px 10px;border-radius:999px}
+.hero p.sub{position:relative;max-width:640px;margin:0 auto;color:#e6d6ff;font-size:17px}
+.bar{position:relative;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;margin-top:16px}
+.prog{font-weight:800;background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+.prog b{color:var(--orange2)}
+.btn{cursor:pointer;border:0;border-radius:12px;padding:10px 16px;font-weight:800;color:#1a0b00;background:linear-gradient(180deg,var(--orange2),var(--orange));box-shadow:0 3px 0 #9b4300;touch-action:manipulation}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 #9b4300}
+.btn.g{background:#3a2558;color:var(--ink);box-shadow:0 3px 0 #1c0f2e}
+.btn.s{background:transparent;color:var(--muted);box-shadow:none;border:1px solid var(--line)}
+.btn.reset{background:rgba(0,0,0,.35);color:#ffd9b0;border:1px solid #7a4a2a;box-shadow:none}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 18px}
+.chip{cursor:pointer;border:1px solid var(--line);background:#1a0f2b;color:var(--muted);border-radius:999px;padding:7px 14px;font-weight:800;font-size:14px}
+.chip.on{background:var(--orange);color:#1a0b00;border-color:var(--orange)}
+.done-all{display:none;text-align:center;font-weight:800;font-size:18px;color:#1a0b00;background:linear-gradient(90deg,var(--green),#c3f56b);border-radius:14px;padding:12px;margin:0 0 16px}
+.done-all.on{display:block}
+.cards{display:grid;gap:22px}
+.card{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line);border-top:4px solid var(--orange);border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.card.done{border-top-color:var(--green)}
+.card[hidden]{display:none}
+.cover{position:relative;height:190px;background:#140a24}
+.cover img{display:block;width:100%;height:100%;object-fit:cover}
+.cover .shade{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(31,18,51,.95))}
+.cover.emo{display:grid;place-items:center;font-size:72px;background:radial-gradient(circle at 50% 40%,#4b2479,#1a0b2e)}
+.cbody{padding:14px 18px 18px}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 6px}
+.tag{font-size:12px;font-weight:800;letter-spacing:.04em;padding:3px 9px;border-radius:999px;background:#3a2558;color:#e5d2ff}
+.tag.o{background:#4a2410;color:#ffc58a}
+.tag.ok{background:#1f4a22;color:#b8f5ae}
+.card h2{margin:4px 0 2px;font-size:22px;line-height:1.2}
+.card .en{color:var(--muted);font-size:14px;margin:0 0 10px}
+.task{background:rgba(0,0,0,.25);border:1px dashed #5b3d82;border-radius:14px;padding:12px}
+.task h3{margin:0 0 4px;font-size:17px;color:var(--orange2)}
+.task .ins{margin:0 0 10px;color:#dccbf5;font-size:15px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.fb{min-height:1.4em;margin-top:8px;font-weight:800}
+.fb.ok{color:var(--green)}
+.fb.bad{color:var(--red)}
+.fb.rev{color:var(--orange2)}
+.open{display:inline-block;margin-top:14px;font-weight:800;text-decoration:none;background:#120a20;border:2px solid var(--orange);color:var(--orange2);padding:9px 14px;border-radius:12px}
+.open:hover{background:var(--orange);color:#1a0b00}
+.tin{width:100%;min-width:0;padding:8px 10px;border-radius:10px;border:2px solid #5b3d82;background:#140a24;color:var(--ink);font-size:16px}
+.tin:focus{outline:none;border-color:var(--orange2)}
+.good .tin,.tin.good{border-color:var(--green);background:#12301a}
+.bad .tin,.tin.bad{border-color:var(--red)}
+.shake{animation:sh .35s}
+@keyframes sh{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+/* label */
+.lgrid{display:grid;grid-template-columns:1.2fr 1fr;gap:12px;align-items:start}
+.lpic{position:relative;border-radius:12px;overflow:hidden}
+.lpic img{display:block;width:100%;height:auto}
+.hot{position:absolute;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;border:2px solid #fff;background:var(--orange);color:#1a0b00;font-weight:900;font-size:14px;padding:0;box-shadow:0 2px 8px rgba(0,0,0,.5);cursor:pointer}
+.hot.good{background:var(--green)}
+.lrows{display:grid;gap:7px}
+.lrow{display:flex;align-items:center;gap:8px;min-width:0}
+.lrow .num{flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--orange);color:#1a0b00;font-weight:900;font-size:13px}
+.lrow .lem{flex:none;font-size:20px}
+.bank{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.wchip{cursor:pointer;border:1px solid #6b4a95;background:#2d1b48;color:var(--ink);border-radius:999px;padding:5px 11px;font-weight:700;font-size:14px}
+/* decode */
+.drow{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) 30px;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid #3a2558}
+.drow:last-of-type{border-bottom:0}
+.code small{display:block;color:var(--muted);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+.code b{font-size:16px;letter-spacing:.03em;overflow-wrap:anywhere}
+.sw{width:28px;height:28px;border-radius:8px;border:2px dashed #6b4a95}
+.abc{display:flex;flex-wrap:wrap;gap:3px;margin-top:8px;font-size:12px;color:var(--muted)}
+.abc span{background:#2a1945;border-radius:5px;padding:2px 5px}
+/* errfix */
+.erow{padding:8px 0;border-bottom:1px solid #3a2558}
+.erow:last-of-type{border-bottom:0}
+.toks{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:6px}
+.tok{cursor:pointer;border:1px solid #6b4a95;background:#2d1b48;color:var(--ink);border-radius:8px;padding:5px 9px;font-weight:700;font-size:16px}
+.tok.sel{background:var(--red);border-color:var(--red);color:#fff;text-decoration:line-through}
+.erow.good .tok.sel{background:#3c6b2f;border-color:var(--green)}
+.efix{display:flex;gap:8px;align-items:center}
+.efix span{flex:none;color:var(--muted);font-size:14px}
+/* listen */
+audio{width:100%;margin:4px 0 10px}
+.qrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;align-items:center;margin:6px 0}
+.qrow label{font-weight:700;font-size:15px}
+/* order */
+.ev{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;cursor:pointer;border:2px solid #5b3d82;background:#140a24;color:var(--ink);border-radius:12px;padding:9px 10px;margin:6px 0;font-size:15px}
+.ev .n{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;border:2px dashed #8a6bb5;font-weight:900;color:var(--orange2)}
+.ev.on .n{border-style:solid;background:var(--orange);color:#1a0b00;border-color:var(--orange)}
+.ev .when{display:block;font-size:12px;font-weight:800;color:var(--green)}
+.ev.good{border-color:var(--green)}
+.ev.bad{border-color:var(--red)}
+/* pairs */
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pcol{display:grid;gap:7px;align-content:start}
+.pi{position:relative;cursor:pointer;text-align:left;border:2px solid #5b3d82;background:#140a24;color:var(--ink);border-radius:12px;padding:9px 10px 9px 34px;font-size:15px;font-weight:700;min-height:44px}
+.pi .k{position:absolute;left:8px;top:50%;transform:translateY(-50%);width:20px;height:20px;border-radius:50%;font-size:12px;display:grid;place-items:center;font-weight:900;background:#3a2558;color:var(--muted)}
+.pi.sel{border-color:var(--orange2);box-shadow:0 0 0 3px rgba(255,179,71,.3)}
+.pi.m .k{color:#1a0b00}
+.pi.good{border-color:var(--green)}
+.pi.bad{border-color:var(--red)}
+/* quiz */
+.qz{padding:8px 0;border-bottom:1px solid #3a2558}
+.qz:last-of-type{border-bottom:0}
+.qz .fact{font-size:14px;color:var(--muted)}
+.qz .fact b{color:#ffd9b0}
+.qz .s{font-size:17px;font-weight:800;margin:4px 0 6px}
+.opts{display:flex;flex-wrap:wrap;gap:6px}
+.opt{cursor:pointer;border:2px solid #6b4a95;background:#2d1b48;color:var(--ink);border-radius:10px;padding:6px 12px;font-weight:800;font-size:15px}
+.opt.on{background:var(--orange);border-color:var(--orange);color:#1a0b00}
+.qz.good .opt.on{background:var(--green);border-color:var(--green)}
+.qz.bad .opt.on{background:var(--red);border-color:var(--red);color:#fff}
+footer{margin-top:30px;text-align:center;color:var(--muted);font-size:14px}
+@media (max-width:640px){
+ .lgrid{grid-template-columns:1fr}
+ .pgrid{grid-template-columns:1fr}
+ .pcol.r{border-top:2px dashed #5b3d82;padding-top:10px}
+ .qrow{grid-template-columns:1fr}
+ .drow{grid-template-columns:minmax(0,1fr) 30px}
+ .drow .tin{grid-column:1;grid-row:2}
+ .drow .sw{grid-column:2;grid-row:1/3}
+ .cover{height:150px}
+ .cbody{padding:12px 12px 16px}
+ .task{padding:10px}
+ .hero .moon{width:58px;height:58px}
+ .hero p.sub{font-size:15px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+ <div class="moon" aria-hidden="true"></div>
+ <svg class="web" viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke="#fff" stroke-width="1.2"><path d="M0 0L120 120M0 0L60 120M0 0L120 60M0 0L0 120M0 0L120 0"/><path d="M0 30Q18 22 30 0M0 60Q36 46 60 0M0 90Q54 70 90 0"/></g></svg>
+ <svg class="bats" viewBox="0 0 1000 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="#0b0414"><path d="M120 60q14-22 30-6q4-10 10-4q6-6 10 4q16-16 30 6q-16-4-22 8q-8-6-12 2q-6-8-12-2q-6-12-24-8z"/><path transform="translate(830 150) scale(.6)" d="M120 60q14-22 30-6q4-10 10-4q6-6 10 4q16-16 30 6q-16-4-22 8q-8-6-12 2q-6-8-12-2q-6-12-24-8z"/><path transform="translate(40 170) scale(.5)" d="M120 60q14-22 30-6q4-10 10-4q6-6 10 4q16-16 30 6q-16-4-22 8q-8-6-12 2q-6-8-12-2q-6-12-24-8z"/><path transform="translate(760 10) scale(.5)" d="M120 60q14-22 30-6q4-10 10-4q6-6 10 4q16-16 30 6q-16-4-22 8q-8-6-12 2q-6-8-12-2q-6-12-24-8z"/></g></svg>
+ <span class="kick">🎃 Halloween · English</span>
+ <h1>Демо: квесты на Хэллоуин</h1>
+ <p class="sub">По одному настоящему заданию из каждого хэллоуинского квеста. Попробуйте прямо здесь — а полный урок откроется по кнопке «Открыть полный урок →».</p>
+ <div class="bar"><span class="prog">Пройдено: <b id="pcount">0 / 0</b></span><button type="button" class="btn reset" id="resetAll">↺ Начать заново</button></div>
+</header>
+<div class="chips" id="chips" role="group" aria-label="Фильтр по возрасту и уровню"></div>
+<div class="done-all" id="doneAll">🎉 Все задания демо пройдены! Откройте полные уроки — там ещё много заданий.</div>
+<main class="cards" id="root"></main>
+<footer>🦇 Счастливого Хэллоуина! Все ответы сохраняются в этом браузере. · <a href="../">Все уроки</a></footer>
+</div>
+<script>
+(function(){
+"use strict";
+var KEY="tutorcall-halloween-demo-v1";
+var S={v:1,t:{},d:{},f:"all"};
+try{var raw=JSON.parse(localStorage.getItem(KEY));if(raw&&typeof raw==="object"&&raw.v===1){if(raw.t&&typeof raw.t==="object")S.t=raw.t;if(raw.d&&typeof raw.d==="object")S.d=raw.d;if(typeof raw.f==="string")S.f=raw.f}}catch(e){}
+var resetting=false;
+function save(){if(resetting)return;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+
+/* ---------- helpers ---------- */
+function h(tag,a){var e=document.createElement(tag);if(a)for(var k in a){if(a[k]==null)continue;if(k==="class")e.className=a[k];else if(k==="text")e.textContent=a[k];else if(k.slice(0,2)==="on")e.addEventListener(k.slice(2),a[k]);else e.setAttribute(k,a[k])}for(var i=2;i<arguments.length;i++)add(e,arguments[i]);return e}
+function add(e,c){if(c==null||c===false)return;if(Array.isArray(c)){c.forEach(function(x){add(e,x)});return}e.appendChild(typeof c==="string"?document.createTextNode(c):c)}
+var RU="йцукенгшщзхъфывапролджэячсмитьбюё",EN="qwertyuiop[]asdfghjkl;'zxcvbnm,.`";
+function base(s){s=String(s==null?"":s);try{s=s.normalize("NFKC")}catch(e){}return s.replace(/[\u200B-\u200D\uFEFF\u00AD]/g,"").replace(/[\u2018\u2019\u02BC\u2032`\u00B4]/g,"'").replace(/[\u201C\u201D\u00AB\u00BB]/g,'"').replace(/[\u2010-\u2015]/g,"-").replace(/\s+/g," ").trim().toLowerCase()}
+function cands(s){s=base(s);var o=[s];if(/[\u0400-\u04FF]/.test(s))o.push(s.replace(/[\u0400-\u04FF]/g,function(c){var i=RU.indexOf(c);return i<0?c:EN.charAt(i)}));return o}
+function plain(s){return s.replace(/["'.,!?;:()\u2026]/g," ").replace(/\s+/g," ").trim()}
+function anyOK(s,fn){return cands(s).some(function(x){try{return !!fn(plain(x),x)}catch(e){return false}})}
+function lev(a,b){var m=[],i,j;for(i=0;i<=a.length;i++)m[i]=[i];for(j=1;j<=b.length;j++)m[0][j]=j;for(i=1;i<=a.length;i++)for(j=1;j<=b.length;j++)m[i][j]=Math.min(m[i-1][j]+1,m[i][j-1]+1,m[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return m[a.length][b.length]}
+function enter(e){return e.key==="Enter"&&!e.isComposing&&e.keyCode!==229}
+function tin(val,ph,label){var i=h("input",{type:"text",class:"tin",autocomplete:"off",autocorrect:"off",autocapitalize:"off",spellcheck:"false",placeholder:ph||"","aria-label":label||ph||"answer"});i.value=val||"";return i}
+function shake(el){el.classList.remove("shake");void el.offsetWidth;el.classList.add("shake")}
+function arr(a,n,d){a=Array.isArray(a)?a.slice(0,n):[];while(a.length<n)a.push(d);return a}
+
+/* ---------- task renderers ---------- */
+var R={};
+
+/* 1. Label the picture (Halloween Candy Mystery) */
+R.label=function(body,st,T){
+ var D=T.data;st.v=arr(st.v,D.words.length,"");st.v=st.v.map(function(x){return typeof x==="string"?x:""});
+ var ins=[],rows=[],spots=[],cur=null;
+ function ok(v,w){return anyOK(v,function(t){t=t.replace(/\b(a|an|the)\b/g," ").replace(/\bblack\b/," ").replace(/\s+/g," ").trim();var x=t.replace(/s$/,""),y=w.replace(/s$/,"");return t===w||x===y||(w.length>=6&&lev(t,w)<=1)})}
+ var pic=h("div",{class:"lpic"},h("img",{src:D.img,alt:D.alt,width:"1000",height:"667"}));
+ var list=h("div",{class:"lrows"});
+ D.words.forEach(function(w,i){
+  var inp=tin(st.v[i],"write the word","Word "+(i+1));
+  inp.addEventListener("focus",function(){cur=i});
+  inp.addEventListener("input",function(){st.v[i]=inp.value;rows[i].classList.remove("good","bad");spots[i].classList.remove("good");save()});
+  inp.addEventListener("keydown",function(e){if(enter(e))T.check()});
+  var sp=h("button",{type:"button",class:"hot",text:String(i+1),style:"left:"+D.hot[i][0]+"%;top:"+D.hot[i][1]+"%","aria-label":"Picture label "+(i+1),onclick:function(){ins[i].focus()}});
+  var r=h("div",{class:"lrow"},h("span",{class:"num",text:String(i+1)}),h("span",{class:"lem",text:D.em[i],"aria-hidden":"true"}),inp);
+  ins.push(inp);rows.push(r);spots.push(sp);pic.appendChild(sp);list.appendChild(r)});
+ var bank=h("div",{class:"bank"});
+ D.bank.forEach(function(w){bank.appendChild(h("button",{type:"button",class:"wchip",text:w,onclick:function(){
+  var t=(cur!=null&&!ins[cur].value)?cur:ins.findIndex(function(x){return !x.value});if(t<0)t=cur;if(t==null||t<0)return;
+  ins[t].value=w;st.v[t]=w;rows[t].classList.remove("good","bad");spots[t].classList.remove("good");save();cur=t;
+  var nx=ins.findIndex(function(x){return !x.value});if(nx>=0)cur=nx}}))});
+ body.appendChild(h("div",{class:"lgrid"},pic,h("div",{},list,h("div",{class:"bank-w"},h("small",{text:"Банк слов (нажми слово — оно встанет в пустую строку):",style:"color:var(--muted);font-weight:700"}),bank))));
+ return {check:function(){var n=0,empty=0;D.words.forEach(function(w,i){var v=ins[i].value;var g=!!v.trim()&&ok(v,w);if(!v.trim())empty++;rows[i].classList.toggle("good",g);rows[i].classList.toggle("bad",!g&&!!v.trim());spots[i].classList.toggle("good",g);if(g){n++;ins[i].value=w;st.v[i]=w}else if(v.trim())shake(rows[i])});
+   return {ok:n===D.words.length,msg:n+" / "+D.words.length+" подписей верно."+(empty?" Заполни все строки.":"")}},
+  reveal:function(){D.words.forEach(function(w,i){ins[i].value=w;st.v[i]=w;rows[i].classList.add("good");rows[i].classList.remove("bad");spots[i].classList.add("good")})}};
+};
+
+/* 2. Colour code breaker (Friendly Halloween Village) */
+R.decode=function(body,st,T){
+ var D=T.data;st.v=arr(st.v,D.items.length,"");
+ var ins=[],rows=[],sws=[];
+ function norm(v){return cands(v).map(function(x){return x.replace(/[^a-z]/g,"")})}
+ function ok(v,it){return norm(v).some(function(n){return !!n&&(n===it.c||(it.c==="grey"&&n==="gray")||(!!it.miss&&n===it.miss))})}
+ D.items.forEach(function(it,i){
+  var inp=tin(st.v[i],"colour","Colour "+(i+1));
+  inp.addEventListener("input",function(){st.v[i]=inp.value;rows[i].classList.remove("good","bad");paint(i,false);save()});
+  inp.addEventListener("keydown",function(e){if(enter(e))T.check()});
+  var sw=h("span",{class:"sw","aria-hidden":"true"});
+  var r=h("div",{class:"drow"},h("div",{class:"code"},h("small",{text:it.kind}),h("b",{text:it.code})),inp,sw);
+  ins.push(inp);rows.push(r);sws.push(sw);body.appendChild(r)});
+ var abc=h("div",{class:"abc","aria-label":"Alphabet key"});"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach(function(c,i){abc.appendChild(h("span",{text:c+"="+(i+1)}))});
+ body.appendChild(h("small",{text:"Ключ для числового кода:",style:"color:var(--muted);font-weight:700;display:block;margin-top:8px"}));body.appendChild(abc);
+ function paint(i,on){var c=D.items[i].c;sws[i].style.background=on?D.col[c]:"transparent";sws[i].style.borderStyle=on?"solid":"dashed"}
+ return {check:function(){var n=0;D.items.forEach(function(it,i){var v=ins[i].value,g=!!v.trim()&&ok(v,it);rows[i].classList.toggle("good",g);rows[i].classList.toggle("bad",!g&&!!v.trim());paint(i,g);if(g){n++;ins[i].value=it.c;st.v[i]=it.c}else if(v.trim())shake(rows[i])});
+   return {ok:n===D.items.length,msg:n+" / "+D.items.length+" цветов расшифровано."}},
+  reveal:function(){D.items.forEach(function(it,i){ins[i].value=it.c;st.v[i]=it.c;rows[i].classList.add("good");rows[i].classList.remove("bad");paint(i,true)})}};
+};
+
+/* 3. Find and fix the mistake (Rescue Nora) */
+R.errfix=function(body,st,T){
+ var D=T.data,n=D.items.length;st.sel=arr(st.sel,n,-1).map(function(x){return Number.isInteger(x)?x:-1});st.v=arr(st.v,n,"");
+ var rows=[],ins=[],toks=[];
+ function fixOK(v,it){var good=it.tokens.map(function(t,k){return k===it.bad?it.fix:t}).join(" ");var gp=plain(base(good));return anyOK(v,function(t){return t===it.fix||t===gp})}
+ D.items.forEach(function(it,i){
+  var tw=h("div",{class:"toks"}),tb=[];
+  it.tokens.forEach(function(t,k){var b=h("button",{type:"button",class:"tok"+(st.sel[i]===k?" sel":""),text:t,"aria-pressed":st.sel[i]===k?"true":"false",onclick:function(){st.sel[i]=st.sel[i]===k?-1:k;tb.forEach(function(x,j){x.classList.toggle("sel",st.sel[i]===j);x.setAttribute("aria-pressed",st.sel[i]===j?"true":"false")});rows[i].classList.remove("good","bad");save();if(st.sel[i]>=0)ins[i].focus()}});tb.push(b);tw.appendChild(b)});
+  var inp=tin(st.v[i],"правильная форма","Fix "+(i+1));
+  inp.addEventListener("input",function(){st.v[i]=inp.value;rows[i].classList.remove("good","bad");save()});
+  inp.addEventListener("keydown",function(e){if(enter(e))T.check()});
+  var r=h("div",{class:"erow"},tw,h("div",{class:"efix"},h("span",{text:"Как правильно:"}),inp));
+  rows.push(r);ins.push(inp);toks.push(tb);body.appendChild(r)});
+ return {check:function(){var good=0,why="";D.items.forEach(function(it,i){var s=st.sel[i],v=ins[i].value;var g=s===it.bad&&!!v.trim()&&fixOK(v,it);
+    if(!g&&!why){if(s<0)why=" Нажми на неверное слово в каждой фразе.";else if(s!==it.bad)why=" Одно из отмеченных слов на самом деле верное — ищи другое.";else if(!v.trim())why=" Впиши правильную форму.";else why=" Проверь форму глагола."}
+    r(i,g);if(g){good++;ins[i].value=it.fix;st.v[i]=it.fix}else if(s>=0||v.trim())shake(rows[i])});
+   function r(i,g){rows[i].classList.toggle("good",g);rows[i].classList.toggle("bad",!g&&(st.sel[i]>=0||!!ins[i].value.trim()))}
+   return {ok:good===n,msg:good+" / "+n+" ошибок исправлено."+(good===n?"":why)}},
+  reveal:function(){D.items.forEach(function(it,i){st.sel[i]=it.bad;ins[i].value=it.fix;st.v[i]=it.fix;toks[i].forEach(function(x,j){x.classList.toggle("sel",j===it.bad)});rows[i].classList.add("good");rows[i].classList.remove("bad")})}};
+};
+
+/* 4. Listening: find the clue (The Vanished School Mascot) */
+function mnorm(s){return String(s).toLowerCase().replace(/[\u2018\u2019\u02BC\u0060\u00B4]/g,"'").replace(/[\u201C\u201D"«»]/g,"").replace(/[\u2010-\u2015]/g,"-").replace(/\s+/g," ").replace(/^[\s.,!?;]+|[\s.,!?;]+$/g,"")}
+function mplain(s){return mnorm(s).replace(/[.,!?;]/g," ").replace(/\s+/g," ").trim()}
+var MM={
+ t545:function(v){var s=mnorm(v).replace(/^at /,"").replace(/\s*(p\.? ?m\.?|in the evening)$/,"").trim();return /^(0?5|17) ?[:.,;\- ] ?45$/.test(s)||/^0?545$/.test(s)||/^five forty[- ]?five$/.test(s)||/^(a )?quarter to six$/.test(s)},
+ shadow:function(v){var s=mplain(v);return /\bshadows?\b/.test(s)&&!/\b(no|not|didn't|didnt)\b/.test(s)},
+ artroom:function(v){var s=mplain(v);return /\bart[- ]?room\b/.test(s)},
+ gloves:function(v){var s=mplain(v);return /\bgloves?\b/.test(s)&&!/\b(white|red|blue|green|brown|yellow|pink)\b/.test(s)}
+};
+R.listen=function(body,st,T){
+ var D=T.data,n=D.q.length;st.v=arr(st.v,n,"");var ins=[],rows=[];
+ body.appendChild(h("audio",{controls:"",preload:"none",src:D.audio}));
+ D.q.forEach(function(q,i){var inp=tin(st.v[i],"","Answer "+(i+1));
+  inp.addEventListener("input",function(){st.v[i]=inp.value;rows[i].classList.remove("good","bad");save()});
+  inp.addEventListener("keydown",function(e){if(enter(e))T.check()});
+  var r=h("div",{class:"qrow"},h("label",{text:q.l}),inp);ins.push(inp);rows.push(r);body.appendChild(r)});
+ return {check:function(){var good=0;D.q.forEach(function(q,i){var v=ins[i].value;var g=!!v.trim()&&cands(v).some(function(x){return MM[q.m](x)});rows[i].classList.toggle("good",g);rows[i].classList.toggle("bad",!g&&!!v.trim());if(g)good++;else if(v.trim())shake(rows[i])});
+   return {ok:good===n,msg:good+" / "+n+" деталей верно. "+(good===n?"":"Послушай ещё раз.")}},
+  reveal:function(){D.q.forEach(function(q,i){ins[i].value=q.a;st.v[i]=q.a;rows[i].classList.add("good");rows[i].classList.remove("bad")})}};
+};
+
+/* 5. Put the timeline in order (Ravenhill) */
+R.order=function(body,st,T){
+ var D=T.data,n=D.ev.length;st.o=Array.isArray(st.o)?st.o.filter(function(x,i,a){return Number.isInteger(x)&&x>=0&&x<n&&a.indexOf(x)===i}):[];
+ var btns=[];var showWhen=false;
+ D.show.forEach(function(ei){var e=D.ev[ei];
+  var b=h("button",{type:"button",class:"ev","data-ev":String(ei),onclick:function(){var k=st.o.indexOf(ei);if(k<0)st.o.push(ei);else st.o.splice(k,1);clear();paint();save()}},h("span",{class:"n"}),h("span",{},h("span",{class:"when"}),e.text));
+  btns[ei]=b;body.appendChild(b)});
+ function clear(){btns.forEach(function(b){b.classList.remove("good","bad")})}
+ function paint(){btns.forEach(function(b,ei){var k=st.o.indexOf(ei);b.classList.toggle("on",k>=0);b.querySelector(".n").textContent=k>=0?String(k+1):"";b.querySelector(".when").textContent=showWhen?D.ev[ei].when:""})}
+ paint();
+ return {check:function(){if(st.o.length<n){clear();return {ok:false,msg:"Пронумеруй все "+n+" событий (нажимай по порядку)."}}
+   var good=0;st.o.forEach(function(ei,k){var g=ei===k;btns[ei].classList.toggle("good",g);btns[ei].classList.toggle("bad",!g);if(g)good++});
+   if(good===n){showWhen=true;paint()}else{shake(body)}
+   return {ok:good===n,msg:good===n?"":"На своём месте: "+good+" из "+n+". Перечитай подсказки времени."}},
+  reveal:function(){st.o=D.ev.map(function(_,i){return i});showWhen=true;paint();btns.forEach(function(b){b.classList.add("good");b.classList.remove("bad")})}};
+};
+
+/* 6. Match the halves (Haunted School · Witch's Kitchen) */
+var PCOL=["#ff8a1f","#7ee36b","#5ec8ff","#f06bff","#ffd84a","#ff6b6b"];
+R.pairs=function(body,st,T){
+ var D=T.data,n=D.pairs.length;var m=(st.m&&typeof st.m==="object")?st.m:{};st.m={};for(var k in m){var a=+k,b=m[k];if(Number.isInteger(a)&&a>=0&&a<n&&Number.isInteger(b)&&b>=0&&b<n)st.m[a]=b}
+ var sel=-1,L=[],Rb=[];
+ var lc=h("div",{class:"pcol l"}),rc=h("div",{class:"pcol r"});
+ D.pairs.forEach(function(p,i){var b=h("button",{type:"button",class:"pi","data-l":String(i),onclick:function(){sel=sel===i?-1:i;clear();paint()}},h("span",{class:"k",text:String(i+1)}),p[0]);L.push(b);lc.appendChild(b)});
+ D.rord.forEach(function(j){var b=h("button",{type:"button",class:"pi","data-r":String(j),onclick:function(){if(sel<0){var owner=leftOf(j);if(owner>=0){delete st.m[owner];clear();paint();save()}return}
+   var o=leftOf(j);if(o>=0)delete st.m[o];st.m[sel]=j;sel=-1;clear();paint();save()}},h("span",{class:"k",text:"·"}),D.pairs[j][1]);Rb[j]=b;rc.appendChild(b)});
+ body.appendChild(h("div",{class:"pgrid"},lc,rc));
+ function leftOf(j){for(var k in st.m)if(st.m[k]===j)return +k;return -1}
+ function clear(){L.concat(Rb).forEach(function(b){b.classList.remove("good","bad")})}
+ function paint(){L.forEach(function(b,i){var has=st.m[i]!=null;b.classList.toggle("sel",sel===i);b.classList.toggle("m",has);var k=b.querySelector(".k");k.style.background=has?PCOL[i%PCOL.length]:"";});
+  Rb.forEach(function(b,j){var o=leftOf(j),k=b.querySelector(".k");b.classList.toggle("m",o>=0);k.textContent=o>=0?String(o+1):"·";k.style.background=o>=0?PCOL[o%PCOL.length]:""})}
+ paint();
+ return {check:function(){var cnt=Object.keys(st.m).length;if(cnt<n)return {ok:false,msg:"Соедини все "+n+" пар: нажми начало, потом конец фразы."};
+   var good=0;for(var i=0;i<n;i++){var g=st.m[i]===i;L[i].classList.toggle("good",g);L[i].classList.toggle("bad",!g);Rb[st.m[i]].classList.toggle("good",g);Rb[st.m[i]].classList.toggle("bad",!g);if(g)good++}
+   return {ok:good===n,msg:good===n?"":"Верных пар: "+good+" из "+n+". Нажми на неверный конец, чтобы снять его."}},
+  reveal:function(){st.m={};for(var i=0;i<n;i++)st.m[i]=i;sel=-1;paint();L.concat(Rb).forEach(function(b){b.classList.add("good");b.classList.remove("bad")})}};
+};
+
+/* 7. Lantern facts (31 Lanterns · The October File) */
+R.quiz=function(body,st,T){
+ var D=T.data,n=D.items.length;st.c=arr(st.c,n,-1).map(function(x){return Number.isInteger(x)?x:-1});var rows=[],ob=[];
+ D.items.forEach(function(it,i){var o=h("div",{class:"opts"}),bs=[];
+  it.opts.forEach(function(t,k){var b=h("button",{type:"button",class:"opt"+(st.c[i]===k?" on":""),text:t,onclick:function(){st.c[i]=k;bs.forEach(function(x,j){x.classList.toggle("on",j===k)});rows[i].classList.remove("good","bad");save()}});bs.push(b);o.appendChild(b)});
+  var r=h("div",{class:"qz"},h("div",{class:"fact"},h("b",{text:"🏮 День "+it.day+" · "+it.theme+": "}),it.fact),h("div",{class:"s",text:it.s}),o);rows.push(r);ob.push(bs);body.appendChild(r)});
+ return {check:function(){var good=0,empty=0;D.items.forEach(function(it,i){var c=st.c[i];if(c<0){empty++;return}var g=c===it.a;rows[i].classList.toggle("good",g);rows[i].classList.toggle("bad",!g);if(g)good++;else shake(rows[i])});
+   return {ok:good===n,msg:good+" / "+n+" верно."+(empty?" Выбери слово в каждой фразе.":"")}},
+  reveal:function(){D.items.forEach(function(it,i){st.c[i]=it.a;ob[i].forEach(function(x,j){x.classList.toggle("on",j===it.a)});rows[i].classList.add("good");rows[i].classList.remove("bad")})}};
+};
+
+/* ---------- quest data (real items from each lesson) ---------- */
+var QUESTS=[
+{id:"candy",href:"../halloween-candy-mystery/",title:"Тайна хэллоуинских конфет",en:"The Halloween Candy Mystery",tags:["A1–A2","5–7 классы","лексика Хэллоуина"],groups:["kids"],
+ task:"Подпиши картинку",ins:"Посмотри на номера на картинке и впиши английское слово в строку с тем же номером. Можно пользоваться банком слов.",type:"label",
+ data:{img:"images/candy-hero.webp",alt:"The detective, the ghost, the black cat, the witch and the bat in the haunted house",words:["ghost","detective","cat","witch","bat","pumpkin"],em:["👻","🔍","🐈‍⬛","🧙‍♀️","🦇","🎃"],hot:[[19,26],[38,46],[53,56],[76,34],[58,14],[79,58]],bank:["ghost","detective","cat","witch","bat","pumpkin","box","map","house","candy"]}},
+{id:"village",href:"../friendly-halloween-village/",title:"Дружелюбная Хэллоуин-деревня",en:"Friendly Halloween Village · Colour-by-Code Haunted House",img:"images/village-colours.jpg",imgAlt:"Halloween Code Breaker: colours of the village",tags:["7–9 лет","цвета"],groups:["kids"],
+ task:"Взломай цветовой код",ins:"Расшифруй цвет и впиши его по-английски: переставь буквы, переведи числа в буквы (A = 1 … Z = 26), найди пропущенную букву или отгадай загадку.",type:"decode",
+ data:{col:{red:"#e53935",green:"#43b04a",pink:"#ff8fc8",orange:"#f5872b",white:"#ffffff"},items:[
+  {c:"red",kind:"Перемешанные буквы",code:"D · E · R"},
+  {c:"green",kind:"Числовой код",code:"7 - 18 - 5 - 5 - 14"},
+  {c:"pink",kind:"Пропущенная буква",code:"P _ N K",miss:"i"},
+  {c:"orange",kind:"Загадка",code:"I am the colour of a pumpkin. 🎃"},
+  {c:"white",kind:"Загадка",code:"I am the colour of snow and of a little ghost. 👻"}]}},
+{id:"october",href:"https://gamify-guru.github.io/october-file/",ext:true,title:"31 фонарь: октябрьское досье",en:"31 Lanterns — The October File · календарь до Хэллоуина",img:"images/october-07.jpg",imgAlt:"A turnip lantern and a pumpkin",tags:["A1–A2","календарь на 31 день","факты о Хэллоуине"],groups:["kids"],
+ task:"Фонари с фактами",ins:"Прочитай факт из окошка календаря и выбери слово для английской фразы «Say this».",type:"quiz",
+ data:{items:[
+  {day:4,theme:"All Hallows' Eve",fact:"Halloween — это сжатое All Hallows' Eve: канун Дня всех святых, 1 ноября.",s:"Eve means the night ___.",opts:["after","before","today"],a:1},
+  {day:7,theme:"Before the Pumpkin",fact:"До тыквы фонарь вырезали из репы. Тыква появилась в Америке.",s:"The first lantern was a ___.",opts:["pumpkin","turnip","mask"],a:1},
+  {day:18,theme:"Barmbrack",fact:"В ирландский хлеб barmbrack пекли кольцо или монетку.",s:"There is a ___ in the bread.",opts:["bat","key","ring"],a:2},
+  {day:26,theme:"Bats Hunt Insects",fact:"Летучие мыши: большинство из них едят насекомых.",s:"Bats hunt ___ at night.",opts:["insects","candy","ghosts"],a:0}]}},
+{id:"nora",href:"../rescue-nora-parade-night/",title:"Rescue Nora: ночь городского парада",en:"Rescue Nora · Миссия 2 «Час назад»",img:"images/nora-past.jpg",imgAlt:"Нора чинит панель лифта",tags:["A2","6 класс","Past Simple · didn’t + V1"],groups:["a2"],
+ task:"Найди и исправь ошибку",ins:"В каждой радиограмме одно неверное слово. Нажми на него и впиши правильную форму.",type:"errfix",
+ data:{items:[{tokens:["I","taked","it","out."],bad:1,fix:"took"},{tokens:["I","did","not","caught","the","door."],bad:3,fix:"catch"},{tokens:["I","finded","two","old","codes."],bad:1,fix:"found"},{tokens:["An","hour","ago","I","go","up","to","the","booth."],bad:4,fix:"went"}]}},
+{id:"mascot",href:"../vanished-school-mascot/",title:"Пропавший талисман школы",en:"The Vanished School Mascot · Shadow School Halloween Investigation",emoji:"🦉",tags:["A2","аудирование","Conditional 1 в уроке"],groups:["a2"],
+ task:"Послушай и найди улики",ins:"Включи запись учителя (35 сек.) и впиши четыре главные детали. Можно отвечать коротко: 5:45, a shadow…",type:"listen",
+ data:{audio:"audio/mascot.mp3",q:[{l:"Time owl last seen:",m:"t545",a:"5:45"},{l:"What Cora saw:",m:"shadow",a:"a shadow"},{l:"Where Ms Hollow was:",m:"artroom",a:"in the art room"},{l:"What Alex looked for:",m:"gloves",a:"his gloves"}]}},
+{id:"haunted",href:"../haunted-school-5-nights/",title:"Haunted School: 5 ночей до Хэллоуина",en:"Ночь 4 · урок-шаблон «Кухня ведьмы» · English: The Forbidden Office",emoji:"🧪",tags:["A2+/B1","First Conditional","набор для учителей"],groups:["a2","b1"],
+ task:"Рецепт зелья: соедини половинки",ins:"Нажми на начало фразы, потом на её конец. If + Present Simple → will / won’t + глагол.",type:"pairs",
+ data:{pairs:[["If you add a spider,","the potion will turn green."],["If you stir it three times,","it will start to bubble."],["If you drink it at midnight,","you will become invisible."],["If you forget the bat wing,","the spell won’t work."],["If the cat sneezes,","the potion will explode."]],rord:[3,0,4,1,2]}},
+{id:"ravenhill",href:"../ravenhill-missing-raven-mask/",title:"Ravenhill Academy: дело о пропавшей маске ворона",en:"The Missing Raven Mask · три дня до Halloween Festival",img:"images/ravenhill-hero.jpg",imgAlt:"Ravenhill Academy at night",tags:["B1–B2","10 класс","phrasal verbs & idioms"],groups:["b1"],
+ task:"Восстанови хронологию",ins:"Нажимай на события в том порядке, в каком они произошли (1 — самое раннее). Повторное нажатие снимает номер. Подсказка: маскарад был 26 октября, а пропажу обнаружили утром 28-го.",type:"order",
+ data:{ev:[
+  {when:"Oct 26, 7:00 PM",text:"Hundreds of students dress up for the Fall Masquerade, and the Raven Mask is displayed in the Great Hall for the first time in fifty years."},
+  {when:"Oct 27, 3:30 PM",text:"In the afternoon, Olivia lends the spare archive key to Jake, who wants to look into some old costumes stored in the Archives."},
+  {when:"Oct 27, 8:30 PM",text:"At 8:30 PM Olivia checks the mask, signs the logbook and locks the archive door."},
+  {when:"Oct 27, ~9:00 PM",text:"At about nine, Olivia, who is still studying in the reading room, hears heavy footsteps in the corridor and nearly jumps out of her skin."},
+  {when:"Oct 28, 9:15 AM",text:"The following morning Mr. Hargreaves opens the Archives, finds the empty case and turns white as a ghost."}],show:[2,4,0,3,1]}}
+];
+var GROUPS=[["all","Все"],["kids","Младшие · A1–A2"],["a2","A2"],["b1","B1 и выше"]];
+
+/* ---------- page ---------- */
+var root=document.getElementById("root"),cards={};
+function progress(){var n=QUESTS.filter(function(q){return S.d[q.id]}).length;document.getElementById("pcount").textContent=n+" / "+QUESTS.length;document.getElementById("doneAll").classList.toggle("on",n===QUESTS.length)}
+function buildCard(q){
+ var st=S.t[q.id]&&typeof S.t[q.id]==="object"?S.t[q.id]:(S.t[q.id]={});
+ var fb=h("div",{class:"fb","aria-live":"polite"});
+ var tb=h("div",{});
+ var T={data:q.data};
+ var api=R[q.type](tb,st,T);
+ T.check=function(){var r=api.check();save();if(r.ok){S.d[q.id]=1;st.rev=false;save();fb.className="fb ok";fb.textContent="✓ Верно! Задание пройдено. 🎃"}else{fb.className="fb bad";fb.textContent="✗ "+r.msg}card.classList.toggle("done",!!S.d[q.id]);stat.hidden=!S.d[q.id];progress()};
+ var cover=q.img?h("div",{class:"cover"},h("img",{src:q.img,alt:q.imgAlt||"",loading:"lazy"}),h("div",{class:"shade"})):(q.emoji?h("div",{class:"cover emo","aria-hidden":"true",text:q.emoji}):null);
+ var stat=h("span",{class:"tag ok",text:"✓ пройдено"});stat.hidden=!S.d[q.id];
+ var meta=h("div",{class:"meta"},q.tags.map(function(t,i){return h("span",{class:"tag"+(i===0?" o":""),text:t})}),stat);
+ var link=h("a",{class:"open",href:q.href,target:q.ext?"_blank":null,rel:q.ext?"noopener":null,text:"Открыть полный урок →"});
+ var card=h("section",{class:"card"+(S.d[q.id]?" done":""),id:"q-"+q.id,"data-groups":q.groups.join(" ")},cover,
+  h("div",{class:"cbody"},meta,h("h2",{text:q.title}),h("p",{class:"en",text:q.en}),
+   h("div",{class:"task"},h("h3",{text:"🎯 "+q.task}),h("p",{class:"ins",text:q.ins}),tb,
+    h("div",{class:"row"},h("button",{type:"button",class:"btn",text:"✓ Проверить",onclick:T.check}),
+     h("button",{type:"button",class:"btn g",text:"👁 Показать ответ",onclick:function(){api.reveal();st.rev=true;save();fb.className="fb rev";fb.textContent="👁 Вот правильный ответ. Нажми «↺ Ещё раз» и попробуй сам(а)!"}}),
+     h("button",{type:"button",class:"btn s",text:"↺ Ещё раз",onclick:function(){S.t[q.id]={};delete S.d[q.id];save();var nc=buildCard(q);card.parentNode.replaceChild(nc,card);cards[q.id]=nc;applyFilter();progress()}})),fb),
+   link));
+ if(st.rev){api.reveal();fb.className="fb rev";fb.textContent="👁 Ответ показан. Нажми «↺ Ещё раз», чтобы попробовать заново."}
+ else if(S.d[q.id]){var r=api.check();if(r.ok){fb.className="fb ok";fb.textContent="✓ Верно! Задание пройдено. 🎃"}}
+ cards[q.id]=card;return card}
+QUESTS.forEach(function(q){root.appendChild(buildCard(q))});
+var chipsEl=document.getElementById("chips"),chipBtns=[];
+if(!GROUPS.some(function(g){return g[0]===S.f}))S.f="all";
+GROUPS.forEach(function(g){var c=QUESTS.filter(function(q){return g[0]==="all"||q.groups.indexOf(g[0])>=0}).length;
+ var b=h("button",{type:"button",class:"chip","data-f":g[0],text:g[1]+" ("+c+")",onclick:function(){S.f=g[0];save();applyFilter()}});chipBtns.push(b);chipsEl.appendChild(b)});
+function applyFilter(){chipBtns.forEach(function(b){var on=b.getAttribute("data-f")===S.f;b.classList.toggle("on",on);b.setAttribute("aria-pressed",on?"true":"false")});
+ QUESTS.forEach(function(q){cards[q.id].hidden=!(S.f==="all"||q.groups.indexOf(S.f)>=0)})}
+applyFilter();progress();
+document.getElementById("resetAll").addEventListener("click",function(){if(!confirm("Удалить все ответы в демо и начать заново?"))return;resetting=true;try{localStorage.removeItem(KEY)}catch(e){}location.reload()});
+})();
+</script>
+</body>
+</html>
