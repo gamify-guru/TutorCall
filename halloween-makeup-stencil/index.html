@@ -27,11 +27,14 @@
     #panel { flex: 0 1 auto; max-height: 50%; overflow-y: auto; background: #161616; border-top: 1px solid #333; padding: 8px 10px 10px; display: flex; flex-direction: column; gap: 8px; -webkit-overflow-scrolling: touch; }
     #panel[hidden] { display: none; }
     .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: center; }
-    #looks { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; padding-bottom: 2px; scrollbar-width: thin; }
+    /* look picker: 2-row horizontal scroller on phones, tidy grid on desktop */
+    #looks { display: grid; grid-template-rows: repeat(2, auto); grid-auto-flow: column; grid-auto-columns: max-content; gap: 6px; overflow-x: auto; justify-content: start; padding-bottom: 4px; scrollbar-width: thin; overscroll-behavior-x: contain; }
+    .style-btn.new { border-color: #b46cff; }
+    .style-btn.new.active { background: #b46cff; }
     button { font: inherit; touch-action: manipulation; cursor: pointer; }
     .style-btn { flex: none; background: #2a2a2a; color: #fff; border: 1px solid #ff4500; padding: 7px 12px; border-radius: 20px; font-size: 0.85rem; transition: background .2s; }
     .style-btn.active { background: #ff4500; color: #000; font-weight: bold; }
-    @media (hover: hover) { .style-btn:hover, .chip:hover:not(:disabled) { background: #ff4500; color: #000; } }
+    @media (hover: hover) { .style-btn:hover, .chip:hover:not(:disabled) { background: #ff4500; color: #000; } .style-btn.new:hover { background: #b46cff; } }
     .seg { display: inline-flex; border: 1px solid #555; border-radius: 20px; overflow: hidden; }
     .seg button { background: transparent; color: #ccc; border: 0; padding: 6px 11px; font-size: 0.8rem; }
     .seg button.active { background: #ff6b00; color: #000; font-weight: bold; }
@@ -75,7 +78,8 @@
     @media (min-width: 900px) {
       #main { flex-direction: row; }
       #panel { max-height: none; width: 380px; flex: none; border-top: 0; border-left: 1px solid #333; }
-      #looks { flex-wrap: wrap; justify-content: center; }
+      #looks { grid-template-rows: none; grid-auto-flow: row; grid-template-columns: repeat(3, 1fr); overflow: visible; }
+      #looks .style-btn { padding: 7px 6px; white-space: nowrap; }
     }
   </style>
 </head>
@@ -102,6 +106,12 @@
         <button type="button" class="style-btn" data-style="clown" aria-pressed="false">🤡 Клоун</button>
         <button type="button" class="style-btn" data-style="zombie" aria-pressed="false">🧟 Зомби</button>
         <button type="button" class="style-btn" data-style="witch" aria-pressed="false">🧙 Ведьма</button>
+        <button type="button" class="style-btn new" data-style="pumpkin" aria-pressed="false">🎃 Тыква</button>
+        <button type="button" class="style-btn new" data-style="spiderweb" aria-pressed="false">🕸️ Паутина</button>
+        <button type="button" class="style-btn new" data-style="mummy" aria-pressed="false">🧻 Мумия</button>
+        <button type="button" class="style-btn new" data-style="catrina" aria-pressed="false">🌸 Катрина</button>
+        <button type="button" class="style-btn new" data-style="ghost" aria-pressed="false">👻 Призрак</button>
+        <button type="button" class="style-btn new" data-style="bat" aria-pressed="false">🦇 Летучая мышь</button>
         <button type="button" class="style-btn" data-style="none" aria-pressed="false">✕ Без грима</button>
       </div>
       <div class="row">
@@ -355,6 +365,156 @@ const LOOKS={
    draw:(c,G)=>WARTS(G).forEach(([p,r])=>wartAt(c,G,p,r)),hl:G=>WARTS(G).map(([p,r])=>ellP(G,p,r*1.6,r*1.6))}
  ]}
 };
+/* ===== more looks (v3) ===== */
+const LP=(G,c,list)=>list.map(([x,y])=>G.O(c,x,y));
+function sharp(pts){const p=new Path2D();p.moveTo(pts[0].x,pts[0].y);for(let i=1;i<pts.length;i++)p.lineTo(pts[i].x,pts[i].y);p.closePath();return p}
+function clipped(c,path,rule,fn){c.save();c.clip(path,rule||'nonzero');fn();c.restore()}
+function circ(G,ctr,r){const p=new Path2D();p.moveTo(ctr.x+r*G.u,ctr.y);p.arc(ctr.x,ctr.y,r*G.u,0,Math.PI*2);return p}
+function arcSample(line){const L=[];let tot=0;for(let i=0;i<line.length-1;i++){const d=Math.hypot(line[i+1].x-line[i].x,line[i+1].y-line[i].y);L.push(d);tot+=d}
+  return t=>{let d=t*tot;for(let i=0;i<L.length;i++){if(d<=L[i]||i===L.length-1)return mid(line[i],line[i+1],L[i]?Math.min(1,d/L[i]):0);d-=L[i]}}}
+const OVALP=G=>polyI(G,OVAL);
+// --- pumpkin
+function pumpEye(G,s){const c=eyeC(G,s);return sharp(LP(G,c,[[0,-0.25],[0.21,0.13],[-0.21,0.13]]))}
+function pumpNose(G){return sharp([G.O(4,0,-0.1),G.O(327,0.03,0.04),G.O(98,-0.03,0.04)])}
+function pumpMouth(G){
+  const c=mid(G.P(61),G.P(291)),hw=Math.hypot(G.P(291).x-c.x,G.P(291).y-c.y)/G.u+0.14,yt=x=>-0.05-0.1*(x/hw)*(x/hw),yb=x=>yt(x)+0.04+0.16*Math.pow(Math.max(0,1-(x/hw)*(x/hw)),0.8);
+  const tw=0.045,top=[],bot=[],N=10,T=[-0.38*hw,0.38*hw];
+  for(let i=0;i<=N;i++){const x=-hw+2*hw*i/N;if(T.some(t=>Math.abs(x-t)<tw+0.01))continue;top.push([x,yt(x)])}
+  T.forEach(t=>top.push([t-tw,yt(t-tw)],[t-tw,yt(t-tw)+0.07],[t+tw,yt(t+tw)+0.07],[t+tw,yt(t+tw)]));
+  top.sort((a,b)=>a[0]-b[0]||0);
+  for(let i=N-1;i>0;i--){const x=-hw+2*hw*i/N;if(Math.abs(x)<0.06)continue;bot.push([x,yb(x)])}
+  const bt=[[0.05,yb(0.05)],[0.05,yb(0.05)-0.07],[-0.05,yb(-0.05)-0.07],[-0.05,yb(-0.05)]];
+  const bot2=bot.filter(p=>p[0]>0).concat(bt,bot.filter(p=>p[0]<0));
+  return sharp(LP(G,c,top.concat(bot2)));
+}
+function pumpRibs(G){const c=G.P(168),L=[];[-0.56,-0.28,0,0.28,0.56].forEach(x=>L.push([G.O(c,x*0.6,-0.75),G.O(c,x*0.85,1.25),G.O(c,x*1.35,0.25)]));return segs(L)}
+function pumpStem(G){return smooth([G.O(10,-0.06,0.24),G.O(10,-0.05,0.08),G.O(10,-0.02,-0.04),G.O(10,0.07,-0.06),G.O(10,0.06,0.08),G.O(10,0.06,0.24)])}
+function pumpLeaf(G){return smooth([G.O(10,0.06,0.2),G.O(10,0.17,0.08),G.O(10,0.3,0.1),G.O(10,0.2,0.2)])}
+function pumpVine(G){return smooth([G.O(10,-0.06,0.2),G.O(10,-0.18,0.16),G.O(10,-0.24,0.06),G.O(10,-0.17,0.02),G.O(10,-0.15,0.09)],false)}
+// --- spider web
+function webGeo(G){const W=G.O(263,0.0,0.01),A=[-95,-60,-25,10,45,80,115].map(a=>a*Math.PI/180),R=[0.14,0.27,0.41,0.56,0.7];
+  const at=(a,r)=>G.O(W,r*Math.cos(a),r*Math.sin(a));return {W,A,R,at}}
+function webSpokes(G){const g=webGeo(G);return segs(g.A.map(a=>[g.W,g.at(a,0.76)]))}
+function webThreads(G){const g=webGeo(G),L=[];g.R.forEach(r=>{for(let i=0;i<g.A.length-1;i++){const a=g.A[i],b=g.A[i+1];L.push([g.at(a,r),g.at(b,r),g.at((a+b)/2,r*0.8)])}});return segs(L)}
+function webSpiderPos(G){return G.O(425,0.03,0.2)}
+function spider(G){const S=webSpiderPos(G),p=union(ellP(G,S,0.045,0.056),circ(G,G.O(S,0,-0.065),0.028));return p}
+function spiderLegs(G){const S=webSpiderPos(G),L=[];BOTH.forEach(s=>[-0.035,-0.01,0.015,0.04].forEach((y,j)=>{const a=G.O(S,s*0.03,y),k=G.O(S,s*0.085,y-0.05+j*0.015),f=G.O(S,s*0.12,y+0.04+j*0.01);L.push([a,k]);L.push([k,f])}));
+  const g=webGeo(G);L.push([g.at(g.A[6],0.56),G.O(S,0,-0.09)]);return segs(L)}
+// --- mummy
+const MUM_B=[[-0.62,0.1],[-0.45,-0.12],[-0.27,0.08],[-0.08,-0.06],[0.12,0.12],[0.3,-0.1],[0.48,0.07],[0.66,-0.12],[0.84,0.1],[1.02,-0.06]];
+function mumBand(G,[y,a],w=0.15){const c=G.O(168,0,y),ex={x:Math.cos(G.rot+a),y:Math.sin(G.rot+a)},ey={x:-ex.y,y:ex.x},L=1.4*G.u,H=w/2*G.u;
+  return sharp([{x:c.x-ex.x*L-ey.x*H,y:c.y-ex.y*L-ey.y*H},{x:c.x+ex.x*L-ey.x*H,y:c.y+ex.y*L-ey.y*H},{x:c.x+ex.x*L+ey.x*H,y:c.y+ex.y*L+ey.y*H},{x:c.x-ex.x*L+ey.x*H,y:c.y-ex.y*L+ey.y*H}])}
+function mumEdge(G,[y,a],off){const c=G.O(168,0,y),ex={x:Math.cos(G.rot+a),y:Math.sin(G.rot+a)},ey={x:-ex.y,y:ex.x},L=1.4*G.u,o=off*G.u;return [{x:c.x-ex.x*L+ey.x*o,y:c.y-ex.y*L+ey.y*o},{x:c.x+ex.x*L+ey.x*o,y:c.y+ex.y*L+ey.y*o}]}
+const mumHoles=G=>union(OVALP(G),socket(G,-1,0.85),socket(G,1,0.85));
+const mumBands=G=>union(...MUM_B.map(b=>mumBand(G,b)));
+// --- catrina
+const CAT_COL={'-1':['#e0218a',[224,33,138]],'1':['#16b3c7',[22,179,199]]};
+function petals(G,s){const c=eyeC(G,s),p=new Path2D();for(let k=0;k<8;k++){const a=k*Math.PI/4+Math.PI/8,q=G.O(c,0.24*Math.cos(a),0.21*Math.sin(a));p.addPath(ellP(G,q,0.1,0.065,a))}return p}
+const catrinaSocket=(G,s)=>ellP(G,eyeC(G,s),0.2,0.165);
+function heartNose(G){const t=G.O(4,0,-0.01),p=union(circ(G,G.O(t,-0.037,-0.012),0.042),circ(G,G.O(t,0.037,-0.012),0.042));p.addPath(sharp([G.O(t,-0.077,0),G.O(t,0.077,0),G.O(t,0,0.085)]));return p}
+function stitchLips(G){const line=[G.O(61,-0.13,0),G.P(61),mid(G.P(82),G.P(87)),mid(G.P(13),G.P(14)),mid(G.P(312),G.P(317)),G.P(291),G.O(291,0.13,0)],f=arcSample(line),L=[];
+  for(let i=1;i<10;i++){const q=f(i/10),h=0.05+0.05*Math.sin(Math.PI*i/10);L.push([G.O(q,0,-h),G.O(q,0,h)])}return {line:smooth(line,false),st:segs(L)}}
+function foreFlower(G){const c=G.O(9,0,-0.3),p=new Path2D();for(let k=0;k<6;k++){const a=k*Math.PI/3,q=G.O(c,0.075*Math.cos(a),0.075*Math.sin(a));p.addPath(ellP(G,q,0.06,0.035,a))}return {p,c}}
+function dotRing(G){const p=new Path2D();BOTH.forEach(s=>{const c=eyeC(G,s);for(let k=0;k<7;k++){const a=Math.PI*(1.1+0.8*k/6);p.addPath(circ(G,G.O(c,0.36*Math.cos(a),0.33*Math.sin(a)),0.016))}});
+  for(let k=-3;k<=3;k++)p.addPath(circ(G,G.O(152,k*0.055,-0.1-0.02*Math.abs(k)),0.018));return p}
+// --- ghost
+const SPARK=(()=>{let s=7;const r=()=>(s=(s*16807)%2147483647)/2147483647,a=[];for(let i=0;i<70;i++)a.push([r()*1.5-0.75,r()*1.9-0.85,0.006+r()*0.012]);return a})();
+function ghostTears(G){return union(...both(s=>{const c=eyeC(G,s);return smooth([G.O(c,-0.1,0.1),G.O(c,0.1,0.1),G.O(c,0.06,0.3),G.O(c,0.02,0.42),G.O(c,-0.03,0.3)])}))}
+// --- bat
+function batMask(G){const c=mid(G.P(33),G.P(263)),h=[[0,-0.2],[0.03,-0.27],[0.075,-0.43],[0.11,-0.27],[0.2,-0.3],[0.42,-0.44],[0.78,-0.32],[0.72,0.0],[0.6,0.18],[0.47,0.12],[0.34,0.25],[0.2,0.13],[0.08,0.18],[0,0.1]];
+  const pts=h.concat(h.slice(1,-1).reverse().map(([x,y])=>[-x,y]));return sharp(LP(G,c,pts))}
+function batHoles(G){return union(...both(s=>{const c=eyeC(G,s);return smooth(EYE[s].map(i=>{const q=G.P(i);return {x:c.x+(q.x-c.x)*1.25,y:c.y+(q.y-c.y)*1.45}}))}))}
+function batBones(G){const c=mid(G.P(33),G.P(263)),L=[];BOTH.forEach(s=>{const o=G.O(c,s*0.11,-0.24);[[0.78,-0.32],[0.72,0.0],[0.47,0.12],[0.2,0.13]].forEach(([x,y])=>L.push([o,G.O(c,s*x,y),G.O(c,s*(x*0.6),y-0.12)]))});return segs(L)}
+function fangs(G){const p=new Path2D();BOTH.forEach(s=>{const b=mid(G.P(s<0?82:312),G.P(s<0?87:317));p.addPath(sharp([G.O(b,-0.03,-0.01),G.O(b,0.03,-0.01),G.O(b,s*0.005,0.12)]))});return p}
+
+Object.assign(LOOKS,{
+ pumpkin:{name:'🎃 Тыква',steps:[
+  {t:'Оранжевая основа',d:'Покрой всё лицо ярко-оранжевым аквагримом. К краям лица можно чуть темнее.',tool:'Широкий спонж',sw:['#f07814','Оранжевый аквагрим'],tip:'Смешай немного жёлтого в центре лица — тыква будет «светиться».',
+   draw:(c,G)=>{const p=baseP(G,false);fillZ(c,p,'rgb(240,120,20)',{alpha:.9,blur:.06*G.u,rule:'evenodd'});blob(c,G,G.O(6,0,0.15),0.35,0.45,[255,190,60,.45],{})},hl:G=>[OVALP(G)]},
+  {t:'Дольки тыквы',d:'Тёмно-оранжевым проведи изогнутые полосы сверху вниз, как дольки у тыквы, и растушуй их. По краю лица — тень.',tool:'Скошенная кисть + спонж',sw:['#a83c00','Тёмно-оранжевый'],tip:'Полосы выгибаются наружу — к щекам. Так лицо станет круглым, как тыква.',
+   draw:(c,G)=>clipped(c,OVALP(G),0,()=>{strokeZ(c,pumpRibs(G),'rgb(160,55,0)',G.u*0.06,{alpha:.6,blur:.05*G.u,mode:'multiply'});strokeZ(c,OVALP(G),'rgb(150,50,0)',G.u*0.14,{alpha:.6,blur:.08*G.u,mode:'multiply'})}),hl:G=>[pumpRibs(G)]},
+  {t:'Глаза-треугольники',d:'Чёрным нарисуй треугольник вокруг каждого глаза — вершиной вверх — и залей его, оставив сам глаз.',tool:'Плоская кисть',sw:['#111111','Чёрный аквагрим'],tip:'Глаза закрыты, на ресницы и слизистую краску не наносим. Сначала поставь 3 точки-вершины.',
+   draw:(c,G)=>both(s=>fillZ(c,union(pumpEye(G,s),polyI(G,EYE[s])),'rgb(15,10,5)',{alpha:.97,rule:'evenodd'})),hl:G=>both(s=>pumpEye(G,s))},
+  {t:'Нос-треугольник',d:'На кончике носа нарисуй маленький чёрный треугольник.',tool:'Круглая кисть №4',sw:['#111111','Чёрный аквагрим'],tip:'Нижние углы — на крыльях носа, вершина — на кончике.',
+   draw:(c,G)=>fillZ(c,pumpNose(G),'rgb(15,10,5)',{alpha:.97}),hl:G=>[pumpNose(G)]},
+  {t:'Зубастая улыбка',d:'Нарисуй широкую чёрную улыбку от щеки до щеки и оставь в ней оранжевые «зубы» — квадратики сверху и снизу.',tool:'Круглая кисть №6',sw:['#111111','Чёрный аквагрим'],tip:'На губы — только краска, разрешённая для губ. Рот держи закрытым.',
+   draw:(c,G)=>{fillZ(c,pumpMouth(G),'rgb(15,10,5)',{alpha:.97});blob(c,G,mid(G.P(13),G.P(14)),0.12,0.04,[255,150,30,.35],{})},hl:G=>[pumpMouth(G)]},
+  {t:'Хвостик и листик',d:'На лбу у линии волос нарисуй зелёный хвостик тыквы, листик и закрученный усик.',tool:'Тонкая кисть',sw:['#2f8a2a','Зелёный аквагрим'],tip:'Тёмно-зелёная полоска на одной стороне хвостика сделает его объёмным.',
+   draw:(c,G)=>{fillZ(c,pumpStem(G),'rgb(60,120,40)',{alpha:.97});strokeZ(c,segs([[G.O(10,0.03,0.22),G.O(10,0.04,-0.03)]]),'rgb(30,70,20)',G.u*0.02,{alpha:.8});fillZ(c,pumpLeaf(G),'rgb(70,160,50)',{alpha:.95});strokeZ(c,pumpVine(G),'rgb(50,130,40)',G.u*0.015)},hl:G=>[pumpStem(G),pumpLeaf(G)]}
+ ]},
+ spiderweb:{name:'🕸️ Паутина',steps:[
+  {t:'Светлая основа',d:'Тонким слоем светлого аквагрима выровняй лицо — на светлом паутина будет заметнее.',tool:'Спонж',sw:['#ece9ef','Светлый аквагрим'],tip:'Слой тонкий и прозрачный — как пудра.',
+   draw:(c,G)=>{const p=baseP(G,true);fillZ(c,p,'rgb(128,128,128)',{alpha:.4,mode:'saturation',rule:'evenodd'});fillZ(c,p,'rgb(236,233,240)',{alpha:.45,blur:.07*G.u,rule:'evenodd'})},hl:G=>[OVALP(G)]},
+  {t:'Дымчатые глаза',d:'Тёмно-серыми тенями закрась веки и под глазами, края растушуй, чтобы получилась «дымка».',tool:'Кисть для теней',sw:['#2e2c38','Тёмно-серые тени'],tip:'Только тени для век. Начинай с малого и добавляй слои.',
+   draw:(c,G)=>both(s=>fillZ(c,socket(G,s,1.2),'rgb(45,42,58)',{alpha:.85,blur:.07*G.u,mode:'multiply'})),hl:G=>both(s=>socket(G,s,1.2))},
+  {t:'Лучи паутины',d:'От внешнего уголка левого глаза проведи 7 прямых чёрных лучей — вверх к виску, в сторону и вниз по щеке.',tool:'Тонкая кисть №1 или подводка',sw:['#111111','Чёрный аквагрим'],tip:'Не начинай прямо у глаза — отступи 3–4 мм от уголка.',
+   draw:(c,G)=>clipped(c,OVALP(G),0,()=>strokeZ(c,webSpokes(G),'rgb(15,15,20)',G.u*0.011,{alpha:.95})),hl:G=>[webSpokes(G)]},
+  {t:'Нити паутины',d:'Соедини лучи дугами, прогнутыми к центру, — 5 рядов от маленьких к большим.',tool:'Тонкая кисть №1',sw:['#111111','Чёрный аквагрим'],tip:'Дуга «провисает» к центру паутины, как настоящая нитка.',
+   draw:(c,G)=>clipped(c,OVALP(G),0,()=>strokeZ(c,webThreads(G),'rgb(15,15,20)',G.u*0.008,{alpha:.9})),hl:G=>[webThreads(G)]},
+  {t:'Паучок',d:'На щеке под паутиной нарисуй паучка: кругленькое тельце, голову и 8 лапок-уголков. Ниточкой подвесь его к паутине.',tool:'Круглая кисть №3 + тонкая кисть',sw:['#111111','Чёрный аквагрим'],tip:'Две белые точки-глазки сделают паучка милым.',
+   draw:(c,G)=>{strokeZ(c,spiderLegs(G),'rgb(15,15,20)',G.u*0.011);fillZ(c,spider(G),'rgb(15,15,20)',{alpha:.97});const h=G.O(webSpiderPos(G),0,-0.065);both(s=>fillZ(c,circ(G,G.O(h,s*0.011,-0.004),0.008),'rgb(255,255,255)',{alpha:.95}))},hl:G=>[spider(G),spiderLegs(G)]},
+  {t:'Тёмные губы',d:'Губы покрой тёмно-сливовым цветом.',tool:'Кисть для губ',sw:['#3a1530','Сливовый'],tip:'Только помада или краска, разрешённая для губ.',
+   draw:(c,G)=>{const p=polyI(G,LIPO);fillZ(c,p,'rgb(58,20,48)',{alpha:.9,mode:'multiply'});fillZ(c,p,'rgb(60,20,50)',{alpha:.45})},hl:G=>[polyI(G,LIPO)]}
+ ]},
+ mummy:{name:'🧻 Мумия',steps:[
+  {t:'Бежевая основа',d:'Покрой лицо светло-бежевым аквагримом.',tool:'Спонж',sw:['#dcc6a0','Бежевый аквагрим'],tip:'Можно смешать белый с капелькой коричневого и жёлтого.',
+   draw:(c,G)=>fillZ(c,baseP(G,false),'rgb(220,198,160)',{alpha:.85,blur:.06*G.u,rule:'evenodd'}),hl:G=>[OVALP(G)]},
+  {t:'Тёмные глаза',d:'Тёмно-коричневым затемни область вокруг глаз — будто глаза выглядывают из-под бинтов.',tool:'Кисть для теней + спонж',sw:['#3c2818','Тёмно-коричневый'],tip:'Только тени для век, глаза закрыты. Края мягко растушуй.',
+   draw:(c,G)=>both(s=>fillZ(c,socket(G,s,1.15),'rgb(60,40,25)',{alpha:.85,blur:.05*G.u,mode:'multiply'})),hl:G=>both(s=>socket(G,s,1.15))},
+  {t:'Бинты',d:'Светлым кремовым цветом нарисуй широкие полосы-бинты поперёк лица, чуть наискосок. Вокруг глаз оставь «щёлочки».',tool:'Плоская кисть или край спонжа',sw:['#f2e8cf','Кремовый'],tip:'Полосы идут в разные стороны и немного перекрывают друг друга — как настоящие бинты.',
+   draw:(c,G)=>clipped(c,mumHoles(G),'evenodd',()=>MUM_B.forEach((b,i)=>fillZ(c,mumBand(G,b),i%2?'rgb(238,228,204)':'rgb(244,236,214)',{alpha:.95}))),hl:G=>[mumBands(G)]},
+  {t:'Тени на бинтах',d:'Коричневым проведи тень вдоль нижнего края каждого бинта и растушуй — бинты станут объёмными.',tool:'Тонкая скошенная кисть',sw:['#7a5a3a','Коричневый'],tip:'Тень всегда с одной стороны (снизу) — так кажется, что свет сверху.',
+   draw:(c,G)=>clipped(c,mumHoles(G),'evenodd',()=>MUM_B.forEach(b=>{const e=mumEdge(G,b,0.07);strokeZ(c,segs([e]),'rgb(110,80,50)',G.u*0.025,{alpha:.7,blur:.012*G.u,mode:'multiply'})})),hl:G=>[mumBands(G)]},
+  {t:'Ткань и складки',d:'Тонкой кистью нарисуй вдоль бинтов тонкие линии ткани и маленькие складочки.',tool:'Тонкая кисть №1',sw:['#a88a64','Светло-коричневый'],tip:'Линии тонкие и светлые: это фактура, а не контур.',
+   draw:(c,G)=>clipped(c,mumHoles(G),'evenodd',()=>MUM_B.forEach(b=>{strokeZ(c,segs([mumEdge(G,b,-0.025),mumEdge(G,b,0.02)]),'rgb(150,120,85)',G.u*0.006,{alpha:.55,mode:'multiply'})})),hl:G=>[mumBands(G)]},
+  {t:'Пыль веков',d:'Спонжем слегка вбей светло-коричневые пятна у краёв лица и между бинтами — мумия станет старинной.',tool:'Спонж с крупными порами',sw:['#8c6e48','Светло-коричневый'],tip:'Совсем немного краски на спонже и лёгкие касания.',
+   draw:(c,G)=>[[234,0.15,0],[454,-0.15,0],[10,0,0.12],[152,0,-0.1],[205,0,0.05]].forEach(([i,x,y])=>blob(c,G,G.O(i,x,y),0.14,0.1,[140,110,72,.4],{mode:'multiply'})),hl:G=>[OVALP(G)]}
+ ]},
+ catrina:{name:'🌸 Катрина',steps:[
+  {t:'Белая основа',d:'Покрой лицо белым аквагримом, губы не трогай.',tool:'Спонж',sw:['#fbfbf8','Белый аквагрим'],tip:'Тонкие слои — основа не потрескается.',
+   draw:(c,G)=>fillZ(c,baseP(G,true),'rgb(252,252,248)',{alpha:.9,blur:.06*G.u,rule:'evenodd'}),hl:G=>[OVALP(G)]},
+  {t:'Цветы вокруг глаз',d:'Вокруг каждого глаза нарисуй 8 лепестков: слева — розовые, справа — бирюзовые.',tool:'Круглая кисть №4',sw:['#e0218a','Розовый и бирюзовый'],tip:'Лепесток — это одно нажатие кистью: прижми и оторви.',
+   draw:(c,G)=>both(s=>fillZ(c,petals(G,s),CAT_COL[s][0],{alpha:.95})),hl:G=>both(s=>petals(G,s))},
+  {t:'Глазницы',d:'В центре цветка закрась круг чёрным вокруг глаза.',tool:'Плоская кисть',sw:['#111111','Чёрный аквагрим'],tip:'Глаза закрыты, по слизистой не рисуем.',
+   draw:(c,G)=>both(s=>fillZ(c,union(catrinaSocket(G,s),polyI(G,EYE[s])),'rgb(12,12,14)',{alpha:.97,rule:'evenodd'})),hl:G=>both(s=>catrinaSocket(G,s))},
+  {t:'Нос-сердечко',d:'На кончике носа нарисуй чёрное перевёрнутое сердечко.',tool:'Круглая кисть №3',sw:['#111111','Чёрный аквагрим'],tip:'Две «кругляшки» сверху и уголок вниз.',
+   draw:(c,G)=>fillZ(c,heartNose(G),'rgb(12,12,14)',{alpha:.97}),hl:G=>[heartNose(G)]},
+  {t:'Губы-стежки',d:'Проведи чёрную линию по середине рта до щёк и пересеки её короткими чёрточками-стежками.',tool:'Тонкая кисть №1',sw:['#111111','Чёрный'],tip:'На губах — только краска для губ.',
+   draw:(c,G)=>{const S=stitchLips(G);strokeZ(c,S.line,'rgb(12,12,14)',G.u*0.014);strokeZ(c,S.st,'rgb(12,12,14)',G.u*0.011)},hl:G=>{const S=stitchLips(G);return [S.line,S.st]}},
+  {t:'Цветок и точки',d:'На лбу нарисуй жёлто-розовый цветок, над глазами — дугу из точек, на подбородке — ряд точек.',tool:'Ватная палочка или кисть',sw:['#ffc21a','Жёлтый и цветные'],tip:'Точки удобно ставить обратной стороной кисти.',
+   draw:(c,G)=>{const F=foreFlower(G);fillZ(c,F.p,'rgb(230,50,120)',{alpha:.95});fillZ(c,circ(G,F.c,0.035),'rgb(255,194,26)',{alpha:.97});fillZ(c,dotRing(G),'rgb(30,130,200)',{alpha:.9})},hl:G=>{const F=foreFlower(G);return [F.p,dotRing(G)]}}
+ ]},
+ ghost:{name:'👻 Призрак',steps:[
+  {t:'Бело-голубая основа',d:'Покрой лицо белым с капелькой голубого — кожа станет «призрачной».',tool:'Спонж',sw:['#e3ecfa','Бело-голубой'],tip:'Захвати шею и уши, чтобы не было границы.',
+   draw:(c,G)=>{const p=baseP(G,true);fillZ(c,p,'rgb(128,128,128)',{alpha:.7,mode:'saturation',rule:'evenodd'});fillZ(c,p,'rgb(226,236,250)',{alpha:.75,blur:.07*G.u,rule:'evenodd'})},hl:G=>[OVALP(G)]},
+  {t:'Голубые тени',d:'Серо-голубым затемни щёки под скулами и виски, растушуй.',tool:'Скошенная кисть',sw:['#7f93b5','Серо-голубой'],tip:'Очень мягко: призрак — прозрачный и лёгкий.',
+   draw:(c,G)=>both(s=>{fillZ(c,hollow(G,s,0.08),'rgb(120,140,185)',{alpha:.6,blur:.08*G.u,mode:'multiply'});blob(c,G,TEMPLE(G,s),0.11,0.16,[120,140,185,.55],{mode:'multiply'})}),hl:G=>both(s=>hollow(G,s,0.08))},
+  {t:'Дымчатые глаза',d:'Тёмно-серо-синими тенями закрась большую область вокруг глаз и растушуй края в дымку.',tool:'Кисть для теней',sw:['#2a3048','Тёмно-синие тени'],tip:'Только косметика для век; глаза закрыты.',
+   draw:(c,G)=>both(s=>fillZ(c,socket(G,s,1.3),'rgb(42,48,72)',{alpha:.88,blur:.09*G.u,mode:'multiply'})),hl:G=>both(s=>socket(G,s,1.3))},
+  {t:'Дымные потёки',d:'Из-под глаз растушуй вниз мягкие серые «дымки».',tool:'Спонж-клинышек',sw:['#5a6480','Серо-синий'],tip:'Веди спонж сверху вниз и отрывай — потёк станет прозрачным к концу.',
+   draw:(c,G)=>fillZ(c,ghostTears(G),'rgb(80,90,125)',{alpha:.5,blur:.05*G.u,mode:'multiply'}),hl:G=>[ghostTears(G)]},
+  {t:'Серо-голубые губы',d:'Губы покрой серо-голубым цветом.',tool:'Кисть для губ',sw:['#6d7fa3','Серо-голубой'],tip:'Только средства, разрешённые для губ.',
+   draw:(c,G)=>{const p=polyI(G,LIPO);fillZ(c,p,'rgb(128,128,128)',{alpha:.9,mode:'saturation'});fillZ(c,p,'rgb(105,125,165)',{alpha:.8})},hl:G=>[polyI(G,LIPO)]},
+  {t:'Серебряное сияние',d:'Серебристым шиммером коснись скул, лба и спинки носа и рассыпь крошечные блёстки.',tool:'Пушистая кисть + косметические блёстки',sw:['#d8e0ec','Серебряный шиммер'],tip:'Только косметические блёстки, не ремесленные! И не возле глаз.',
+   draw:(c,G)=>clipped(c,OVALP(G),0,()=>{both(s=>blob(c,G,G.O(I('bone',s),-s*0.02,-0.02),0.12,0.06,[255,255,255,.75],{mode:'screen'}));blob(c,G,G.O(9,0,-0.2),0.16,0.1,[255,255,255,.6],{mode:'screen'});blob(c,G,G.O(6,0,0.05),0.03,0.12,[255,255,255,.6],{mode:'screen'});
+     const p=new Path2D();SPARK.forEach(([x,y,r])=>p.addPath(circ(G,G.O(6,x,y),r)));fillZ(c,p,'rgb(240,246,255)',{alpha:.9})}),hl:G=>both(s=>ellP(G,G.O(I('bone',s),-s*0.02,-0.02),0.12,0.06)).concat([ellP(G,G.O(9,0,-0.2),0.16,0.1)])}
+ ]},
+ bat:{name:'🦇 Летучая мышь',steps:[
+  {t:'Фиолетовая дымка',d:'Фиолетовым покрой лоб и область вокруг глаз; к щекам цвет плавно исчезает.',tool:'Спонж',sw:['#7a2fb0','Фиолетовый аквагрим'],tip:'Работай краем спонжа, чтобы переход был плавным.',
+   draw:(c,G)=>{const a=G.O(10,0,0),b=G.O(4,0,0),g=c.createLinearGradient(a.x,a.y,b.x,b.y);g.addColorStop(0,'rgba(122,47,176,0.9)');g.addColorStop(0.65,'rgba(122,47,176,0.55)');g.addColorStop(1,'rgba(122,47,176,0)');
+     clipped(c,OVALP(G),0,()=>fillZ(c,union(OVALP(G),...both(s=>polyI(G,EYE[s]))),g,{rule:'evenodd'}))},hl:G=>[OVALP(G)]},
+  {t:'Контур крыльев',d:'Тонкой чёрной линией нарисуй летучую мышь: голова с ушками над переносицей, крылья через глаза к вискам, нижний край — «волнами».',tool:'Тонкая кисть или карандаш для лица',sw:['#111111','Чёрный'],tip:'Сначала одну сторону, потом зеркально вторую — смотри в зеркало.',
+   draw:(c,G)=>strokeZ(c,batMask(G),'rgb(10,8,14)',G.u*0.014),hl:G=>[batMask(G)]},
+  {t:'Чёрная маска',d:'Залей мышь чёрным, оставив открытыми глаза.',tool:'Плоская кисть',sw:['#0a080e','Чёрный аквагрим'],tip:'Возле глаз — тонкой кистью и с закрытыми глазами. По слизистой не рисуем.',
+   draw:(c,G)=>fillZ(c,union(batMask(G),batHoles(G)),'rgb(10,8,14)',{alpha:.97,rule:'evenodd'}),hl:G=>[batMask(G)]},
+  {t:'Перепонки',d:'Фиолетово-серебряными линиями нарисуй «косточки» крыльев от головы к кончикам и к волнам.',tool:'Тонкая кисть №1',sw:['#b48ce0','Сиреневый'],tip:'Линии чуть изогнуты — так крыло будто натянуто.',
+   draw:(c,G)=>clipped(c,batMask(G),0,()=>strokeZ(c,batBones(G),'rgb(180,140,224)',G.u*0.01,{alpha:.85})),hl:G=>[batBones(G)]},
+  {t:'Тёмные губы',d:'Губы покрой тёмно-фиолетовым цветом.',tool:'Кисть для губ',sw:['#3a1048','Тёмно-фиолетовый'],tip:'Только помада или краска для губ.',
+   draw:(c,G)=>{const p=polyI(G,LIPO);fillZ(c,p,'rgb(58,16,72)',{alpha:.9,mode:'multiply'});fillZ(c,p,'rgb(62,18,78)',{alpha:.5})},hl:G=>[polyI(G,LIPO)]},
+  {t:'Клычки',d:'Белым нарисуй два маленьких клычка от середины губ вниз и обведи их тонкой серой линией.',tool:'Тонкая кисть',sw:['#ffffff','Белый аквагрим'],tip:'Клычки маленькие и аккуратные — это милая летучая мышка!',
+   draw:(c,G)=>{fillZ(c,fangs(G),'rgb(252,252,252)',{alpha:.98});strokeZ(c,fangs(G),'rgb(110,110,120)',G.u*0.006)},hl:G=>[fangs(G)]}
+ ]}
+});
   const KEY = 'tutorcall-halloween-makeup-stencil-v1';
   const DEFAULTS = { style: 'skeleton', opacity: 0.8, view: 'look' };
   const $ = id => document.getElementById(id);
@@ -372,6 +532,12 @@ const LOOKS={
     clown: { color: '#ff0000', lineWidth: 5, connections: [[1,98],[1,327],[98,2],[327,2],[33,133],[133,159],[159,33],[263,362],[362,386],[386,263],[61,17],[17,291],[61,291]] },
     zombie: { color: '#228b22', lineWidth: 2, connections: [[10,152],[67,297],[50,280],[33,263],[61,291]] },
     witch: { color: '#006400', lineWidth: 3, connections: [[70,63],[63,105],[105,66],[66,107],[300,293],[293,334],[334,296],[296,336],[61,291],[13,14]] },
+    pumpkin: { color: '#ff8c1a', lineWidth: 2, zones: true, connections: [] },
+    spiderweb: { color: '#d0d0ff', lineWidth: 2, zones: true, connections: [] },
+    mummy: { color: '#e8d9b5', lineWidth: 2, zones: true, connections: [] },
+    catrina: { color: '#ff4fb0', lineWidth: 2, zones: true, connections: [] },
+    ghost: { color: '#9fd0ff', lineWidth: 2, zones: true, connections: [] },
+    bat: { color: '#b46cff', lineWidth: 2, zones: true, connections: [] },
     none: { color: '#000000', lineWidth: 0, connections: [] }
   };
   const BEFORE = { t: 'Перед началом', html: '<ul>' +
@@ -498,8 +664,8 @@ const LOOKS={
     const L = LOOKS[look];
     for (let i = 0; i <= upto && i < L.steps.length; i++) L.steps[i].draw(c, G);
   }
-  function drawLines(c, pts, look) {
-    const st = LINES[look]; if (!st.connections.length) return;
+  function drawLines(c, pts, look, G) {
+    const st = LINES[look]; if (!st.connections.length && !st.zones) return;
     const W = c.canvas.width, H = c.canvas.height, lm = pts.map(function (p) { return { x: p.x / W, y: p.y / H }; });
     const w = function (n) { return n * dpr; };
     c.save(); c.globalAlpha = opacity;
@@ -507,6 +673,10 @@ const LOOKS={
     [FACEMESH_LEFT_EYE, FACEMESH_RIGHT_EYE].forEach(function (s) { drawConnectors(c, lm, s, { color: st.color + 'cc', lineWidth: w(2) }); });
     [FACEMESH_LIPS, FACEMESH_LEFT_EYEBROW, FACEMESH_RIGHT_EYEBROW].forEach(function (s) { drawConnectors(c, lm, s, { color: st.color + 'aa', lineWidth: w(2) }); });
     c.strokeStyle = st.color; c.lineWidth = st.lineWidth * dpr; c.lineCap = 'round';
+    if (st.zones) {   // newer looks: the stencil is the outline of every makeup zone
+      c.lineWidth = Math.max(1.5, G.u * 0.012); c.lineJoin = 'round';
+      LOOKS[look].steps.forEach(function (stp) { stp.hl(G).forEach(function (pth) { c.stroke(pth); }); });
+    }
     st.connections.forEach(function (k) { const a = pts[k[0]], b = pts[k[1]]; c.beginPath(); c.moveTo(a.x, a.y); c.lineTo(b.x, b.y); c.stroke(); });
     c.restore();
   }
@@ -515,7 +685,7 @@ const LOOKS={
     c.save();
     paths.forEach(function (p) {
       c.globalAlpha = 0.12 + 0.12 * pulse; c.fillStyle = '#00e5ff'; c.fill(p);
-      c.globalAlpha = 0.65 + 0.35 * pulse; c.strokeStyle = '#00e5ff'; c.lineWidth = Math.max(2, G.u * 0.018);
+      c.globalAlpha = 0.85 + 0.15 * pulse; c.strokeStyle = '#00e5ff'; c.lineWidth = Math.max(2, G.u * 0.018);
       c.setLineDash([G.u * 0.05, G.u * 0.035]); c.lineDashOffset = -t / 40; c.stroke(p);
     });
     c.restore();
@@ -535,7 +705,7 @@ const LOOKS={
     const upto = guide ? Math.min(g, n - 1) : n - 1;   // guided: steps up to the current one
     OP = opacity;
     if (view === 'look') { if (!guide || g >= 0) drawLook(c, G, currentStyle, upto); }
-    else drawLines(c, pts, currentStyle);
+    else drawLines(c, pts, currentStyle, G);
     OP = 1;
     if (withHints && guide && g >= 0 && g < n) { const hp = L.steps[g].hl(G); drawHighlight(c, G, hp, t); lastHl = hp.length; }
   }
