@@ -1,0 +1,4 @@
+Local copies of MediaPipe (Google), Apache License 2.0:
+- @mediapipe/face_mesh 0.4.1633559619
+- @mediapipe/drawing_utils 0.3.1675466124
+Source: npm registry. Copied so the page works without a CDN.

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Halloween Makeup Stencil Guide — грим на Хэллоуин по трафарету</title>
+  <link rel="icon" href="data:,">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0d0d0d;
+      color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+    }
+    header {
+      background: linear-gradient(90deg, #1a0a0a, #2a0a0a);
+      padding: 10px 15px;
+      text-align: center;
+      border-bottom: 2px solid #ff4500;
+    }
+    header h1 {
+      font-size: 1.4rem;
+      color: #ff6b00;
+      text-shadow: 0 0 10px #ff4500;
+    }
+    #container {
+      position: relative;
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+    }
+    video, canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transform: scaleX(-1); /* mirror for selfie */
+    }
+    video { object-fit: cover; }
+    canvas { pointer-events: none; }
+    #placeholder { position: relative; font-size: 4rem; opacity: .35; pointer-events: none; }
+    #controls {
+      background: #1a1a1a;
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      align-items: center;
+      border-top: 1px solid #333;
+      max-height: 30vh;
+      overflow-y: auto;
+    }
+    #controls[hidden] { display: none; }
+    .style-btn {
+      background: #2a2a2a;
+      color: #fff;
+      border: 1px solid #ff4500;
+      padding: 8px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      touch-action: manipulation;
+    }
+    .style-btn.active {
+      background: #ff4500;
+      color: #000;
+      font-weight: bold;
+    }
+    @media (hover: hover) { .style-btn:hover { background: #ff4500; color: #000; } }
+    .style-btn:focus-visible, #start-btn:focus-visible, #reset-btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+    #opacity-control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #ccc;
+      font-size: 0.8rem;
+    }
+    #opacity-control output { min-width: 2.6em; color: #ff6b00; font-weight: bold; }
+    #reset-btn {
+      background: transparent; color: #ccc; border: 1px solid #555; padding: 7px 12px;
+      border-radius: 20px; cursor: pointer; font: inherit; font-size: 0.8rem;
+    }
+    #start-btn {
+      background: #ff4500;
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      font: inherit;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 10px auto;
+      display: block;
+    }
+    #start-btn:disabled { opacity: .6; cursor: wait; }
+    #start-btn[hidden] { display: none; }
+    #status {
+      text-align: center;
+      padding: 5px;
+      font-size: 0.9rem;
+      color: #ff6b00;
+      min-height: 1.9em;
+    }
+    .info {
+      font-size: 0.75rem;
+      color: #aaa;
+      text-align: center;
+      padding: 5px 10px;
+    }
+    @media (max-width: 480px) {
+      header h1 { font-size: 1.2rem; }
+      .style-btn { padding: 7px 10px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎃 Halloween Makeup Stencil</h1>
+    <div class="info">Подставь лицо к камере и веди по линиям!</div>
+  </header>
+
+  <div id="status" role="status" aria-live="polite">Нажми «Старт», чтобы включить камеру</div>
+
+  <div id="container">
+    <div id="placeholder" aria-hidden="true">🎃</div>
+    <video id="video" playsinline autoplay muted></video>
+    <canvas id="canvas"></canvas>
+  </div>
+
+  <div id="controls" hidden>
+    <button type="button" class="style-btn active" data-style="skeleton" aria-pressed="true">💀 Скелет</button>
+    <button type="button" class="style-btn" data-style="cat" aria-pressed="false">🐱 Кошка</button>
+    <button type="button" class="style-btn" data-style="vampire" aria-pressed="false">🧛 Вампир</button>
+    <button type="button" class="style-btn" data-style="clown" aria-pressed="false">🤡 Клоун</button>
+    <button type="button" class="style-btn" data-style="zombie" aria-pressed="false">🧟 Зомби</button>
+    <button type="button" class="style-btn" data-style="witch" aria-pressed="false">🧙 Ведьма</button>
+    <button type="button" class="style-btn" data-style="none" aria-pressed="false">✕ Без линий</button>
+
+    <label id="opacity-control">
+      Прозрачность: <input type="range" id="opacity" min="0.2" max="1" step="0.1" value="0.8"> <output id="opacity-val">80%</output>
+    </label>
+    <button type="button" id="reset-btn">↺ Начать заново</button>
+  </div>
+
+  <button type="button" id="start-btn">Старт камеры</button>
+  <div class="info">
+    Браузер попросит доступ к камере — разреши его. Видео никуда не отправляется: всё работает прямо на твоём устройстве.<br>
+    На телефоне лучше в Chrome / Safari.
+  </div>
+
+  <script src="vendor/drawing_utils/drawing_utils.js"></script>
+  <script src="vendor/face_mesh/face_mesh.js"></script>
+
+  <script>
+  (function () {
+    'use strict';
+    const KEY = 'tutorcall-halloween-makeup-stencil-v1';
+    const DEFAULTS = { style: 'skeleton', opacity: 0.8 };
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const container = document.getElementById('container');
+    const startBtn = document.getElementById('start-btn');
+    const statusEl = document.getElementById('status');
+    const controls = document.getElementById('controls');
+    const opacitySlider = document.getElementById('opacity');
+    const opacityVal = document.getElementById('opacity-val');
+    const placeholder = document.getElementById('placeholder');
+    const styleBtns = Array.prototype.slice.call(document.querySelectorAll('.style-btn'));
+
+    let currentStyle = DEFAULTS.style;
+    let opacity = DEFAULTS.opacity;
+    let faceMesh = null;
+    let stream = null;
+    let running = false, busy = false, gotResult = false, noFaceFrames = 0;
+
+    // Custom connection sets for Halloween styles (landmark indices of MediaPipe Face Mesh)
+    const STYLES = {
+      skeleton: {
+        color: '#ffffff',
+        lineWidth: 3,
+        connections: [
+          // Forehead bones
+          [10, 151], [151, 9], [9, 8], [8, 168],
+          [10, 67], [10, 297],
+          // Nose
+          [168, 6], [6, 197], [197, 195], [195, 5], [5, 4], [4, 1],
+          [1, 2], [2, 98], [2, 327],
+          // Cheeks
+          [50, 101], [280, 330]
+        ]
+      },
+      cat: {
+        color: '#ff69b4',
+        lineWidth: 4,
+        connections: [
+          // Cat eyes (pointed)
+          [33, 133], [133, 362], [362, 263],
+          // Nose triangle
+          [1, 98], [1, 327], [98, 327],
+          // Whiskers left
+          [50, 187], [50, 147], [50, 123],
+          // Whiskers right
+          [280, 411], [280, 376], [280, 352]
+        ]
+      },
+      vampire: {
+        color: '#8b0000',
+        lineWidth: 3,
+        connections: [
+          // Under eyes
+          [33, 7], [263, 249],
+          // Fangs
+          [13, 14], [13, 0], [0, 267],
+          // Lips
+          [61, 291]
+        ]
+      },
+      clown: {
+        color: '#ff0000',
+        lineWidth: 5,
+        connections: [
+          // Big nose circle points
+          [1, 98], [1, 327], [98, 2], [327, 2],
+          // Eye triangles
+          [33, 133], [133, 159], [159, 33],
+          [263, 362], [362, 386], [386, 263],
+          // Big smile
+          [61, 17], [17, 291], [61, 291]
+        ]
+      },
+      zombie: {
+        color: '#228b22',
+        lineWidth: 2,
+        connections: [
+          // Stitches
+          [10, 152], [67, 297], [50, 280],
+          [33, 263], [61, 291]
+        ]
+      },
+      witch: {
+        color: '#006400',
+        lineWidth: 3,
+        connections: [
+          // Pointed brows
+          [70, 63], [63, 105], [105, 66], [66, 107],
+          [300, 293], [293, 334], [334, 296], [296, 336],
+          // Dark lips
+          [61, 291], [13, 14]
+        ]
+      },
+      none: { color: '#000000', lineWidth: 0, connections: [] }
+    };
+
+    /* ---------- saved settings ---------- */
+    function load() {
+      try {
+        const s = JSON.parse(localStorage.getItem(KEY));
+        if (s && typeof s === 'object') {
+          if (Object.prototype.hasOwnProperty.call(STYLES, s.style)) currentStyle = s.style;
+          const o = Number(s.opacity);
+          if (o >= 0.2 && o <= 1) opacity = Math.round(o * 10) / 10;
+        }
+      } catch (e) {}
+    }
+    function save() {
+      try { localStorage.setItem(KEY, JSON.stringify({ v: 1, style: currentStyle, opacity: opacity })); } catch (e) {}
+    }
+    function paintUI() {
+      styleBtns.forEach(function (b) {
+        const on = b.dataset.style === currentStyle;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      opacitySlider.value = String(opacity);
+      opacityVal.textContent = Math.round(opacity * 100) + '%';
+    }
+
+    /* ---------- drawing ---------- */
+    let cw = 0, ch = 0, dpr = 1;
+    function resizeCanvas() {
+      const w = container.clientWidth, h = container.clientHeight, r = window.devicePixelRatio || 1;
+      if (w === cw && h === ch && r === dpr) return;
+      cw = w; ch = h; dpr = r;
+      canvas.width = Math.max(1, Math.round(w * dpr));
+      canvas.height = Math.max(1, Math.round(h * dpr));
+    }
+    // The video is shown with object-fit: cover, so landmarks (normalised to the camera frame)
+    // must be mapped through the same crop/scale to sit on the face.
+    function mapLandmarks(lms) {
+      const vw = video.videoWidth || 640, vh = video.videoHeight || 480;
+      const s = Math.max(cw / vw, ch / vh);
+      const dx = (cw - vw * s) / 2, dy = (ch - vh * s) / 2;
+      return lms.map(function (p) {
+        return { x: (p.x * vw * s + dx) / cw, y: (p.y * vh * s + dy) / ch, z: p.z };
+      });
+    }
+    function drawCustomLines(lm, style) {
+      if (!style.connections || style.connections.length === 0) return;
+      ctx.strokeStyle = style.color;
+      ctx.lineWidth = style.lineWidth * dpr;
+      ctx.lineCap = 'round';
+      style.connections.forEach(function (c) {
+        const a = lm[c[0]], b = lm[c[1]];
+        if (a && b) {
+          ctx.beginPath();
+          ctx.moveTo(a.x * canvas.width, a.y * canvas.height);
+          ctx.lineTo(b.x * canvas.width, b.y * canvas.height);
+          ctx.stroke();
+        }
+      });
+    }
+    function onResults(results) {
+      resizeCanvas();
+      ctx.save();
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const faces = results.multiFaceLandmarks;
+      if (faces && faces.length > 0) {
+        noFaceFrames = 0;
+        const lm = mapLandmarks(faces[0]);
+        const style = STYLES[currentStyle];
+        ctx.globalAlpha = opacity;          // slider controls all lines
+        if (currentStyle !== 'none') {
+          // Main face contours lightly for orientation
+          const w = function (n) { return n * dpr; };
+          drawConnectors(ctx, lm, FACEMESH_FACE_OVAL, { color: '#55555580', lineWidth: w(1) });
+          drawConnectors(ctx, lm, FACEMESH_LEFT_EYE, { color: style.color + 'cc', lineWidth: w(2) });
+          drawConnectors(ctx, lm, FACEMESH_RIGHT_EYE, { color: style.color + 'cc', lineWidth: w(2) });
+          drawConnectors(ctx, lm, FACEMESH_LIPS, { color: style.color + 'aa', lineWidth: w(2) });
+          drawConnectors(ctx, lm, FACEMESH_LEFT_EYEBROW, { color: style.color + 'aa', lineWidth: w(2) });
+          drawConnectors(ctx, lm, FACEMESH_RIGHT_EYEBROW, { color: style.color + 'aa', lineWidth: w(2) });
+        }
+        drawCustomLines(lm, style);
+        if (!gotResult || statusEl.dataset.k !== 'ok') setStatus('ok', 'Камера работает! Выбери стиль и веди по линиям.');
+      } else if (++noFaceFrames > 15) {
+        setStatus('noface', 'Лицо не видно — посмотри прямо в камеру, нужен хороший свет.');
+      }
+      gotResult = true;
+      ctx.restore();
+    }
+    function setStatus(k, t) { statusEl.dataset.k = k; statusEl.textContent = t; }
+
+    /* ---------- camera ---------- */
+    function loop() {
+      if (!running) return;
+      if (!busy && video.readyState >= 2) {
+        busy = true;
+        faceMesh.send({ image: video }).then(function () { busy = false; }, function (err) {
+          busy = false;
+          console.warn(err);
+        });
+      }
+      requestAnimationFrame(loop);
+    }
+    async function startCamera() {
+      startBtn.disabled = true;
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        setStatus('err', 'Этот браузер не даёт доступ к камере. Открой страницу в Chrome или Safari.');
+        startBtn.disabled = false;
+        return;
+      }
+      if (typeof FaceMesh !== 'function' || typeof drawConnectors !== 'function') {
+        setStatus('err', 'Не удалось загрузить модель. Обнови страницу.');
+        startBtn.disabled = false;
+        return;
+      }
+      setStatus('load', 'Загрузка модели...');
+      try {
+        if (!faceMesh) {
+          faceMesh = new FaceMesh({ locateFile: function (file) { return 'vendor/face_mesh/' + file; } });
+          faceMesh.setOptions({
+            maxNumFaces: 1,
+            refineLandmarks: true,
+            minDetectionConfidence: 0.5,
+            minTrackingConfidence: 0.5
+          });
+          faceMesh.onResults(onResults);
+        }
+        stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } }, audio: false
+        });
+        video.srcObject = stream;
+        await video.play().catch(function () {});
+        running = true;
+        placeholder.hidden = true;
+        startBtn.hidden = true;
+        controls.hidden = false;
+        resizeCanvas();
+        setStatus('load', 'Камера включена. Загружаю модель лица…');
+        loop();
+      } catch (err) {
+        const name = err && err.name;
+        const why = name === 'NotAllowedError' ? 'доступ к камере запрещён — разреши его в настройках браузера'
+          : name === 'NotFoundError' ? 'камера не найдена'
+          : name === 'NotReadableError' ? 'камера занята другим приложением'
+          : (err && err.message) || String(err);
+        setStatus('err', 'Ошибка камеры: ' + why + '.');
+        startBtn.disabled = false;
+      }
+    }
+
+    /* ---------- UI events ---------- */
+    styleBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        currentStyle = btn.dataset.style;
+        paintUI(); save();
+      });
+    });
+    opacitySlider.addEventListener('input', function (e) {
+      const v = parseFloat(e.target.value);
+      if (v >= 0.2 && v <= 1) opacity = v;
+      paintUI(); save();
+    });
+    document.getElementById('reset-btn').addEventListener('click', function () {
+      if (!confirm('Сбросить стиль и прозрачность к начальным?')) return;
+      try { localStorage.removeItem(KEY); } catch (e) {}
+      currentStyle = DEFAULTS.style; opacity = DEFAULTS.opacity;
+      paintUI();
+    });
+    startBtn.addEventListener('click', startCamera);
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('pagehide', function () {
+      running = false;
+      if (stream) stream.getTracks().forEach(function (t) { t.stop(); });
+      stream = null;
+    });
+    window.addEventListener('pageshow', function (e) {
+      if (!e.persisted || running) return;   // back/forward cache: the camera was stopped
+      video.srcObject = null;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      placeholder.hidden = false; controls.hidden = true;
+      startBtn.hidden = false; startBtn.disabled = false;
+      setStatus('idle', 'Нажми «Старт», чтобы включить камеру');
+    });
+
+    load(); paintUI(); resizeCanvas();
+    window.__stencil = { get style() { return currentStyle; }, get opacity() { return opacity; }, get gotResult() { return gotResult; } };
+  })();
+  </script>
+</body>
+</html>
