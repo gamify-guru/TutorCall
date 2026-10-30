@@ -3,452 +3,691 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Halloween Makeup Stencil Guide — грим на Хэллоуин по трафарету</title>
+  <title>Halloween Makeup Stencil — профессиональный грим на Хэллоуин с подсказками</title>
   <link rel="icon" href="data:,">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #0d0d0d;
-      color: #f0f0f0;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      height: 100dvh;
-      overflow: hidden;
+      background: #0d0d0d; color: #f0f0f0;
+      display: flex; flex-direction: column;
+      height: 100vh; height: 100dvh; overflow: hidden;
     }
-    header {
-      background: linear-gradient(90deg, #1a0a0a, #2a0a0a);
-      padding: 10px 15px;
-      text-align: center;
-      border-bottom: 2px solid #ff4500;
-    }
-    header h1 {
-      font-size: 1.4rem;
-      color: #ff6b00;
-      text-shadow: 0 0 10px #ff4500;
-    }
-    #container {
-      position: relative;
-      flex: 1;
-      min-height: 0;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #000;
-    }
-    video, canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      transform: scaleX(-1); /* mirror for selfie */
-    }
+    header { background: linear-gradient(90deg, #1a0a0a, #2a0a0a); padding: 6px 12px; text-align: center; border-bottom: 2px solid #ff4500; flex: none; }
+    header h1 { font-size: 1.25rem; color: #ff6b00; text-shadow: 0 0 10px #ff4500; }
+    header .info { padding: 2px 6px 0; }
+    #status { text-align: center; padding: 4px 8px; font-size: 0.85rem; color: #ff6b00; min-height: 1.7em; flex: none; }
+    #main { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+    #container { position: relative; flex: 1 1 auto; min-height: 240px; overflow: hidden; display: flex; justify-content: center; align-items: center; background: #000; }
+    video, canvas { position: absolute; inset: 0; width: 100%; height: 100%; transform: scaleX(-1); }
     video { object-fit: cover; }
     canvas { pointer-events: none; }
     #placeholder { position: relative; font-size: 4rem; opacity: .35; pointer-events: none; }
-    #controls {
-      background: #1a1a1a;
-      padding: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: center;
-      align-items: center;
-      border-top: 1px solid #333;
-      max-height: 30vh;
-      overflow-y: auto;
-    }
-    #controls[hidden] { display: none; }
-    .style-btn {
-      background: #2a2a2a;
-      color: #fff;
-      border: 1px solid #ff4500;
-      padding: 8px 12px;
-      border-radius: 20px;
-      cursor: pointer;
-      font: inherit;
-      font-size: 0.85rem;
-      transition: all 0.2s;
-      touch-action: manipulation;
-    }
-    .style-btn.active {
-      background: #ff4500;
-      color: #000;
-      font-weight: bold;
-    }
-    @media (hover: hover) { .style-btn:hover { background: #ff4500; color: #000; } }
-    .style-btn:focus-visible, #start-btn:focus-visible, #reset-btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
-    #opacity-control {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: #ccc;
-      font-size: 0.8rem;
-    }
+    #panel { flex: 0 1 auto; max-height: 50%; overflow-y: auto; background: #161616; border-top: 1px solid #333; padding: 8px 10px 10px; display: flex; flex-direction: column; gap: 8px; -webkit-overflow-scrolling: touch; }
+    #panel[hidden] { display: none; }
+    .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: center; }
+    #looks { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; padding-bottom: 2px; scrollbar-width: thin; }
+    button { font: inherit; touch-action: manipulation; cursor: pointer; }
+    .style-btn { flex: none; background: #2a2a2a; color: #fff; border: 1px solid #ff4500; padding: 7px 12px; border-radius: 20px; font-size: 0.85rem; transition: background .2s; }
+    .style-btn.active { background: #ff4500; color: #000; font-weight: bold; }
+    @media (hover: hover) { .style-btn:hover, .chip:hover:not(:disabled) { background: #ff4500; color: #000; } }
+    .seg { display: inline-flex; border: 1px solid #555; border-radius: 20px; overflow: hidden; }
+    .seg button { background: transparent; color: #ccc; border: 0; padding: 6px 11px; font-size: 0.8rem; }
+    .seg button.active { background: #ff6b00; color: #000; font-weight: bold; }
+    #opacity-control { display: flex; align-items: center; gap: 6px; color: #ccc; font-size: 0.8rem; }
+    #opacity-control input { width: 110px; }
     #opacity-control output { min-width: 2.6em; color: #ff6b00; font-weight: bold; }
-    #reset-btn {
-      background: transparent; color: #ccc; border: 1px solid #555; padding: 7px 12px;
-      border-radius: 20px; cursor: pointer; font: inherit; font-size: 0.8rem;
-    }
-    #start-btn {
-      background: #ff4500;
-      color: #000;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 25px;
-      font: inherit;
-      font-size: 1.1rem;
-      font-weight: bold;
-      cursor: pointer;
-      margin: 10px auto;
-      display: block;
-    }
+    .chip { background: #262626; color: #eee; border: 1px solid #555; padding: 7px 12px; border-radius: 20px; font-size: 0.82rem; }
+    .chip.on { border-color: #00e5ff; color: #00e5ff; }
+    .chip:disabled { opacity: .45; cursor: default; }
+    button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+    #start-btn { background: #ff4500; color: #000; border: none; padding: 12px 24px; border-radius: 25px; font-size: 1.1rem; font-weight: bold; margin: 10px auto; display: block; flex: none; }
     #start-btn:disabled { opacity: .6; cursor: wait; }
     #start-btn[hidden] { display: none; }
-    #status {
-      text-align: center;
-      padding: 5px;
-      font-size: 0.9rem;
-      color: #ff6b00;
-      min-height: 1.9em;
-    }
-    .info {
-      font-size: 0.75rem;
-      color: #aaa;
-      text-align: center;
-      padding: 5px 10px;
-    }
+    .info { font-size: 0.72rem; color: #aaa; text-align: center; padding: 4px 10px; }
+    #guide { background: #1f1f24; border: 1px solid #00e5ff55; border-radius: 12px; padding: 10px 12px; }
+    #guide[hidden] { display: none; }
+    #g-count { font-size: 0.75rem; color: #00e5ff; font-weight: bold; letter-spacing: .02em; }
+    #g-title { font-size: 1rem; color: #fff; margin: 2px 0 4px; }
+    #g-text { font-size: 0.86rem; line-height: 1.35; color: #ddd; }
+    #g-text ul { padding-left: 1.1em; margin-top: 2px; }
+    #g-text li { margin: 2px 0; }
+    .g-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 6px; font-size: 0.8rem; color: #ccc; }
+    .swatch { display: inline-block; width: 18px; height: 18px; border-radius: 50%; border: 2px solid #fff8; vertical-align: middle; margin-right: 4px; }
+    #g-tip { margin-top: 6px; font-size: 0.8rem; color: #ffd27a; }
+    #g-tip:empty { display: none; }
+    .g-nav { display: flex; gap: 8px; align-items: center; justify-content: space-between; margin-top: 8px; }
+    .g-nav button { background: #00e5ff; color: #000; border: 0; padding: 7px 14px; border-radius: 18px; font-weight: bold; font-size: 0.85rem; }
+    .g-nav button.ghost { background: transparent; color: #00e5ff; border: 1px solid #00e5ff; }
+    .g-nav button[hidden] { display: none; }
+    #g-dots { display: flex; gap: 4px; flex: 1; justify-content: center; }
+    #g-dots i { width: 8px; height: 8px; border-radius: 50%; background: #444; }
+    #g-dots i.done { background: #00e5ff88; }
+    #g-dots i.cur { background: #00e5ff; transform: scale(1.3); }
     @media (max-width: 480px) {
-      header h1 { font-size: 1.2rem; }
-      .style-btn { padding: 7px 10px; }
+      header h1 { font-size: 1.05rem; }
+      header .info { display: none; }
+      .style-btn { padding: 6px 10px; font-size: 0.8rem; }
+      #panel { max-height: 52%; padding: 6px 8px 8px; gap: 6px; }
+      #container { min-height: 220px; }
+    }
+    @media (min-width: 900px) {
+      #main { flex-direction: row; }
+      #panel { max-height: none; width: 380px; flex: none; border-top: 0; border-left: 1px solid #333; }
+      #looks { flex-wrap: wrap; justify-content: center; }
     }
   </style>
 </head>
 <body>
   <header>
     <h1>🎃 Halloween Makeup Stencil</h1>
-    <div class="info">Подставь лицо к камере и веди по линиям!</div>
+    <div class="info">Профессиональный грим на Хэллоуин: примерь образ на своём лице и рисуй по шагам</div>
   </header>
 
   <div id="status" role="status" aria-live="polite">Нажми «Старт», чтобы включить камеру</div>
 
-  <div id="container">
-    <div id="placeholder" aria-hidden="true">🎃</div>
-    <video id="video" playsinline autoplay muted></video>
-    <canvas id="canvas"></canvas>
-  </div>
+  <div id="main">
+    <div id="container">
+      <div id="placeholder" aria-hidden="true">🎃</div>
+      <video id="video" playsinline autoplay muted></video>
+      <canvas id="canvas" aria-label="Превью грима на лице"></canvas>
+    </div>
 
-  <div id="controls" hidden>
-    <button type="button" class="style-btn active" data-style="skeleton" aria-pressed="true">💀 Скелет</button>
-    <button type="button" class="style-btn" data-style="cat" aria-pressed="false">🐱 Кошка</button>
-    <button type="button" class="style-btn" data-style="vampire" aria-pressed="false">🧛 Вампир</button>
-    <button type="button" class="style-btn" data-style="clown" aria-pressed="false">🤡 Клоун</button>
-    <button type="button" class="style-btn" data-style="zombie" aria-pressed="false">🧟 Зомби</button>
-    <button type="button" class="style-btn" data-style="witch" aria-pressed="false">🧙 Ведьма</button>
-    <button type="button" class="style-btn" data-style="none" aria-pressed="false">✕ Без линий</button>
-
-    <label id="opacity-control">
-      Прозрачность: <input type="range" id="opacity" min="0.2" max="1" step="0.1" value="0.8"> <output id="opacity-val">80%</output>
-    </label>
-    <button type="button" id="reset-btn">↺ Начать заново</button>
+    <div id="panel" hidden>
+      <div class="row" id="looks" role="group" aria-label="Образ">
+        <button type="button" class="style-btn active" data-style="skeleton" aria-pressed="true">💀 Скелет</button>
+        <button type="button" class="style-btn" data-style="cat" aria-pressed="false">🐱 Кошка</button>
+        <button type="button" class="style-btn" data-style="vampire" aria-pressed="false">🧛 Вампир</button>
+        <button type="button" class="style-btn" data-style="clown" aria-pressed="false">🤡 Клоун</button>
+        <button type="button" class="style-btn" data-style="zombie" aria-pressed="false">🧟 Зомби</button>
+        <button type="button" class="style-btn" data-style="witch" aria-pressed="false">🧙 Ведьма</button>
+        <button type="button" class="style-btn" data-style="none" aria-pressed="false">✕ Без грима</button>
+      </div>
+      <div class="row">
+        <div class="seg" role="group" aria-label="Превью">
+          <button type="button" id="view-look" class="active" aria-pressed="true">🎨 Полный образ</button>
+          <button type="button" id="view-lines" aria-pressed="false">✏️ Только линии</button>
+        </div>
+        <label id="opacity-control">Яркость: <input type="range" id="opacity" min="0.2" max="1" step="0.1" value="0.8"> <output id="opacity-val">80%</output></label>
+      </div>
+      <div class="row">
+        <button type="button" class="chip" id="guide-btn" aria-pressed="false">📋 Пошагово</button>
+        <button type="button" class="chip" id="snap-btn">📷 Сделать фото</button>
+        <button type="button" class="chip" id="reset-btn">↺ Начать заново</button>
+      </div>
+      <section id="guide" hidden aria-live="polite">
+        <div id="g-count"></div>
+        <h2 id="g-title"></h2>
+        <div id="g-text"></div>
+        <div class="g-meta" id="g-meta"><span id="g-tool"></span><span id="g-sw"></span></div>
+        <div id="g-tip"></div>
+        <div class="g-nav">
+          <button type="button" class="ghost" id="g-back">← Назад</button>
+          <div id="g-dots" aria-hidden="true"></div>
+          <button type="button" id="g-next">Далее →</button>
+        </div>
+      </section>
+    </div>
   </div>
 
   <button type="button" id="start-btn">Старт камеры</button>
-  <div class="info">
-    Браузер попросит доступ к камере — разреши его. Видео никуда не отправляется: всё работает прямо на твоём устройстве.<br>
-    На телефоне лучше в Chrome / Safari.
-  </div>
+  <div class="info" id="privacy">Видео никуда не отправляется: всё работает прямо на твоём устройстве. Фото сохраняется только к тебе.</div>
 
   <script src="vendor/drawing_utils/drawing_utils.js"></script>
   <script src="vendor/face_mesh/face_mesh.js"></script>
-
   <script>
   (function () {
-    'use strict';
-    const KEY = 'tutorcall-halloween-makeup-stencil-v1';
-    const DEFAULTS = { style: 'skeleton', opacity: 0.8 };
-    const video = document.getElementById('video');
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
-    const container = document.getElementById('container');
-    const startBtn = document.getElementById('start-btn');
-    const statusEl = document.getElementById('status');
-    const controls = document.getElementById('controls');
-    const opacitySlider = document.getElementById('opacity');
-    const opacityVal = document.getElementById('opacity-val');
-    const placeholder = document.getElementById('placeholder');
-    const styleBtns = Array.prototype.slice.call(document.querySelectorAll('.style-btn'));
+  'use strict';
+/* ===== face geometry (MediaPipe Face Mesh indices) ===== */
+const OVAL=[10,338,297,332,284,251,389,356,454,323,361,288,397,365,379,378,400,377,152,148,176,149,150,136,172,58,132,93,234,127,162,21,54,103,67,109];
+const EYE={'-1':[33,246,161,160,159,158,157,173,133,155,154,153,145,144,163,7],'1':[263,466,388,387,386,385,384,398,362,382,381,380,374,373,390,249]};
+const LID_UP={'-1':[133,173,157,158,159,160,161,246,33],'1':[362,398,384,385,386,387,388,466,263]};   // inner → outer
+const LID_LO={'-1':[155,154,153,145,144,163,7],'1':[382,381,380,374,373,390,249]};                    // inner → outer
+const BROW_UP={'-1':[70,63,105,66,107],'1':[300,293,334,296,336]};                                    // outer → inner
+const BROW_LO={'-1':[46,53,52,65,55],'1':[276,283,282,295,285]};                                      // outer → inner
+const LIPO=[61,185,40,39,37,0,267,269,270,409,291,375,321,405,314,17,84,181,91,146];
+const LIPI=[78,191,80,81,82,13,312,311,310,415,308,324,318,402,317,14,87,178,88,95];
+const FORE=[162,21,54,103,67,109,10,338,297,332,284,251,389,300,293,334,296,336,9,107,66,105,63,70];
+// side: -1 = person's right (image left), +1 = person's left
+const SI={eyeOut:[33,263],eyeIn:[133,362],nostril:[98,327],mouth:[61,291],cheek:[50,280],apple:[205,425],bone:[116,345],ear:[234,454],temple:[127,356],jaw:[172,397],browOut:[70,300],browMid:[105,334],browIn:[107,336],fore:[67,297]};
+const I=(n,s)=>SI[n][s<0?0:1];
 
-    let currentStyle = DEFAULTS.style;
-    let opacity = DEFAULTS.opacity;
-    let faceMesh = null;
-    let stream = null;
-    let running = false, busy = false, gotResult = false, noFaceFrames = 0;
+function makeG(pts){
+  const P=i=>pts[i];
+  const a=P(33),b=P(263),dx=b.x-a.x,dy=b.y-a.y,u=Math.hypot(dx,dy)||1;
+  const ex={x:dx/u,y:dy/u},ey={x:-ex.y,y:ex.x};
+  const pt=i=>typeof i==='number'?P(i):i;
+  const O=(i,ox,oy)=>{const p=pt(i);return {x:p.x+(ox*ex.x+oy*ey.x)*u,y:p.y+(ox*ex.y+oy*ey.y)*u}};
+  return {P,u,ex,ey,O,rot:Math.atan2(ex.y,ex.x),pt};
+}
+const mid=(a,b,t=.5)=>({x:a.x+(b.x-a.x)*t,y:a.y+(b.y-a.y)*t});
+const meanP=ps=>{let x=0,y=0;ps.forEach(p=>{x+=p.x;y+=p.y});return {x:x/ps.length,y:y/ps.length}};
+function smooth(pts,closed=true){
+  const p=new Path2D(),n=pts.length;
+  if(!closed){p.moveTo(pts[0].x,pts[0].y);for(let i=1;i<n-1;i++){const e=mid(pts[i],pts[i+1]);p.quadraticCurveTo(pts[i].x,pts[i].y,e.x,e.y)}p.lineTo(pts[n-1].x,pts[n-1].y);return p}
+  const s=mid(pts[n-1],pts[0]);p.moveTo(s.x,s.y);
+  for(let i=0;i<n;i++){const c=pts[i],e=mid(c,pts[(i+1)%n]);p.quadraticCurveTo(c.x,c.y,e.x,e.y)}
+  p.closePath();return p;
+}
+const polyI=(G,idx)=>smooth(idx.map(G.P));
+function ellP(G,c,rx,ry,rot=0){const p=new Path2D();p.ellipse(c.x,c.y,Math.max(1,rx*G.u),Math.max(1,ry*G.u),G.rot+rot,0,Math.PI*2);return p}
+function union(...ps){const p=new Path2D();ps.forEach(q=>p.addPath(q));return p}
+const eyeC=(G,s)=>meanP(EYE[s].map(G.P));
+function socketPts(G,s,k=1){
+  const up=BROW_LO[s].map(i=>G.O(i,0,0.01));
+  const inner=G.O(I('eyeIn',s),-s*0.05*k,0.01);
+  const low=LID_LO[s].map((i,j,arr)=>G.O(i,0,0.07+0.06*k*Math.sin(Math.PI*(j+1)/(arr.length+1))));
+  const outer=G.O(I('eyeOut',s),s*0.07*k,-0.02);
+  return up.concat([inner],low,[outer]);
+}
+const socket=(G,s,k)=>smooth(socketPts(G,s,k));
+function hollow(G,s,w=0.09){
+  const e=G.P(I('ear',s)),m=G.P(I('mouth',s)),c=G.O(mid(e,m,0.42),0,0.05);
+  const L=Math.hypot(m.x-e.x,m.y-e.y)/G.u;
+  const p=new Path2D();p.ellipse(c.x,c.y,L*0.42*G.u,w*G.u,Math.atan2(m.y-e.y,m.x-e.x),0,Math.PI*2);return p;
+}
+function baseP(G,mouthHole){const p=union(polyI(G,OVAL),polyI(G,EYE[-1]),polyI(G,EYE[1]));if(mouthHole)p.addPath(polyI(G,LIPI));return p}
+function wingLiner(G,s,len=0.17,lift=0.1,th=0.045){
+  const lid=LID_UP[s].map(G.P),n=lid.length;
+  const tip=G.O(I('eyeOut',s),s*len,-lift);
+  const top=lid.map((p,j)=>G.O(p,0,-(0.008+th*Math.pow(j/(n-1),1.5)))).reverse();
+  return smooth(lid.concat([tip],top).map((p,j,a)=>p),true);
+}
+/* ===== painting helpers ===== */
+let OP=1;   // global opacity (slider)
+function fillZ(c,path,style,o={}){
+  c.save();c.globalCompositeOperation=o.mode||'source-over';c.globalAlpha=Math.min(1,(o.alpha==null?1:o.alpha)*OP);
+  if(o.blur&&typeof style==='string'){const OFF=c.canvas.width+c.canvas.height+400;c.shadowColor=style;c.shadowBlur=o.blur;c.shadowOffsetX=OFF;c.translate(-OFF,0)}
+  c.fillStyle=style;c.fill(path,o.rule||'nonzero');c.restore();
+}
+function strokeZ(c,path,style,w,o={}){
+  c.save();c.globalCompositeOperation=o.mode||'source-over';c.globalAlpha=Math.min(1,(o.alpha==null?1:o.alpha)*OP);
+  if(o.blur){const OFF=c.canvas.width+c.canvas.height+400;c.shadowColor=style;c.shadowBlur=o.blur;c.shadowOffsetX=OFF;c.translate(-OFF,0)}
+  c.strokeStyle=style;c.lineWidth=Math.max(1,w);c.lineCap='round';c.lineJoin='round';if(o.dash)c.setLineDash(o.dash);c.stroke(path);c.restore();
+}
+// soft elliptical blob with radial gradient: col = [r,g,b,a]
+function blob(c,G,ctr,rx,ry,col,o={}){
+  c.save();c.globalCompositeOperation=o.mode||'source-over';c.globalAlpha=Math.min(1,(o.alpha==null?1:o.alpha)*OP);
+  c.translate(ctr.x,ctr.y);c.rotate(G.rot+(o.rot||0));c.scale(1,ry/rx);
+  const R=rx*G.u,g=c.createRadialGradient(0,0,0,0,0,R),[r,gg,b,a]=col,h=o.hard==null?0.35:o.hard;
+  g.addColorStop(0,`rgba(${r},${gg},${b},${a})`);g.addColorStop(h,`rgba(${r},${gg},${b},${a})`);g.addColorStop(1,`rgba(${r},${gg},${b},0)`);
+  c.fillStyle=g;c.beginPath();c.arc(0,0,R,0,Math.PI*2);c.fill();c.restore();
+}
+function blobPath(G,ctr,rx,ry,rot=0){return ellP(G,ctr,rx,ry,rot)}
+// line segments (stitches, whiskers, teeth) as one Path2D
+function segs(list){const p=new Path2D();list.forEach(([a,b,cp])=>{p.moveTo(a.x,a.y);cp?p.quadraticCurveTo(cp.x,cp.y,b.x,b.y):p.lineTo(b.x,b.y)});return p}
+function stitchedCut(G,a,b,n,len){
+  const dx=b.x-a.x,dy=b.y-a.y,L=Math.hypot(dx,dy)||1,nx=-dy/L,ny=dx/L,list=[];
+  for(let i=1;i<=n;i++){const t=i/(n+1),p={x:a.x+dx*t,y:a.y+dy*t},h=len*G.u/2,sk=0.25*h;
+    list.push([{x:p.x-nx*h-dx/L*sk,y:p.y-ny*h-dy/L*sk},{x:p.x+nx*h+dx/L*sk,y:p.y+ny*h+dy/L*sk}])}
+  return segs(list);
+}
+function drips(G,start,list){ // list: [len, width, dx]
+  const p=new Path2D();
+  list.forEach(([len,w,dx])=>{const s=G.O(start,dx,0),W=w*G.u,ey=G.ey,ex=G.ex,e={x:s.x+ey.x*len*G.u,y:s.y+ey.y*len*G.u};
+    const l0={x:s.x-ex.x*W/2,y:s.y-ex.y*W/2},r0={x:s.x+ex.x*W/2,y:s.y+ex.y*W/2},l1={x:e.x-ex.x*W*0.35,y:e.y-ex.y*W*0.35},r1={x:e.x+ex.x*W*0.35,y:e.y+ex.y*W*0.35};
+    p.moveTo(l0.x,l0.y);p.lineTo(l1.x,l1.y);p.arc(e.x+ey.x*W*0.3,e.y+ey.y*W*0.3,W*0.62,G.rot+Math.PI*1.05,G.rot-0.05,true);p.lineTo(r1.x,r1.y);p.lineTo(r0.x,r0.y);p.closePath()});
+  return p;
+}
+/* ===== professional looks: steps (Russian), drawing and highlight zones ===== */
+const BOTH=[-1,1];
+const TEMPLE=(G,s)=>G.O(I('browOut',s),s*0.14,-0.06);
+const both=f=>BOTH.map(f);
+function teeth(G){
+  const sL=-1,sR=1,cL=G.P(61),cR=G.P(291);
+  const eL=G.O(61,-0.27,-0.03),eR=G.O(291,0.27,-0.03);
+  const m=[mid(G.P(82),G.P(87)),mid(G.P(13),G.P(14)),mid(G.P(312),G.P(317))];
+  const line=[eL,cL,m[0],m[1],m[2],cR,eR];
+  // arc-length sampling
+  const segL=[];let tot=0;for(let i=0;i<line.length-1;i++){const d=Math.hypot(line[i+1].x-line[i].x,line[i+1].y-line[i].y);segL.push(d);tot+=d}
+  const at=t=>{let d=t*tot;for(let i=0;i<segL.length;i++){if(d<=segL[i]||i===segL.length-1){const k=segL[i]?Math.min(1,d/segL[i]):0;return mid(line[i],line[i+1],k)}d-=segL[i]}};
+  const N=14,top=[],bot=[],v=[];
+  const hU=G.O(0,0,0),hD=G.O(17,0,0),H=Math.hypot(hD.x-hU.x,hD.y-hU.y)/G.u;
+  for(let i=0;i<=N;i++){const t=i/N,p=at(t),f=Math.sin(Math.PI*t),h=(0.035+H*0.42*f);
+    const a=G.O(p,0,-h),b=G.O(p,0,h);top.push(a);bot.push(b);if(i>0&&i<N)v.push([a,b])}
+  return {mid:smooth(line,false),env:smooth(top.concat(bot.slice().reverse())),v:segs(v),top:smooth(top,false),bot:smooth(bot,false)};
+}
+function bigMouth(G){
+  const c=mid(G.P(61),G.P(291)),half=Math.hypot(G.P(291).x-c.x,G.P(291).y-c.y)/G.u||0.3;
+  return smooth(LIPO.map(i=>{const p=G.P(i),dx=p.x-c.x,dy=p.y-c.y,lx=(dx*G.ex.x+dy*G.ex.y)/G.u,ly=(dx*G.ey.x+dy*G.ey.y)/G.u,n=lx/half;
+    return G.O(c,lx*1.3,ly*1.75-0.13*n*n)}));
+}
+function diamond(G,s){const c=eyeC(G,s);return smooth([G.O(c,0,-0.4),G.O(c,0.17,0),G.O(c,0,0.34),G.O(c,-0.17,0)].map(p=>p),true)}
+function diamondSharp(G,s){const c=eyeC(G,s),p=new Path2D(),q=[G.O(c,0,-0.4),G.O(c,0.17,0),G.O(c,0,0.34),G.O(c,-0.17,0)];p.moveTo(q[0].x,q[0].y);q.slice(1).forEach(z=>p.lineTo(z.x,z.y));p.closePath();return p}
+function catNose(G){const p=new Path2D(),a=G.O(98,0.01,-0.07),b=G.O(327,-0.01,-0.07),t=G.O(2,0,0.005);p.moveTo(a.x,a.y);p.quadraticCurveTo(mid(a,b).x,mid(a,b).y-0.03*G.u,b.x,b.y);p.quadraticCurveTo(G.O(327,-0.02,0.0).x,G.O(327,-0.02,0.0).y,t.x,t.y);p.quadraticCurveTo(G.O(98,0.02,0).x,G.O(98,0.02,0).y,a.x,a.y);p.closePath();return p}
+function pad(G,s){return G.O(mid(G.P(I('nostril',s)),G.P(I('mouth',s))),s*0.07,0.0)}
+function whiskers(G){const L=[];BOTH.forEach(s=>{const c=pad(G,s);for(let j=0;j<3;j++){const a=G.O(c,s*0.12,-0.035+0.035*j),b=G.O(c,s*0.62,-0.16+0.13*j),cp=G.O(c,s*0.38,-0.08+0.06*j-0.04);L.push([a,b,cp])}});return segs(L)}
+function whiskerDots(G){const p=new Path2D();BOTH.forEach(s=>{const c=pad(G,s);[[0.03,-0.04],[0.08,-0.05],[0.05,0.01],[0.1,0],[0.02,0.05],[0.07,0.05]].forEach(([x,y])=>{const q=G.O(c,s*x,y);p.moveTo(q.x+0.014*G.u,q.y);p.arc(q.x,q.y,0.014*G.u,0,Math.PI*2)})});return p}
+function furStrokes(G){const L=[];BOTH.forEach(s=>{BROW_UP[s].forEach((i,j)=>{const a=G.O(i,0,-0.03),b=G.O(i,s*0.03,-0.1-0.02*(j%2));L.push([a,b])})});[54,103,67,109,10,338,297,332,284].forEach((i,j)=>{const a=G.O(i,0,0.12),b=G.O(i,(j-4)*0.01,0.03);L.push([a,b])});return segs(L)}
+function nose3(G){const p=new Path2D(),q=[G.O(5,0,-0.05),G.O(327,0.035,0.03),G.O(2,0,0.05),G.O(98,-0.035,0.03)];p.moveTo(q[0].x,q[0].y);p.quadraticCurveTo(G.O(327,0.05,-0.06).x,G.O(327,0.05,-0.06).y,q[1].x,q[1].y);p.quadraticCurveTo(G.O(2,0.05,0.07).x,G.O(2,0.05,0.07).y,q[2].x,q[2].y);p.quadraticCurveTo(G.O(2,-0.05,0.07).x,G.O(2,-0.05,0.07).y,q[3].x,q[3].y);p.quadraticCurveTo(G.O(98,-0.05,-0.06).x,G.O(98,-0.05,-0.06).y,q[0].x,q[0].y);p.closePath();return p}
+function browArch(G,s){const p=[G.O(I('browIn',s),-s*0.01,0.01),G.O(I('browMid',s),0,-0.1),G.O(I('browOut',s),s*0.09,-0.05)];return smooth(p,false)}
+function wartAt(c,G,ctr,r){blob(c,G,ctr,r,r,[95,70,35,1],{hard:0.55});blob(c,G,G.O(ctr,-0.3*r,-0.3*r),r*0.35,r*0.35,[255,240,210,0.8],{hard:0.2})}
+const WARTS=G=>[[G.O(327,0.03,-0.07),0.045],[G.O(152,0.08,-0.1),0.04],[G.O(425,-0.05,-0.1),0.035]];
+const BRUISES=G=>[[G.O(67,0.05,0.12),0.17,0.11],[G.O(397,-0.17,-0.12),0.15,0.1]];
+function bruiseP(G){return union(...BRUISES(G).map(([c,rx,ry])=>ellP(G,c,rx,ry,0.4)))}
+function woundGeo(G){const c=G.O(mid(G.P(425),G.P(454),0.08),0,0.03),a=G.O(c,-0.15,-0.08),b=G.O(c,0.13,0.07);return {c,a,b,rot:Math.atan2(b.y-a.y,b.x-a.x)-G.rot}}
+function scarGeo(G){return {a:G.O(67,0.02,0.04),b:G.O(109,0.14,0.2)}}
 
-    // Custom connection sets for Halloween styles (landmark indices of MediaPipe Face Mesh)
-    const STYLES = {
-      skeleton: {
-        color: '#ffffff',
-        lineWidth: 3,
-        connections: [
-          // Forehead bones
-          [10, 151], [151, 9], [9, 8], [8, 168],
-          [10, 67], [10, 297],
-          // Nose
-          [168, 6], [6, 197], [197, 195], [195, 5], [5, 4], [4, 1],
-          [1, 2], [2, 98], [2, 327],
-          // Cheeks
-          [50, 101], [280, 330]
-        ]
-      },
-      cat: {
-        color: '#ff69b4',
-        lineWidth: 4,
-        connections: [
-          // Cat eyes (pointed)
-          [33, 133], [133, 362], [362, 263],
-          // Nose triangle
-          [1, 98], [1, 327], [98, 327],
-          // Whiskers left
-          [50, 187], [50, 147], [50, 123],
-          // Whiskers right
-          [280, 411], [280, 376], [280, 352]
-        ]
-      },
-      vampire: {
-        color: '#8b0000',
-        lineWidth: 3,
-        connections: [
-          // Under eyes
-          [33, 7], [263, 249],
-          // Fangs
-          [13, 14], [13, 0], [0, 267],
-          // Lips
-          [61, 291]
-        ]
-      },
-      clown: {
-        color: '#ff0000',
-        lineWidth: 5,
-        connections: [
-          // Big nose circle points
-          [1, 98], [1, 327], [98, 2], [327, 2],
-          // Eye triangles
-          [33, 133], [133, 159], [159, 33],
-          [263, 362], [362, 386], [386, 263],
-          // Big smile
-          [61, 17], [17, 291], [61, 291]
-        ]
-      },
-      zombie: {
-        color: '#228b22',
-        lineWidth: 2,
-        connections: [
-          // Stitches
-          [10, 152], [67, 297], [50, 280],
-          [33, 263], [61, 291]
-        ]
-      },
-      witch: {
-        color: '#006400',
-        lineWidth: 3,
-        connections: [
-          // Pointed brows
-          [70, 63], [63, 105], [105, 66], [66, 107],
-          [300, 293], [293, 334], [334, 296], [296, 336],
-          // Dark lips
-          [61, 291], [13, 14]
-        ]
-      },
-      none: { color: '#000000', lineWidth: 0, connections: [] }
-    };
+const LOOKS={
+ skeleton:{name:'💀 Скелет',steps:[
+  {t:'Белая основа',d:'Покрой всё лицо белым аквагримом лёгкими похлопываниями спонжа — от линии волос до подбородка, захвати губы. Вокруг глаз оставь пару миллиметров.',tool:'Широкий спонж',sw:['#f7f7f2','Белый аквагрим'],tip:'Наноси тонкими слоями: второй — когда первый подсохнет. Так основа не потрескается.',
+   draw:(c,G)=>{const p=baseP(G,false);fillZ(c,p,'rgb(248,248,242)',{alpha:.88,blur:.07*G.u,rule:'evenodd'})},hl:G=>[polyI(G,OVAL)]},
+  {t:'Глазницы',d:'Чёрным аквагримом плоской кистью обведи большой круг от брови до верха скулы и залей его. Края мягко растушуй спонжем.',tool:'Плоская кисть + спонж',sw:['#111111','Чёрный аквагрим'],tip:'Попроси закрыть глаза и не моргать. На ресницы и слизистую краску не наносим.',
+   draw:(c,G)=>both(s=>{fillZ(c,socket(G,s,1.6),'rgb(8,8,10)',{alpha:1,blur:.04*G.u});fillZ(c,socket(G,s,1.2),'rgb(0,0,0)',{alpha:1})}),hl:G=>both(s=>socket(G,s,1.6))},
+  {t:'Нос',d:'Нарисуй на кончике носа и крыльях чёрное «перевёрнутое сердечко» — это носовая впадина черепа.',tool:'Круглая кисть №4',sw:['#111111','Чёрный аквагрим'],tip:'Сначала тонкий контур, потом заливка — так форма получится ровной.',
+   draw:(c,G)=>fillZ(c,nose3(G),'rgb(12,12,14)',{alpha:.95,blur:.012*G.u}),hl:G=>[nose3(G)]},
+  {t:'Впалые скулы',d:'Серым цветом нарисуй тень под скулой — полосу от уха к уголку рта — и растушуй её вниз.',tool:'Скошенная кисть',sw:['#5b5b60','Серый аквагрим'],tip:'Найди скулу пальцами: тень идёт прямо под костью. Растушёвывай в сторону от белого.',
+   draw:(c,G)=>both(s=>fillZ(c,hollow(G,s,0.085),'rgb(70,70,78)',{alpha:.75,blur:.07*G.u,mode:'multiply'})),hl:G=>both(s=>hollow(G,s,0.085))},
+  {t:'Зубы',d:'Тонкой кистью проведи чёрную линию по середине рта и дальше к щекам. Потом нарисуй вертикальные чёрточки — это зубы — и обведи их края.',tool:'Тонкая кисть №1–2',sw:['#111111','Чёрный аквагрим'],tip:'Рот держи закрытым и расслабленным. Для губ используй только краску, на которой написано, что её можно наносить на губы.',
+   draw:(c,G)=>{const T=teeth(G),w=G.u*0.016;fillZ(c,T.env,'rgb(250,250,246)',{alpha:.9,blur:.01*G.u});strokeZ(c,T.mid,'rgb(15,15,15)',w*1.1);strokeZ(c,T.v,'rgb(15,15,15)',w);strokeZ(c,T.top,'rgb(20,20,20)',w*0.8);strokeZ(c,T.bot,'rgb(20,20,20)',w*0.8)},hl:G=>[teeth(G).env]},
+  {t:'Тени по краю лица',d:'Серым растушуй тень по контуру лица и на висках — череп станет объёмным.',tool:'Спонж',sw:['#6d6d72','Серый аквагрим'],tip:'Меньше — лучше: тень должна плавно переходить в белый.',
+   draw:(c,G)=>{strokeZ(c,polyI(G,OVAL),'rgb(70,70,80)',G.u*0.16,{alpha:.55,blur:.09*G.u,mode:'multiply'});both(s=>blob(c,G,TEMPLE(G,s),0.13,0.18,[60,60,70,.7],{mode:'multiply'}))},hl:G=>[polyI(G,OVAL)]}
+ ]},
+ cat:{name:'🐱 Кошка',steps:[
+  {t:'Шёрстка на лбу',d:'Рыжим аквагримом покрой лоб от бровей до волос. У бровей цвет слабее, к волосам — насыщеннее.',tool:'Спонж',sw:['#e2781f','Рыжий аквагрим'],tip:'Возьми край спонжа и вбивай краску: получится мягкий «пушистый» переход.',
+   draw:(c,G)=>{const top=G.O(10,0,-0.02),bot=G.O(9,0,0.12),g=c.createLinearGradient(top.x,top.y,bot.x,bot.y);g.addColorStop(0,'rgba(226,120,31,0.95)');g.addColorStop(1,'rgba(226,120,31,0.25)');fillZ(c,polyI(G,FORE),g,{});fillZ(c,polyI(G,FORE),'rgba(226,120,31,0.35)',{blur:.06*G.u});both(s=>blob(c,G,G.O(I('bone',s),s*0.04,0.02),0.17,0.22,[226,120,31,.7]))},hl:G=>[polyI(G,FORE)]},
+  {t:'Белая мордочка',d:'Белым нарисуй две «подушечки» над верхней губой — от крыльев носа к уголкам рта.',tool:'Спонж или круглая кисть',sw:['#fbfbf7','Белый аквагрим'],tip:'Делай подушечки одинаковыми — сравнивай в зеркале.',
+   draw:(c,G)=>both(s=>fillZ(c,ellP(G,pad(G,s),0.19,0.12,s*0.15),'rgb(252,252,248)',{alpha:1,blur:.015*G.u})),hl:G=>both(s=>ellP(G,pad(G,s),0.17,0.11,s*0.15))},
+  {t:'Носик',d:'Чёрным закрась кончик носа треугольником и проведи тонкую линию вниз до верхней губы.',tool:'Круглая кисть №4',sw:['#141414','Чёрный аквагрим'],tip:'Блик: капля белого на кончике носа делает его «мокрым» и живым.',
+   draw:(c,G)=>{fillZ(c,catNose(G),'rgb(20,20,20)',{alpha:.95});strokeZ(c,segs([[G.O(2,0,0),G.O(0,0,0.01)]]),'rgb(20,20,20)',G.u*0.02);blob(c,G,G.O(4,-0.02,-0.02),0.022,0.016,[255,255,255,.8],{hard:.3})},hl:G=>[catNose(G)]},
+  {t:'Кошачьи стрелки',d:'Нарисуй стрелку по верхнему веку от внутреннего уголка к внешнему и выведи «хвостик» вверх к виску.',tool:'Тонкая кисть или косметический карандаш',sw:['#0d0d0d','Чёрная подводка'],tip:'Только косметика для глаз! По слизистой не рисуем. Хвостик продолжает линию нижнего века.',
+   draw:(c,G)=>both(s=>fillZ(c,wingLiner(G,s,0.22,0.12,0.06),'rgb(10,10,10)',{alpha:.95})),hl:G=>both(s=>wingLiner(G,s,0.22,0.12,0.06))},
+  {t:'Усы',d:'На белых подушечках поставь чёрные точки, а от них тонкой кистью проведи по три изогнутых уса в каждую сторону.',tool:'Тонкая кисть №1',sw:['#141414','Чёрный аквагрим'],tip:'Веди кисть быстро и уверенно, отрывая к концу: ус станет тоньше на кончике.',
+   draw:(c,G)=>{fillZ(c,whiskerDots(G),'rgb(20,20,20)',{alpha:.9});strokeZ(c,whiskers(G),'rgb(20,20,20)',G.u*0.011,{alpha:.9})},hl:G=>[whiskers(G),whiskerDots(G)]},
+  {t:'Шерстинки',d:'Тёмно-рыжим добавь короткие штрихи по краю рыжей зоны и над бровями — шерсть станет пушистой.',tool:'Тонкая кисть',sw:['#7a3a0e','Коричневый аквагрим'],tip:'Штрихи разной длины и в направлении роста шерсти — от центра лица наружу.',
+   draw:(c,G)=>strokeZ(c,furStrokes(G),'rgb(110,50,12)',G.u*0.012,{alpha:.85}),hl:G=>[furStrokes(G)]}
+ ]},
+ vampire:{name:'🧛 Вампир',steps:[
+  {t:'Бледная основа',d:'Тонким слоем светлого аквагрима выровняй и осветли лицо — кожа должна стать фарфорово-бледной.',tool:'Спонж',sw:['#ece8f0','Светлый аквагрим'],tip:'Не перекрывай кожу полностью: лёгкая прозрачность выглядит естественнее.',
+   draw:(c,G)=>{const p=baseP(G,true);fillZ(c,p,'rgb(128,128,128)',{alpha:.55,mode:'saturation',rule:'evenodd'});fillZ(c,p,'rgb(236,232,242)',{alpha:.5,blur:.07*G.u,rule:'evenodd'})},hl:G=>[polyI(G,OVAL)]},
+  {t:'Тени под скулами',d:'Серо-фиолетовым нарисуй тень под скулами и у висков, растушуй вниз — лицо станет худым и острым.',tool:'Скошенная кисть',sw:['#5a3d5c','Серо-фиолетовый'],tip:'Улыбнись, найди «яблочко» щеки — тень идёт ниже него, от уха к уголку рта.',
+   draw:(c,G)=>both(s=>{fillZ(c,hollow(G,s,0.08),'rgb(90,60,95)',{alpha:.7,blur:.08*G.u,mode:'multiply'});blob(c,G,TEMPLE(G,s),0.11,0.16,[90,60,95,.6],{mode:'multiply'})}),hl:G=>both(s=>hollow(G,s,0.08))},
+  {t:'Тёмные глаза',d:'Бордово-фиолетовые тени нанеси вокруг глаз, сильнее у внешнего уголка и под глазом. Растушуй края.',tool:'Кисть для теней + спонж',sw:['#5a0f2a','Бордовые тени'],tip:'Тени — только косметические, для век. Глаза закрыты, кисть ведём от внутреннего уголка наружу.',
+   draw:(c,G)=>both(s=>{fillZ(c,socket(G,s,1.05),'rgb(110,20,55)',{alpha:.85,blur:.06*G.u,mode:'multiply'});strokeZ(c,polyI(G,EYE[s]),'rgb(60,0,20)',G.u*0.02,{alpha:.8,blur:.01*G.u})}),hl:G=>both(s=>socket(G,s,1.05))},
+  {t:'Острые брови',d:'Тёмным карандашом сделай брови темнее и вытяни кончик вверх — взгляд станет хищным.',tool:'Косметический карандаш',sw:['#1d141c','Тёмно-серый'],tip:'Рисуй короткими штрихами по росту волосков.',
+   draw:(c,G)=>both(s=>{fillZ(c,smooth(BROW_UP[s].concat(BROW_LO[s].slice().reverse()).map(G.P)),'rgb(25,15,25)',{alpha:.8,mode:'multiply'});strokeZ(c,browArch(G,s),'rgb(25,15,25)',G.u*0.025,{alpha:.75})}),hl:G=>both(s=>smooth(BROW_UP[s].concat(BROW_LO[s].slice().reverse()).map(G.P)))},
+  {t:'Красные губы',d:'Покрой губы тёмно-красной помадой или аквагримом для губ. Контур — чётко, кисточкой.',tool:'Кисть для губ',sw:['#8c0a1e','Тёмно-красный'],tip:'Только средства, разрешённые для губ (помада, аквагрим с пометкой «для губ»).',
+   draw:(c,G)=>{const p=polyI(G,LIPO);fillZ(c,p,'rgb(140,0,25)',{alpha:.9,mode:'multiply'});fillZ(c,p,'rgb(150,5,30)',{alpha:.45})},hl:G=>[polyI(G,LIPO)]},
+  {t:'Капли крови',d:'От уголка рта нарисуй 2–3 стекающие капли разной длины. На каждую капельку — белый блик.',tool:'Тонкая кисть',sw:['#a0000c','Косметическая кровь'],tip:'Бери только театральную кровь для кожи (не для рта, если не написано иначе). Капли — разной длины, так естественнее.',
+   draw:(c,G)=>{const p=drips(G,G.O(291,-0.02,0.01),[[0.32,0.04,0],[0.2,0.03,-0.07],[0.13,0.025,0.05]]);fillZ(c,p,'rgb(150,0,12)',{alpha:.95});fillZ(c,p,'rgb(70,0,5)',{alpha:.35,mode:'multiply'});blob(c,G,G.O(291,0.005,0.2),0.012,0.03,[255,255,255,.6],{hard:.3})},hl:G=>[drips(G,G.O(291,-0.02,0.01),[[0.32,0.04,0],[0.2,0.03,-0.07],[0.13,0.025,0.05]])]}
+ ]},
+ clown:{name:'🤡 Клоун',steps:[
+  {t:'Белая основа',d:'Покрой лицо белым аквагримом. Вокруг глаз оставь 2–3 мм чистой кожи.',tool:'Спонж',sw:['#fbfbf8','Белый аквагрим'],tip:'Влажный (не мокрый!) спонж даёт ровный слой без полос.',
+   draw:(c,G)=>fillZ(c,baseP(G,false),'rgb(252,252,248)',{alpha:.9,blur:.06*G.u,rule:'evenodd'}),hl:G=>[polyI(G,OVAL)]},
+  {t:'Ромбы на глазах',d:'Синим нарисуй вытянутый ромб через каждый глаз: верх — над бровью, низ — на щеке. Залей цветом.',tool:'Плоская кисть',sw:['#2a5ad8','Синий аквагрим'],tip:'Сначала поставь 4 точки-вершины, потом соедини их — ромбы выйдут одинаковыми.',
+   draw:(c,G)=>both(s=>fillZ(c,union(diamondSharp(G,s),polyI(G,EYE[s])),'rgb(40,90,216)',{alpha:.92,rule:'evenodd'})),hl:G=>both(s=>diamondSharp(G,s))},
+  {t:'Большой рот',d:'Красным нарисуй рот шире и выше губ — уголки поднимаются в улыбку к щекам. Залей губы и эту зону.',tool:'Круглая кисть №6',sw:['#dc1f30','Красный аквагрим'],tip:'На губы — только помада или краска для губ, вокруг — аквагрим.',
+   draw:(c,G)=>fillZ(c,bigMouth(G),'rgb(220,25,45)',{alpha:.95,blur:.006*G.u}),hl:G=>[bigMouth(G)]},
+  {t:'Красный нос',d:'Нарисуй красный круг на кончике носа и поставь белый блик сверху.',tool:'Спонж-тампон или кисть',sw:['#e0102a','Красный аквагрим'],tip:'Можно надеть поролоновый нос — тогда этот шаг пропусти.',
+   draw:(c,G)=>{const c0=G.O(4,0,0.0);fillZ(c,ellP(G,c0,0.15,0.14),'rgb(225,20,40)',{alpha:.97});blob(c,G,G.O(c0,0.0,0.05),0.15,0.1,[120,0,10,.4],{mode:'multiply'});blob(c,G,G.O(c0,-0.05,-0.05),0.035,0.025,[255,255,255,.9],{hard:.3})},hl:G=>[ellP(G,G.O(4,0,0),0.15,0.14)]},
+  {t:'Румянец',d:'Розовыми кругами отметь щёки и растушуй края.',tool:'Спонж',sw:['#ff6fa0','Розовый аквагрим'],tip:'Улыбнись — румянец ставим на самые высокие точки щёк.',
+   draw:(c,G)=>both(s=>blob(c,G,G.O(I('apple',s),s*0.05,-0.03),0.16,0.15,[255,95,150,.85],{hard:.45})),hl:G=>both(s=>ellP(G,G.O(I('apple',s),s*0.05,-0.03),0.16,0.15))},
+  {t:'Чёрный контур',d:'Тонкой кистью обведи чёрным ромбы и большой рот — рисунок станет чётким, как в цирке.',tool:'Тонкая кисть №1–2',sw:['#111111','Чёрный аквагрим'],tip:'Опирайся мизинцем на щёку модели — рука не дрогнет.',
+   draw:(c,G)=>{both(s=>strokeZ(c,diamondSharp(G,s),'rgb(15,15,15)',G.u*0.018));strokeZ(c,bigMouth(G),'rgb(15,15,15)',G.u*0.018);strokeZ(c,segs([[G.P(61),G.P(291),mid(G.P(13),G.P(14))]]),'rgb(15,15,15)',G.u*0.012)},hl:G=>[bigMouth(G),...both(s=>diamondSharp(G,s))]}
+ ]},
+ zombie:{name:'🧟 Зомби',steps:[
+  {t:'Серо-зелёная основа',d:'Покрой лицо серо-зелёным, неровными пятнами: где-то светлее, где-то темнее.',tool:'Спонж',sw:['#8a9c80','Серо-зелёный'],tip:'Пятнистость — это хорошо: зомби выглядит «несвежим».',
+   draw:(c,G)=>{const p=baseP(G,false);fillZ(c,p,'rgb(110,140,100)',{alpha:.9,mode:'color',rule:'evenodd'});fillZ(c,p,'rgb(140,158,128)',{alpha:.4,blur:.07*G.u,rule:'evenodd'});[[67,0.05,0.1],[297,-0.05,0.15],[234,0.15,0.05],[152,0,-0.1]].forEach(([i,x,y])=>blob(c,G,G.O(i,x,y),0.14,0.1,[90,110,80,.35],{mode:'multiply'}))},hl:G=>[polyI(G,OVAL)]},
+  {t:'Впалые глаза',d:'Тёмно-фиолетовым и чёрным широко затемни область вокруг глаз, к центру глаза — темнее. По краю века — тонкая красноватая линия.',tool:'Кисть для теней + спонж',sw:['#2c1a2e','Тёмно-фиолетовый'],tip:'Растушуй так, чтобы не было видно границы — глаза будто провалились.',
+   draw:(c,G)=>both(s=>{fillZ(c,socket(G,s,1.35),'rgb(45,25,48)',{alpha:.9,blur:.09*G.u,mode:'multiply'});strokeZ(c,polyI(G,EYE[s]),'rgb(170,40,50)',G.u*0.018,{alpha:.7,blur:.01*G.u})}),hl:G=>both(s=>socket(G,s,1.35))},
+  {t:'Впалые щёки и виски',d:'Тёмно-серым затемни щёки под скулами и виски — лицо станет истощённым.',tool:'Скошенная кисть',sw:['#3b4438','Тёмно-серый'],tip:'Тень растушёвывай вниз и к уху, никогда — к носу.',
+   draw:(c,G)=>both(s=>{fillZ(c,hollow(G,s,0.1),'rgb(55,65,52)',{alpha:.75,blur:.08*G.u,mode:'multiply'});blob(c,G,TEMPLE(G,s),0.12,0.17,[55,60,50,.7],{mode:'multiply'})}),hl:G=>both(s=>hollow(G,s,0.1))},
+  {t:'Синяки',d:'Спонжем вбей фиолетовые пятна на лбу и на челюсти, по краю добавь жёлто-зелёный — как у старого синяка.',tool:'Спонж с крупными порами',sw:['#6e2878','Фиолетовый + жёлтый'],tip:'Работай похлопываниями, не мажь — тогда синяк выглядит «живым».',
+   draw:(c,G)=>BRUISES(G).forEach(([ct,rx,ry])=>{blob(c,G,ct,rx*1.25,ry*1.25,[175,165,60,.45],{mode:'multiply',rot:.4});blob(c,G,ct,rx,ry,[110,40,120,.85],{mode:'multiply',rot:.4,hard:.25});blob(c,G,G.O(ct,0.03,0.01),rx*0.5,ry*0.5,[70,20,60,.6],{mode:'multiply',rot:.4})}),hl:G=>[bruiseP(G)]},
+  {t:'Рана со швами',d:'На щеке нарисуй рану: тёмно-бордовая середина, красные края, вокруг — покраснение. Сверху — чёрные стежки поперёк.',tool:'Тонкая кисть + спонж',sw:['#7a0010','Бордовый + красный'],tip:'Середина раны самая тёмная, края — светлее: так появляется глубина.',
+   draw:(c,G)=>{const W=woundGeo(G);blob(c,G,W.c,0.26,0.1,[170,40,50,.55],{mode:'multiply',rot:W.rot});fillZ(c,ellP(G,W.c,0.19,0.035,W.rot),'rgb(160,10,25)',{alpha:.95,blur:.01*G.u});fillZ(c,ellP(G,W.c,0.16,0.016,W.rot),'rgb(60,0,8)',{alpha:.95});strokeZ(c,stitchedCut(G,W.a,W.b,6,0.09),'rgb(15,10,10)',G.u*0.012)},hl:G=>{const W=woundGeo(G);return [ellP(G,W.c,0.24,0.08,W.rot)]}},
+  {t:'Шрам и кровь',d:'На лбу проведи тонкий шрам со стежками, а от уголка рта — струйку крови вниз.',tool:'Тонкая кисть',sw:['#9a0010','Косметическая кровь'],tip:'Кровь — только театральная, для кожи. В рот её не берём.',
+   draw:(c,G)=>{const S=scarGeo(G);strokeZ(c,segs([[S.a,S.b]]),'rgb(120,20,30)',G.u*0.022,{alpha:.9});strokeZ(c,stitchedCut(G,S.a,S.b,5,0.07),'rgb(15,10,10)',G.u*0.011);const d=drips(G,G.O(61,0.02,0.01),[[0.26,0.035,0],[0.12,0.025,-0.06]]);fillZ(c,d,'rgb(140,0,12)',{alpha:.95})},hl:G=>{const S=scarGeo(G);return [segs([[S.a,S.b]]),drips(G,G.O(61,0.02,0.01),[[0.26,0.035,0],[0.12,0.025,-0.06]])]}}
+ ]},
+ witch:{name:'🧙 Ведьма',steps:[
+  {t:'Зелёная кожа',d:'Зелёным аквагримом покрой всё лицо тонким ровным слоем.',tool:'Спонж',sw:['#3c9a3c','Зелёный аквагрим'],tip:'Захвати уши и шею — иначе граница будет заметна.',
+   draw:(c,G)=>{const p=baseP(G,true);fillZ(c,p,'rgb(60,170,60)',{alpha:.95,mode:'color',rule:'evenodd'});fillZ(c,p,'rgb(120,200,110)',{alpha:.5,blur:.07*G.u,mode:'multiply',rule:'evenodd'})},hl:G=>[polyI(G,OVAL)]},
+  {t:'Контуринг',d:'Тёмно-зелёным затемни щёки под скулами, крылья носа и виски.',tool:'Скошенная кисть',sw:['#1d4a22','Тёмно-зелёный'],tip:'Тени на носу делают его длиннее и острее — как у настоящей ведьмы.',
+   draw:(c,G)=>{both(s=>{fillZ(c,hollow(G,s,0.08),'rgb(25,75,30)',{alpha:.65,blur:.08*G.u,mode:'multiply'});strokeZ(c,segs([[G.O(6,s*0.07,0),G.O(I('nostril',s),0,-0.04)]]),'rgb(25,75,30)',G.u*0.05,{alpha:.55,blur:.04*G.u,mode:'multiply'});blob(c,G,TEMPLE(G,s),0.11,0.16,[25,75,30,.6],{mode:'multiply'})})},hl:G=>both(s=>hollow(G,s,0.08))},
+  {t:'Фиолетовые глаза',d:'Фиолетовыми тенями закрась веко до брови и вытяни цвет вверх к виску. Края растушуй.',tool:'Кисть для теней',sw:['#7a1ea0','Фиолетовые тени'],tip:'Самый яркий цвет — у внешнего уголка, к брови — светлее.',
+   draw:(c,G)=>both(s=>{fillZ(c,socket(G,s,1.05),'rgb(120,30,160)',{alpha:.9,blur:.06*G.u,mode:'multiply'});blob(c,G,G.O(I('eyeOut',s),s*0.08,-0.1),0.14,0.07,[150,50,200,.8],{rot:-s*0.6,mode:'multiply'});fillZ(c,socket(G,s,1.05),'rgb(165,70,210)',{alpha:.3,blur:.05*G.u})}),hl:G=>both(s=>socket(G,s,1.05))},
+  {t:'Брови и стрелки',d:'Чёрным нарисуй высокие брови «домиком» и длинные стрелки по верхнему веку.',tool:'Тонкая кисть / косметический карандаш',sw:['#0d0d0d','Чёрный'],tip:'Только косметика для глаз. Стрелку начинай от середины века.',
+   draw:(c,G)=>both(s=>{strokeZ(c,browArch(G,s),'rgb(12,12,12)',G.u*0.035,{alpha:.9});fillZ(c,wingLiner(G,s,0.2,0.12,0.04),'rgb(10,10,10)',{alpha:.95})}),hl:G=>both(s=>browArch(G,s)).concat(both(s=>wingLiner(G,s,0.2,0.12,0.04)))},
+  {t:'Тёмные губы',d:'Покрой губы чёрно-фиолетовым цветом, контур — чётко.',tool:'Кисть для губ',sw:['#2a0a32','Чёрно-фиолетовый'],tip:'Только помада или краска, разрешённая для губ.',
+   draw:(c,G)=>{const p=polyI(G,LIPO);fillZ(c,p,'rgb(40,10,50)',{alpha:.9,mode:'multiply'});fillZ(c,p,'rgb(45,10,55)',{alpha:.5})},hl:G=>[polyI(G,LIPO)]},
+  {t:'Бородавки',d:'Коричневым поставь 2–3 бородавки: на носу, на подбородке и на щеке. На каждую — светлый блик.',tool:'Круглая кисть или ватная палочка',sw:['#5f4623','Коричневый'],tip:'Объём даёт блик сверху и тень снизу. Можно приклеить хлопья овсянки косметическим клеем — но только с взрослым!',
+   draw:(c,G)=>WARTS(G).forEach(([p,r])=>wartAt(c,G,p,r)),hl:G=>WARTS(G).map(([p,r])=>ellP(G,p,r*1.6,r*1.6))}
+ ]}
+};
+  const KEY = 'tutorcall-halloween-makeup-stencil-v1';
+  const DEFAULTS = { style: 'skeleton', opacity: 0.8, view: 'look' };
+  const $ = id => document.getElementById(id);
+  const video = $('video'), canvas = $('canvas'), ctx = canvas.getContext('2d');
+  const container = $('container'), startBtn = $('start-btn'), statusEl = $('status'), panel = $('panel');
+  const opacitySlider = $('opacity'), opacityVal = $('opacity-val'), placeholder = $('placeholder');
+  const styleBtns = Array.prototype.slice.call(document.querySelectorAll('.style-btn'));
+  const guideEl = $('guide'), guideBtn = $('guide-btn'), snapBtn = $('snap-btn');
 
-    /* ---------- saved settings ---------- */
-    function load() {
-      try {
-        const s = JSON.parse(localStorage.getItem(KEY));
-        if (s && typeof s === 'object') {
-          if (Object.prototype.hasOwnProperty.call(STYLES, s.style)) currentStyle = s.style;
-          const o = Number(s.opacity);
-          if (o >= 0.2 && o <= 1) opacity = Math.round(o * 10) / 10;
-        }
-      } catch (e) {}
-    }
-    function save() {
-      try { localStorage.setItem(KEY, JSON.stringify({ v: 1, style: currentStyle, opacity: opacity })); } catch (e) {}
-    }
-    function paintUI() {
-      styleBtns.forEach(function (b) {
-        const on = b.dataset.style === currentStyle;
-        b.classList.toggle('active', on);
-        b.setAttribute('aria-pressed', on ? 'true' : 'false');
-      });
-      opacitySlider.value = String(opacity);
-      opacityVal.textContent = Math.round(opacity * 100) + '%';
-    }
+  // Outline mode (the original line stencil)
+  const LINES = {
+    skeleton: { color: '#ffffff', lineWidth: 3, connections: [[10,151],[151,9],[9,8],[8,168],[10,67],[10,297],[168,6],[6,197],[197,195],[195,5],[5,4],[4,1],[1,2],[2,98],[2,327],[50,101],[280,330]] },
+    cat: { color: '#ff69b4', lineWidth: 4, connections: [[33,133],[133,362],[362,263],[1,98],[1,327],[98,327],[50,187],[50,147],[50,123],[280,411],[280,376],[280,352]] },
+    vampire: { color: '#8b0000', lineWidth: 3, connections: [[33,7],[263,249],[13,14],[13,0],[0,267],[61,291]] },
+    clown: { color: '#ff0000', lineWidth: 5, connections: [[1,98],[1,327],[98,2],[327,2],[33,133],[133,159],[159,33],[263,362],[362,386],[386,263],[61,17],[17,291],[61,291]] },
+    zombie: { color: '#228b22', lineWidth: 2, connections: [[10,152],[67,297],[50,280],[33,263],[61,291]] },
+    witch: { color: '#006400', lineWidth: 3, connections: [[70,63],[63,105],[105,66],[66,107],[300,293],[293,334],[334,296],[296,336],[61,291],[13,14]] },
+    none: { color: '#000000', lineWidth: 0, connections: [] }
+  };
+  const BEFORE = { t: 'Перед началом', html: '<ul>' +
+    '<li>Используй <b>только косметический аквагрим</b> для лица. Гуашь, акрил, фломастеры и маркеры — нельзя.</li>' +
+    '<li><b>Тест на коже:</b> нанеси капельку на внутреннюю сторону руки (лучше за день). Покраснело или чешется — не используй.</li>' +
+    '<li><b>Глаза и губы</b> — только средствами, где написано, что их можно для век/губ. Не рисуй по слизистой и близко к ресницам.</li>' +
+    '<li>Не наноси на раздражённую кожу, ранки и прыщики.</li>' +
+    '<li><b>Как смыть:</b> тёплая вода и мягкое мыло или мицеллярная вода, без трения; потом — крем.</li>' +
+    '<li>Попроси взрослого помочь, особенно возле глаз.</li></ul>' };
 
-    /* ---------- drawing ---------- */
-    let cw = 0, ch = 0, dpr = 1;
-    function resizeCanvas() {
-      const w = container.clientWidth, h = container.clientHeight, r = window.devicePixelRatio || 1;
-      if (w === cw && h === ch && r === dpr) return;
-      cw = w; ch = h; dpr = r;
-      canvas.width = Math.max(1, Math.round(w * dpr));
-      canvas.height = Math.max(1, Math.round(h * dpr));
+  let currentStyle = DEFAULTS.style, opacity = DEFAULTS.opacity, view = DEFAULTS.view, guide = false;
+  let stepIdx = {};          // look -> -1 (before), 0..n-1, n (done)
+  let faceMesh = null, stream = null;
+  let running = false, busy = false, gotResult = false, noFaceFrames = 0;
+  let snapWanted = false, lastG = null, lastHl = 0;
+
+  /* ---------- saved settings ---------- */
+  function load() {
+    try {
+      const s = JSON.parse(localStorage.getItem(KEY));
+      if (s && typeof s === 'object') {
+        if (Object.prototype.hasOwnProperty.call(LINES, s.style)) currentStyle = s.style;
+        const o = Number(s.opacity);
+        if (o >= 0.2 && o <= 1) opacity = Math.round(o * 10) / 10;
+        if (s.view === 'look' || s.view === 'lines') view = s.view;
+        guide = s.guide === true;
+        if (s.steps && typeof s.steps === 'object') Object.keys(LOOKS).forEach(function (k) {
+          const v = s.steps[k];
+          if (Number.isInteger(v) && v >= -1 && v <= LOOKS[k].steps.length) stepIdx[k] = v;
+        });
+      }
+    } catch (e) {}
+  }
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify({ v: 2, style: currentStyle, opacity: opacity, view: view, guide: guide, steps: stepIdx })); } catch (e) {}
+  }
+  const curStep = () => (currentStyle in stepIdx ? stepIdx[currentStyle] : -1);
+
+  function paintUI() {
+    styleBtns.forEach(function (b) {
+      const on = b.dataset.style === currentStyle;
+      b.classList.toggle('active', on); b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    opacitySlider.value = String(opacity);
+    opacityVal.textContent = Math.round(opacity * 100) + '%';
+    [['view-look', 'look'], ['view-lines', 'lines']].forEach(function (p) {
+      const b = $(p[0]), on = view === p[1]; b.classList.toggle('active', on); b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    const canGuide = currentStyle !== 'none';
+    guideBtn.disabled = !canGuide;
+    guideBtn.classList.toggle('on', guide && canGuide);
+    guideBtn.setAttribute('aria-pressed', guide && canGuide ? 'true' : 'false');
+    guideBtn.textContent = guide && canGuide ? '📋 Скрыть подсказки' : '📋 Пошагово';
+    paintGuide();
+  }
+  function paintGuide() {
+    const on = guide && currentStyle !== 'none';
+    guideEl.hidden = !on;
+    if (!on) return;
+    const L = LOOKS[currentStyle], n = L.steps.length, k = curStep();
+    const back = $('g-back'), next = $('g-next');
+    $('g-dots').innerHTML = L.steps.map(function (_, i) { return '<i class="' + (i < k ? 'done' : i === k ? 'cur' : '') + '"></i>'; }).join('');
+    back.hidden = k < 0;
+    if (k < 0) {
+      $('g-count').textContent = L.name + ' · ' + n + ' шагов';
+      $('g-title').textContent = '⚠️ ' + BEFORE.t;
+      $('g-text').innerHTML = BEFORE.html;
+      $('g-meta').hidden = true; $('g-tip').textContent = '';
+      next.textContent = 'Понятно, начинаем →';
+    } else if (k >= n) {
+      $('g-count').textContent = 'Все ' + n + ' шагов пройдены';
+      $('g-title').textContent = '🎉 Образ готов!';
+      $('g-text').textContent = 'Отлично! Сравни себя с превью, поправь края спонжем и сделай фото. Не забудь смыть грим перед сном.';
+      $('g-meta').hidden = true; $('g-tip').textContent = '';
+      next.textContent = '↺ Пройти заново';
+    } else {
+      const s = L.steps[k];
+      $('g-count').textContent = 'Шаг ' + (k + 1) + ' из ' + n;
+      $('g-title').textContent = s.t;
+      $('g-text').textContent = s.d;
+      $('g-meta').hidden = false;
+      $('g-tool').textContent = '🖌️ ' + s.tool;
+      $('g-sw').innerHTML = '<span class="swatch"></span>';
+      $('g-sw').firstChild.style.background = s.sw[0];
+      $('g-sw').appendChild(document.createTextNode(s.sw[1]));
+      $('g-tip').textContent = '💡 ' + s.tip;
+      next.textContent = k === n - 1 ? 'Готово ✓' : 'Далее →';
     }
-    // The video is shown with object-fit: cover, so landmarks (normalised to the camera frame)
-    // must be mapped through the same crop/scale to sit on the face.
-    function mapLandmarks(lms) {
-      const vw = video.videoWidth || 640, vh = video.videoHeight || 480;
-      const s = Math.max(cw / vw, ch / vh);
-      const dx = (cw - vw * s) / 2, dy = (ch - vh * s) / 2;
-      return lms.map(function (p) {
-        return { x: (p.x * vw * s + dx) / cw, y: (p.y * vh * s + dy) / ch, z: p.z };
-      });
+  }
+
+  /* ---------- canvas & landmarks ---------- */
+  let cw = 0, ch = 0, dpr = 1;
+  function resizeCanvas() {
+    const w = container.clientWidth, h = container.clientHeight, r = Math.min(2, window.devicePixelRatio || 1);
+    if (w === cw && h === ch && r === dpr) return;
+    cw = w; ch = h; dpr = r;
+    canvas.width = Math.max(1, Math.round(w * dpr));
+    canvas.height = Math.max(1, Math.round(h * dpr));
+    sm = null;
+  }
+  // The frame is drawn with "cover" fit; landmarks go through the same crop/scale (canvas px).
+  function coverOf(img) {
+    const vw = img.width || video.videoWidth || 640, vh = img.height || video.videoHeight || 480;
+    const W = canvas.width, H = canvas.height, s = Math.max(W / vw, H / vh);
+    return { vw: vw, vh: vh, s: s, dx: (W - vw * s) / 2, dy: (H - vh * s) / 2 };
+  }
+  let sm = null;   // smoothed landmarks (canvas px)
+  function track(lms, cv) {
+    const pts = lms.map(function (p) { return { x: p.x * cv.vw * cv.s + cv.dx, y: p.y * cv.vh * cv.s + cv.dy }; });
+    if (sm && sm.length === pts.length) {
+      const u = Math.hypot(pts[263].x - pts[33].x, pts[263].y - pts[33].y) || 1;
+      const jump = Math.hypot(pts[1].x - sm[1].x, pts[1].y - sm[1].y) / u;
+      if (jump < 0.3) {
+        const a = jump > 0.08 ? 0.75 : 0.5;  // follow fast moves quickly, damp jitter when still
+        for (let i = 0; i < pts.length; i++) { sm[i].x += (pts[i].x - sm[i].x) * a; sm[i].y += (pts[i].y - sm[i].y) * a; }
+        return sm;
+      }
     }
-    function drawCustomLines(lm, style) {
-      if (!style.connections || style.connections.length === 0) return;
-      ctx.strokeStyle = style.color;
-      ctx.lineWidth = style.lineWidth * dpr;
-      ctx.lineCap = 'round';
-      style.connections.forEach(function (c) {
-        const a = lm[c[0]], b = lm[c[1]];
-        if (a && b) {
-          ctx.beginPath();
-          ctx.moveTo(a.x * canvas.width, a.y * canvas.height);
-          ctx.lineTo(b.x * canvas.width, b.y * canvas.height);
-          ctx.stroke();
-        }
-      });
+    sm = pts;
+    return sm;
+  }
+
+  function drawLook(c, G, look, upto) {
+    const L = LOOKS[look];
+    for (let i = 0; i <= upto && i < L.steps.length; i++) L.steps[i].draw(c, G);
+  }
+  function drawLines(c, pts, look) {
+    const st = LINES[look]; if (!st.connections.length) return;
+    const W = c.canvas.width, H = c.canvas.height, lm = pts.map(function (p) { return { x: p.x / W, y: p.y / H }; });
+    const w = function (n) { return n * dpr; };
+    c.save(); c.globalAlpha = opacity;
+    drawConnectors(c, lm, FACEMESH_FACE_OVAL, { color: '#55555580', lineWidth: w(1) });
+    [FACEMESH_LEFT_EYE, FACEMESH_RIGHT_EYE].forEach(function (s) { drawConnectors(c, lm, s, { color: st.color + 'cc', lineWidth: w(2) }); });
+    [FACEMESH_LIPS, FACEMESH_LEFT_EYEBROW, FACEMESH_RIGHT_EYEBROW].forEach(function (s) { drawConnectors(c, lm, s, { color: st.color + 'aa', lineWidth: w(2) }); });
+    c.strokeStyle = st.color; c.lineWidth = st.lineWidth * dpr; c.lineCap = 'round';
+    st.connections.forEach(function (k) { const a = pts[k[0]], b = pts[k[1]]; c.beginPath(); c.moveTo(a.x, a.y); c.lineTo(b.x, b.y); c.stroke(); });
+    c.restore();
+  }
+  function drawHighlight(c, G, paths, t) {
+    const pulse = 0.5 + 0.5 * Math.sin(t / 260);
+    c.save();
+    paths.forEach(function (p) {
+      c.globalAlpha = 0.12 + 0.12 * pulse; c.fillStyle = '#00e5ff'; c.fill(p);
+      c.globalAlpha = 0.65 + 0.35 * pulse; c.strokeStyle = '#00e5ff'; c.lineWidth = Math.max(2, G.u * 0.018);
+      c.setLineDash([G.u * 0.05, G.u * 0.035]); c.lineDashOffset = -t / 40; c.stroke(p);
+    });
+    c.restore();
+  }
+  // Paint one frame: camera image + makeup (+ hints)
+  function paint(c, img, cv, pts, withHints, t) {
+    c.save(); c.setTransform(1, 0, 0, 1, 0, 0);
+    c.globalCompositeOperation = 'source-over'; c.globalAlpha = 1;
+    c.fillStyle = '#000'; c.fillRect(0, 0, c.canvas.width, c.canvas.height);
+    if (img) c.drawImage(img, cv.dx, cv.dy, cv.vw * cv.s, cv.vh * cv.s);
+    c.restore();
+    lastHl = 0;
+    if (!pts || currentStyle === 'none') return;
+    const G = makeG(pts); lastG = G;
+    const L = LOOKS[currentStyle], n = L.steps.length;
+    const g = guide ? curStep() : n;
+    const upto = guide ? Math.min(g, n - 1) : n - 1;   // guided: steps up to the current one
+    OP = opacity;
+    if (view === 'look') { if (!guide || g >= 0) drawLook(c, G, currentStyle, upto); }
+    else drawLines(c, pts, currentStyle);
+    OP = 1;
+    if (withHints && guide && g >= 0 && g < n) { const hp = L.steps[g].hl(G); drawHighlight(c, G, hp, t); lastHl = hp.length; }
+  }
+
+  function onResults(results) {
+    resizeCanvas();
+    const img = results.image, cv = coverOf(img);
+    const faces = results.multiFaceLandmarks;
+    let pts = null;
+    if (faces && faces.length > 0) {
+      noFaceFrames = 0;
+      pts = track(faces[0], cv);
+      if (!gotResult || statusEl.dataset.k !== 'ok') setStatus('ok', 'Камера работает! Выбери образ или включи «Пошагово».');
+    } else {
+      sm = null;
+      if (++noFaceFrames > 15) setStatus('noface', 'Лицо не видно — посмотри прямо в камеру, нужен хороший свет.');
     }
-    function onResults(results) {
+    paint(ctx, img, cv, pts, true, performance.now());
+    if (snapWanted) { snapWanted = false; doSnap(img, pts); }
+    gotResult = true;
+  }
+  function setStatus(k, t) { statusEl.dataset.k = k; statusEl.textContent = t; }
+
+  /* ---------- photo ---------- */
+  function doSnap(img, pts) {
+    try {
+      const a = document.createElement('canvas'); a.width = canvas.width; a.height = canvas.height;
+      const ac = a.getContext('2d');
+      paint(ac, img, coverOf(img), pts, false, 0);
+      const b = document.createElement('canvas'); b.width = a.width; b.height = a.height;
+      const bc = b.getContext('2d'); bc.translate(b.width, 0); bc.scale(-1, 1); bc.drawImage(a, 0, 0);   // mirror like the screen
+      b.toBlob(function (blob) {
+        if (!blob) { setStatus('err', 'Не получилось сохранить фото.'); return; }
+        const url = URL.createObjectURL(blob), link = document.createElement('a');
+        link.href = url; link.download = 'halloween-makeup-' + currentStyle + '.png';
+        document.body.appendChild(link); link.click(); link.remove();
+        setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+        setStatus('ok', '📷 Фото сохранено на устройство.');
+      }, 'image/png');
+    } catch (e) { setStatus('err', 'Не получилось сохранить фото.'); }
+  }
+
+  /* ---------- camera ---------- */
+  function loop() {
+    if (!running) return;
+    if (!busy && video.readyState >= 2) {
+      busy = true;
+      faceMesh.send({ image: video }).then(function () { busy = false; }, function (err) { busy = false; console.warn(err); });
+    }
+    requestAnimationFrame(loop);
+  }
+  async function startCamera() {
+    startBtn.disabled = true;
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      setStatus('err', 'Этот браузер не даёт доступ к камере. Открой страницу в Chrome или Safari.');
+      startBtn.disabled = false; return;
+    }
+    if (typeof FaceMesh !== 'function' || typeof drawConnectors !== 'function') {
+      setStatus('err', 'Не удалось загрузить модель. Обнови страницу.');
+      startBtn.disabled = false; return;
+    }
+    setStatus('load', 'Загрузка модели...');
+    try {
+      if (!faceMesh) {
+        faceMesh = new FaceMesh({ locateFile: function (file) { return 'vendor/face_mesh/' + file; } });
+        faceMesh.setOptions({ maxNumFaces: 1, refineLandmarks: true, minDetectionConfidence: 0.5, minTrackingConfidence: 0.5 });
+        faceMesh.onResults(onResults);
+      }
+      stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } }, audio: false });
+      video.srcObject = stream;
+      await video.play().catch(function () {});
+      running = true;
+      placeholder.hidden = true; startBtn.hidden = true; panel.hidden = false;
       resizeCanvas();
-      ctx.save();
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const faces = results.multiFaceLandmarks;
-      if (faces && faces.length > 0) {
-        noFaceFrames = 0;
-        const lm = mapLandmarks(faces[0]);
-        const style = STYLES[currentStyle];
-        ctx.globalAlpha = opacity;          // slider controls all lines
-        if (currentStyle !== 'none') {
-          // Main face contours lightly for orientation
-          const w = function (n) { return n * dpr; };
-          drawConnectors(ctx, lm, FACEMESH_FACE_OVAL, { color: '#55555580', lineWidth: w(1) });
-          drawConnectors(ctx, lm, FACEMESH_LEFT_EYE, { color: style.color + 'cc', lineWidth: w(2) });
-          drawConnectors(ctx, lm, FACEMESH_RIGHT_EYE, { color: style.color + 'cc', lineWidth: w(2) });
-          drawConnectors(ctx, lm, FACEMESH_LIPS, { color: style.color + 'aa', lineWidth: w(2) });
-          drawConnectors(ctx, lm, FACEMESH_LEFT_EYEBROW, { color: style.color + 'aa', lineWidth: w(2) });
-          drawConnectors(ctx, lm, FACEMESH_RIGHT_EYEBROW, { color: style.color + 'aa', lineWidth: w(2) });
-        }
-        drawCustomLines(lm, style);
-        if (!gotResult || statusEl.dataset.k !== 'ok') setStatus('ok', 'Камера работает! Выбери стиль и веди по линиям.');
-      } else if (++noFaceFrames > 15) {
-        setStatus('noface', 'Лицо не видно — посмотри прямо в камеру, нужен хороший свет.');
-      }
-      gotResult = true;
-      ctx.restore();
+      setStatus('load', 'Камера включена. Загружаю модель лица…');
+      loop();
+    } catch (err) {
+      const name = err && err.name;
+      const why = name === 'NotAllowedError' ? 'доступ к камере запрещён — разреши его в настройках браузера'
+        : name === 'NotFoundError' ? 'камера не найдена'
+        : name === 'NotReadableError' ? 'камера занята другим приложением'
+        : (err && err.message) || String(err);
+      setStatus('err', 'Ошибка камеры: ' + why + '.');
+      startBtn.disabled = false;
     }
-    function setStatus(k, t) { statusEl.dataset.k = k; statusEl.textContent = t; }
+  }
 
-    /* ---------- camera ---------- */
-    function loop() {
-      if (!running) return;
-      if (!busy && video.readyState >= 2) {
-        busy = true;
-        faceMesh.send({ image: video }).then(function () { busy = false; }, function (err) {
-          busy = false;
-          console.warn(err);
-        });
-      }
-      requestAnimationFrame(loop);
-    }
-    async function startCamera() {
-      startBtn.disabled = true;
-      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        setStatus('err', 'Этот браузер не даёт доступ к камере. Открой страницу в Chrome или Safari.');
-        startBtn.disabled = false;
-        return;
-      }
-      if (typeof FaceMesh !== 'function' || typeof drawConnectors !== 'function') {
-        setStatus('err', 'Не удалось загрузить модель. Обнови страницу.');
-        startBtn.disabled = false;
-        return;
-      }
-      setStatus('load', 'Загрузка модели...');
-      try {
-        if (!faceMesh) {
-          faceMesh = new FaceMesh({ locateFile: function (file) { return 'vendor/face_mesh/' + file; } });
-          faceMesh.setOptions({
-            maxNumFaces: 1,
-            refineLandmarks: true,
-            minDetectionConfidence: 0.5,
-            minTrackingConfidence: 0.5
-          });
-          faceMesh.onResults(onResults);
-        }
-        stream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } }, audio: false
-        });
-        video.srcObject = stream;
-        await video.play().catch(function () {});
-        running = true;
-        placeholder.hidden = true;
-        startBtn.hidden = true;
-        controls.hidden = false;
-        resizeCanvas();
-        setStatus('load', 'Камера включена. Загружаю модель лица…');
-        loop();
-      } catch (err) {
-        const name = err && err.name;
-        const why = name === 'NotAllowedError' ? 'доступ к камере запрещён — разреши его в настройках браузера'
-          : name === 'NotFoundError' ? 'камера не найдена'
-          : name === 'NotReadableError' ? 'камера занята другим приложением'
-          : (err && err.message) || String(err);
-        setStatus('err', 'Ошибка камеры: ' + why + '.');
-        startBtn.disabled = false;
-      }
-    }
+  /* ---------- UI events ---------- */
+  styleBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () { currentStyle = btn.dataset.style; paintUI(); save(); });
+  });
+  $('view-look').addEventListener('click', function () { view = 'look'; paintUI(); save(); });
+  $('view-lines').addEventListener('click', function () { view = 'lines'; paintUI(); save(); });
+  opacitySlider.addEventListener('input', function (e) {
+    const v = parseFloat(e.target.value);
+    if (v >= 0.2 && v <= 1) opacity = v;
+    paintUI(); save();
+  });
+  guideBtn.addEventListener('click', function () {
+    guide = !guide;
+    if (guide && !(currentStyle in stepIdx)) stepIdx[currentStyle] = -1;
+    paintUI(); save();
+    if (guide) guideEl.scrollIntoView({ block: 'nearest' });
+  });
+  $('g-next').addEventListener('click', function () {
+    const n = LOOKS[currentStyle].steps.length, k = curStep();
+    stepIdx[currentStyle] = k >= n ? 0 : k + 1;
+    paintUI(); save();
+  });
+  $('g-back').addEventListener('click', function () {
+    const k = curStep();
+    stepIdx[currentStyle] = Math.max(-1, k - 1);
+    paintUI(); save();
+  });
+  snapBtn.addEventListener('click', function () {
+    if (!running) return;
+    snapWanted = true;
+  });
+  $('reset-btn').addEventListener('click', function () {
+    if (!confirm('Сбросить образ, шаги и настройки к начальным?')) return;
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    currentStyle = DEFAULTS.style; opacity = DEFAULTS.opacity; view = DEFAULTS.view; guide = false; stepIdx = {};
+    paintUI();
+  });
+  startBtn.addEventListener('click', startCamera);
+  window.addEventListener('resize', resizeCanvas);
+  window.addEventListener('pagehide', function () {
+    running = false;
+    if (stream) stream.getTracks().forEach(function (t) { t.stop(); });
+    stream = null;
+  });
+  window.addEventListener('pageshow', function (e) {
+    if (!e.persisted || running) return;   // back/forward cache: the camera was stopped
+    video.srcObject = null;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    placeholder.hidden = false; panel.hidden = true;
+    startBtn.hidden = false; startBtn.disabled = false;
+    setStatus('idle', 'Нажми «Старт», чтобы включить камеру');
+  });
 
-    /* ---------- UI events ---------- */
-    styleBtns.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        currentStyle = btn.dataset.style;
-        paintUI(); save();
-      });
-    });
-    opacitySlider.addEventListener('input', function (e) {
-      const v = parseFloat(e.target.value);
-      if (v >= 0.2 && v <= 1) opacity = v;
-      paintUI(); save();
-    });
-    document.getElementById('reset-btn').addEventListener('click', function () {
-      if (!confirm('Сбросить стиль и прозрачность к начальным?')) return;
-      try { localStorage.removeItem(KEY); } catch (e) {}
-      currentStyle = DEFAULTS.style; opacity = DEFAULTS.opacity;
-      paintUI();
-    });
-    startBtn.addEventListener('click', startCamera);
-    window.addEventListener('resize', resizeCanvas);
-    window.addEventListener('pagehide', function () {
-      running = false;
-      if (stream) stream.getTracks().forEach(function (t) { t.stop(); });
-      stream = null;
-    });
-    window.addEventListener('pageshow', function (e) {
-      if (!e.persisted || running) return;   // back/forward cache: the camera was stopped
-      video.srcObject = null;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      placeholder.hidden = false; controls.hidden = true;
-      startBtn.hidden = false; startBtn.disabled = false;
-      setStatus('idle', 'Нажми «Старт», чтобы включить камеру');
-    });
-
-    load(); paintUI(); resizeCanvas();
-    window.__stencil = { get style() { return currentStyle; }, get opacity() { return opacity; }, get gotResult() { return gotResult; } };
+  load(); paintUI(); resizeCanvas();
+  window.__stencil = {
+    get style() { return currentStyle; }, get opacity() { return opacity; }, get gotResult() { return gotResult; },
+    get view() { return view; }, get guide() { return guide; }, get step() { return curStep(); }, get hl() { return lastHl; },
+    faceBox: function () {
+      if (!sm) return null;
+      let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+      OVAL.forEach(function (i) { const p = sm[i]; x0 = Math.min(x0, p.x); y0 = Math.min(y0, p.y); x1 = Math.max(x1, p.x); y1 = Math.max(y1, p.y); });
+      return { x0: x0, y0: y0, x1: x1, y1: y1, w: canvas.width, h: canvas.height, u: lastG ? lastG.u : 0 };
+    },
+    pt: function (i) { return sm ? { x: sm[i].x, y: sm[i].y } : null; }
+  };
   })();
   </script>
 </body>
