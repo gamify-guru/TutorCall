@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b0b0f">
+<title>Кинословарь · Reel Words</title>
+<meta name="description" content="Интерактивный личный словарь: подсказки при вводе, перевод, британское произношение, две вкладки — дополнительные занятия и школьный учебник.">
+<style>
+:root{--bg:#0b0b0f;--panel:#14141b;--panel2:#1b1b24;--line:#2a2a36;--text:#f5f5f7;--muted:#b3b3c2;--red:#e50914;--red2:#b20710;--gold:#f5c518;--ok:#46d369;--card:#18181f;--focus:#fff3}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+button,input{font:inherit}
+body{background:radial-gradient(1200px 500px at 50% -10%,#3a0a10 0%,transparent 55%),linear-gradient(180deg,#121218,#0b0b0f 40%);min-height:100vh}
+.grain{pointer-events:none;position:fixed;inset:0;opacity:.045;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");z-index:0}
+.wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:18px 16px 60px}
+.top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.brand{display:flex;flex-direction:column;gap:4px}
+.brand .mark{display:inline-flex;align-items:center;gap:8px;font-weight:900;letter-spacing:.04em;text-transform:uppercase;font-size:13px;color:var(--red)}
+.brand h1{margin:0;font-size:clamp(28px,5vw,44px);line-height:1.05;font-weight:900}
+.brand p{margin:0;color:var(--muted);font-size:14px;max-width:42ch}
+.reset{border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:999px;padding:8px 14px;cursor:pointer}
+.reset:hover{color:#fff;border-color:#555}
+.tabs{display:flex;gap:8px;padding:6px;background:var(--panel);border:1px solid var(--line);border-radius:999px;margin:0 0 18px;overflow:auto}
+.tab{flex:1;min-width:max-content;border:0;border-radius:999px;padding:12px 16px;background:transparent;color:var(--muted);font-weight:800;cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{background:var(--red);color:#fff;box-shadow:0 8px 24px #e5091440}
+.tab small{display:block;font-weight:600;opacity:.85;font-size:11px}
+.hero{display:grid;gap:14px;grid-template-columns:1.2fr .8fr}
+@media(max-width:860px){.hero{grid-template-columns:1fr}}
+.panel{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 20px 50px #0006}
+.panel h2{margin:0 0 4px;font-size:18px}
+.hint{margin:0 0 12px;color:var(--muted);font-size:13px}
+.field{position:relative}
+.field input{width:100%;border:1px solid var(--line);background:#0f0f14;color:#fff;border-radius:12px;padding:14px 14px 14px 44px;outline:none}
+.field input:focus{border-color:#e5091488;box-shadow:0 0 0 3px #e5091433}
+.field .ico{position:absolute;left:14px;top:50%;transform:translateY(-50%);opacity:.7}
+.suggest{position:absolute;left:0;right:0;top:calc(100% + 6px);background:#121218;border:1px solid var(--line);border-radius:14px;max-height:240px;overflow:auto;z-index:5;box-shadow:0 18px 40px #000a;display:none}
+.suggest.open{display:block}
+.suggest button{display:block;width:100%;text-align:left;border:0;background:transparent;color:#fff;padding:11px 14px;cursor:pointer}
+.suggest button[aria-selected="true"],.suggest button:hover{background:var(--focus)}
+.suggest b{color:var(--gold)}
+.status{min-height:1.3em;margin:8px 0 0;color:var(--muted);font-size:13px}
+.status.err{color:#ff7b7b}.status.ok{color:var(--ok)}
+.preview{margin-top:14px;display:none}
+.preview.show{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;position:relative;overflow:hidden}
+.card:before{content:"";position:absolute;inset:auto -20% -40% auto;width:160px;height:160px;background:radial-gradient(circle,#e5091444,transparent 70%)}
+.word{font-size:clamp(28px,4vw,40px);font-weight:900;margin:0 0 4px;letter-spacing:.01em}
+.ru{margin:0;color:#ffd7db;font-size:18px;font-weight:700}
+.ipa{margin:8px 0 12px;color:var(--muted);font-family:ui-monospace,Menlo,monospace;font-size:14px}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.btn{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:pointer}
+.btn-red{background:var(--red);color:#fff}.btn-red:hover{background:#f6121d}
+.btn-ghost{background:#ffffff12;color:#fff;border:1px solid #ffffff22}
+.btn-ghost:hover{background:#ffffff22}
+.badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 10px;background:#46d36922;color:var(--ok);font-size:12px;font-weight:800}
+.manual{display:none;margin-top:12px;gap:8px}
+.manual.show{display:grid}
+.manual input{border:1px solid var(--line);background:#0f0f14;color:#fff;border-radius:10px;padding:10px 12px}
+.searchbox{margin:18px 0 10px}
+.rows{display:grid;gap:18px}
+.row h3{margin:0 0 10px;font-size:18px;display:flex;align-items:baseline;gap:10px}
+.row h3 span{color:var(--muted);font-size:13px;font-weight:600}
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(180px,220px);gap:12px;overflow-x:auto;padding:4px 2px 10px;scroll-snap-type:x mandatory}
+.tile{scroll-snap-align:start;background:linear-gradient(160deg,#242430,#121218 70%);border:1px solid var(--line);border-radius:14px;padding:14px;min-height:150px;transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column;gap:6px}
+.tile:hover,.tile:focus-within{transform:scale(1.04);box-shadow:0 16px 40px #0008;z-index:1}
+.tile .ew{font-size:22px;font-weight:900;line-height:1.1}
+.tile .rw{color:#ffc9ce;font-weight:700}
+.tile .ph{color:var(--muted);font-size:12px;font-family:ui-monospace,Menlo,monospace}
+.tile .meta{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+.tile .kill{border:0;background:transparent;color:#ff8a8a;cursor:pointer;font-size:12px;font-weight:700}
+.empty{border:1px dashed #3a3a4a;border-radius:16px;padding:28px 18px;text-align:center;color:var(--muted);background:#101018}
+.empty strong{display:block;color:#fff;font-size:18px;margin-bottom:6px}
+.flash{outline:2px solid var(--gold);box-shadow:0 0 0 6px #f5c51833}
+footer{margin-top:28px;color:#7d7d8f;font-size:12px;text-align:center}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <span class="mark"><span aria-hidden="true">▶</span> Reel Words</span>
+      <h1>Кинословарь</h1>
+      <p>Твой личный словарь как watchlist: вводи слово — сразу перевод и британское произношение. Две отдельные полки: доп. занятия и школьный учебник.</p>
+    </div>
+    <button type="button" class="reset" id="resetBtn" data-ttc-reset>↻ Начать заново</button>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="Какой словарь открыть">
+    <button type="button" class="tab" role="tab" id="tab-extra" aria-controls="panel-main" aria-selected="true" data-tab="extra">Дополнительные занятия <small>слова с репетитора / доп. уроков</small></button>
+    <button type="button" class="tab" role="tab" id="tab-school" aria-controls="panel-main" aria-selected="false" data-tab="school">Школьный учебник <small>слова из учебника</small></button>
+  </div>
+
+  <section class="hero" id="panel-main">
+    <div class="panel">
+      <h2 id="addTitle">Добавить слово</h2>
+      <p class="hint" id="addHint">Начни печатать по-английски — подсказки появятся сами. Выбери слово: увидишь перевод и услышишь, как его говорят в Британии.</p>
+      <div class="field">
+        <span class="ico" aria-hidden="true">🔎</span>
+        <input id="lookup" type="text" autocomplete="off" spellcheck="false" autocapitalize="off" aria-autocomplete="list" aria-controls="suggest" aria-expanded="false" aria-label="Поиск и добавление английского слова" placeholder="Начни вводить слово… например, adventure">
+        <div id="suggest" class="suggest" role="listbox" aria-label="Подсказки"></div>
+      </div>
+      <p class="status" id="status" aria-live="polite"></p>
+      <div class="preview" id="preview" aria-live="polite">
+        <div class="card">
+          <p class="word" id="pWord">—</p>
+          <p class="ru" id="pRu">—</p>
+          <p class="ipa" id="pIpa"></p>
+          <div class="actions">
+            <button type="button" class="btn btn-ghost" id="listenBtn">🔊 Listen</button>
+            <button type="button" class="btn btn-red" id="saveBtn">＋ В мой словарь</button>
+            <span class="badge" id="savedBadge" hidden>✓ Уже в твоём словаре</span>
+          </div>
+          <p class="hint" id="pEx" style="margin-top:12px"></p>
+          <p class="hint" id="otherTabNote" style="margin-top:8px"></p>
+        </div>
+        <div class="manual" id="manual">
+          <input id="manualRu" type="text" placeholder="Напиши перевод сам (если интернет не ответил)">
+          <button type="button" class="btn btn-ghost" id="manualSave">Сохранить с моим переводом</button>
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <h2>Как пользоваться</h2>
+      <p class="hint">1) Выбери вкладку — это два разных словаря.<br>2) Печатай слово → выбери из списка.<br>3) Нажми Listen (британский акцент).<br>4) Сохрани карточку — она останется в браузере.<br>5) Ищи по своим словам ниже.</p>
+      <p class="hint" id="countLine">Пока пусто. Добавь первое слово!</p>
+    </div>
+  </section>
+
+  <div class="searchbox field panel" style="padding:12px 14px">
+    <span class="ico" aria-hidden="true">📚</span>
+    <input id="mineSearch" type="search" aria-label="Поиск по твоему словарю на этой вкладке" placeholder="Поиск по твоему словарю (англ. или рус.)…">
+  </div>
+
+  <div class="rows" id="rows"></div>
+  <footer>Reel Words · Кинословарь · прогресс только в этом браузере · не связан с Netflix</footer>
+</div>
+<script>
+const KEY='tutorcall-reel-words-v1';
+const TABS={extra:{title:'Дополнительные занятия',short:'доп. занятия'},school:{title:'Школьный учебник',short:'учебник'}};
+const $=id=>document.getElementById(id);
+const norm=s=>(s||'').toLowerCase().trim().replace(/[’']/g,"'");
+let WORDS=[];
+let state={v:1,tab:'extra',lists:{extra:[],school:[]}};
+let active=null, sug=[], sugI=-1, tLookup=null, audioEl=null;
+
+function load(){
+  try{const raw=JSON.parse(localStorage.getItem(KEY)||'null');
+    if(raw&&raw.v===1&&raw.lists){state.tab=raw.tab==='school'?'school':'extra';
+      state.lists.extra=Array.isArray(raw.lists.extra)?raw.lists.extra:[];
+      state.lists.school=Array.isArray(raw.lists.school)?raw.lists.school:[];
+    }
+  }catch{}
+}
+function save(){try{localStorage.setItem(KEY,JSON.stringify({v:1,t:Date.now(),tab:state.tab,lists:state.lists}))}catch{}}
+function list(){return state.lists[state.tab]}
+function otherTab(){return state.tab==='extra'?'school':'extra'}
+function findIn(tab,word){const n=norm(word);return state.lists[tab].find(x=>norm(x.word)===n)}
+
+function setTab(tab,persist=true){
+  state.tab=tab==='school'?'school':'extra';if(persist)save();
+  document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===state.tab)));
+  $('addTitle').textContent='Добавить слово · '+TABS[state.tab].title;
+  $('addHint').textContent='Слова на этой вкладке не смешиваются с другой. Сейчас открыт словарь «'+TABS[state.tab].title+'».';
+  $('mineSearch').placeholder='Поиск только в «'+TABS[state.tab].short+'»…';
+  $('lookup').value='';hideSuggest();active=null;$('preview').classList.remove('show');$('status').textContent='';
+  renderMine();updateCount();
+}
+
+function updateCount(){
+  const n=list().length, o=state.lists[otherTab()].length;
+  $('countLine').textContent=n?`В «${TABS[state.tab].short}»: ${n}. В другой вкладке: ${o}.`:`Пока пусто на этой вкладке. Добавь первое слово! (в другой вкладке: ${o})`;
+}
+
+function hideSuggest(){$('suggest').classList.remove('open');$('suggest').innerHTML='';$('lookup').setAttribute('aria-expanded','false');sug=[];sugI=-1}
+function showSuggest(items){
+  sug=items;sugI=items.length?0:-1;
+  const box=$('suggest');
+  if(!items.length){hideSuggest();return}
+  box.innerHTML=items.map((w,i)=>`<button type="button" role="option" id="sug-${i}" aria-selected="${i===0}" data-i="${i}"><b>${escapeHtml(w.slice(0,$('lookup').value.trim().length))}</b>${escapeHtml(w.slice($('lookup').value.trim().length))}</button>`).join('');
+  box.classList.add('open');$('lookup').setAttribute('aria-expanded','true');
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+function rankSuggest(q){
+  const n=norm(q);if(n.length<1)return[];
+  const starts=[], contains=[];
+  for(const w of WORDS){
+    if(w===n){starts.unshift(w);continue}
+    if(w.startsWith(n))starts.push(w);else if(n.length>=2&&w.includes(n))contains.push(w);
+    if(starts.length>=8)break;
+  }
+  return [...starts,...contains].slice(0,8);
+}
+
+async function ensureWords(){
+  if(WORDS.length)return;
+  try{WORDS=await(await fetch('./words.json')).json()}catch{WORDS=['adventure','school','library','friend','because','beautiful','interesting','homework','teacher','science']}
+}
+
+async function enrich(word){
+  const w=norm(word);if(!w)return null;
+  $('status').textContent='Ищем перевод и произношение…';$('status').className='status';
+  let entry={word:w,ru:'',ipa:'',audio:'',example:'',def:''};
+  try{
+    const r=await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(w));
+    if(r.ok){
+      const data=await r.json();const e=data[0]||{};
+      entry.word=e.word||w;
+      const ph=(e.phonetics||[]).find(p=>p.audio&&/uk|gb|british/i.test(p.audio))||(e.phonetics||[]).find(p=>p.audio)||(e.phonetics||[])[0];
+      entry.ipa=(ph&&ph.text)||e.phonetic||'';
+      entry.audio=(ph&&ph.audio)||'';
+      const m=(e.meanings||[])[0];const d=m&&(m.definitions||[])[0];
+      entry.def=d&&d.definition||'';entry.example=d&&d.example||'';
+    }
+  }catch{}
+  try{
+    const tr=await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(entry.word)+'&langpair=en|ru');
+    if(tr.ok){const j=await tr.json();const t=j&&j.responseData&&j.responseData.translatedText;if(t&&norm(t)!==norm(entry.word))entry.ru=t}
+  }catch{}
+  return entry;
+}
+
+function speakGB(text){
+  try{
+    const u=new SpeechSynthesisUtterance(text);u.lang='en-GB';u.rate=.92;
+    const voices=speechSynthesis.getVoices()||[];
+    const v=voices.find(x=>/en(-|_)GB/i.test(x.lang)&&/female|female|google|daniel|martha|serena|libby|amy|emma/i.test(x.name))
+      ||voices.find(x=>/en(-|_)GB/i.test(x.lang))||voices.find(x=>/^en/i.test(x.lang));
+    if(v)u.voice=v;speechSynthesis.cancel();speechSynthesis.speak(u);
+  }catch{}
+}
+function listen(entry){
+  if(entry&&entry.audio){
+    try{if(audioEl){audioEl.pause()}audioEl=new Audio(entry.audio);audioEl.play().catch(()=>speakGB(entry.word));return}catch{}
+  }
+  speakGB(entry?entry.word:$('lookup').value);
+}
+
+function showPreview(entry){
+  active=entry;const box=$('preview');box.classList.add('show');
+  $('pWord').textContent=entry.word;$('pRu').textContent=entry.ru||'Перевод не найден — можешь написать сам';
+  $('pIpa').textContent=entry.ipa?`UK ${entry.ipa}`:(entry.audio?'UK audio ✓':'UK · Listen ≈ TTS');
+  $('pEx').textContent=entry.example?`Example: ${entry.example}`:(entry.def?`Meaning: ${entry.def}`:'');
+  const here=!!findIn(state.tab,entry.word);const there=findIn(otherTab(),entry.word);
+  $('savedBadge').hidden=!here;$('saveBtn').hidden=here;
+  $('otherTabNote').textContent=there&&!here?`Это слово уже есть во вкладке «${TABS[otherTab()].title}», но не в текущей.`:'';
+  $('manual').classList.toggle('show',!entry.ru);
+  $('status').textContent=here?'Уже в твоём словаре на этой вкладке.':'Готово — можно слушать и сохранить.';
+  $('status').className='status ok';
+}
+
+async function pickWord(word){
+  hideSuggest();$('lookup').value=word;
+  const cached=findIn(state.tab,word); // reuse saved translation if present
+  const entry=cached?{...cached}:await enrich(word);
+  if(!entry.ru&&cached)entry.ru=cached.ru;
+  showPreview(entry);
+}
+
+function addWord(entry){
+  if(!entry||!entry.word)return;
+  if(findIn(state.tab,entry.word)){showPreview(entry);flashWord(entry.word);return}
+  const ru=entry.ru||$('manualRu').value.trim();
+  if(!ru){$('status').textContent='Нужен перевод: подожди API или напиши сам.';$('status').className='status err';$('manual').classList.add('show');return}
+  const item={word:entry.word,ru,ipa:entry.ipa||'',audio:entry.audio||'',example:entry.example||'',def:entry.def||'',ts:Date.now()};
+  state.lists[state.tab]=[item,...list()];save();showPreview(item);renderMine();updateCount();flashWord(item.word);
+  $('status').textContent='Сохранено в «'+TABS[state.tab].title+'»!';$('status').className='status ok';
+}
+
+function flashWord(word){
+  const el=document.querySelector(`[data-word="${CSS.escape(norm(word))}"]`);
+  if(!el)return;el.classList.add('flash');el.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+  setTimeout(()=>el.classList.remove('flash'),1600);
+}
+
+function removeWord(word){
+  state.lists[state.tab]=list().filter(x=>norm(x.word)!==norm(word));save();renderMine();updateCount();
+  if(active&&norm(active.word)===norm(word))showPreview(active);
+}
+
+function renderMine(){
+  const q=norm($('mineSearch').value);let items=list();
+  if(q)items=items.filter(x=>norm(x.word).includes(q)||norm(x.ru).includes(q));
+  const root=$('rows');
+  if(!list().length){
+    root.innerHTML=`<div class="empty"><strong>Твой watchlist пуст</strong>Добавь первое английское слово сверху — карточка появится здесь, как постер в подборке.</div>`;
+    return;
+  }
+  if(q&&!items.length){
+    root.innerHTML=`<div class="empty"><strong>Ничего не нашлось</strong>В «${TABS[state.tab].short}» нет такого слова. Проверь другую вкладку или добавь новое.</div>`;
+    return;
+  }
+  const recent=items.slice().sort((a,b)=>b.ts-a.ts).slice(0,12);
+  const az=items.slice().sort((a,b)=>norm(a.word).localeCompare(norm(b.word)));
+  const tile=x=>`<article class="tile" data-word="${escapeHtml(norm(x.word))}"><div class="ew">${escapeHtml(x.word)}</div><div class="rw">${escapeHtml(x.ru)}</div><div class="ph">${escapeHtml(x.ipa||'UK · Listen')}</div><div class="meta"><button type="button" class="btn btn-ghost" data-listen="${escapeHtml(x.word)}" style="padding:6px 10px">🔊</button><button type="button" class="kill" data-del="${escapeHtml(x.word)}">удалить</button></div></article>`;
+  root.innerHTML=`
+    <section class="row"><h3>Recently added <span>${TABS[state.tab].title}</span></h3><div class="rail">${recent.map(tile).join('')}</div></section>
+    <section class="row"><h3>A–Z <span>${items.length} слов</span></h3><div class="rail">${az.map(tile).join('')}</div></section>`;
+}
+
+// events
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
+$('lookup').addEventListener('input',async e=>{
+  await ensureWords();const q=e.target.value;const items=rankSuggest(q);showSuggest(items);
+  clearTimeout(tLookup);
+  if(!norm(q)){hideSuggest();return}
+  // if exact match in suggestions, soft-preview after debounce without forcing
+  tLookup=setTimeout(async()=>{
+    const exact=WORDS.find(w=>w===norm(q));
+    if(exact) pickWord(exact);
+  },320);
+});
+$('lookup').addEventListener('keydown',e=>{
+  if(!$('suggest').classList.contains('open'))return;
+  if(e.key==='ArrowDown'){e.preventDefault();sugI=Math.min(sug.length-1,sugI+1);[...$('suggest').children].forEach((b,i)=>b.setAttribute('aria-selected',String(i===sugI)))}
+  else if(e.key==='ArrowUp'){e.preventDefault();sugI=Math.max(0,sugI-1);[...$('suggest').children].forEach((b,i)=>b.setAttribute('aria-selected',String(i===sugI)))}
+  else if(e.key==='Enter'){e.preventDefault();if(sugI>=0)pickWord(sug[sugI]);else if(norm($('lookup').value))pickWord(norm($('lookup').value))}
+  else if(e.key==='Escape')hideSuggest();
+});
+$('suggest').addEventListener('click',e=>{const b=e.target.closest('button[data-i]');if(b)pickWord(sug[+b.dataset.i])});
+$('listenBtn').addEventListener('click',()=>active&&listen(active));
+$('saveBtn').addEventListener('click',()=>active&&addWord(active));
+$('manualSave').addEventListener('click',()=>active&&addWord(active));
+$('mineSearch').addEventListener('input',renderMine);
+$('rows').addEventListener('click',e=>{
+  const L=e.target.closest('[data-listen]');const D=e.target.closest('[data-del]');
+  if(L){const it=findIn(state.tab,L.dataset.listen);if(it)listen(it)}
+  if(D)removeWord(D.dataset.del);
+});
+$('resetBtn').addEventListener('click',()=>{
+  if(confirm('Начать заново? Оба словаря (доп. занятия и учебник) будут очищены.')){
+    try{localStorage.removeItem(KEY)}catch{}
+    location.reload();
+  }
+});
+document.addEventListener('click',e=>{if(!e.target.closest('.field'))hideSuggest()});
+if(window.speechSynthesis)speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices();
+
+load();ensureWords().then(()=>{setTab(state.tab,false)});
+</script>
+</body>
+</html>
