@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="author" content="@gamify_guru, @o_olay_lay_lay"/>
 <meta name="theme-color" content="#fff6e8"/>
-<title>Final Boss · Pathfinder Phonics</title>
+<title>Финальный босс · Pathfinder Phonics</title>
 <link rel="stylesheet" href="../../_shared/fonts.css"/>
 <link rel="stylesheet" href="../pixar-theme.css"/>
 <link rel="stylesheet" href="../_course/course-extras.css"/>
@@ -15,7 +15,7 @@
   <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
     <a href="../">← К курсу</a>
   </div>
-  <div class="pf-mid">Final Boss</div>
+  <div class="pf-mid">Финальный босс</div>
   <div></div>
 </nav>
 <div class="pf-wrap">
@@ -23,9 +23,9 @@
   <header class="pf-hero">
     <img class="pf-hero-art" src="../images/journey-map.jpg" alt="Final boss castle path" width="1280" height="720"/>
     <div class="pf-hero-body">
-      <h1>🏰 Final Boss — Castle of All Rules</h1>
+      <h1>🏰 Финальный босс — Замок всех правил</h1>
       <p class="en">Mix of syllable types, vowel teams, digraphs, silent letters, soft/hard C&amp;G</p>
-      <p id="boss-lock-msg" class="pf-muted">Complete all 5 episodes (full backpack) to unlock. Teachers: add <code>?unlock=1</code>.</p>
+      <p id="boss-lock-msg" class="pf-muted">Пройди все 5 эпизодов (полный рюкзак), чтобы открыть. Учитель: <code>?unlock=1</code>.</p>
     </div>
   </header>
   <div id="boss-app"></div>
@@ -43,11 +43,11 @@
   const app=document.getElementById('boss-app');
   const cert=document.getElementById('boss-cert');
   if(!unlocked){
-    msg.textContent='🔒 Locked — finish all 5 episodes or open with ?unlock=1';
-    app.innerHTML='<p class="pf-muted">Keep adventuring! Return when your backpack is full.</p><p><a class="pf-cta" href="../">← Back to map</a></p>';
+    msg.textContent='🔒 Закрыто — пройди все 5 эпизодов или открой с ?unlock=1';
+    app.innerHTML='<p class="pf-muted">Продолжай приключение! Вернись, когда рюкзак будет полным.</p><p><a class="pf-cta" href="../">← К карте</a></p>';
     return;
   }
-  msg.textContent='Unlocked! 4–5 rounds · 6–8 items each · lenient checking · tap/type (no mic needed).';
+  msg.textContent='Открыто! 4–5 раундов · 6–8 заданий · мягкая проверка · нажми/напечатай (микрофон не нужен).';
   const rounds=(PFData.boss&&PFData.boss.rounds)||[];
   let ri=0, answers={}, scores=[];
   function norm(s){return String(s||'').trim().toLowerCase();}
@@ -83,7 +83,7 @@
       app.appendChild(box);
     });
     const row=document.createElement('div'); row.className='pf-row';
-    const next=document.createElement('button'); next.className='pf-btn pf-btn-primary'; next.textContent= ri===rounds.length-1?'Finish boss':'Next round →';
+    const next=document.createElement('button'); next.className='pf-btn pf-btn-primary'; next.textContent= ri===rounds.length-1?'Завершить босса':'Следующий раунд →';
     next.onclick=()=>{
       // score round
       let c=0,t=0;
@@ -103,7 +103,7 @@
     const pct=T?Math.round(C/T*100):0;
     const stars=PFCourse.starsFromAccuracy(pct);
     PFCourse.writeCourse({boss:{won:true, accuracy:pct, stars, at:Date.now(), answers}});
-    app.innerHTML='<h2>🏆 Boss cleared!</h2><p>Accuracy '+pct+'% · Boss stars: '+'★'.repeat(stars)+'☆'.repeat(3-stars)+'</p>';
+    app.innerHTML='<h2>🏆 Босс побеждён!</h2><p>Точность '+pct+'% · Звёзды босса: '+'★'.repeat(stars)+'☆'.repeat(3-stars)+'</p>';
     showCert(pct, stars);
   }
   function showCert(pct, stars){
@@ -118,27 +118,28 @@
         <h1>Сертификат Следопыта</h1>
         <p class="en">Pathfinder Phonics Quest Certificate</p>
         <p>This certifies that</p>
-        <p><input id="cert-name" class="pf-input" style="max-width:320px;margin:8px auto;text-align:center" placeholder="Student name" value="${name.replace(/"/g,'&quot;')}"/></p>
+        <p><input id="cert-name" class="pf-input" style="max-width:320px;margin:8px auto;text-align:center" placeholder="Имя ученика" value="${name.replace(/"/g,'&quot;')}"/></p>
         <p>has defeated the Final Boss and collected the Pathfinder rewards.</p>
-        <p class="pf-stars" style="font-size:1.4rem">${'★'.repeat(Math.min(3,stars))}${'☆'.repeat(Math.max(0,3-stars))} boss · total stars ${total}</p>
-        <p class="pf-muted">Date: ${date} · Accuracy ${pct}%</p>
+        <p class="pf-stars" style="font-size:1.4rem">${'★'.repeat(Math.min(3,stars))}${'☆'.repeat(Math.max(0,3-stars))} босс · всего звёзд ${total}</p>
+        <p class="pf-muted">Дата: ${date} · Точность ${pct}%</p>
         <div class="pf-row pf-no-print" style="justify-content:center">
-          <button type="button" class="pf-btn pf-btn-primary" id="cert-save">Save name</button>
-          <button type="button" class="pf-btn pf-btn-ghost" id="cert-print">🖨 Print / PDF</button>
+          <button type="button" class="pf-btn pf-btn-primary" id="cert-save">Сохранить имя</button>
+          <button type="button" class="pf-btn pf-btn-ghost" id="cert-print">🖨 Печать / PDF</button>
         </div>
         <p class="pf-muted" style="font-size:12px;margin-top:12px">© @gamify_guru · @o_olay_lay_lay</p>
+        <p class="pf-cert-print-wm">© @gamify_guru · @o_olay_lay_lay</p>
       </div>`;
     document.getElementById('cert-save').onclick=()=>{
       const v=document.getElementById('cert-name').value.trim();
       PFCourse.writeCourse({studentName:v});
-      alert('Name saved');
+      alert('Имя сохранено');
     };
     document.getElementById('cert-print').onclick=()=>window.print();
   }
   // resume cert if already won
   const prev=PFCourse.readCourse().boss||{};
   if(prev.won){ ri=rounds.length; scores=[{c:1,t:1}]; /* jump */ 
-    app.innerHTML='<h2>🏆 Boss already cleared</h2><p>Replay rounds or print your certificate.</p><div class="pf-row"><button class="pf-btn pf-btn-ghost" id="replay">Replay boss</button></div>';
+    app.innerHTML='<h2>🏆 Босс уже побеждён</h2><p>Можно пройти раунды снова или распечатать сертификат.</p><div class="pf-row"><button class="pf-btn pf-btn-ghost" id="replay">Пройти босса снова</button></div>';
     document.getElementById('replay').onclick=()=>{ri=0;answers={};scores=[];render();};
     showCert(prev.accuracy||0, prev.stars||1);
   } else render();
