@@ -49,13 +49,13 @@
     PFCourse.touchPlayed(slug);
 
     const dock = el('div', { id: 'pf-extra-dock', className: 'pf-extra-dock' });
-    const btnHw = el('button', { type: 'button', text: '📝 Homework', className: '' });
-    const btnMt = el('button', { type: 'button', text: '📖 Mini-text', className: '' });
-    const btnClose = el('button', { type: 'button', text: '✕ Close', className: '' });
+    const btnHw = el('button', { type: 'button', text: '📝 Домашка', className: '' });
+    const btnMt = el('button', { type: 'button', text: '📖 Мини-текст', className: '' });
+    const btnClose = el('button', { type: 'button', text: '✕ Закрыть', className: '' });
     dock.append(btnHw, btnMt, btnClose);
 
-    const panelHw = el('section', { id: 'pf-hw-panel', className: 'pf-extra-panel', 'aria-label': 'Homework' });
-    const panelMt = el('section', { id: 'pf-mt-panel', className: 'pf-extra-panel', 'aria-label': 'Mini-text' });
+    const panelHw = el('section', { id: 'pf-hw-panel', className: 'pf-extra-panel', 'aria-label': 'Домашка' });
+    const panelMt = el('section', { id: 'pf-mt-panel', className: 'pf-extra-panel', 'aria-label': 'Мини-текст' });
 
     function show(which) {
       panelHw.classList.toggle('pf-open', which === 'hw');
@@ -64,7 +64,14 @@
       btnMt.classList.toggle('pf-on', which === 'mt');
       if (which === 'hw') renderHomework(panelHw, slug, hw);
       if (which === 'mt') renderMiniText(panelMt, slug, mt);
-      if (which) (which === 'hw' ? panelHw : panelMt).scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (which) {
+        const panel = which === 'hw' ? panelHw : panelMt;
+        const nav = document.querySelector('.pf-course-nav');
+        const dock = document.getElementById('pf-extra-dock');
+        const offset = (nav ? nav.getBoundingClientRect().height : 0) + (dock ? dock.getBoundingClientRect().height : 0) + 8;
+        const y = panel.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+      }
     }
     btnHw.onclick = () => show(panelHw.classList.contains('pf-open') ? '' : 'hw');
     btnMt.onclick = () => show(panelMt.classList.contains('pf-open') ? '' : 'mt');
@@ -98,7 +105,7 @@
         const mtState = (c.miniText || {})[slug] || {};
         if (mt && !mtState.done) {
           openMt();
-          alert('Read the Mini-text and answer the questions before finishing the episode. (You can still play!)');
+          alert('Сначала прочитай Мини-текст и ответь на вопросы — потом можно завершить эпизод. (Играть можно!)');
           // still allow partial progress
           PF.write({ started: true, status: 'in_progress', percent: Math.max(70, (PF.read().percent || 50)) });
           return;
@@ -130,8 +137,8 @@
     if (!hw) { panel.append(el('p', { text: 'No homework for this episode.' })); return; }
     const saved = (PFCourse.readCourse().homework[slug] || {});
     panel.append(
-      el('h2', { text: '📝 Homework' }),
-      el('p', { className: 'pf-muted', text: 'Grade 6 English · different formats from the episode games · answers are checked leniently and saved.' })
+      el('h2', { text: '📝 Домашка' }),
+      el('p', { className: 'pf-muted', text: 'English Grade 6 · задания в других форматах, чем игры урока · ответы проверяются мягко и сохраняются.' })
     );
     const state = saved.answers || {};
     let correct = 0, total = 0;
@@ -245,8 +252,8 @@
       el('p', { className: 'pf-feedback ' + (accuracy >= 70 ? 'ok' : 'bad'), text: `Checked items accuracy: ${accuracy}% (${correct}/${total})` }),
       el('div', { className: 'pf-row' }, [
         el('button', {
-          type: 'button', className: 'pf-btn pf-btn-primary', text: done ? '✓ Homework saved' : 'Save homework progress',
-          onClick: () => { persistHw(slug, hw, state, true); alert('Homework saved!'); },
+          type: 'button', className: 'pf-btn pf-btn-primary', text: done ? '✓ Домашка сохранена' : 'Сохранить домашку',
+          onClick: () => { persistHw(slug, hw, state, true); alert('Домашка сохранена!'); },
         }),
       ])
     );
@@ -296,13 +303,13 @@
     let highlight = !!saved.highlight;
 
     panel.append(
-      el('h2', { text: '📖 Mini-text: ' + mt.title }),
-      el('p', { className: 'pf-muted', text: 'A1–A2 Pixar story · en-GB listen · highlight patterns · then answer 6 questions.' })
+      el('h2', { text: '📖 Мини-текст: ' + mt.title }),
+      el('p', { className: 'pf-muted', text: 'Короткая история A1–A2 · озвучка en-GB · подсветка паттернов · 6 вопросов.' })
     );
     const tools = el('div', { className: 'pf-row' });
     const hlBtn = el('button', {
       type: 'button', className: 'pf-btn pf-btn-ghost',
-      text: highlight ? 'Hide pattern highlight' : 'Highlight pattern words',
+      text: highlight ? 'Скрыть подсветку' : 'Подсветить слова-паттерны',
       onClick: () => {
         highlight = !highlight;
         PFCourse.saveMiniText(slug, { ...saved, highlight, answers });
@@ -310,10 +317,10 @@
       },
     });
     const readAll = el('button', {
-      type: 'button', className: 'pf-btn pf-btn-primary', text: '🔊 Read all (en-GB)',
+      type: 'button', className: 'pf-btn pf-btn-primary', text: '🔊 Слушать всё (en-GB)',
       onClick: () => PFTts.speak(mt.sentences.join(' ')),
     });
-    tools.append(hlBtn, readAll, el('button', { type: 'button', className: 'pf-btn pf-btn-ghost', text: 'Stop', onClick: () => PFTts.stop() }));
+    tools.append(hlBtn, readAll, el('button', { type: 'button', className: 'pf-btn pf-btn-ghost', text: 'Стоп', onClick: () => PFTts.stop() }));
     panel.appendChild(tools);
 
     mt.sentences.forEach((s, i) => {
@@ -334,7 +341,7 @@
       panel.appendChild(row);
     });
 
-    panel.append(el('h3', { text: 'Comprehension' }));
+    panel.append(el('h3', { text: 'Вопросы' }));
     let correct = 0, total = 0;
     mt.questions.forEach((q, idx) => {
       const key = 'q' + idx;
@@ -359,7 +366,7 @@
         box.appendChild(opts);
       } else if (q.type === 'short') {
         total++;
-        const inp = el('input', { type: 'text', className: 'pf-input', value: answers[key] || '', placeholder: 'Type a short answer (no mic needed)' });
+        const inp = el('input', { type: 'text', className: 'pf-input', value: answers[key] || '', placeholder: 'Короткий ответ (без микрофона)' });
         inp.onchange = () => {
           answers[key] = inp.value;
           const ok = acceptAny(inp.value, q.answers);
@@ -370,7 +377,7 @@
         box.appendChild(inp);
       } else {
         total++;
-        const ta = el('textarea', { className: 'pf-input', placeholder: 'Write your question in English…' });
+        const ta = el('textarea', { className: 'pf-input', placeholder: 'Напиши свой вопрос по-английски…' });
         ta.value = answers[key] || '';
         ta.onchange = () => {
           answers[key] = ta.value;
@@ -387,18 +394,18 @@
     const accuracy = total ? Math.round((correct / total) * 100) : 0;
     const finish = el('button', {
       type: 'button', className: 'pf-btn pf-btn-primary',
-      text: 'Finish mini-text & unlock episode complete',
+      text: 'Завершить мини-текст и отметить эпизод пройденным',
       onClick: () => {
         saveMt(slug, mt, answers, highlight, true);
         const acc = PFCourse.computeEpisodeAccuracy(slug);
         PFCourse.completeEpisode(slug, { accuracyPct: acc });
-        alert('Mini-text saved. Episode marked complete. Reward + stars updated!');
+        alert('Мини-текст сохранён. Эпизод отмечен пройденным. Награда и звёзды обновлены!');
       },
     });
     panel.append(
       el('p', { className: 'pf-feedback ' + (accuracy >= 70 ? 'ok' : 'bad'), text: `Comprehension accuracy: ${accuracy}%` }),
       el('div', { className: 'pf-row' }, [finish]),
-      el('p', { className: 'pf-muted', text: 'Tip: typing answers always works — microphone is optional and never required.' })
+      el('p', { className: 'pf-muted', text: 'Подсказка: можно всегда печатать ответ — микрофон не обязателен.' })
     );
   }
 

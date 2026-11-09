@@ -21,14 +21,14 @@
 <div class="pf-wrap">
 
   <h1>📊 Мои результаты</h1>
-  <p class="en pf-muted">Teacher screen-share view · progress, stars, homework, mistakes</p>
+  <p class="en pf-muted">Для проверки учителем (screen share) · прогресс, звёзды, домашка, ошибки</p>
   <div class="pf-row">
-    <input id="res-name" class="pf-input" style="max-width:280px" placeholder="Student name"/>
-    <button type="button" class="pf-btn pf-btn-primary" id="res-save-name">Save name</button>
-    <button type="button" class="pf-btn pf-btn-ghost" id="res-copy">Copy summary</button>
+    <input id="res-name" class="pf-input" style="max-width:280px" placeholder="Имя ученика"/>
+    <button type="button" class="pf-btn pf-btn-primary" id="res-save-name">Сохранить имя</button>
+    <button type="button" class="pf-btn pf-btn-ghost" id="res-copy">Копировать сводку</button>
   </div>
   <div id="res-table"></div>
-  <h3>Mistakes</h3>
+  <h3>Ошибки</h3>
   <div id="res-mistakes"></div>
 
 </div>
@@ -42,15 +42,15 @@
   document.getElementById('res-name').value=c.studentName||'';
   document.getElementById('res-save-name').onclick=()=>{
     PFCourse.writeCourse({studentName:document.getElementById('res-name').value.trim()});
-    alert('Saved');
+    alert('Сохранено');
   };
   document.getElementById('res-copy').onclick=async()=>{
     const t=PFCourse.summaryText();
-    try{ await navigator.clipboard.writeText(t); alert('Copied'); }
-    catch{ prompt('Copy:', t); }
+    try{ await navigator.clipboard.writeText(t); alert('Скопировано'); }
+    catch{ prompt('Скопируй:', t); }
   };
   const table=document.getElementById('res-table');
-  let html='<div class="pf-task"><p>Total stars: <strong>'+PFCourse.totalStars()+'</strong> · Boss: '+(c.boss&&c.boss.won?'won':'not won')+'</p><div class="pf-backpack" id="bp"></div></div>';
+  let html='<div class="pf-task"><p>Всего звёзд: <strong>'+PFCourse.totalStars()+'</strong> · Босс: '+(c.boss&&c.boss.won?'побеждён':'ещё нет')+'</p><div class="pf-backpack" id="bp"></div></div>';
   html+='<div class="pf-cols">';
   PFCourse.EPISODES.forEach(e=>{
     const s=PFCourse.readEp(e.key)||{};
@@ -60,12 +60,12 @@
     const stars=c.stars[e.slug]||0;
     const last=c.lastPlayed[e.slug]? new Date(c.lastPlayed[e.slug]).toLocaleString():'—';
     html+=`<div class="pf-col"><h4>Ep${e.num} ${e.en}</h4>
-      <p>Status: ${st}</p>
+      <p>Статус: ${st}</p>
       <p class="pf-stars">${'★'.repeat(stars)}${'☆'.repeat(3-stars)}</p>
-      <p>Homework: ${hw.done?'yes ('+(hw.accuracy||0)+'%)':'no'}</p>
-      <p>Mini-text: ${mt.done?'yes ('+(mt.accuracy||0)+'%)':'no'}</p>
-      <p>Reward: ${c.backpack.includes(e.reward)?e.rewardLabel:'—'}</p>
-      <p class="pf-muted">Last: ${last}</p></div>`;
+      <p>Домашка: ${hw.done?'да ('+(hw.accuracy||0)+'%)':'нет'}</p>
+      <p>Мини-текст: ${mt.done?'да ('+(mt.accuracy||0)+'%)':'нет'}</p>
+      <p>Награда: ${c.backpack.includes(e.reward)?e.rewardLabel:'—'}</p>
+      <p class="pf-muted">Последний раз: ${last}</p></div>`;
   });
   html+='</div>';
   table.innerHTML=html;
@@ -77,7 +77,7 @@
   });
   const mist=document.getElementById('res-mistakes');
   const ms=(c.mistakes||[]).slice().reverse();
-  if(!ms.length) mist.innerHTML='<p class="pf-muted">No mistakes logged yet.</p>';
+  if(!ms.length) mist.innerHTML='<p class="pf-muted">Ошибок пока нет.</p>';
   else mist.innerHTML='<ul>'+ms.slice(0,80).map(m=>`<li><strong>${m.episode}</strong> · ${m.word}: answered “${m.answered}” expected “${m.expected}” <span class="pf-muted">(${m.task})</span></li>`).join('')+'</ul>';
 })();
 </script>

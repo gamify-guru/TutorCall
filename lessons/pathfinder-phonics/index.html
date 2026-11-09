@@ -242,7 +242,7 @@
     <div class="pf-hero-body">
       <h1>🧭 Следопыт: фонетический квест</h1>
       <p class="en">Pathfinder Phonics Quest</p>
-      <p>Пять эпизодов + Final Boss. Homework, mini-texts, dictionary, stars &amp; backpack rewards. Прогресс сохраняется в этом браузере.</p>
+      <p>Пять эпизодов + финальный босс. Домашка, мини-тексты, словарик, звёзды и награды в рюкзаке. Прогресс сохраняется в этом браузере.</p>
       <div class="pf-progress" aria-label="Общий прогресс"><span id="pf-overall"></span></div>
       <div id="pf-overall-label" style="color:var(--pf-muted);font-size:.9rem;font-weight:700">0 / 5 уроков</div>
       <div class="pf-actions">
@@ -250,16 +250,15 @@
         <button type="button" class="pf-ghost" id="pf-reset-all">↺ Сбросить весь курс</button>
       </div>
       <div class="pf-linkrow">
-        <a href="dictionary/">📚 Dictionary</a>
+        <a href="dictionary/">📚 Словарик</a>
         <a href="results/">📊 Мои результаты</a>
-        <a href="final-boss/" id="pf-boss-link">🏰 Final Boss</a>
-        <a href="teacher.html">👩‍🏫 Teacher</a>
+        <a href="final-boss/" id="pf-boss-link">🏰 Финальный босс</a>
       </div>
     </div>
   </header>
 
-  <h2 style="font-family:Fredoka,Nunito,sans-serif;color:#2a1f14">🗺 Journey Map</h2>
-  <p class="pf-muted" style="color:#5a4633">Tap a stop to travel. Locked stops open in order (or replay any done episode).</p>
+  <h2 style="font-family:Fredoka,Nunito,sans-serif;color:#2a1f14">🗺 Карта путешествия</h2>
+  <p class="pf-muted" style="color:#5a4633">Нажми на остановку, чтобы перейти. Закрытые открываются по порядку (пройденные можно повторить).</p>
   <div class="pf-map-wrap" id="pf-map">
     <img class="pf-map-art" src="images/journey-map.jpg" alt="Pathfinder journey map" width="1280" height="720"/>
     <div class="pf-map-overlay" aria-hidden="false">
@@ -273,11 +272,11 @@
     </div>
   </div>
 
-  <h2 style="font-family:Fredoka,Nunito,sans-serif;color:#2a1f14">🎒 Backpack rewards</h2>
+  <h2 style="font-family:Fredoka,Nunito,sans-serif;color:#2a1f14">🎒 Награды в рюкзаке</h2>
   <p class="pf-muted" id="pf-bp-hint" style="color:#5a4633">Finish each episode to earn an item. Full backpack unlocks the boss.</p>
   <div class="pf-backpack" id="pf-backpack"></div>
 
-  <h2 style="font-family:Fredoka,Nunito,sans-serif;color:#2a1f14">Episodes</h2>
+  <h2 style="font-family:Fredoka,Nunito,sans-serif;color:#2a1f14">Эпизоды</h2>
   <div class="pf-grid">
     <a class="pf-card" data-key="tutorcall-pathfinder-phonics-explorers-backpack-v1" data-slug="explorers-backpack" href="explorers-backpack/">
       <img class="pf-card-art" src="images/ep1-backpack.jpg" alt="Рюкзак Следопыта" width="640" height="360" loading="lazy"/>
@@ -369,7 +368,7 @@
     cont.textContent = done===0 ? 'Начать курс →' : (done===5 ? 'Курс пройден — к боссу →' : 'Продолжить →');
     if(done===5) cont.href='final-boss/';
     document.getElementById('pf-overall').style.width = (done/5*100)+'%';
-    document.getElementById('pf-overall-label').textContent = done+' / 5 уроков · stars '+PFCourse.totalStars();
+    document.getElementById('pf-overall-label').textContent = done+' / 5 уроков · звёзд '+PFCourse.totalStars();
 
     // map states
     let lockNext=false;
@@ -403,17 +402,17 @@
       d.innerHTML='<img src="images/'+r.img+'" alt="'+r.label+'"/><div class="lab">'+r.label+'</div>';
       bp.appendChild(d);
     });
-    document.getElementById('pf-bp-hint').textContent=PFCourse.backpackFull()?'Backpack full — Final Boss unlocked!':'Finish each episode to earn an item. Full backpack unlocks the boss.';
+    document.getElementById('pf-bp-hint').textContent=PFCourse.backpackFull()?'Рюкзак полный — финальный босс открыт!':'Заверши каждый эпизод, чтобы получить награду. Полный рюкзак открывает босса.';
   }
   function preventLocked(e){
     const a=e.currentTarget;
-    if(a.dataset.state==='locked'){ e.preventDefault(); alert('This stop is locked. Finish the previous episode first.'); }
+    if(a.dataset.state==='locked'){ e.preventDefault(); alert('Эта остановка закрыта. Сначала пройди предыдущий эпизод.'); }
   }
   document.querySelectorAll('.pf-map-stop').forEach(a=>a.addEventListener('click', function(e){
-    if(this.dataset.state==='locked'){ e.preventDefault(); alert(this.classList.contains('boss')?'Boss locked — complete all 5 episodes (or use ?unlock=1).':'Stop locked — finish the previous episode first.'); }
+    if(this.dataset.state==='locked'){ e.preventDefault(); alert(this.classList.contains('boss')?'Босс закрыт — пройди все 5 эпизодов (учитель: ?unlock=1).':'Остановка закрыта — сначала пройди предыдущий эпизод.'); }
   }));
   document.getElementById('pf-reset-all').onclick=()=>{
-    if(!confirm('Сбросить ВЕСЬ курс: эпизоды, homework, mini-text, stars, backpack, mistakes, boss?')) return;
+    if(!confirm('Сбросить ВЕСЬ курс: эпизоды, домашку, мини-тексты, звёзды, рюкзак, ошибки, босса?')) return;
     PFCourse.resetAll();
     refresh();
   };
