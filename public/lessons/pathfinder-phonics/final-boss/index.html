@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="author" content="@gamify_guru, @o_olay_lay_lay"/>
+<meta name="theme-color" content="#fff6e8"/>
+<title>Final Boss · Pathfinder Phonics</title>
+<link rel="stylesheet" href="../../_shared/fonts.css"/>
+<link rel="stylesheet" href="../pixar-theme.css"/>
+<link rel="stylesheet" href="../_course/course-extras.css"/>
+</head>
+<body>
+<nav class="pf-course-nav" data-pf-nav="1">
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+    <a href="../">← К курсу</a>
+  </div>
+  <div class="pf-mid">Final Boss</div>
+  <div></div>
+</nav>
+<div class="pf-wrap">
+
+  <header class="pf-hero">
+    <img class="pf-hero-art" src="../images/journey-map.jpg" alt="Final boss castle path" width="1280" height="720"/>
+    <div class="pf-hero-body">
+      <h1>🏰 Final Boss — Castle of All Rules</h1>
+      <p class="en">Mix of syllable types, vowel teams, digraphs, silent letters, soft/hard C&amp;G</p>
+      <p id="boss-lock-msg" class="pf-muted">Complete all 5 episodes (full backpack) to unlock. Teachers: add <code>?unlock=1</code>.</p>
+    </div>
+  </header>
+  <div id="boss-app"></div>
+  <div id="boss-cert" class="pf-cert" style="display:none;margin-top:20px"></div>
+
+</div>
+<script src="../_course/course-store.js"></script>
+<script src="../_course/course-data.js"></script>
+<script src="../_course/tts.js"></script>
+
+<script>
+(function(){
+  const unlocked = PFCourse.bossUnlocked();
+  const msg=document.getElementById('boss-lock-msg');
+  const app=document.getElementById('boss-app');
+  const cert=document.getElementById('boss-cert');
+  if(!unlocked){
+    msg.textContent='🔒 Locked — finish all 5 episodes or open with ?unlock=1';
+    app.innerHTML='<p class="pf-muted">Keep adventuring! Return when your backpack is full.</p><p><a class="pf-cta" href="../">← Back to map</a></p>';
+    return;
+  }
+  msg.textContent='Unlocked! 4–5 rounds · 6–8 items each · lenient checking · tap/type (no mic needed).';
+  const rounds=(PFData.boss&&PFData.boss.rounds)||[];
+  let ri=0, answers={}, scores=[];
+  function norm(s){return String(s||'').trim().toLowerCase();}
+  function okAns(got, expect){
+    got=norm(got); expect=norm(expect);
+    return got===expect || got.replace(/[^a-z0-9]/g,'')===expect.replace(/[^a-z0-9]/g,'');
+  }
+  function render(){
+    if(ri>=rounds.length){ return finish(); }
+    const round=rounds[ri];
+    app.innerHTML='';
+    const h=document.createElement('h2'); h.textContent=round.title; app.appendChild(h);
+    const p=document.createElement('p'); p.className='pf-muted'; p.textContent=round.instructions+' · Round '+(ri+1)+'/'+rounds.length; app.appendChild(p);
+    round.items.forEach((it,idx)=>{
+      const box=document.createElement('div'); box.className='pf-task';
+      const key=round.id+':'+idx;
+      if(it.type==='choice'){
+        box.innerHTML='<p><strong>'+(idx+1)+'. '+it.word+'</strong></p>';
+        const opts=document.createElement('div'); opts.className='pf-options';
+        it.options.forEach(opt=>{
+          const b=document.createElement('button'); b.type='button'; b.textContent=opt;
+          if(answers[key]===opt) b.classList.add('pf-pick');
+          b.onclick=()=>{answers[key]=opt; render();};
+          opts.appendChild(b);
+        });
+        box.appendChild(opts);
+      } else {
+        box.innerHTML='<label>'+(idx+1)+'. '+it.prompt+'</label>';
+        const inp=document.createElement('input'); inp.type='text'; inp.className='pf-input'; inp.value=answers[key]||'';
+        inp.onchange=()=>{answers[key]=inp.value;};
+        box.appendChild(inp);
+      }
+      app.appendChild(box);
+    });
+    const row=document.createElement('div'); row.className='pf-row';
+    const next=document.createElement('button'); next.className='pf-btn pf-btn-primary'; next.textContent= ri===rounds.length-1?'Finish boss':'Next round →';
+    next.onclick=()=>{
+      // score round
+      let c=0,t=0;
+      round.items.forEach((it,idx)=>{
+        t++; const key=round.id+':'+idx; const got=answers[key];
+        const expect=it.answer;
+        const good=okAns(got, expect) || (it.full && okAns(got, it.full));
+        if(good) c++; else if(got) PFCourse.logMistake({episode:'final-boss', word:it.word||it.prompt, expected:expect, answered:got, task:round.id});
+      });
+      scores.push({c,t});
+      ri++; render();
+    };
+    row.appendChild(next); app.appendChild(row);
+  }
+  function finish(){
+    const C=scores.reduce((a,s)=>a+s.c,0), T=scores.reduce((a,s)=>a+s.t,0);
+    const pct=T?Math.round(C/T*100):0;
+    const stars=PFCourse.starsFromAccuracy(pct);
+    PFCourse.writeCourse({boss:{won:true, accuracy:pct, stars, at:Date.now(), answers}});
+    app.innerHTML='<h2>🏆 Boss cleared!</h2><p>Accuracy '+pct+'% · Boss stars: '+'★'.repeat(stars)+'☆'.repeat(3-stars)+'</p>';
+    showCert(pct, stars);
+  }
+  function showCert(pct, stars){
+    const c=PFCourse.readCourse();
+    const name=c.studentName||'';
+    const total=PFCourse.totalStars();
+    const date=new Date().toLocaleDateString('ru-RU');
+    cert.style.display='block';
+    cert.innerHTML=`
+      <img class="pf-cert-art" src="../images/certificate-art.jpg" alt="Certificate art"/>
+      <div class="pf-cert-body">
+        <h1>Сертификат Следопыта</h1>
+        <p class="en">Pathfinder Phonics Quest Certificate</p>
+        <p>This certifies that</p>
+        <p><input id="cert-name" class="pf-input" style="max-width:320px;margin:8px auto;text-align:center" placeholder="Student name" value="${name.replace(/"/g,'&quot;')}"/></p>
+        <p>has defeated the Final Boss and collected the Pathfinder rewards.</p>
+        <p class="pf-stars" style="font-size:1.4rem">${'★'.repeat(Math.min(3,stars))}${'☆'.repeat(Math.max(0,3-stars))} boss · total stars ${total}</p>
+        <p class="pf-muted">Date: ${date} · Accuracy ${pct}%</p>
+        <div class="pf-row pf-no-print" style="justify-content:center">
+          <button type="button" class="pf-btn pf-btn-primary" id="cert-save">Save name</button>
+          <button type="button" class="pf-btn pf-btn-ghost" id="cert-print">🖨 Print / PDF</button>
+        </div>
+        <p class="pf-muted" style="font-size:12px;margin-top:12px">© @gamify_guru · @o_olay_lay_lay</p>
+      </div>`;
+    document.getElementById('cert-save').onclick=()=>{
+      const v=document.getElementById('cert-name').value.trim();
+      PFCourse.writeCourse({studentName:v});
+      alert('Name saved');
+    };
+    document.getElementById('cert-print').onclick=()=>window.print();
+  }
+  // resume cert if already won
+  const prev=PFCourse.readCourse().boss||{};
+  if(prev.won){ ri=rounds.length; scores=[{c:1,t:1}]; /* jump */ 
+    app.innerHTML='<h2>🏆 Boss already cleared</h2><p>Replay rounds or print your certificate.</p><div class="pf-row"><button class="pf-btn pf-btn-ghost" id="replay">Replay boss</button></div>';
+    document.getElementById('replay').onclick=()=>{ri=0;answers={};scores=[];render();};
+    showCert(prev.accuracy||0, prev.stars||1);
+  } else render();
+})();
+</script>
+
+<script src="../../_shared/watermark.js" defer data-handles="@gamify_guru,@o_olay_lay_lay" data-mode="bar" data-position="bottom"></script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="author" content="@gamify_guru, @o_olay_lay_lay"/>
+<meta name="theme-color" content="#fff6e8"/>
+<title>Dictionary · Pathfinder Phonics</title>
+<link rel="stylesheet" href="../../_shared/fonts.css"/>
+<link rel="stylesheet" href="../pixar-theme.css"/>
+<link rel="stylesheet" href="../_course/course-extras.css"/>
+</head>
+<body>
+<nav class="pf-course-nav" data-pf-nav="1">
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+    <a href="../">← К курсу</a>
+  </div>
+  <div class="pf-mid">Dictionary</div>
+  <div></div>
+</nav>
+<div class="pf-wrap">
+
+  <h1>📚 Course Dictionary</h1>
+  <p class="en pf-muted">All Pathfinder words by rule · 🔊 en-GB · search · filter · ★ review · mini-quiz</p>
+  <div class="pf-row">
+    <input id="dict-q" class="pf-input" style="max-width:280px" placeholder="Search word…" />
+    <select id="dict-ep" class="pf-input" style="max-width:220px">
+      <option value="">All episodes</option>
+      <option value="explorers-backpack">Ep1 Backpack</option>
+      <option value="forest-fairies">Ep2 Fairies</option>
+      <option value="dragon-gorge">Ep3 Dragons</option>
+      <option value="sleeping-giants">Ep4 Giants</option>
+      <option value="goblin-tricks">Ep5 Goblins</option>
+    </select>
+    <label><input type="checkbox" id="dict-starred"/> ★ only</label>
+    <button type="button" class="pf-btn pf-btn-primary" id="dict-quiz">Mini-quiz</button>
+  </div>
+  <div id="dict-list"></div>
+  <div id="dict-quiz-box" class="pf-task" style="display:none"></div>
+
+</div>
+<script src="../_course/course-store.js"></script>
+<script src="../_course/course-data.js"></script>
+<script src="../_course/tts.js"></script>
+
+<script>
+(function(){
+  const list=document.getElementById('dict-list');
+  const words=PFData.dictionary||[];
+  function starred(){return new Set(PFCourse.readCourse().dictionaryStars||[]);}
+  function render(){
+    const q=norm(document.getElementById('dict-q').value);
+    const ep=document.getElementById('dict-ep').value;
+    const only=document.getElementById('dict-starred').checked;
+    const st=starred();
+    list.innerHTML='';
+    const groups={};
+    words.forEach(w=>{
+      if(q && !w.word.includes(q)) return;
+      if(ep && w.episode!==ep) return;
+      if(only && !st.has(w.word)) return;
+      (groups[w.rule]=groups[w.rule]||[]).push(w);
+    });
+    Object.keys(groups).sort().forEach(rule=>{
+      const h=document.createElement('h3'); h.textContent=rule; list.appendChild(h);
+      const wrap=document.createElement('div'); wrap.className='pf-options';
+      groups[rule].forEach(w=>{
+        const row=document.createElement('div'); row.className='pf-row'; row.style.margin='4px 0';
+        const star=document.createElement('button'); star.type='button'; star.className='pf-btn pf-btn-ghost'; star.textContent=st.has(w.word)?'★':'☆';
+        star.onclick=()=>{
+          const c=PFCourse.readCourse();
+          let arr=c.dictionaryStars||[];
+          if(arr.includes(w.word)) arr=arr.filter(x=>x!==w.word); else arr=[...arr,w.word];
+          PFCourse.writeCourse({dictionaryStars:arr}); render();
+        };
+        const speak=document.createElement('button'); speak.type='button'; speak.className='pf-btn pf-btn-ghost'; speak.textContent='🔊';
+        speak.onclick=()=>PFTts.speak(w.word);
+        const lab=document.createElement('strong'); lab.textContent=w.word;
+        const meta=document.createElement('span'); meta.className='pf-muted'; meta.textContent=' · '+w.episode;
+        row.append(star, speak, lab, meta); wrap.appendChild(row);
+      });
+      list.appendChild(wrap);
+    });
+  }
+  function norm(s){return String(s||'').trim().toLowerCase();}
+  document.getElementById('dict-q').oninput=render;
+  document.getElementById('dict-ep').onchange=render;
+  document.getElementById('dict-starred').onchange=render;
+  document.getElementById('dict-quiz').onclick=()=>{
+    const box=document.getElementById('dict-quiz-box'); box.style.display='block';
+    const pool=words.slice().sort(()=>Math.random()-0.5).slice(0,6);
+    let i=0,c=0;
+    function ask(){
+      if(i>=pool.length){ box.innerHTML='<p class="pf-feedback ok">Quiz done: '+c+'/'+pool.length+'</p>'; return; }
+      const w=pool[i];
+      box.innerHTML='<p>Listen and type the word ('+(i+1)+'/'+pool.length+')</p>';
+      const b=document.createElement('button'); b.className='pf-btn pf-btn-primary'; b.textContent='🔊 Play'; b.onclick=()=>PFTts.speak(w.word);
+      const inp=document.createElement('input'); inp.className='pf-input'; inp.placeholder='Type what you hear (or skip)';
+      const go=document.createElement('button'); go.className='pf-btn pf-btn-ghost'; go.textContent='Check';
+      go.onclick=()=>{
+        if(norm(inp.value)===norm(w.word)) c++;
+        else if(inp.value) PFCourse.logMistake({episode:'dictionary', word:w.word, expected:w.word, answered:inp.value, task:'quiz'});
+        i++; ask();
+      };
+      const show=document.createElement('button'); show.className='pf-btn pf-btn-ghost'; show.textContent='Show word'; show.onclick=()=>{inp.value=w.word;};
+      box.append(b, inp, go, show);
+    }
+    ask();
+  };
+  render();
+})();
+</script>
+
+<script src="../../_shared/watermark.js" defer data-handles="@gamify_guru,@o_olay_lay_lay" data-mode="bar" data-position="bottom"></script>
+</body>
+</html>
