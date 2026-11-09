@@ -785,7 +785,7 @@ window.PFData = {
                 "face"
               ],
               "answer": "cage",
-              "why": "cage has hard G; others soft C"
+              "why": "cage starts with a hard C /k/; the others have a soft C /s/"
             },
             {
               "options": [
@@ -1263,7 +1263,9 @@ window.PFData = {
           "q": "Name one hard-C word from the story.",
           "answers": [
             "cup",
-            "cat"
+            "cat",
+            "cannot",
+            "can"
           ]
         },
         {
