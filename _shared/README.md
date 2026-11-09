@@ -2,19 +2,18 @@
 
 ## Watermark
 
-Default (only `@gamify_guru`):
+Default tiled (only `@gamify_guru`):
 
 ```html
 <script src="../_shared/watermark.js" defer></script>
 ```
 
-Multiple handles (e.g. Pathfinder course):
+Bar mode (bottom strip — Pathfinder course):
 
 ```html
-<script src="../../_shared/watermark.js" defer
+<script src="../_shared/watermark.js" defer
   data-handles="@gamify_guru,@o_olay_lay_lay"
-  data-theme="dark"></script>
+  data-mode="bar" data-position="bottom"></script>
 ```
 
-Or set `window.TTC_WATERMARK = { handles: ['@gamify_guru','@o_olay_lay_lay'], theme:'dark' }` before the script.
-Default behaviour for existing lessons stays single `@gamify_guru`.
+`data-mode="tile"` (default) keeps the diagonal overlay used on Ravenhill etc.
