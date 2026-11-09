@@ -233,6 +233,7 @@
 }
 </style>
 <link rel="stylesheet" href="./pixar-theme.css"/>
+<link rel="stylesheet" href="./_course/course-extras.css"/>
 </head>
 <body>
 <div class="pf-wrap">
@@ -241,94 +242,179 @@
     <div class="pf-hero-body">
       <h1>🧭 Следопыт: фонетический квест</h1>
       <p class="en">Pathfinder Phonics Quest</p>
-      <p>Пять эпизодов приключений по чтению на английском в едином Pixar-стиле: от типов слогов до soft/hard C&amp;G. Вместе с героем Pathfinder лови существ, крути колесо фей, бросай драконий кубик, стреляй лазером по великанам и раскрывай уловки гоблинов. Прогресс сохраняется в этом браузере.</p>
+      <p>Пять эпизодов + Final Boss. Homework, mini-texts, dictionary, stars &amp; backpack rewards. Прогресс сохраняется в этом браузере.</p>
       <div class="pf-progress" aria-label="Общий прогресс"><span id="pf-overall"></span></div>
       <div id="pf-overall-label" style="color:var(--pf-muted);font-size:.9rem;font-weight:700">0 / 5 уроков</div>
       <div class="pf-actions">
         <a class="pf-cta" id="pf-continue" href="explorers-backpack/">Начать курс →</a>
         <button type="button" class="pf-ghost" id="pf-reset-all">↺ Сбросить весь курс</button>
       </div>
+      <div class="pf-linkrow">
+        <a href="dictionary/">📚 Dictionary</a>
+        <a href="results/">📊 Мои результаты</a>
+        <a href="final-boss/" id="pf-boss-link">🏰 Final Boss</a>
+        <a href="teacher.html">👩‍🏫 Teacher</a>
+      </div>
     </div>
   </header>
+
+  <h2 style="font-family:Fredoka,Nunito,sans-serif;color:#2a1f14">🗺 Journey Map</h2>
+  <p class="pf-muted" style="color:#5a4633">Tap a stop to travel. Locked stops open in order (or replay any done episode).</p>
+  <div class="pf-map-wrap" id="pf-map">
+    <img class="pf-map-art" src="images/journey-map.jpg" alt="Pathfinder journey map" width="1280" height="720"/>
+    <div class="pf-map-overlay" aria-hidden="false">
+      <img class="pf-map-token" id="pf-token" src="images/hero-ref.jpg" alt=""/>
+      <a class="pf-map-stop" data-slug="explorers-backpack" style="left:14%;top:72%" href="explorers-backpack/">1</a>
+      <a class="pf-map-stop" data-slug="forest-fairies" style="left:28%;top:58%" href="forest-fairies/">2</a>
+      <a class="pf-map-stop" data-slug="dragon-gorge" style="left:44%;top:48%" href="dragon-gorge/">3</a>
+      <a class="pf-map-stop" data-slug="sleeping-giants" style="left:60%;top:38%" href="sleeping-giants/">4</a>
+      <a class="pf-map-stop" data-slug="goblin-tricks" style="left:74%;top:30%" href="goblin-tricks/">5</a>
+      <a class="pf-map-stop boss" data-slug="final-boss" style="left:88%;top:22%" href="final-boss/">🏰</a>
+    </div>
+  </div>
+
+  <h2 style="font-family:Fredoka,Nunito,sans-serif;color:#2a1f14">🎒 Backpack rewards</h2>
+  <p class="pf-muted" id="pf-bp-hint" style="color:#5a4633">Finish each episode to earn an item. Full backpack unlocks the boss.</p>
+  <div class="pf-backpack" id="pf-backpack"></div>
+
+  <h2 style="font-family:Fredoka,Nunito,sans-serif;color:#2a1f14">Episodes</h2>
   <div class="pf-grid">
-    <a class="pf-card" data-key="tutorcall-pathfinder-phonics-explorers-backpack-v1" href="explorers-backpack/">
+    <a class="pf-card" data-key="tutorcall-pathfinder-phonics-explorers-backpack-v1" data-slug="explorers-backpack" href="explorers-backpack/">
       <img class="pf-card-art" src="images/ep1-backpack.jpg" alt="Рюкзак Следопыта" width="640" height="360" loading="lazy"/>
       <div class="pf-card-body">
         <div class="pf-card-top"><span class="pf-num">Эпизод 1</span><span class="pf-status" data-status>не начат</span></div>
         <h2>Рюкзак Следопыта</h2>
         <p class="pf-en">Explorer's Backpack</p>
-        <p class="pf-goal">Закрытый / открытый слог, R-тип и magic E — лови существ и читай истории.</p>
+        <p class="pf-goal">Closed/open syllables, R-type &amp; magic E.</p>
+        <p class="pf-stars" data-stars></p>
         <div class="pf-card-bar"><span data-bar style="width:0%"></span></div>
       </div>
     </a>
-    <a class="pf-card" data-key="tutorcall-pathfinder-phonics-forest-fairies-v1" href="forest-fairies/">
+    <a class="pf-card" data-key="tutorcall-pathfinder-phonics-forest-fairies-v1" data-slug="forest-fairies" href="forest-fairies/">
       <img class="pf-card-art" src="images/ep2-fairies.jpg" alt="Переполох Лесных Фей" width="640" height="360" loading="lazy"/>
       <div class="pf-card-body">
         <div class="pf-card-top"><span class="pf-num">Эпизод 2</span><span class="pf-status" data-status>не начат</span></div>
         <h2>Переполох Лесных Фей</h2>
         <p class="pf-en">Forest Fairies Wheel</p>
-        <p class="pf-goal">Vowel teams EE/EA/OO/AI/AY/OA/OU/OI — крути колесо и читай слова.</p>
+        <p class="pf-goal">Vowel teams EE/EA/OO/AI/AY/OA/OU/OI.</p>
+        <p class="pf-stars" data-stars></p>
         <div class="pf-card-bar"><span data-bar style="width:0%"></span></div>
       </div>
     </a>
-    <a class="pf-card" data-key="tutorcall-pathfinder-phonics-dragon-gorge-v1" href="dragon-gorge/">
-      <img class="pf-card-art" src="images/ep3-dragons.jpg" alt="Волшебный Кубик в Ущелье Драконов" width="640" height="360" loading="lazy"/>
+    <a class="pf-card" data-key="tutorcall-pathfinder-phonics-dragon-gorge-v1" data-slug="dragon-gorge" href="dragon-gorge/">
+      <img class="pf-card-art" src="images/ep3-dragons.jpg" alt="Ущелье Драконов" width="640" height="360" loading="lazy"/>
       <div class="pf-card-body">
         <div class="pf-card-top"><span class="pf-num">Эпизод 3</span><span class="pf-status" data-status>не начат</span></div>
         <h2>Волшебный Кубик в Ущелье Драконов</h2>
         <p class="pf-en">Magic Cube in Dragon Gorge</p>
-        <p class="pf-goal">Digraphs CK, TCH, TH, SH, CH, NG, PH, QU — кубик и голос дракона.</p>
+        <p class="pf-goal">Digraphs CK, TCH, TH, SH, CH, NG, PH, QU.</p>
+        <p class="pf-stars" data-stars></p>
         <div class="pf-card-bar"><span data-bar style="width:0%"></span></div>
       </div>
     </a>
-    <a class="pf-card" data-key="tutorcall-pathfinder-phonics-sleeping-giants-v1" href="sleeping-giants/">
-      <img class="pf-card-art" src="images/ep4-giants.jpg" alt="Лазерная Ловушка в Горах Спящих Великанов" width="640" height="360" loading="lazy"/>
+    <a class="pf-card" data-key="tutorcall-pathfinder-phonics-sleeping-giants-v1" data-slug="sleeping-giants" href="sleeping-giants/">
+      <img class="pf-card-art" src="images/ep4-giants.jpg" alt="Спящие Великаны" width="640" height="360" loading="lazy"/>
       <div class="pf-card-body">
         <div class="pf-card-top"><span class="pf-num">Эпизод 4</span><span class="pf-status" data-status>не начат</span></div>
         <h2>Лазерная Ловушка в Горах Спящих Великанов</h2>
-        <p class="pf-en">Laser Trap in the Sleeping Giants</p>
-        <p class="pf-goal">Silent letters — разбуди великанов лазерным чтением.</p>
+        <p class="pf-en">Sleeping Giants</p>
+        <p class="pf-goal">Silent letters — laser reading.</p>
+        <p class="pf-stars" data-stars></p>
         <div class="pf-card-bar"><span data-bar style="width:0%"></span></div>
       </div>
     </a>
-    <a class="pf-card" data-key="tutorcall-pathfinder-phonics-goblin-tricks-v1" href="goblin-tricks/">
-      <img class="pf-card-art" src="images/ep5-goblins.jpg" alt="Хитрые уловки гоблинов" width="640" height="360" loading="lazy"/>
+    <a class="pf-card" data-key="tutorcall-pathfinder-phonics-goblin-tricks-v1" data-slug="goblin-tricks" href="goblin-tricks/">
+      <img class="pf-card-art" src="images/ep5-goblins.jpg" alt="Уловки гоблинов" width="640" height="360" loading="lazy"/>
       <div class="pf-card-body">
         <div class="pf-card-top"><span class="pf-num">Эпизод 5</span><span class="pf-status" data-status>не начат</span></div>
         <h2>Хитрые уловки гоблинов</h2>
         <p class="pf-en">Goblin Tricks</p>
-        <p class="pf-goal">Soft/Hard C & G — ведьмы помогают разоблачить гоблинов.</p>
+        <p class="pf-goal">Soft/Hard C &amp; G.</p>
+        <p class="pf-stars" data-stars></p>
         <div class="pf-card-bar"><span data-bar style="width:0%"></span></div>
       </div>
-    </a></div>
+    </a>
+  </div>
 </div>
+<script src="./_course/course-store.js"></script>
+<script src="./_course/course-data.js"></script>
 <script>
 (function(){
-  const keys = ["tutorcall-pathfinder-phonics-explorers-backpack-v1", "tutorcall-pathfinder-phonics-forest-fairies-v1", "tutorcall-pathfinder-phonics-dragon-gorge-v1", "tutorcall-pathfinder-phonics-sleeping-giants-v1", "tutorcall-pathfinder-phonics-goblin-tricks-v1"];
-  const lessons = [{"key": "tutorcall-pathfinder-phonics-explorers-backpack-v1", "slug": "explorers-backpack", "num": 1}, {"key": "tutorcall-pathfinder-phonics-forest-fairies-v1", "slug": "forest-fairies", "num": 2}, {"key": "tutorcall-pathfinder-phonics-dragon-gorge-v1", "slug": "dragon-gorge", "num": 3}, {"key": "tutorcall-pathfinder-phonics-sleeping-giants-v1", "slug": "sleeping-giants", "num": 4}, {"key": "tutorcall-pathfinder-phonics-goblin-tricks-v1", "slug": "goblin-tricks", "num": 5}];
-  function read(k){ try{ return JSON.parse(localStorage.getItem(k)||'null')||null; }catch{ return null; } }
+  const lessons = PFCourse.EPISODES;
+  const positions={
+    'explorers-backpack':[14,72],'forest-fairies':[28,58],'dragon-gorge':[44,48],
+    'sleeping-giants':[60,38],'goblin-tricks':[74,30],'final-boss':[88,22]
+  };
   function refresh(){
-    let done=0;
+    const course=PFCourse.readCourse();
+    let done=0; let currentSlug=lessons[0].slug;
     document.querySelectorAll('.pf-card').forEach(card=>{
       const k=card.getAttribute('data-key');
-      const s=read(k);
+      const slug=card.getAttribute('data-slug');
+      const s=PFCourse.readEp(k);
       const st=card.querySelector('[data-status]');
       const bar=card.querySelector('[data-bar]');
+      const starsEl=card.querySelector('[data-stars]');
       let state='not_started', label='не начат', pct=0;
       if(s && (s.done || s.status==='done')){ state='done'; label='пройден'; pct=100; done++; }
       else if(s && (s.started || s.status==='in_progress')){ state='in_progress'; label='в процессе'; pct=Math.max(10, Math.min(95, s.percent||25)); }
       st.textContent=label; st.setAttribute('data-state', state); bar.style.width=pct+'%';
+      const stars=course.stars[slug]||0;
+      starsEl.textContent='★'.repeat(stars)+'☆'.repeat(3-stars);
     });
-    const firstOpen = lessons.find(l=>{ const s=read(l.key); return !(s&&(s.done||s.status==='done')); }) || lessons[0];
+    const firstOpen = lessons.find(l=>{ const s=PFCourse.readEp(l.key); return !(s&&(s.done||s.status==='done')); }) || lessons[0];
+    currentSlug = firstOpen.slug;
     const cont=document.getElementById('pf-continue');
     cont.href=firstOpen.slug+'/';
-    cont.textContent = done===0 ? 'Начать курс →' : (done===5 ? 'Курс пройден — повторить 1 эпизод →' : 'Продолжить →');
+    cont.textContent = done===0 ? 'Начать курс →' : (done===5 ? 'Курс пройден — к боссу →' : 'Продолжить →');
+    if(done===5) cont.href='final-boss/';
     document.getElementById('pf-overall').style.width = (done/5*100)+'%';
-    document.getElementById('pf-overall-label').textContent = done+' / 5 уроков пройдено';
+    document.getElementById('pf-overall-label').textContent = done+' / 5 уроков · stars '+PFCourse.totalStars();
+
+    // map states
+    let lockNext=false;
+    lessons.forEach((e,i)=>{
+      const a=document.querySelector('.pf-map-stop[data-slug="'+e.slug+'"]');
+      const s=PFCourse.readEp(e.key);
+      const isDone=!!(s&&(s.done||s.status==='done'));
+      const prevDone=i===0||!!(PFCourse.readEp(lessons[i-1].key)&&(PFCourse.readEp(lessons[i-1].key).done||PFCourse.readEp(lessons[i-1].key).status==='done'));
+      let state='locked';
+      if(isDone) state='done';
+      else if(prevDone || i===0) state='current';
+      else state='locked';
+      a.dataset.state=state;
+      if(state==='locked'){ a.addEventListener('click', preventLocked, {once:false}); }
+    });
+    const boss=document.querySelector('.pf-map-stop.boss');
+    const bu=PFCourse.bossUnlocked();
+    boss.dataset.state=bu?(course.boss&&course.boss.won?'done':'current'):'locked';
+    const bl=document.getElementById('pf-boss-link'); bl.style.color=bu?'#2a1f14':'#8a5a12'; bl.style.background=bu?'#fff':'#fff5eb';
+
+    // token
+    const token=document.getElementById('pf-token');
+    const pos=positions[currentSlug]||positions['explorers-backpack'];
+    token.style.left=pos[0]+'%'; token.style.top=pos[1]+'%';
+
+    // backpack
+    const bp=document.getElementById('pf-backpack'); bp.innerHTML='';
+    (PFData.rewards||[]).forEach(r=>{
+      const d=document.createElement('div');
+      d.className='item'+(course.backpack.includes(r.id)?'':' empty');
+      d.innerHTML='<img src="images/'+r.img+'" alt="'+r.label+'"/><div class="lab">'+r.label+'</div>';
+      bp.appendChild(d);
+    });
+    document.getElementById('pf-bp-hint').textContent=PFCourse.backpackFull()?'Backpack full — Final Boss unlocked!':'Finish each episode to earn an item. Full backpack unlocks the boss.';
   }
+  function preventLocked(e){
+    const a=e.currentTarget;
+    if(a.dataset.state==='locked'){ e.preventDefault(); alert('This stop is locked. Finish the previous episode first.'); }
+  }
+  document.querySelectorAll('.pf-map-stop').forEach(a=>a.addEventListener('click', function(e){
+    if(this.dataset.state==='locked'){ e.preventDefault(); alert(this.classList.contains('boss')?'Boss locked — complete all 5 episodes (or use ?unlock=1).':'Stop locked — finish the previous episode first.'); }
+  }));
   document.getElementById('pf-reset-all').onclick=()=>{
-    if(!confirm('Сбросить прогресс по всем 5 урокам курса?')) return;
-    keys.forEach(k=>localStorage.removeItem(k));
+    if(!confirm('Сбросить ВЕСЬ курс: эпизоды, homework, mini-text, stars, backpack, mistakes, boss?')) return;
+    PFCourse.resetAll();
     refresh();
   };
   refresh();

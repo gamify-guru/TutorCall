@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="author" content="@gamify_guru, @o_olay_lay_lay"/>
+<meta name="theme-color" content="#fff6e8"/>
+<title>Мои результаты · Pathfinder</title>
+<link rel="stylesheet" href="../../_shared/fonts.css"/>
+<link rel="stylesheet" href="../pixar-theme.css"/>
+<link rel="stylesheet" href="../_course/course-extras.css"/>
+</head>
+<body>
+<nav class="pf-course-nav" data-pf-nav="1">
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+    <a href="../">← К курсу</a>
+  </div>
+  <div class="pf-mid">Мои результаты</div>
+  <div></div>
+</nav>
+<div class="pf-wrap">
+
+  <h1>📊 Мои результаты</h1>
+  <p class="en pf-muted">Teacher screen-share view · progress, stars, homework, mistakes</p>
+  <div class="pf-row">
+    <input id="res-name" class="pf-input" style="max-width:280px" placeholder="Student name"/>
+    <button type="button" class="pf-btn pf-btn-primary" id="res-save-name">Save name</button>
+    <button type="button" class="pf-btn pf-btn-ghost" id="res-copy">Copy summary</button>
+  </div>
+  <div id="res-table"></div>
+  <h3>Mistakes</h3>
+  <div id="res-mistakes"></div>
+
+</div>
+<script src="../_course/course-store.js"></script>
+<script src="../_course/course-data.js"></script>
+<script src="../_course/tts.js"></script>
+
+<script>
+(function(){
+  const c=PFCourse.readCourse();
+  document.getElementById('res-name').value=c.studentName||'';
+  document.getElementById('res-save-name').onclick=()=>{
+    PFCourse.writeCourse({studentName:document.getElementById('res-name').value.trim()});
+    alert('Saved');
+  };
+  document.getElementById('res-copy').onclick=async()=>{
+    const t=PFCourse.summaryText();
+    try{ await navigator.clipboard.writeText(t); alert('Copied'); }
+    catch{ prompt('Copy:', t); }
+  };
+  const table=document.getElementById('res-table');
+  let html='<div class="pf-task"><p>Total stars: <strong>'+PFCourse.totalStars()+'</strong> · Boss: '+(c.boss&&c.boss.won?'won':'not won')+'</p><div class="pf-backpack" id="bp"></div></div>';
+  html+='<div class="pf-cols">';
+  PFCourse.EPISODES.forEach(e=>{
+    const s=PFCourse.readEp(e.key)||{};
+    const st=s.done||s.status==='done'?'done':s.started?'in_progress':'not_started';
+    const hw=c.homework[e.slug]||{};
+    const mt=c.miniText[e.slug]||{};
+    const stars=c.stars[e.slug]||0;
+    const last=c.lastPlayed[e.slug]? new Date(c.lastPlayed[e.slug]).toLocaleString():'—';
+    html+=`<div class="pf-col"><h4>Ep${e.num} ${e.en}</h4>
+      <p>Status: ${st}</p>
+      <p class="pf-stars">${'★'.repeat(stars)}${'☆'.repeat(3-stars)}</p>
+      <p>Homework: ${hw.done?'yes ('+(hw.accuracy||0)+'%)':'no'}</p>
+      <p>Mini-text: ${mt.done?'yes ('+(mt.accuracy||0)+'%)':'no'}</p>
+      <p>Reward: ${c.backpack.includes(e.reward)?e.rewardLabel:'—'}</p>
+      <p class="pf-muted">Last: ${last}</p></div>`;
+  });
+  html+='</div>';
+  table.innerHTML=html;
+  const bp=document.getElementById('bp');
+  (PFData.rewards||[]).forEach(r=>{
+    const d=document.createElement('div'); d.className='item'+(c.backpack.includes(r.id)?'':' empty');
+    d.innerHTML=`<img src="../images/${r.img}" alt="${r.label}"/><div class="lab">${r.label}</div>`;
+    bp.appendChild(d);
+  });
+  const mist=document.getElementById('res-mistakes');
+  const ms=(c.mistakes||[]).slice().reverse();
+  if(!ms.length) mist.innerHTML='<p class="pf-muted">No mistakes logged yet.</p>';
+  else mist.innerHTML='<ul>'+ms.slice(0,80).map(m=>`<li><strong>${m.episode}</strong> · ${m.word}: answered “${m.answered}” expected “${m.expected}” <span class="pf-muted">(${m.task})</span></li>`).join('')+'</ul>';
+})();
+</script>
+
+<script src="../../_shared/watermark.js" defer data-handles="@gamify_guru,@o_olay_lay_lay" data-mode="bar" data-position="bottom"></script>
+</body>
+</html>
