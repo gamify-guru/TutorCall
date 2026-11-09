@@ -1,98 +1,72 @@
-/* Pathfinder Phonics — unified Pixar-warm UI override */
+/* Pathfinder Phonics — unified Pixar-warm UI override (light, high-contrast) */
 :root{
-  --pf-bg:#fff6e8;
-  --pf-bg2:#ffe8c8;
-  --pf-card:#ffffff;
-  --pf-ink:#2a1f14;
-  --pf-muted:#6b553f;
-  --pf-accent:#ff8a3d;
-  --pf-accent2:#5b8cff;
-  --pf-gold:#f5b942;
-  --pf-ok:#2fbf71;
-  --pf-line:rgba(80,50,20,.12);
-  --pf-shadow:0 10px 28px rgba(80,45,15,.12);
-  --pf-shadow-sm:0 4px 14px rgba(80,45,15,.10);
-  --pf-radius:22px;
-  --pf-font:"Nunito",system-ui,sans-serif;
-  --pf-display:"Fredoka","Nunito",system-ui,sans-serif;
+  --pf-bg:#fff6e8 !important;
+  --pf-bg2:#ffe8c8 !important;
+  --pf-card:#ffffff !important;
+  --pf-ink:#2a1f14 !important;
+  --pf-muted:#5a4633 !important;
+  --pf-accent:#ff8a3d !important;
+  --pf-accent2:#355ecf !important;
+  --pf-gold:#d4920a !important;
+  --pf-ok:#1c8a4e !important;
+  --pf-line:rgba(80,50,20,.14) !important;
+  --pf-shadow:0 10px 28px rgba(80,45,15,.12) !important;
+  --pf-shadow-sm:0 4px 14px rgba(80,45,15,.10) !important;
+  --pf-radius:22px !important;
+  --pf-font:"Nunito",system-ui,sans-serif !important;
+  --pf-display:"Fredoka","Nunito",system-ui,sans-serif !important;
 }
 html,body{
   background:
     radial-gradient(900px 420px at 12% -8%, #ffd9a8 0%, transparent 55%),
     radial-gradient(800px 380px at 100% 0%, #c9e4ff 0%, transparent 50%),
-    var(--pf-bg) !important;
-  color:var(--pf-ink) !important;
-  font-family:var(--pf-font) !important;
+    #fff6e8 !important;
+  color:#2a1f14 !important;
+  font-family:"Nunito",system-ui,sans-serif !important;
 }
-/* Force readable text on formerly-dark episodes */
-#root, #root *{ font-family:var(--pf-font); }
-#root{
-  color:var(--pf-ink);
-}
-/* Common dark bg utilities → warm light */
-#root .bg-slate-950, #root .bg-slate-900, #root .bg-slate-800,
-#root .bg-\[\#0b1020\], #root .bg-\[\#0f1220\], #root .bg-black,
-#root [class*="bg-slate-9"], #root [class*="bg-slate-8"], #root [class*="bg-zinc-9"],
-#root [class*="bg-gray-9"], #root [class*="bg-neutral-9"]{
-  background-color: rgba(255,255,255,.78) !important;
-  color: var(--pf-ink) !important;
-}
-#root .text-white, #root .text-slate-100, #root .text-slate-200, #root .text-zinc-100{
-  color: var(--pf-ink) !important;
-}
-#root .text-slate-300, #root .text-slate-400, #root .text-zinc-300, #root .text-zinc-400,
-#root .text-white\/60, #root .text-white\/70, #root .text-white\/80{
-  color: var(--pf-muted) !important;
-}
-#root .bg-white\/5, #root .bg-white\/10, #root .bg-black\/20, #root .bg-black\/30,
-#root .bg-slate-800\/50, #root .bg-slate-900\/40{
-  background-color: rgba(255,255,255,.85) !important;
-  border-color: var(--pf-line) !important;
-  box-shadow: var(--pf-shadow-sm);
-}
-#root .border-white\/10, #root .border-white\/20, #root .border-slate-700, #root .border-slate-600{
-  border-color: var(--pf-line) !important;
-}
-/* Cards / panels */
-#root .rounded-2xl, #root .rounded-3xl, #root .rounded-xl{
-  border-radius: var(--pf-radius) !important;
-}
-#root .shadow-xl, #root .shadow-2xl, #root .shadow-lg{
-  box-shadow: var(--pf-shadow) !important;
-}
-/* Buttons — pill 3D */
-#root button, #root .pf-cta, .pf-actions a, .pf-course-nav a, .pf-course-nav button{
-  border-radius: 999px !important;
-  box-shadow: 0 4px 0 rgba(80,45,15,.12), var(--pf-shadow-sm);
-  font-weight: 800 !important;
-  transition: transform .12s ease, filter .12s ease;
-}
-#root button:hover, .pf-course-nav a:hover, .pf-course-nav button:hover{
-  transform: translateY(-1px);
-  filter: brightness(1.03);
-}
-#root button:active{ transform: translateY(1px); box-shadow: 0 2px 0 rgba(80,45,15,.12); }
 
-/* Course chrome */
+/* ===== Course chrome (nav) — hard-coded ink, never inherit pale vars ===== */
 .pf-course-nav{
   position:sticky; top:0; z-index:10050; display:flex; flex-wrap:wrap; gap:8px; align-items:center;
   justify-content:space-between; padding:10px 14px;
-  background:rgba(255,249,239,.94) !important;
-  border-bottom:1px solid var(--pf-line) !important;
-  backdrop-filter:blur(10px); font-family:var(--pf-font); color:var(--pf-ink) !important;
-  box-shadow: var(--pf-shadow-sm);
+  background:rgba(255,249,239,.96) !important;
+  border-bottom:1px solid rgba(80,50,20,.14) !important;
+  backdrop-filter:blur(10px);
+  font-family:"Nunito",system-ui,sans-serif !important;
+  color:#2a1f14 !important;
+  box-shadow:0 4px 14px rgba(80,45,15,.10);
 }
 .pf-course-nav a, .pf-course-nav button{
-  appearance:none; border:1px solid var(--pf-line); background:#fff;
-  color:var(--pf-ink) !important; border-radius:999px; padding:7px 13px; font:800 12px/1.2 var(--pf-font);
-  text-decoration:none; cursor:pointer;
+  appearance:none !important;
+  border:1px solid rgba(80,50,20,.18) !important;
+  background:#ffffff !important;
+  color:#2a1f14 !important;
+  border-radius:999px !important;
+  padding:7px 13px !important;
+  font:800 12px/1.2 "Nunito",system-ui,sans-serif !important;
+  text-decoration:none !important;
+  cursor:pointer;
+  box-shadow:0 3px 0 rgba(80,45,15,.10);
 }
-.pf-course-nav .pf-mid{ color:var(--pf-muted) !important; font:800 12px/1.2 var(--pf-display); }
-.pf-course-nav .pf-reset{ border-color:rgba(255,120,90,.35); background:#fff5f0; }
+.pf-course-nav a:hover, .pf-course-nav button:hover{
+  border-color:rgba(255,138,61,.55) !important;
+  background:#fff5eb !important;
+  color:#2a1f14 !important;
+}
+.pf-course-nav .pf-mid{
+  color:#5a4633 !important;
+  font:800 12px/1.2 "Fredoka","Nunito",system-ui,sans-serif !important;
+}
+.pf-course-nav .pf-reset{
+  border-color:rgba(255,120,90,.45) !important;
+  background:#fff5f0 !important;
+  color:#8a2e16 !important;
+}
 
+/* ===== Episode hero ===== */
 .pf-ep-hero{
   position:relative; margin:12px 12px 8px; border-radius:28px; overflow:hidden;
-  box-shadow: var(--pf-shadow); border:1px solid var(--pf-line); min-height:160px;
+  box-shadow:0 10px 28px rgba(80,45,15,.12); border:1px solid rgba(80,50,20,.14); min-height:160px;
   background:#ffe0b5;
 }
 .pf-ep-hero img{ display:block; width:100%; height:clamp(160px,28vw,280px); object-fit:cover; }
@@ -101,63 +75,387 @@ html,body{
   display:flex; gap:12px; align-items:flex-end;
 }
 .pf-ep-hero .pf-ep-caption .pf-bubble{
-  background:rgba(255,255,255,.92); border:1px solid var(--pf-line); border-radius:18px;
-  padding:10px 14px; box-shadow: var(--pf-shadow-sm); max-width:min(92%,520px);
+  background:rgba(255,255,255,.94) !important;
+  border:1px solid rgba(80,50,20,.14) !important;
+  border-radius:18px;
+  padding:10px 14px; box-shadow:0 4px 14px rgba(80,45,15,.10);
+  max-width:min(92%,560px);
+  color:#2a1f14 !important;
 }
 .pf-ep-hero .pf-ep-caption h1{
-  margin:0; font:800 clamp(1.05rem,2.6vw,1.45rem)/1.15 var(--pf-display); color:var(--pf-ink);
+  margin:0 !important;
+  font:800 clamp(1.05rem,2.6vw,1.45rem)/1.15 "Fredoka","Nunito",system-ui,sans-serif !important;
+  color:#2a1f14 !important;
 }
-.pf-ep-hero .pf-ep-caption p{ margin:4px 0 0; color:var(--pf-muted); font:700 12px/1.3 var(--pf-font); }
+.pf-ep-hero .pf-ep-caption p{
+  margin:4px 0 0 !important;
+  color:#5a4633 !important;
+  font:700 12px/1.35 "Nunito",system-ui,sans-serif !important;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+}
 .pf-ep-hero .pf-avatar{
   width:64px; height:64px; border-radius:50%; object-fit:cover; border:3px solid #fff;
-  box-shadow: var(--pf-shadow-sm); flex:none;
+  box-shadow:0 4px 14px rgba(80,45,15,.10); flex:none;
 }
 @media (max-width:420px){
   .pf-ep-hero .pf-avatar{ width:48px; height:48px; }
   .pf-ep-hero{ margin:8px; border-radius:20px; }
 }
 
-/* Home */
+/* ===== Force light readable episode UI (Tailwind dark leftovers) ===== */
+#root, #root.text-white, #root.min-h-screen{
+  color:#2a1f14 !important;
+  background-color:transparent !important;
+  background-image:none !important;
+}
+#root *{ font-family:"Nunito",system-ui,sans-serif; }
+
+/* Dark utility backgrounds → warm light cards */
+#root .bg-slate-950, #root .bg-slate-900, #root .bg-slate-800, #root .bg-slate-700,
+#root .bg-zinc-950, #root .bg-zinc-900, #root .bg-zinc-800,
+#root .bg-gray-950, #root .bg-gray-900, #root .bg-gray-800,
+#root .bg-neutral-950, #root .bg-neutral-900, #root .bg-black,
+#root .bg-\[\#0b1020\], #root .bg-\[\#0f1220\],
+#root [class*="bg-slate-9"], #root [class*="bg-slate-8"], #root [class*="bg-slate-7"],
+#root [class*="bg-zinc-9"], #root [class*="bg-zinc-8"],
+#root [class*="bg-gray-9"], #root [class*="bg-neutral-9"],
+#root [class*="from-slate-9"], #root [class*="via-slate-9"], #root [class*="to-slate-9"],
+#root [class*="from-purple-95"], #root [class*="via-slate"],
+#root .bg-gradient-to-b, #root .bg-gradient-to-br, #root .bg-gradient-to-r.from-slate-900{
+  background-color:#ffffff !important;
+  background-image:none !important;
+  color:#2a1f14 !important;
+}
+/* Semi-transparent dark overlays / panels */
+#root .bg-white\/5, #root .bg-white\/10, #root .bg-white\/20,
+#root .bg-black\/20, #root .bg-black\/30, #root .bg-black\/40, #root .bg-black\/50,
+#root .bg-slate-800\/50, #root .bg-slate-900\/40, #root .bg-slate-900\/60, #root .bg-slate-900\/80,
+#root .bg-slate-950\/80, #root [class*="bg-slate-900\/"], #root [class*="bg-slate-800\/"],
+#root [class*="bg-black\/"], #root [class*="bg-white\/5"], #root [class*="bg-white\/10"]{
+  background-color:rgba(255,255,255,.92) !important;
+  background-image:none !important;
+  border-color:rgba(80,50,20,.14) !important;
+  box-shadow:0 4px 14px rgba(80,45,15,.08);
+  color:#2a1f14 !important;
+}
+/* Fixed decorative blurs — neutralize dark purple washes */
+#root .fixed.inset-0, #root .fixed.pointer-events-none{
+  background-image:none !important;
+  background-color:transparent !important;
+  opacity:0 !important;
+}
+
+/* Pale / white text → dark ink (match root + descendants) */
+#root .text-white, #root .text-slate-50, #root .text-slate-100, #root .text-slate-200,
+#root .text-zinc-50, #root .text-zinc-100, #root .text-zinc-200,
+#root .text-gray-50, #root .text-gray-100, #root .text-neutral-50,
+#root [class*="text-white"], #root [class*="text-slate-1"], #root [class*="text-slate-2"],
+#root [class*="text-zinc-1"], #root [class*="text-zinc-2"]{
+  color:#2a1f14 !important;
+}
+#root .text-slate-300, #root .text-slate-400, #root .text-slate-500,
+#root .text-zinc-300, #root .text-zinc-400, #root .text-zinc-500,
+#root .text-gray-300, #root .text-gray-400, #root .text-gray-500,
+#root [class*="text-slate-3"], #root [class*="text-slate-4"], #root [class*="text-slate-5"],
+#root [class*="text-zinc-3"], #root [class*="text-zinc-4"],
+#root [class*="text-white\/"]{
+  color:#5a4633 !important;
+}
+/* Headings / body copy */
+#root h1, #root h2, #root h3, #root h4, #root h5, #root h6{
+  color:#2a1f14 !important;
+}
+#root p, #root label, #root span, #root li, #root td, #root th, #root div{
+  /* don't blanket every div — too aggressive for accent chips; color inherits from #root */
+}
+#root p, #root label{ color:#2a1f14 !important; }
+#root .text-purple-200, #root .text-purple-300, #root .text-fuchsia-200,
+#root .text-yellow-200, #root .text-yellow-300, #root .text-amber-200,
+#root .text-cyan-200, #root .text-sky-200, #root .text-blue-200,
+#root [class*="text-purple-2"], #root [class*="text-purple-3"],
+#root [class*="text-yellow-2"], #root [class*="text-amber-2"],
+#root [class*="text-cyan-2"], #root [class*="text-sky-2"]{
+  color:#5a4633 !important;
+}
+
+/* Borders that assumed dark UI */
+#root .border-white\/10, #root .border-white\/20, #root .border-white\/30,
+#root .border-slate-700, #root .border-slate-600, #root .border-slate-800,
+#root [class*="border-white\/"], #root [class*="border-slate-6"], #root [class*="border-slate-7"], #root [class*="border-slate-8"]{
+  border-color:rgba(80,50,20,.14) !important;
+}
+
+/* Cards / panels */
+#root .rounded-2xl, #root .rounded-3xl, #root .rounded-xl{
+  border-radius:22px !important;
+}
+#root .shadow-xl, #root .shadow-2xl, #root .shadow-lg{
+  box-shadow:0 10px 28px rgba(80,45,15,.12) !important;
+}
+
+/* Buttons — pill 3D; default readable */
+#root button, #root a.btn-3d, #root .btn-3d{
+  border-radius:999px !important;
+  box-shadow:0 4px 0 rgba(80,45,15,.12), 0 4px 14px rgba(80,45,15,.08);
+  font-weight:800 !important;
+  transition: transform .12s ease, filter .12s ease;
+}
+#root button:hover{ transform:translateY(-1px); filter:brightness(1.03); }
+#root button:active{ transform:translateY(1px); box-shadow:0 2px 0 rgba(80,45,15,.12); }
+
+/* Inactive / ghost header chips */
+#root button.bg-slate-800, #root button.bg-slate-700, #root button[class*="bg-slate-8"],
+#root button[class*="bg-white\/"], #root a[class*="bg-white\/"]{
+  background:#fff !important;
+  color:#2a1f14 !important;
+  border:1px solid rgba(80,50,20,.16) !important;
+}
+
+
+
+/* Hide leftover story scenario control */
+.pf-hide-story-btn{ display:none !important; }
+
+/* ===== Home ===== */
 .pf-wrap{ max-width:980px; margin:0 auto; padding:22px 16px 72px; }
 .pf-hero{
-  background:#fff; border:1px solid var(--pf-line); border-radius:28px; overflow:hidden;
-  box-shadow: var(--pf-shadow); margin-bottom:20px;
+  background:#fff; border:1px solid rgba(80,50,20,.14); border-radius:28px; overflow:hidden;
+  box-shadow:0 10px 28px rgba(80,45,15,.12); margin-bottom:20px;
 }
 .pf-hero-art{ display:block; width:100%; height:clamp(180px,34vw,320px); object-fit:cover; }
 .pf-hero-body{ padding:18px 20px 20px; }
-.pf-hero h1{ font-family:var(--pf-display); font-size:clamp(1.55rem,4vw,2.3rem); margin:0 0 6px; color:var(--pf-ink); }
-.pf-hero .en{ color:var(--pf-accent2); font-weight:800; margin:0 0 10px; }
-.pf-hero p{ color:var(--pf-muted); margin:0 0 14px; line-height:1.5; }
+.pf-hero h1{ font-family:"Fredoka","Nunito",system-ui,sans-serif; font-size:clamp(1.55rem,4vw,2.3rem); margin:0 0 6px; color:#2a1f14; }
+.pf-hero .en{ color:#274bb5; font-weight:800; margin:0 0 10px; }
+.pf-hero p{ color:#5a4633; margin:0 0 14px; line-height:1.5; }
 .pf-progress{ height:14px; background:rgba(80,45,15,.08); border-radius:999px; overflow:hidden; margin:10px 0; }
-.pf-progress>span{ display:block; height:100%; width:0; background:linear-gradient(90deg,var(--pf-accent),var(--pf-gold)); transition:width .35s; }
+.pf-progress>span{ display:block; height:100%; width:0; background:linear-gradient(90deg,#ff8a3d,#f5b942); transition:width .35s; }
 .pf-actions{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
 .pf-actions a, .pf-actions button{
-  appearance:none; border:0; border-radius:999px; padding:12px 18px; font:800 14px/1 var(--pf-font);
+  appearance:none; border:0; border-radius:999px; padding:12px 18px; font:800 14px/1 "Nunito",system-ui,sans-serif;
   cursor:pointer; text-decoration:none;
 }
 .pf-cta{ background:linear-gradient(180deg,#ffb067,#ff8a3d); color:#fff !important; }
-.pf-ghost{ background:#fff; color:var(--pf-ink); border:1px solid var(--pf-line)!important; }
+.pf-ghost{ background:#fff; color:#2a1f14; border:1px solid rgba(80,50,20,.14)!important; }
 .pf-grid{ display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
 .pf-card{
-  display:flex; flex-direction:column; background:var(--pf-card); border:1px solid var(--pf-line);
+  display:flex; flex-direction:column; background:#fff; border:1px solid rgba(80,50,20,.14);
   border-radius:24px; overflow:hidden; color:inherit; text-decoration:none;
-  box-shadow: var(--pf-shadow-sm); transition:.2s transform,.2s box-shadow;
+  box-shadow:0 4px 14px rgba(80,45,15,.10); transition:.2s transform,.2s box-shadow;
 }
-.pf-card:hover{ transform:translateY(-3px); box-shadow: var(--pf-shadow); }
+.pf-card:hover{ transform:translateY(-3px); box-shadow:0 10px 28px rgba(80,45,15,.12); }
 .pf-card-art{ width:100%; height:140px; object-fit:cover; display:block; background:#ffe0b5; }
 .pf-card-body{ padding:14px 14px 16px; }
 .pf-card-top{ display:flex; justify-content:space-between; gap:8px; margin-bottom:6px; }
-.pf-num{ font:800 12px/1 var(--pf-display); color:var(--pf-accent); letter-spacing:.04em; text-transform:uppercase; }
-.pf-status{ font:800 11px/1 var(--pf-font); padding:5px 8px; border-radius:999px; background:rgba(80,45,15,.06); color:var(--pf-muted); }
-.pf-status[data-state="in_progress"]{ background:rgba(91,140,255,.15); color:#355ecf; }
+.pf-num{ font:800 12px/1 "Fredoka","Nunito",system-ui,sans-serif; color:#7a3208; letter-spacing:.04em; text-transform:uppercase; }
+.pf-status{ font:800 11px/1 "Nunito",system-ui,sans-serif; padding:5px 8px; border-radius:999px; background:rgba(80,45,15,.06); color:#5a4633; }
+.pf-status[data-state="in_progress"]{ background:rgba(91,140,255,.15); color:#274bb5; }
 .pf-status[data-state="done"]{ background:rgba(47,191,113,.16); color:#1c8a4e; }
-.pf-card h2{ font-family:var(--pf-display); font-size:1.15rem; margin:0 0 4px; color:var(--pf-ink); }
-.pf-en{ margin:0 0 8px; color:var(--pf-accent2); font-size:.9rem; font-weight:800; }
-.pf-goal{ margin:0; color:var(--pf-muted); font-size:.92rem; line-height:1.45; }
+.pf-card h2{ font-family:"Fredoka","Nunito",system-ui,sans-serif; font-size:1.15rem; margin:0 0 4px; color:#2a1f14; }
+.pf-en{ margin:0 0 8px; color:#274bb5; font-size:.9rem; font-weight:800; }
+.pf-goal{ margin:0; color:#5a4633; font-size:.92rem; line-height:1.45; }
 .pf-card-bar{ margin-top:12px; height:7px; background:rgba(80,45,15,.08); border-radius:99px; overflow:hidden; }
-.pf-card-bar>span{ display:block; height:100%; background:linear-gradient(90deg,var(--pf-accent),var(--pf-gold)); }
+.pf-card-bar>span{ display:block; height:100%; background:linear-gradient(90deg,#ff8a3d,#f5b942); }
 
-/* Teacher page warm restyle */
-body .wrap{ color:var(--pf-ink); }
+/* Teacher */
+body .wrap{ color:#2a1f14; }
 body .wrap h1, body .wrap h2{ color:#c45c12 !important; }
-body .plan{ background:#fff !important; border-color:var(--pf-line) !important; box-shadow:var(--pf-shadow-sm); }
+body .plan{ background:#fff !important; border-color:rgba(80,50,20,.14) !important; box-shadow:0 4px 14px rgba(80,45,15,.10); }
+
+/* ===== glass-panel → warm frosted light ===== */
+#root .glass-panel, .glass-panel{
+  background:rgba(255,255,255,.92) !important;
+  background-image:none !important;
+  color:#2a1f14 !important;
+  border-color:rgba(80,50,20,.14) !important;
+  box-shadow:0 10px 28px rgba(80,45,15,.10) !important;
+  backdrop-filter:blur(12px);
+}
+#root header.glass-panel, #root .glass-panel.sticky{
+  background:rgba(255,249,239,.96) !important;
+  color:#2a1f14 !important;
+}
+#root .glass-panel .text-white,
+#root .glass-panel [class*="text-white"],
+#root .glass-panel .text-slate-100,
+#root .glass-panel .text-slate-200,
+#root .glass-panel .text-slate-300,
+#root .glass-panel [class*="text-slate-1"],
+#root .glass-panel [class*="text-slate-2"],
+#root .glass-panel [class*="text-slate-3"],
+#root header.glass-panel h1,
+#root header.glass-panel h2,
+#root .glass-panel h1,
+#root .glass-panel h2,
+#root .glass-panel h3,
+#root .glass-panel p{
+  color:#2a1f14 !important;
+}
+#root .glass-panel .text-slate-400,
+#root .glass-panel .text-slate-500,
+#root .glass-panel [class*="text-slate-4"],
+#root .glass-panel [class*="text-slate-5"]{
+  color:#5a4633 !important;
+}
+
+/* Accent fills: white text on the fill itself + its .text-white children (NOT universal *) */
+#root .bg-purple-500, #root .bg-purple-600, #root .bg-violet-500, #root .bg-violet-600,
+#root .bg-fuchsia-500, #root .bg-pink-500, #root .bg-rose-500, #root .bg-rose-600,
+#root .bg-orange-500, #root .bg-orange-600, #root .bg-amber-500, #root .bg-amber-600,
+#root .bg-red-500, #root .bg-red-600, #root .bg-blue-500, #root .bg-blue-600,
+#root .bg-sky-500, #root .bg-cyan-500, #root .bg-indigo-500, #root .bg-indigo-600,
+#root .bg-emerald-500, #root .bg-emerald-600, #root .bg-green-500, #root .bg-green-600,
+#root [class~="bg-purple-500"], #root [class~="bg-purple-600"],
+#root [class~="bg-orange-500"], #root [class~="bg-orange-600"],
+#root [class~="bg-amber-500"], #root [class~="bg-red-500"],
+#root [class~="bg-blue-500"], #root [class~="bg-violet-500"],
+#root [class~="bg-pink-500"], #root [class~="bg-fuchsia-500"],
+#root [class~="bg-indigo-500"], #root [class~="bg-emerald-500"],
+#root [class~="bg-green-500"], #root [class~="bg-sky-500"]{
+  color:#ffffff !important;
+}
+#root .bg-purple-500.text-white, #root .bg-purple-600.text-white,
+#root .bg-orange-500.text-white, #root .bg-orange-600.text-white,
+#root .bg-amber-500.text-white, #root .bg-red-500.text-white,
+#root .bg-violet-500.text-white, #root .bg-blue-500.text-white,
+#root .bg-pink-500.text-white, #root .bg-fuchsia-500.text-white,
+#root .bg-indigo-500.text-white, #root .bg-emerald-500.text-white,
+#root .bg-purple-500 .text-white, #root .bg-purple-600 .text-white,
+#root .bg-orange-500 .text-white, #root .bg-orange-600 .text-white,
+#root .bg-amber-500 .text-white, #root .bg-red-500 .text-white,
+#root .bg-violet-500 .text-white, #root .bg-blue-500 .text-white,
+#root .bg-gradient-to-r.from-amber-500, #root .bg-gradient-to-r.from-amber-500.text-white,
+#root .bg-gradient-to-r.from-orange-500, #root .bg-gradient-to-r.from-orange-600,
+#root .bg-gradient-to-r.from-purple-500, #root .bg-gradient-to-r.from-purple-600,
+#root .bg-gradient-to-r.from-red-500, #root .bg-gradient-to-r.from-red-600,
+#root .bg-gradient-to-r.from-violet-500,
+#root button.bg-gradient-to-r.from-amber-500,
+#root button.bg-gradient-to-r.from-orange-500,
+#root button.bg-gradient-to-r.from-purple-500,
+#root button.bg-gradient-to-r.from-red-500,
+#root button.bg-gradient-to-r.from-violet-500,
+#root .btn-3d.bg-gradient-to-r{
+  color:#ffffff !important;
+}
+
+/* Dice face panels (solid colored absolute faces) */
+#root .absolute.inset-0.flex.flex-col.items-center.justify-center.rounded-2xl{
+  color:#ffffff !important;
+}
+#root .absolute.inset-0.flex.flex-col.items-center.justify-center.rounded-2xl .text-white,
+#root .absolute.inset-0.flex.flex-col.items-center.justify-center.rounded-2xl [class*="text-white"],
+#root .absolute.inset-0.flex.flex-col.items-center.justify-center.rounded-2xl [class*="text-slate"],
+#root .absolute.inset-0.flex.flex-col.items-center.justify-center.rounded-2xl span,
+#root .absolute.inset-0.flex.flex-col.items-center.justify-center.rounded-2xl div{
+  color:#ffffff !important;
+}
+
+/* Yellow buttons: dark text */
+#root .bg-yellow-300, #root .bg-yellow-400, #root .bg-yellow-200,
+#root [class~="bg-yellow-300"], #root [class~="bg-yellow-400"],
+#root button[class*="from-yellow-3"], #root button[class*="from-yellow-4"],
+#root button.bg-yellow-400, #root button.bg-yellow-300{
+  color:#2a1f14 !important;
+}
+#root .bg-yellow-300 .text-white, #root .bg-yellow-400 .text-white,
+#root .bg-yellow-300 [class*="text-white"], #root .bg-yellow-400 [class*="text-white"]{
+  color:#2a1f14 !important;
+}
+
+/* Soft accent labels on light UI */
+#root .text-yellow-400, #root .text-yellow-300, #root .text-amber-400{ color:#8a5a12 !important; }
+#root .text-purple-400, #root .text-purple-300, #root .text-fuchsia-400{ color:#5b3db8 !important; }
+#root .text-cyan-400, #root .text-sky-400{ color:#0e7490 !important; }
+
+/* Home accent English title — darker blue for WCAG */
+.pf-hero .en, .pf-en{ color:#274bb5 !important; }
+
+/* Hero bubble lock */
+.pf-ep-hero .pf-bubble, .pf-ep-hero .pf-bubble h1, .pf-ep-hero .pf-bubble p{
+  color:#2a1f14 !important;
+}
+.pf-ep-hero .pf-bubble p{ color:#5a4633 !important; }
+
+/* Badge / chip panels that keep saturated bg but had dark inherited ink */
+#root [class*="bg-purple-500"], #root [class*="bg-purple-600"],
+#root [class*="bg-violet-500"], #root [class*="bg-violet-600"],
+#root [class*="bg-fuchsia-500"], #root [class*="bg-pink-500"],
+#root [class*="bg-orange-500"], #root [class*="bg-orange-600"],
+#root [class*="bg-amber-500"], #root [class*="bg-red-500"],
+#root [class*="bg-blue-500"], #root [class*="bg-indigo-500"],
+#root [class*="bg-emerald-500"], #root [class*="bg-green-500"]{
+  color:#ffffff !important;
+}
+/* But NOT the /opacity utility chips on light UI (bg-purple-500/10 etc) — those need dark text */
+#root [class*="bg-purple-500/"], #root [class*="bg-purple-600/"],
+#root [class*="bg-violet-500/"], #root [class*="bg-orange-500/"],
+#root [class*="bg-amber-500/"], #root [class*="bg-red-500/"],
+#root [class*="bg-blue-500/"], #root [class*="bg-emerald-500/"],
+#root [class*="bg-pink-500/"], #root [class*="bg-fuchsia-500/"]{
+  color:#2a1f14 !important;
+}
+/* IPA / secondary labels that sat on translucent washes: force muted dark */
+#root .text-purple-200, #root .text-fuchsia-200, #root .text-violet-200{
+  color:#5a4633 !important;
+}
+
+/* Keep dark translucent chips dark (IPA pills use bg-black/30 + text-white) */
+#root .bg-black\/20, #root .bg-black\/30, #root .bg-black\/40, #root .bg-black\/50,
+#root [class*="bg-black/20"], #root [class*="bg-black/30"], #root [class*="bg-black/40"], #root [class*="bg-black/50"]{
+  background-color:rgba(42,31,20,.55) !important;
+  color:#ffffff !important;
+}
+#root [class*="bg-black/20"] .text-white, #root [class*="bg-black/30"] .text-white,
+#root [class*="bg-black/30"][class*="text-white"], #root [class*="bg-black/20"][class*="text-white"],
+#root .bg-black\/30, #root .bg-black\/30.text-white, #root [class*="text-white/90"]{
+  color:#ffffff !important;
+}
+
+/* Active colored buttons with text-white (inline style bg from JS) */
+#root button.text-white[style*="background"],
+#root button.text-white.shadow-lg,
+#root button.text-white.scale-105,
+#root [style*="background-color"][class*="text-white"]{
+  color:#ffffff !important;
+}
+
+/* Ep1 arbitrary muted golds → darker readable browns */
+#root .text-\[\#a28552\], #root [class*="text-[#a28552]"],
+#root .text-\[\#b8860b\], #root [class*="text-[#b8860b]"],
+#root .text-\[\#b98d49\], #root [class*="text-[#b98d49]"]{
+  color:#6b4a12 !important;
+}
+#root .bg-\[\#241d14\], #root [class*="bg-[#241d14]"]{
+  background-color:#5b3d18 !important;
+  color:#fff !important;
+}
+
+/* Soften dice orange so white large text hits 3:1 — prefer darker orange fill */
+#root .bg-orange-500, #root [class~="bg-orange-500"]{
+  background-color:#c2410c !important;
+  color:#fff !important;
+}
+#root .bg-amber-500, #root [class~="bg-amber-500"]{
+  background-color:#b45309 !important;
+  color:#fff !important;
+}
+#root .bg-cyan-500, #root [class~="bg-cyan-500"], #root .bg-cyan-400{
+  background-color:#0e7490 !important;
+  color:#fff !important;
+}
+#root .bg-pink-500, #root [class~="bg-pink-500"]{
+  background-color:#be185d !important;
+  color:#fff !important;
+}
+#root .bg-emerald-500, #root [class~="bg-emerald-500"]{
+  background-color:#047857 !important;
+  color:#fff !important;
+}
+#root .bg-blue-500, #root [class~="bg-blue-500"]{
+  background-color:#1d4ed8 !important;
+  color:#fff !important;
+}
+#root .bg-purple-500, #root [class~="bg-purple-500"]{
+  background-color:#7e22ce !important;
+  color:#fff !important;
+}
+
