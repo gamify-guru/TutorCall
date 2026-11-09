@@ -78,3 +78,10 @@
 
 /* Allow episode voice modals (position:fixed) to paint above chrome */
 #root, #root > div.min-h-screen { overflow: visible !important; }
+
+
+/* Ep1 voice-lock modal: sit above watermark bar, keep backdrop usable */
+#root .fixed.inset-0.z-\[2147483100\],
+body > .fixed.inset-0 {
+  z-index: 2147483100 !important;
+}
