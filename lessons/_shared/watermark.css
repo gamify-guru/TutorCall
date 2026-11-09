@@ -1,0 +1,39 @@
+/* TutorCall material watermark — @gamify_guru
+   Include via watermark.js (preferred) or link this file + call GamifyWatermark.mount(). */
+.ttc-wm-layer{
+  position:fixed; inset:0; z-index:2147483000;
+  pointer-events:none !important; user-select:none !important;
+  -webkit-user-select:none !important;
+  overflow:hidden; contain:strict;
+}
+.ttc-wm-tile{
+  position:absolute; inset:-40% -20%;
+  display:flex; flex-wrap:wrap; align-content:flex-start;
+  gap:2.2rem 2.8rem; transform:rotate(-28deg);
+  opacity:0.075; color:#c9b8a0;
+  font:600 15px/1.2 ui-sans-serif,system-ui,Segoe UI,Roboto,Manrope,sans-serif;
+  letter-spacing:0.04em; white-space:nowrap;
+}
+.ttc-wm-tile span{ display:inline-block; padding:0.35rem 0.6rem; }
+.ttc-wm-badge{
+  position:fixed; right:10px; bottom:10px; z-index:2147483001;
+  pointer-events:none !important; user-select:none !important;
+  font:600 11px/1.2 ui-sans-serif,system-ui,sans-serif;
+  letter-spacing:0.02em; color:rgba(243,233,220,0.72);
+  background:rgba(20,15,12,0.45); border:1px solid rgba(212,168,87,0.28);
+  border-radius:999px; padding:5px 10px; backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+}
+@media (max-width:420px){
+  .ttc-wm-tile{ font-size:12px; gap:1.6rem 1.8rem; opacity:0.07; }
+  .ttc-wm-badge{ right:8px; bottom:8px; font-size:10px; padding:4px 8px; }
+}
+@media print{
+  .ttc-wm-layer{ position:fixed; inset:0; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .ttc-wm-tile{ opacity:0.14 !important; color:#666 !important; }
+  .ttc-wm-badge{
+    position:fixed; right:8px; bottom:8px; opacity:1 !important;
+    color:#333 !important; background:transparent !important; border-color:#999 !important;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+}
