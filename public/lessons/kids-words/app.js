@@ -312,7 +312,9 @@ function addWord(entry){
   const ru=(entry.ru||$('manualRu').value.trim()).slice(0,MAX_RU);
   if(!ru){$('status').textContent='Нужен перевод: напиши сам или добавь своё слово.';$('status').className='status err';$('manual').classList.add('show');return}
   const item=migrateItem({...entry,ru,example:makeExample(entry.word,entry.example),theme:$('themePick').value||entry.theme,hard:!!entry.hard,ts:Date.now(),custom:!!entry.custom,emoji:entry.emoji||pickEmoji(entry.word)});
-  state.lists[state.tab]=[item,...list()]; save(); showPreview(item); renderMine(); renderBank(); updateCount(); flashWord(item.word);
+  state.lists[state.tab]=[item,...list()];
+  if(themeFilter && item.theme!==themeFilter) themeFilter=item.theme||'';
+  save(); showPreview(item); renderThemeFilters(); renderMine(); renderBank(); updateCount(); flashWord(item.word);
   $('status').textContent='Сохранено в «'+TABS[state.tab].title+'»!';$('status').className='status ok';
 }
 function flashWord(word){
@@ -369,26 +371,33 @@ async function saveCustom(ev){
   if(!ru){$('customStatus').textContent='Нужен перевод.';$('customStatus').className='status err';return}
   if(findIn(state.tab,word)){$('customStatus').textContent='Такое слово уже есть на этой вкладке.';$('customStatus').className='status err';return}
   $('customStatus').textContent='Сохраняем…';
-  let audio='', ipa=$('cIpa').value.trim();
-  try{
-    const r=await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(norm(word)));
-    if(r.ok){
-      const data=await r.json(); const e=data[0]||{};
-      const ph=(e.phonetics||[]).find(p=>p.audio&&/uk|gb|british/i.test(p.audio))||(e.phonetics||[]).find(p=>p.audio)||(e.phonetics||[])[0];
-      if(!ipa) ipa=(ph&&ph.text)||e.phonetic||'';
-      audio=(ph&&ph.audio)||'';
-    }
-  }catch{}
+  const ipa=$('cIpa').value.trim();
   const example=($('cEx').value.trim()||makeExample(word,'')).slice(0,MAX_EX);
   const item=migrateItem({
-    word, ru, ipa, audio, example, def:'', hard:$('cHard').checked,
+    word, ru, ipa, audio:'', example, def:'', hard:$('cHard').checked,
     theme:$('cTheme').value, ts:Date.now(), custom:true,
     emoji:($('cEmoji').value.trim()||pickEmoji(word))
   });
-  state.lists[state.tab]=[item,...list()]; save();
-  closeCustomModal(); showPreview(item); renderMine(); renderBank(); updateCount(); flashWord(item.word);
+  state.lists[state.tab]=[item,...list()];
+  if(themeFilter && item.theme!==themeFilter) themeFilter=item.theme||'';
+  save();
+  closeCustomModal(); showPreview(item); renderThemeFilters(); renderMine(); renderBank(); updateCount(); flashWord(item.word);
   $('lookup').value=item.word;
   $('status').textContent='Своё слово сохранено в «'+TABS[state.tab].title+'»!';$('status').className='status ok';
+  // Optional UK audio/IPA — never block the child's save on a network lookup.
+  (async()=>{
+    try{
+      const r=await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(norm(word)));
+      if(!r.ok)return;
+      const data=await r.json(); const e=data[0]||{};
+      const ph=(e.phonetics||[]).find(p=>p.audio&&/uk|gb|british/i.test(p.audio))||(e.phonetics||[]).find(p=>p.audio)||(e.phonetics||[])[0];
+      const it=findIn(state.tab,word); if(!it)return;
+      if(!it.ipa) it.ipa=(ph&&ph.text)||e.phonetic||it.ipa;
+      it.audio=(ph&&ph.audio)||it.audio||'';
+      save();
+      if(active&&norm(active.word)===norm(word)) showPreview({...it});
+    }catch{}
+  })();
 }
 
 function openEditModal(word){
