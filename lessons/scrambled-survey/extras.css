@@ -1,0 +1,51 @@
+/* TutorCall port extras: contrast, watermark print, tap safety */
+
+/* Disabled buttons: solid muted colors (opacity .42 fails WCAG) */
+.btn:disabled{
+  opacity: 1 !important;
+  background: #24382f;
+  color: #f7f1e6;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+.btn-light:disabled,
+.btn-brass:disabled,
+.btn-outline-light:disabled{
+  background: #c4b089;
+  color: #2a2116;
+  border-color: #6b5738;
+}
+
+/* Clay on parchment is just under 4.5 — deepen it */
+.text-clay,
+[class*="text-clay"]{
+  color: #8a3f2c;
+}
+
+/* Invisible scroll-reveal wrappers must not intercept taps */
+.reveal:not(.is-visible){
+  pointer-events: none !important;
+}
+
+/* Print: keep the @gamify_guru bar visible even though the original
+   lesson hides body * except .report-print */
+@media print{
+  #ttc-wm-bar,
+  #ttc-wm-bar *{
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: flex !important;
+    color: #333 !important;
+    background: #f5f0e6 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 2147483001 !important;
+  }
+  html, body{
+    padding-bottom: 40px !important;
+  }
+}
