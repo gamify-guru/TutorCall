@@ -76,12 +76,16 @@ footer b{color:var(--p);font-family:var(--T)}
 @media (max-width:900px){main{grid-template-columns:1fr;padding:10px}.timer{position:static;min-height:0}.kbd{display:none}.clock{font-size:clamp(84px,24vw,200px)}}
 
 /* TutorCall: watermark clearance + 390 overflow */
-body{padding-bottom:48px}
-footer{padding-bottom:40px}
+html,body{height:auto;min-height:100%}
+body{padding-bottom:56px}
+main{padding-bottom:28px}
+footer{padding-bottom:48px}
+.timer{min-height:calc(100vh - 220px)}
 .hbtns .ttc-reset{white-space:nowrap}
 @media (max-width:900px){
   .custom{white-space:normal}
   .hwrap{gap:8px}
+  .timer{min-height:0}
 }
 </style>
 </head>
