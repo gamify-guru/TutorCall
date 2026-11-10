@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#7ec8f0">
+<title>Мой первый словарик · My First Dictionary</title>
+<meta name="description" content="Словарик английского для 1–4 классов (A1): слова по темам с картинками, британское произношение, свои слова, игры и звёзды. Две вкладки — доп. занятия и школьный учебник.">
+<link rel="stylesheet" href="../_shared/fonts.css">
+<style>
+:root{
+  --bg:#fff4dc;
+  --sky:#9ad8ff;
+  --ink:#2a1f14;
+  --muted:#4a3728;
+  --card:#fffdf8;
+  --line:#e0bf8c;
+  --accent:#ff8a3d;
+  --accent-ink:#2a1200;
+  --accent-edge:#c45a12;
+  --green:#1a6b3c;
+  --green-fg:#ffffff;
+  --blue:#155e8a;
+  --blue-fg:#ffffff;
+  --gold:#f5c518;
+  --gold-ink:#2a1f14;
+  --ok:#146c38;
+  --err:#9b1c1c;
+  --pink:#ffd6e6;
+  --focus:#155e8a;
+  --shadow:rgba(80,50,20,.16);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font:20px/1.45 Nunito,system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,.brand .mark,.tab,.btn,.tool,.chip,.word,.ew{font-family:Fredoka,Nunito,system-ui,sans-serif}
+button,input,select,textarea{font:inherit;color:var(--ink)}
+button{cursor:pointer}
+.sky{pointer-events:none;position:fixed;inset:0;z-index:0;background:
+  radial-gradient(1200px 420px at 50% -40px,#9ad8ff 0%,#c8ecff 38%,#fff4dc 70%,#ffe8b8 100%);
+}
+.cloud{pointer-events:none;position:fixed;z-index:0;background:#fff;border-radius:999px;opacity:.85;box-shadow:18px 8px 0 #fff,40px 4px 0 #fff,-22px 8px 0 #fff}
+.cloud.c1{width:90px;height:36px;top:28px;left:8%}
+.cloud.c2{width:70px;height:28px;top:70px;right:10%}
+.cloud.c3{width:110px;height:40px;top:18px;right:28%}
+.sun{pointer-events:none;position:fixed;z-index:0;top:12px;left:50%;width:72px;height:72px;margin-left:160px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff6b0,#ffd24a 55%,#ffb31c);box-shadow:0 0 0 8px #ffe68a88,0 6px 0 #e09a10}
+.wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:18px 16px 96px;width:100%}
+.top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.brand .mark{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:16px;color:#155e8a;background:#fff;border:2px solid #8ec8ea;border-radius:999px;padding:4px 12px}
+.brand h1{margin:8px 0 4px;font-size:clamp(28px,6vw,48px);line-height:1.1;font-weight:700}
+.brand p{margin:0;color:var(--muted);font-size:17px;max-width:48ch;font-weight:700}
+.top-actions{display:flex;flex-wrap:wrap;gap:8px}
+.tool,.reset{border:2px solid var(--line);background:#fffdf8;color:var(--ink);border-radius:999px;padding:12px 16px;font-weight:700;min-height:48px;box-shadow:0 4px 0 #e0bf8c}
+.tool.primary{background:var(--accent);border-color:var(--accent-edge);color:var(--accent-ink);box-shadow:0 4px 0 var(--accent-edge)}
+.reset{background:#fff}
+.tabs{display:flex;gap:8px;padding:6px;background:#fff;border:2px solid var(--line);border-radius:999px;margin:0 0 16px;overflow:auto;max-width:100%;box-shadow:0 6px 0 #e8c9a0}
+.tab{flex:1;min-width:max-content;border:0;border-radius:999px;padding:14px 18px;background:transparent;color:var(--muted);font-weight:700;font-size:18px;min-height:56px}
+.tab[aria-selected="true"]{background:var(--accent);color:var(--accent-ink);box-shadow:0 4px 0 var(--accent-edge)}
+.tab small{display:block;font-weight:600;font-size:13px}
+.stars-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:#fff;border:2px solid var(--line);border-radius:24px;padding:12px 16px;margin:0 0 16px;box-shadow:0 6px 0 #e8c9a0}
+.stars-bar .count{font-weight:800;font-size:22px}
+.stickers{display:flex;flex-wrap:wrap;gap:6px;font-size:28px;line-height:1}
+.hero{display:grid;gap:14px;grid-template-columns:1.2fr .8fr}
+@media(max-width:860px){.hero{grid-template-columns:1fr}}
+.panel{background:#fffdf8;border:2px solid var(--line);border-radius:28px;padding:18px;box-shadow:0 8px 0 #e8c9a0,0 16px 28px var(--shadow);min-width:0}
+.panel h2{margin:0 0 4px;font-size:24px}
+.hint{margin:0 0 12px;color:var(--muted);font-size:16px;font-weight:700}
+.field{position:relative}
+.field input,.searchbox input{width:100%;border:2px solid var(--line);background:#fff;color:var(--ink);border-radius:18px;padding:14px 14px 14px 48px;outline:none;min-height:56px;font-size:20px;font-weight:700}
+.field input:focus,.searchbox input:focus,.quiz-input:focus,select:focus,textarea:focus{border-color:var(--focus);box-shadow:0 0 0 3px #155e8a33}
+.field .ico{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:22px}
+.suggest{position:absolute;left:0;right:0;top:calc(100% + 6px);background:#fff;border:2px solid var(--line);border-radius:18px;max-height:280px;overflow:auto;z-index:8;box-shadow:0 12px 28px var(--shadow);display:none}
+.suggest.open{display:block}
+.suggest button{display:block;width:100%;text-align:left;border:0;background:transparent;color:var(--ink);padding:12px 14px;font-weight:700;font-size:18px}
+.suggest button[aria-selected="true"],.suggest button:hover{background:#ffe0c4}
+.suggest .add-own{color:#155e8a;border-top:2px solid var(--line)}
+.status{min-height:1.3em;margin:8px 0 0;color:var(--muted);font-size:16px;font-weight:700}
+.status.err{color:var(--err)}.status.ok{color:var(--ok)}
+.preview{margin-top:14px;display:none}.preview.show{display:block}
+.card{background:var(--card);border:2px solid var(--line);border-radius:24px;padding:16px;position:relative}
+.pic{font-size:72px;line-height:1;text-align:center;filter:drop-shadow(0 6px 0 rgba(80,50,20,.12))}
+.word{font-size:clamp(28px,5vw,44px);font-weight:700;margin:6px 0 4px;word-break:break-word;text-align:center}
+.ru{margin:0;color:#8a3a10;font-size:22px;font-weight:800;word-break:break-word;text-align:center}
+.ipa{margin:8px 0;color:var(--muted);font-family:ui-monospace,Menlo,monospace;font-size:18px;text-align:center;font-weight:700}
+.ex{margin:0 0 12px;color:var(--ink);font-size:18px;word-break:break-word;text-align:center;font-weight:700}
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}
+.btn{border:0;border-radius:999px;padding:14px 18px;font-weight:700;min-height:56px;font-size:18px}
+.btn-red{background:var(--accent);color:var(--accent-ink);box-shadow:0 5px 0 var(--accent-edge)}
+.btn-green{background:var(--green);color:var(--green-fg);box-shadow:0 5px 0 #0e4526}
+.btn-blue{background:var(--blue);color:var(--blue-fg);box-shadow:0 5px 0 #0d3f5e}
+.btn-ghost{background:#fff;color:var(--ink);border:2px solid var(--line);box-shadow:0 4px 0 #e0bf8c}
+.btn-listen{background:var(--gold);color:var(--gold-ink);min-width:132px;min-height:64px;font-size:22px;box-shadow:0 5px 0 #c49410}
+.badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 10px;background:#d8f5e3;color:var(--ok);font-size:15px;font-weight:800}
+.own-tag{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:4px 9px;background:#fff3c2;color:#6a4a00;font-size:14px;font-weight:800}
+.manual{display:none;margin-top:12px;gap:8px}.manual.show{display:grid}
+.manual input,.theme-pick,.form-grid input,.form-grid textarea,.form-grid select{border:2px solid var(--line);background:#fff;color:var(--ink);border-radius:14px;padding:12px 14px;width:100%;min-height:52px;font-weight:700}
+.theme-row{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
+.chip{border:2px solid var(--line);background:#fffaf3;color:var(--ink);border-radius:999px;padding:10px 14px;font-weight:700;font-size:16px;min-height:44px}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent-edge);color:var(--accent-ink)}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.game-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:88px;border:2px solid var(--line);background:#fff;border-radius:24px;font-weight:800;font-size:16px;color:var(--ink);box-shadow:0 6px 0 #e8c9a0;padding:10px;text-align:center}
+.game-btn span{font-size:28px;line-height:1}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 10px;align-items:center}
+.searchbox{margin:8px 0 10px}
+.rows{display:grid;gap:18px}
+.row h3{margin:0 0 10px;font-size:22px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.row h3 span{color:var(--muted);font-size:15px;font-weight:700}
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(200px,240px);gap:12px;overflow-x:auto;padding:4px 2px 14px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.bank-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.swipe{scroll-snap-align:start;position:relative;border-radius:22px;overflow:hidden;touch-action:pan-y}
+.swipe-bg{position:absolute;inset:0;background:#9b1c1c;display:flex;align-items:center;justify-content:flex-end;padding-right:18px;color:#fff;font-weight:800}
+.tile,.bank-card{position:relative;background:#fffdf8;border:2px solid var(--line);border-radius:22px;padding:14px;min-height:220px;display:flex;flex-direction:column;gap:4px;box-shadow:0 6px 0 #e8c9a0}
+.tile .pic,.bank-card .pic{font-size:52px;text-align:center}
+.tile .ew,.bank-card .ew{font-size:24px;font-weight:800;line-height:1.1;padding-right:28px;word-break:break-word;text-align:center}
+.tile .rw,.bank-card .rw{color:#8a3a10;font-weight:800;word-break:break-word;text-align:center}
+.tile .ph,.bank-card .ph{color:var(--muted);font-size:14px;font-family:ui-monospace,Menlo,monospace;text-align:center;font-weight:700}
+.tile .ex,.bank-card .ex{font-size:14px;color:var(--ink);margin:0;text-align:center;font-weight:700}
+.tile .meta,.bank-card .meta{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:14px;color:var(--muted);flex-wrap:wrap}
+.tile .btn-listen,.bank-card .btn-listen{min-width:88px;min-height:52px;padding:8px 12px;font-size:20px}
+.hard-btn{position:absolute;top:8px;right:8px;border:0;background:transparent;font-size:24px;line-height:1;padding:6px;color:#8a7058;min-width:44px;min-height:44px}
+.hard-btn.on{color:#8a6200;text-shadow:0 0 8px #f5c51888}
+.theme-tag{display:inline-block;font-size:13px;font-weight:800;color:#6a4a00;background:#fff3c2;border-radius:999px;padding:3px 8px}
+.kill,.edit{border:0;background:transparent;font-size:14px;font-weight:800;min-height:40px;padding:6px}
+.kill{color:var(--err)}.edit{color:var(--blue)}
+.empty{border:2px dashed var(--line);border-radius:22px;padding:28px 18px;text-align:center;color:var(--muted);background:#fffaf3}
+.empty strong{display:block;color:var(--ink);font-size:20px;margin-bottom:6px}
+.flash{outline:3px solid #c49410;box-shadow:0 0 0 6px #f5c51855}
+.toast{position:fixed;left:50%;bottom:52px;transform:translateX(-50%);background:#2a1f14;border:2px solid #5a4030;color:#fff8ee;padding:12px 16px;border-radius:999px;z-index:40;display:none;gap:10px;align-items:center;box-shadow:0 12px 40px var(--shadow);max-width:calc(100vw - 24px);font-weight:800}
+.toast.show{display:flex}
+.toast .btn-ghost{color:var(--ink);min-height:44px}
+.modal{position:fixed;inset:0;background:rgba(42,31,20,.55);z-index:80;display:none;align-items:flex-end;justify-content:center;padding:12px;pointer-events:none}
+.modal.open{display:flex;pointer-events:auto}
+.modal .sheet{width:min(680px,100%);max-height:92vh;overflow:auto;background:#fffdf8;border:2px solid var(--line);border-radius:28px 28px 16px 16px;padding:16px;box-shadow:0 -8px 40px var(--shadow)}
+.form-grid{display:grid;gap:10px;margin-top:10px}
+.form-grid label{display:grid;gap:4px;font-size:16px;font-weight:800;color:var(--muted)}
+.form-grid label span.req{color:var(--err)}
+.form-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;position:sticky;bottom:0;background:#fffdf8;padding:10px 0 4px}
+.quiz-q{font-size:24px;font-weight:800;margin:8px 0 12px;word-break:break-word;text-align:center}
+.quiz-opts{display:grid;gap:8px}
+.quiz-opts button,.quiz-check{text-align:center;border:2px solid var(--line);background:#fff;color:var(--ink);border-radius:18px;padding:14px 16px;font-weight:800;min-height:56px;font-size:20px;box-shadow:0 4px 0 #e0bf8c}
+.quiz-input{width:100%;border:2px solid var(--line);background:#fff;color:var(--ink);border-radius:18px;padding:14px;min-height:56px;font-size:22px;font-weight:800;text-align:center}
+.mem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:520px){.mem-grid{grid-template-columns:repeat(3,1fr)}}
+.mem-card{min-height:86px;border:2px solid var(--line);border-radius:18px;background:#155e8a;color:#fff;font-weight:800;font-size:22px;box-shadow:0 5px 0 #0d3f5e;display:flex;align-items:center;justify-content:center;padding:8px;word-break:break-word}
+.mem-card.flipped,.mem-card.matched{background:#fff;color:var(--ink);box-shadow:0 5px 0 #e0bf8c}
+.mem-card.matched{background:#d8f5e3;border-color:#1a6b3c}
+.hint-word{font-size:32px;font-weight:800;letter-spacing:.18em;text-align:center;margin:8px 0;color:var(--ink)}
+.print-only{display:none}
+@media print{
+  .sky,.cloud,.sun,.tabs,.hero,.toolbar,.searchbox,.top-actions,.toast,.modal,.hard-btn,.kill,.edit,.btn-listen,.swipe-bg,.games,.stars-bar,.bank-wrap{display:none!important}
+  .print-only{display:block!important}
+  body,.wrap{background:#fff;color:#000}
+  #ttc-wm-bar{display:flex!important;opacity:1!important;position:fixed!important;visibility:visible!important}
+  .tile{break-inside:avoid;border:1px solid #ccc;background:#fff;color:#000;transform:none!important;box-shadow:none}
+  .tile .rw,.tile .ex,.tile .ph{color:#222}
+}
+@media(hover:hover) and (pointer:fine){
+  .tool:hover,.reset:hover{filter:brightness(1.03)}
+  .btn-red:hover{filter:brightness(1.04)}
+  .tile:hover,.bank-card:hover{transform:translateY(-3px)}
+}
+@media(max-width:500px){
+  .btn-listen{min-width:112px;min-height:56px;font-size:20px}
+  .tile,.bank-card{min-height:200px}
+  .top-actions .tool,.top-actions .reset{padding:10px 12px;font-size:15px}
+  .rail{grid-auto-columns:minmax(170px,86vw)}
+  .tab{font-size:16px;padding:12px 12px}
+}
+footer{margin-top:28px;color:var(--muted);font-size:14px;text-align:center;font-weight:700}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #155e8a;outline-offset:2px}
+@media (hover:hover) and (pointer:fine){
+  .btn:active,.tool:active,.game-btn:active{transform:translateY(3px);box-shadow:0 2px 0 #c45a12}
+}
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true"></div>
+<div class="sun" aria-hidden="true"></div>
+<div class="cloud c1" aria-hidden="true"></div>
+<div class="cloud c2" aria-hidden="true"></div>
+<div class="cloud c3" aria-hidden="true"></div>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <span class="mark"><span aria-hidden="true">🌈</span> 1–4 класс · A1</span>
+      <h1>Мой первый словарик</h1>
+      <p>My First Dictionary — слова с картинками, британским произношением и весёлыми играми. Две полки: доп. занятия и школьный учебник.</p>
+    </div>
+    <div class="top-actions">
+      <button type="button" class="tool primary" id="quizBtn" data-ttc-quiz>❓ Викторина</button>
+      <button type="button" class="tool" id="exportBtn" data-ttc-export>📋 Экспорт</button>
+      <button type="button" class="tool" id="printBtn">🖨 Печать</button>
+      <button type="button" class="reset" id="resetBtn" data-ttc-reset>↺ Начать заново</button>
+    </div>
+  </header>
+
+  <div class="stars-bar" id="starsBar">
+    <span class="count" id="starsCount">⭐ 0</span>
+    <div class="stickers" id="stickerRow" aria-label="Наклейки"></div>
+    <span class="hint" style="margin:0" id="progressHint">Играй и собирай звёзды и наклейки!</span>
+  </div>
+
+  <div class="tabs" role="tablist" aria-label="Какой словарь открыть">
+    <button type="button" class="tab" role="tab" id="tab-extra" aria-controls="panel-main" aria-selected="true" data-tab="extra">Доп. занятия <small>репетитор / доп. уроки</small></button>
+    <button type="button" class="tab" role="tab" id="tab-school" aria-controls="panel-main" aria-selected="false" data-tab="school">Школьный учебник <small>слова из учебника</small></button>
+  </div>
+
+  <section class="hero" id="panel-main">
+    <div class="panel">
+      <h2 id="addTitle">Добавить слово</h2>
+      <p class="hint" id="addHint">Напиши английское слово — появятся подсказки. Нет в списке? Добавь своё!</p>
+      <div class="field">
+        <span class="ico" aria-hidden="true">🔎</span>
+        <input id="lookup" type="text" autocomplete="off" spellcheck="false" autocapitalize="off" maxlength="80" aria-autocomplete="list" aria-controls="suggest" aria-expanded="false" aria-label="Поиск и добавление английского слова" placeholder="Напиши слово… например, cat">
+        <div id="suggest" class="suggest" role="listbox" aria-label="Подсказки"></div>
+      </div>
+      <p class="status" id="status" aria-live="polite"></p>
+      <div class="preview" id="preview" aria-live="polite">
+        <div class="card">
+          <div class="pic" id="pPic" aria-hidden="true"></div>
+          <p class="word" id="pWord">—</p>
+          <p class="ru" id="pRu">—</p>
+          <p class="ipa" id="pIpa"></p>
+          <p class="ex" id="pEx" data-ttc-example></p>
+          <div id="pOwn" hidden><span class="own-tag" data-ttc-custom-tag>своё слово</span></div>
+          <label class="hint" for="themePick">Тема при сохранении</label>
+          <select id="themePick" class="theme-pick" aria-label="Тема слова"></select>
+          <div class="actions" style="margin-top:12px">
+            <button type="button" class="btn btn-listen" id="listenBtn">🔊 Слушать</button>
+            <button type="button" class="btn btn-red" id="saveBtn">＋ В мой словарь</button>
+            <button type="button" class="btn btn-ghost" id="editPreviewBtn" hidden data-ttc-edit-preview>✎ Изменить</button>
+            <span class="badge" id="savedBadge" hidden>✓ Уже в словаре</span>
+          </div>
+          <p class="hint" id="otherTabNote" style="margin-top:12px"></p>
+        </div>
+        <div class="manual" id="manual">
+          <input id="manualRu" type="text" maxlength="120" placeholder="Напиши перевод сам">
+          <button type="button" class="btn btn-ghost" id="manualSave">Сохранить с моим переводом</button>
+          <button type="button" class="btn btn-ghost" id="openCustomFromManual" data-ttc-open-custom>＋ Добавить как своё слово…</button>
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <h2>Как пользоваться</h2>
+      <p class="hint">1) Выбери вкладку — это два разных словаря.<br>2) Возьми слово из словарика или добавь своё.<br>3) Нажми 🔊, чтобы услышать слово (UK).<br>4) ★ — трудное слово, его можно повторить.<br>5) Играй, печатай список или распечатай.</p>
+      <p class="hint" id="countLine">Пока пусто. Добавь первое слово!</p>
+      <p class="hint" id="quizLast" data-ttc-quiz-last></p>
+      <div class="games" aria-label="Игры">
+        <button type="button" class="game-btn" id="gamePic" data-game="pic"><span>🖼</span>Картинка и слово</button>
+        <button type="button" class="game-btn" id="gameListen" data-game="listen"><span>👂</span>Слушай и выбери</button>
+        <button type="button" class="game-btn" id="gameMemory" data-game="memory"><span>🧠</span>Найди пару</button>
+        <button type="button" class="game-btn" id="gameType" data-game="type"><span>⌨️</span>Напечатай слово</button>
+        <button type="button" class="game-btn" id="gameQuiz" data-game="quiz"><span>❓</span>Викторина</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="toolbar" id="themeFilters" aria-label="Фильтр по теме"></div>
+  <div class="bank-wrap panel" style="margin:0 0 16px">
+    <h2 style="margin:0 0 6px">Слова по темам</h2>
+    <p class="hint">Готовый словарик. Нажми «В мой словарь», чтобы сохранить слово на этой вкладке.</p>
+    <div class="actions" style="margin-bottom:12px;justify-content:flex-start">
+      <button type="button" class="btn btn-green" id="addThemeBtn">＋ Добавить всю тему</button>
+    </div>
+    <div class="bank-grid" id="bankGrid"></div>
+  </div>
+  <div class="searchbox field panel" style="padding:12px 14px">
+    <span class="ico" aria-hidden="true">📚</span>
+    <input id="mineSearch" type="search" aria-label="Поиск по твоему словарю на этой вкладке" placeholder="Поиск по твоему словарю…">
+  </div>
+  <div class="print-only" id="printBlock"></div>
+  <div class="rows" id="rows"></div>
+  <footer>Мой первый словарик · My First Dictionary · прогресс только в этом браузере · @gamify_guru</footer>
+</div>
+
+<div class="toast" id="toast" role="status"><span id="toastMsg"></span><button type="button" class="btn btn-ghost" id="undoBtn">Отменить</button></div>
+
+<div class="modal" id="quizModal" aria-hidden="true">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="quizTitle">
+    <div style="display:flex;justify-content:space-between;gap:8px;align-items:center">
+      <h2 id="quizTitle" style="margin:0">Викторина</h2>
+      <button type="button" class="tool" id="quizClose">Закрыть</button>
+    </div>
+    <p class="hint" id="quizProg"></p>
+    <div id="quizBody"></div>
+  </div>
+</div>
+
+<div class="modal" id="gameModal" aria-hidden="true">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="gameTitle">
+    <div style="display:flex;justify-content:space-between;gap:8px;align-items:center">
+      <h2 id="gameTitle" style="margin:0">Игра</h2>
+      <button type="button" class="tool" id="gameClose">Закрыть</button>
+    </div>
+    <p class="hint" id="gameProg"></p>
+    <div id="gameBody"></div>
+  </div>
+</div>
+
+<div class="modal" id="customModal" aria-hidden="true" data-ttc-custom-modal>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="customTitle">
+    <div style="display:flex;justify-content:space-between;gap:8px;align-items:center">
+      <h2 id="customTitle" style="margin:0">Своё слово</h2>
+      <button type="button" class="tool" id="customClose">Закрыть</button>
+    </div>
+    <p class="hint" id="customHint">Даже если слова нет в словарике — добавь его сам. Можно короткие фразы, например <i>ice-cream</i>.</p>
+    <form class="form-grid" id="customForm" autocomplete="off">
+      <label>Английское слово или фраза <span class="req">*</span>
+        <input id="cWord" name="word" required maxlength="80" autocapitalize="off" spellcheck="false" placeholder="например, ice-cream" data-ttc-c-word>
+      </label>
+      <label>Перевод <span class="req">*</span>
+        <input id="cRu" name="ru" required maxlength="120" placeholder="например, мороженое" data-ttc-c-ru>
+      </label>
+      <label>Транскрипция (можно пропустить)
+        <input id="cIpa" name="ipa" maxlength="80" placeholder="например /kæt/" data-ttc-c-ipa>
+      </label>
+      <label>Короткий пример (можно пропустить)
+        <textarea id="cEx" name="example" rows="2" maxlength="200" placeholder="например, I like ice-cream." data-ttc-c-ex></textarea>
+      </label>
+      <label>Картинка-эмодзи (можно пропустить)
+        <input id="cEmoji" name="emoji" maxlength="8" placeholder="например 🍦" data-ttc-c-emoji>
+      </label>
+      <label>Тема
+        <select id="cTheme" data-ttc-c-theme></select>
+      </label>
+      <label style="display:flex;align-items:center;gap:8px;flex-direction:row">
+        <input type="checkbox" id="cHard" data-ttc-c-hard style="width:auto">
+        <span>★ Трудное — в «Повторить сегодня»</span>
+      </label>
+      <p class="status" id="customStatus" aria-live="polite"></p>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-red" data-ttc-c-save>Сохранить своё слово</button>
+        <button type="button" class="btn btn-listen" id="cListen">🔊 Слушать</button>
+        <button type="button" class="btn btn-ghost" id="customCancel">Отмена</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="editModal" aria-hidden="true" data-ttc-edit-modal>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="editTitle">
+    <div style="display:flex;justify-content:space-between;gap:8px;align-items:center">
+      <h2 id="editTitle" style="margin:0">Изменить карточку</h2>
+      <button type="button" class="tool" id="editClose">Закрыть</button>
+    </div>
+    <p class="hint">Можно поправить перевод, пример, транскрипцию, картинку и тему. Английское слово не меняется.</p>
+    <form class="form-grid" id="editForm" autocomplete="off">
+      <label>Слово
+        <input id="eWord" readonly data-ttc-e-word>
+      </label>
+      <label>Перевод <span class="req">*</span>
+        <input id="eRu" required maxlength="120" data-ttc-e-ru>
+      </label>
+      <label>Транскрипция
+        <input id="eIpa" maxlength="80" data-ttc-e-ipa>
+      </label>
+      <label>Пример
+        <textarea id="eEx" rows="2" maxlength="200" data-ttc-e-ex></textarea>
+      </label>
+      <label>Картинка-эмодзи
+        <input id="eEmoji" maxlength="8" data-ttc-e-emoji>
+      </label>
+      <label>Тема
+        <select id="eTheme" data-ttc-e-theme></select>
+      </label>
+      <p class="status" id="editStatus" aria-live="polite"></p>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-red" data-ttc-e-save>Сохранить изменения</button>
+        <button type="button" class="btn btn-ghost" id="editCancel">Отмена</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="./app.js"></script>
+<script src="../_shared/watermark.js" data-mode="bar" data-position="bottom" defer></script>
+</body>
+</html>
