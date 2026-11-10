@@ -80,8 +80,28 @@
 #root, #root > div.min-h-screen { overflow: visible !important; }
 
 
-/* Ep1 voice-lock modal: sit above watermark bar, keep backdrop usable */
-#root .fixed.inset-0.z-\[2147483100\],
-body > .fixed.inset-0 {
+/* Watermark stays visible but never intercepts taps */
+#ttc-wm-bar, #ttc-wm-layer, .ttc-wm-layer, .ttc-wm-badge, .ttc-wm-credit,
+#root .fixed.pointer-events-none,
+#root .fixed.inset-0.pointer-events-none,
+#root .fixed.inset-0.-z-10 {
+  pointer-events: none !important;
+}
+
+/* Ep1 voice-lock + episode result modals: visible, tappable, above watermark */
+#root .pf-voice-modal,
+#root .pf-episode-modal,
+#root .fixed.inset-0.z-50,
+#root .fixed.inset-0.z-\[2147483100\] {
   z-index: 2147483100 !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  visibility: visible !important;
+}
+
+#root .pf-spot-btn {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: auto;
+  z-index: 6;
 }
