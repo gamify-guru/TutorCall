@@ -138,11 +138,27 @@ html,body{
   box-shadow:0 4px 14px rgba(80,45,15,.08);
   color:#2a1f14 !important;
 }
-/* Fixed decorative blurs — neutralize dark purple washes */
-#root .fixed.inset-0, #root .fixed.pointer-events-none{
+/* Decorative fixed blurs only — never hide real game/voice modals.
+   The old `#root .fixed.inset-0 { opacity:0 }` rule made every full-screen
+   modal invisible while leaving it in the DOM with pointer-events:auto,
+   so taps looked like they did nothing. */
+#root .fixed.inset-0.pointer-events-none,
+#root .fixed.pointer-events-none,
+#root .fixed.inset-0.-z-10{
   background-image:none !important;
   background-color:transparent !important;
   opacity:0 !important;
+  pointer-events:none !important;
+}
+
+/* Voice-lock / episode result modals must stay visible and tappable */
+#root .pf-voice-modal,
+#root .pf-episode-modal,
+#root .fixed.inset-0.z-50,
+#root .fixed.inset-0.z-\[2147483100\]{
+  opacity:1 !important;
+  pointer-events:auto !important;
+  visibility:visible !important;
 }
 
 /* Pale / white text → dark ink (match root + descendants) */
@@ -200,8 +216,10 @@ html,body{
   font-weight:800 !important;
   transition: transform .12s ease, filter .12s ease;
 }
-#root button:hover{ transform:translateY(-1px); filter:brightness(1.03); }
-#root button:active{ transform:translateY(1px); box-shadow:0 2px 0 rgba(80,45,15,.12); }
+@media (hover:hover) and (pointer:fine){
+  #root button:hover:not(.pf-spot-btn){ transform:translateY(-1px); filter:brightness(1.03); }
+  #root button:active:not(.pf-spot-btn){ transform:translateY(1px); box-shadow:0 2px 0 rgba(80,45,15,.12); }
+}
 
 /* Inactive / ghost header chips */
 #root button.bg-slate-800, #root button.bg-slate-700, #root button[class*="bg-slate-8"],
