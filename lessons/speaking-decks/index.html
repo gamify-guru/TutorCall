@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Колоды · Заговорили!</title>
 <meta name="author" content="@gamify_guru">
-<meta name="description" content="Двадцать устных игр Заговорили! в четырёх колодах. Переверни карточку — на обороте цель, как провести игру и опоры A1 / A2 / B1.">
+<meta name="description" content="Двадцать устных игр Заговорили! в четырёх колодах. На лицевой стороне — улика или роль, опоры и время; на обороте — как провести игру.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect rx='6' width='32' height='32' fill='%23703e80'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='16' fill='%23f0cd46' font-family='sans-serif' font-weight='800'%3E%D0%9A%3C/text%3E%3C/svg%3E">
 <style>
 @font-face{font-family:'RubikE';src:url(fonts/RubikE.woff2) format('woff2');font-weight:300 900;font-display:swap}
@@ -15,13 +15,13 @@
   --d:rgb(40,28,48);--bg:#fbf7ee;--card:#fff;--muted:#6d6176;
   --T:'RubikE','Rubik','Arial Black',system-ui,sans-serif;
   --B:'NunitoE','Nunito','Segoe UI',system-ui,sans-serif;
-  --тайна:var(--p);--роль:var(--m);--спор:var(--y);--ограничение:var(--l);
   --bar:56px;
+  --stripe:repeating-linear-gradient(135deg,var(--y) 0 52px,var(--m) 52px 104px,var(--p) 104px 156px);
 }
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%;height:auto}
 body{font-family:var(--B);color:var(--d);background:var(--bg);font-size:17px;line-height:1.4;padding-bottom:var(--bar)}
-header{background:repeating-linear-gradient(135deg,var(--y) 0 60px,var(--m) 60px 120px,var(--p) 120px 180px);padding:14px 16px}
+header{background:var(--stripe);padding:14px 16px}
 .hwrap{background:#fff;border-radius:20px;padding:10px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;box-shadow:0 6px 18px rgba(40,28,48,.18)}
 .logo{font-family:var(--T);font-weight:800;background:var(--p);color:#fff;border-radius:16px;padding:8px 14px;font-size:18px;letter-spacing:.4px}
 h1{font-family:var(--T);font-weight:800;margin:0;font-size:clamp(22px,2.4vw,32px);flex:1}
@@ -31,7 +31,6 @@ h1{font-family:var(--T);font-weight:800;margin:0;font-size:clamp(22px,2.4vw,32px
 .btn:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(40,28,48,.25)}
 .btn.pri{background:var(--y)}
 .btn.sec{background:var(--m)}
-.btn.warn{background:var(--l);color:var(--p)}
 .btn.ghost{background:#f1ecf4;color:var(--p);box-shadow:none;font-size:15px;padding:9px 14px}
 .btn.sm{font-size:14px;padding:8px 12px;box-shadow:0 3px 0 rgba(40,28,48,.2)}
 .btn[aria-pressed=true]{background:var(--p);color:#fff}
@@ -41,35 +40,51 @@ main{padding:16px 16px 72px;max-width:1280px;margin:0 auto}
 .tabs{display:flex;flex-wrap:wrap;gap:8px}
 .tab{font:inherit;font-family:var(--T);font-weight:800;font-size:15px;border:2px solid #e6dfeb;background:#fff;border-radius:999px;padding:8px 14px;cursor:pointer;color:var(--d)}
 .tab[aria-selected=true]{color:#fff;border-color:transparent}
-.tab[data-deck="all"][aria-selected=true]{background:var(--p)}
-.tab[data-deck="Тайна"][aria-selected=true]{background:var(--p)}
+.tab[data-deck="all"][aria-selected=true],.tab[data-deck="Тайна"][aria-selected=true]{background:var(--p)}
 .tab[data-deck="Роль"][aria-selected=true]{background:var(--m);color:var(--d)}
 .tab[data-deck="Спор"][aria-selected=true]{background:var(--y);color:var(--d)}
 .tab[data-deck="Ограничение"][aria-selected=true]{background:#c9b3d8;color:var(--d)}
 .status{margin-left:auto;font-weight:700;color:var(--muted);font-size:15px}
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
-.card{perspective:1400px;touch-action:manipulation;aspect-ratio:3/4;min-height:0;scroll-margin-bottom:calc(var(--bar) + 16px);scroll-margin-top:8px}
-.card-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.15,.2,1);border-radius:22px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}
+.card{position:relative;container-type:inline-size;container-name:card;touch-action:manipulation;scroll-margin-bottom:calc(var(--bar) + 16px);scroll-margin-top:8px}
+.card-sizer{visibility:hidden;pointer-events:none}
+.card-sizer .front-frame{position:relative}
+.card-sizer .face-front{position:relative;inset:auto;transform:none;backface-visibility:visible;-webkit-backface-visibility:visible;box-shadow:none;overflow:visible;height:auto;display:block}
+.card-inner{position:absolute;inset:0;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.15,.2,1);border-radius:26px}
 .card.is-flipped .card-inner{transform:rotateY(180deg)}
-.face{position:absolute;inset:0;border-radius:22px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 8px 22px rgba(40,28,48,.14);background:#fff}
-.face-front{display:flex;flex-direction:column;cursor:pointer;transform:rotateY(0deg) translateZ(1px)}
+.face{position:absolute;inset:0;border-radius:26px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 8px 22px rgba(40,28,48,.16)}
+.face-front{transform:rotateY(0deg) translateZ(1px);cursor:pointer}
 .face-back{transform:rotateY(180deg) translateZ(1px);display:flex;flex-direction:column;background:#fff;color:var(--d)}
-.illu{flex:1;min-height:0;position:relative;background:#efe8f3}
+/* ---- new reference front ---- */
+.front-frame{background:var(--stripe);padding:10px 10px 8px;display:flex;flex-direction:column;gap:8px;height:100%;border-radius:26px}
+.illu{position:relative;border-radius:18px;overflow:hidden;background:#efe8f3;aspect-ratio:4/3;flex:0 0 auto}
 .illu img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
-.front-meta{padding:10px 12px 12px;background:#fff;display:flex;flex-direction:column;gap:4px}
-.badge{align-self:flex-start;font-family:var(--T);font-weight:800;font-size:12px;letter-spacing:.4px;text-transform:uppercase;border-radius:999px;padding:3px 9px;color:#fff}
-.badge.тайна{background:var(--p)}
-.badge.роль{background:var(--m);color:var(--d)}
-.badge.спор{background:var(--y);color:var(--d)}
-.badge.ограничение{background:#9b7aaf;color:#fff}
-.front-title{font-family:var(--T);font-weight:800;font-size:clamp(16px,1.5vw,20px);line-height:1.15;margin:0}
-.no{position:absolute;top:10px;right:10px;background:#fff;color:var(--p);font-family:var(--T);font-weight:800;font-size:13px;border-radius:999px;padding:3px 8px;box-shadow:0 2px 8px rgba(40,28,48,.15)}
-.played-stamp{position:absolute;top:10px;left:10px;background:var(--m);color:var(--d);font-family:var(--T);font-weight:800;font-size:12px;border-radius:999px;padding:4px 9px;box-shadow:0 2px 8px rgba(40,28,48,.18);z-index:2}
-.card.is-played .face-front{filter:saturate(.85)}
-.card.is-played .illu img{opacity:.92}
+.deck-pill{position:absolute;top:12px;left:12px;z-index:2;font-family:var(--T);font-weight:800;font-size:clamp(11px,3.6cqi,15px);letter-spacing:.4px;text-transform:uppercase;background:var(--p);color:#fff;border-radius:999px;padding:6px 12px;box-shadow:0 3px 10px rgba(40,28,48,.25);max-width:calc(100% - 24px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.played-stamp{position:absolute;top:12px;right:12px;z-index:2;background:var(--m);color:var(--d);font-family:var(--T);font-weight:800;font-size:12px;border-radius:999px;padding:4px 9px;box-shadow:0 2px 8px rgba(40,28,48,.18)}
+.front-panel{background:#fff;border-radius:18px;padding:12px 14px 10px;display:flex;flex-direction:column;gap:8px;flex:1 1 auto;min-width:0}
+.front-title{font-family:var(--T);font-weight:800;font-size:clamp(18px,6.2cqi,26px);line-height:1.15;margin:0;color:var(--d);overflow-wrap:anywhere}
+.front-chips{display:flex;flex-wrap:wrap;gap:6px}
+.fchip{font-family:var(--T);font-weight:800;font-size:clamp(11px,3.3cqi,14px);border-radius:999px;padding:5px 10px;line-height:1.15;white-space:nowrap}
+.fchip.gc{background:var(--y);color:var(--d)}
+.fchip.lv{background:var(--m);color:var(--d)}
+.fchip.tm{background:var(--l);color:var(--p)}
+.clue{background:#fff6c9;border-radius:14px;padding:8px 10px 9px}
+.clue-lab{font-family:var(--T);font-weight:800;font-size:clamp(11px,3.2cqi,13px);letter-spacing:.6px;text-transform:uppercase;color:var(--p);margin:0 0 3px}
+.clue p{margin:0;font-weight:800;font-size:clamp(13px,3.8cqi,16px);line-height:1.3;color:var(--d);overflow-wrap:anywhere}
+.phrases-lab{font-family:var(--T);font-weight:800;font-size:clamp(11px,3.2cqi,13px);letter-spacing:.6px;text-transform:uppercase;color:var(--p);margin:2px 0 2px}
+.phrases ul{margin:0;padding:0;list-style:none}
+.phrases li{position:relative;padding:1px 0 1px 18px;font-weight:700;font-size:clamp(13px,3.7cqi,16px);line-height:1.3;overflow-wrap:anywhere}
+.phrases li:before{content:"";position:absolute;left:2px;top:.55em;width:8px;height:8px;border-radius:50%;background:var(--m)}
+.front-foot{margin:2px 0 0;font-size:clamp(11px,3cqi,13px);font-weight:700;color:#8a8190}
+.card.is-played .illu img{opacity:.92;filter:saturate(.85)}
+/* ---- back (unchanged content) + timer ---- */
 .back-scroll{flex:1;min-height:0;overflow:auto;padding:12px 14px 8px;-webkit-overflow-scrolling:touch}
 .back-head{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px}
 .back-head h2{font-family:var(--T);font-weight:800;font-size:18px;margin:0;flex:1;line-height:1.2}
+.badge{align-self:flex-start;font-family:var(--T);font-weight:800;font-size:12px;letter-spacing:.4px;text-transform:uppercase;border-radius:999px;padding:3px 9px;color:#fff;background:var(--p)}
+.badge.роль{background:var(--m);color:var(--d)}
+.badge.спор{background:var(--y);color:var(--d)}
+.badge.ограничение{background:#9b7aaf;color:#fff}
 .meta{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}
 .chip{font-size:12px;font-weight:800;background:#f3eef6;color:var(--p);border-radius:999px;padding:3px 8px}
 .goal{font-weight:800;margin:0 0 8px;font-size:15px}
@@ -83,24 +98,40 @@ h3.sec{font-family:var(--T);font-weight:800;font-size:13px;margin:10px 0 4px;col
 .ex ul{margin:0;padding-left:18px;font-size:13px}
 .words{font-size:13px;color:var(--muted);font-weight:700;margin:4px 0 0}
 .back-actions{display:flex;flex-wrap:wrap;gap:6px;padding:8px 10px 10px;border-top:1px solid #efe8f3;background:#fff}
-.hint{font-size:12px;color:var(--muted);font-weight:700;align-self:center}
-footer{text-align:center;color:var(--muted);font-weight:700;padding:8px 16px 48px;font-size:15px}
-footer b{color:var(--p);font-family:var(--T)}
-#spot{display:none;position:fixed;inset:0;background:rgba(40,28,48,.55);z-index:30;padding:16px 16px calc(var(--bar) + 16px);align-items:center;justify-content:center}
+.card-timer{border-top:1px solid #efe8f3;background:#fbf7ee;padding:8px 10px 10px;display:flex;flex-direction:column;gap:6px;position:relative;z-index:2;scroll-margin-bottom:calc(var(--bar) + 16px)}
+.timer-btns .btn,.back-actions .btn{position:relative;z-index:3;pointer-events:auto}
+.timer-clock{font-family:var(--T);font-weight:800;font-variant-numeric:tabular-nums;font-size:28px;line-height:1;text-align:center;color:var(--d)}
+.timer-bar{height:10px;background:#e6dfeb;border-radius:999px;overflow:hidden}
+.timer-bar i{display:block;height:100%;width:100%;background:repeating-linear-gradient(135deg,var(--y) 0 14px,var(--m) 14px 28px);border-radius:999px;transform-origin:left center;transition:transform .2s linear}
+.timer-btns{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.timer-flash{animation:tflash .7s ease-in-out 3;background:#fde68a}
+@keyframes tflash{50%{background:var(--y);transform:scale(1.03)}}
+.card.is-done .timer-clock,.timer-done .timer-clock{color:var(--p)}
+/* spotlight */
+#spot{display:none;position:fixed;inset:0;background:rgba(40,28,48,.55);z-index:30;padding:52px 12px calc(var(--bar) + 12px);align-items:center;justify-content:center}
 #spot.open{display:flex}
-#spot .spot-card{width:min(520px,100%);height:min(86vh,780px);max-height:calc(100% - 8px);aspect-ratio:auto}
 #spot .close-x{position:absolute;top:12px;right:12px;z-index:2}
+.spot-stage{display:flex;flex-direction:column;align-items:center;gap:10px;width:min(520px,100%);max-height:100%;}
+#spot-card.card{width:100%;max-height:calc(100vh - var(--bar) - 200px);overflow:auto}
+#spot-card.card .card-inner{min-height:100%}
+#spot-card .illu{max-height:220px;aspect-ratio:16/10}
+#spot-card .front-frame{gap:6px;padding:8px}
+#spot-card .front-panel{padding:8px 12px 8px;gap:5px}
+#spot-card .front-title{font-size:clamp(18px,4.5cqi,24px)}
+.spot-stage{overflow:auto;max-height:100%}
+#spot-timer.timer-lg{width:100%;background:#fff;border-radius:18px;padding:12px 14px 14px;box-shadow:0 8px 22px rgba(40,28,48,.18);flex:0 0 auto}
+#spot-timer .timer-clock{font-size:clamp(42px,8vw,64px);padding:4px 0}
+#spot-timer .timer-bar{height:14px}
+#spot-timer .btn{font-size:16px;padding:10px 16px}
 body.stage .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
-body.stage .card{aspect-ratio:3/4}
 body.stage header .sub{display:none}
 .pulse{animation:pulse 0.9s ease}
 @keyframes pulse{0%{transform:scale(1)}40%{transform:scale(1.04)}100%{transform:scale(1)}}
-.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-@media (max-width:1100px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (max-width:820px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}body.stage .grid{grid-template-columns:1fr}}
-@media (max-width:520px){
+footer{text-align:center;color:var(--muted);font-weight:700;padding:8px 16px 48px;font-size:15px}
+footer b{color:var(--p);font-family:var(--T)}
+@media (max-width:980px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){
   .grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}
-  .card{aspect-ratio:3/4.1;max-height:calc(100svh - var(--bar) - 12px)}
   .hwrap{gap:8px}
   h1{font-size:22px;flex:1 1 100%}
   .status{margin-left:0;width:100%}
@@ -109,7 +140,7 @@ body.stage header .sub{display:none}
 }
 @media (prefers-reduced-motion:reduce){
   .card-inner{transition:none}
-  .pulse{animation:none}
+  .pulse,.timer-flash{animation:none}
 }
 </style>
 </head>
@@ -119,10 +150,11 @@ body.stage header .sub{display:none}
     <div class="logo">ЗАГОВОРИЛИ!</div>
     <div>
       <h1>Колоды</h1>
-      <p class="sub">20 устных игр на карточках. Переверни — на обороте цель, как провести и опоры A1 / A2 / B1.</p>
+      <p class="sub">20 устных игр на карточках. На лицевой стороне — улика или роль и опоры; переверни — как провести игру.</p>
     </div>
     <div class="hbtns">
       <button class="btn ghost ttc-reset" id="ttc-reset" type="button" aria-label="Начать заново, удалить сохранённые колоды">↺ Начать заново</button>
+      <button class="btn ghost" id="btn-sound" type="button" aria-pressed="true">🔔 Звук: вкл</button>
       <button class="btn ghost" id="btn-stage" type="button" aria-pressed="false">🖥 Большой экран</button>
     </div>
   </div>
@@ -148,10 +180,14 @@ body.stage header .sub{display:none}
 <footer><b>Заговорили!</b> · Геймификация без фантика · t.me/game_kwest</footer>
 <div id="spot" aria-hidden="true">
   <button class="btn ghost close-x" id="spot-close" type="button">Закрыть</button>
-  <div class="card spot-card" id="spot-card"></div>
+  <div class="spot-stage">
+    <div class="card spot-card" id="spot-card"></div>
+    <div class="card-timer timer-lg" id="spot-timer" data-act="timer-wrap" hidden></div>
+  </div>
 </div>
 <script>
 const GAMES = [{"n":1,"deck":"Тайна","title":"Кто украл торт?","gc":"Past Simple","gram":"Past Simple: saw, took, went, didn’t, was / were","level":"A2 · 5–7 класс","lv":["A2"],"time":"8–10 мин","t":[8,10],"roles":["свидетель"],"score":"Дело раскрыто, когда все ключевые улики на доске","fmt":"6–12 человек; большой класс — две группы с одним делом","steps":[{"name":"Старт","dur":"1 мин","min":1,"max":1,"text":"Покажи «место преступления», задай вопрос: кто, когда и зачем унёс торт? Вывеси 1–2 опорные фразы."},{"name":"Улики","dur":"1 мин","min":1,"max":1,"text":"По одной карточке на человека. Улику не читают вслух, а пересказывают своими словами."},{"name":"Расследование","dur":"5–6 мин","min":5,"max":6,"text":"Ученики ходят, расспрашивают и выносят факты на доску: Who? Where? When? Why?"},{"name":"Финал","dur":"2 мин","min":2,"max":2,"text":"Класс собирает решение целиком: Masha took the cake because… Хвали общее дело, а не «первого»."}],"goal":"Спрашивать и отвечать о прошлых действиях","vocab":"Food, school party, places in school","mat":"8–10 улик, лист опор, доска «Evidence»","story":"На школьном празднике около трёх часов со стола пропал шоколадный торт. Ученики — свидетели. Финал добрый: Маша унесла торт заболевшему Коле.","online":["Улики — в личные сообщения или по комнатам (breakout rooms).","Общая доска: Who / Where / When / Why — только сказанное вслух.","Нет комнат — цепочка: пара меняется уликами 40 секунд."],"op":{"A1":["I saw Masha.","I didn't see the cake.","I was in the hall.","Did you see the cake?","Where were you?"],"A2":["I saw Masha near the table at three o'clock.","Tim didn't go to the table.","Masha left the party early.","What did you hear?","Where was Tim at three o'clock?"],"B1":["I noticed a chocolate stain on her bag after the party.","She didn't eat anything, so maybe she took it for someone else.","Why did she leave so early?","I think Masha took the cake because Kolya was ill."],"words":"cake · table · hall · bag · stain · party · ill · early · saw · took"},"img":"img/01"},{"n":2,"deck":"Тайна","title":"Что спрятано в кабинете?","gc":"There is / are","gram":"There is / there are, Is there…?, There aren’t any…","level":"A1–A2 · 5–6 класс","lv":["A1","A2"],"time":"7–8 мин","t":[7,8],"roles":["сыщик зоны"],"score":"Предмет найден, когда карта кабинета собрана из всех зон","fmt":"4–5 «зон», по 2–4 ученика в каждой","steps":[{"name":"Старт","dur":"1 мин","min":1,"max":1,"text":"Нарисуй на доске пустой план кабинета и раздели его на зоны: окно, шкаф, стол учителя, доска."},{"name":"Зоны","dur":"1 мин","min":1,"max":1,"text":"Каждая группа получает карточку своей зоны и тихо её изучает. Карточку не показывают."},{"name":"Опрос","dur":"4–5 мин","min":4,"max":5,"text":"Группы по очереди описывают зону и отвечают на вопросы: Is there a box near the window?"},{"name":"Финал","dur":"1 мин","min":1,"max":1,"text":"Класс отмечает на плане, где предмет, и называет фразу целиком: It’s in the cupboard, under the box."}],"goal":"Описывать, что где находится, и задавать вопросы о месте","vocab":"Classroom objects, prepositions of place","mat":"Карточки зон, общий план кабинета на доске","story":"Из кабинета «пропал» классный журнал с пятёрками. У каждой группы — схема своей зоны. Журнал нашёлся в шкафу под коробкой с мелом.","online":["Покажи план кабинета на экране, зоны раздай в чат.","Ученики ставят отметки на общей доске (Miro, Padlet) только после фразы вслух."],"op":{"A1":["There is a desk.","There are two chairs.","There isn't a bag.","Is there a box?","Yes, there is. / No, there isn't."],"A2":["There is a box under the teacher's desk.","There aren't any books on the shelf.","Is there a bag near the window?","Are there any pens in the cupboard?","It's in the cupboard, under the box."],"B1":["There's a big box of chalk at the bottom of the cupboard.","There aren't any papers near the window, so it isn't there.","Is there anything behind the board?","I think the register is in the cupboard, under the box of chalk."],"words":"register · cupboard · shelf · window · board · box · chalk · under · behind · near"},"img":"img/02"},{"n":3,"deck":"Тайна","title":"Где все сейчас?","gc":"Present Continuous","gram":"Present Continuous: is / are + -ing, What is he doing?","level":"A2 · 5–7 класс","lv":["A2"],"time":"7–10 мин","t":[7,10],"roles":["свидетель с камеры"],"score":"Пропавший найден, когда все места школы отмечены","fmt":"6–12 человек, у каждого «снимок с камеры»","steps":[{"name":"Старт","dur":"1 мин","min":1,"max":1,"text":"Объяви «тревогу»: концерт через 10 минут, барабанщика нет. Повесь схему школы."},{"name":"Камеры","dur":"1 мин","min":1,"max":1,"text":"Раздай снимки. Каждый молча смотрит, кто что делает на его снимке."},{"name":"Обмен","dur":"4–6 мин","min":4,"max":6,"text":"В парах и тройках: What is Anna doing in the canteen? Факты переносят на схему."},{"name":"Финал","dur":"1–2 мин","min":1,"max":2,"text":"Класс называет, где Дима и что он делает. Вместе проговорите всю картину."}],"goal":"Описывать действия в момент речи и уточнять детали","vocab":"School places, actions","mat":"Карточки-«камеры», схема школы на доске","story":"Перед концертом пропал барабанщик Дима. У охранника — снимки с камер двора, столовой, коридора и спортзала. Дима репетирует в спортзале.","online":["Снимки — картинки в личный чат каждому.","Схема школы на общем экране, учитель отмечает места со слов учеников."],"op":{"A1":["She is eating.","He is running.","They are playing.","What is he doing?","Is she reading?"],"A2":["Anna is eating lunch in the canteen.","Two boys are playing football in the yard.","They aren't talking in the corridor.","What is Anna doing in the canteen?","Who is playing in the gym?"],"B1":["Someone is playing the drums in the gym. It must be Dima!","Everyone in the canteen is eating, so Dima isn't there.","Is anyone practising for the concert right now?","Dima is rehearsing in the gym, so the concert can start."],"words":"yard · canteen · corridor · gym · drums · eating · running · waiting · practising"},"img":"img/03"},{"n":4,"deck":"Тайна","title":"Чьи это планы?","gc":"be going to","gram":"be going to: I’m going to…, Is she going to…?","level":"A2 · 6–7 класс","lv":["A2"],"time":"8–10 мин","t":[8,10],"roles":["детектив"],"score":"Дело закрыто, когда расписание выходных собрано целиком","fmt":"8–15 человек, обрывки записок","steps":[{"name":"Старт","dur":"1 мин","min":1,"max":1,"text":"Прочитай найденную записку и задай задачу: чьи это планы и с кем встреча?"},{"name":"Обрывки","dur":"1 мин","min":1,"max":1,"text":"У каждого кусок чужого расписания. Свой план тоже записан на карточке."},{"name":"Расспросы","dur":"5–6 мин","min":5,"max":6,"text":"Are you going to go to the cinema on Saturday? Ответы — в таблицу на доске."},{"name":"Финал","dur":"1–2 мин","min":1,"max":2,"text":"Находим планы, которые не сходятся, и автора записки. Проговорите итог вместе."}],"goal":"Говорить о планах и выяснять планы других","vocab":"Weekend plans, places in town","mat":"Обрывки записок, таблица «Сб / Вс» на доске","story":"В классе нашли записку без подписи: «Встречаемся в субботу у кино». Чтобы понять, чья она, класс собирает планы всех на выходные.","online":["Карточки — в личный чат, таблица «Сб / Вс» — в общем Google Doc.","Вопросы задаём по кругу, учитель переключает пары."],"op":{"A1":["I'm going to play.","She's going to swim.","I'm not going to go out.","Are you going to go?","What are you going to do?"],"A2":["I'm going to visit my grandma on Saturday.","Is she going to stay at home on Sunday?","We aren't going to watch a film.","Are you going to go to the cinema on Saturday?","Who are you going to meet?"],"B1":["She's going to meet a friend at the cinema, so the note may be hers.","He isn't going to be in town on Saturday, so it can't be his note.","What time are you going to get there?","She's going to be at the pool, so she can't meet at the cinema."],"words":"Saturday · Sunday · weekend · cinema · park · pool · café · meet · visit · note"},"img":"img/04"},{"n":5,"deck":"Тайна","title":"Кто кого зовёт?","gc":"Question forms","gram":"Question forms: Who / Where / When…? Do / Does…?","level":"A1–A2 · 5–6 класс","lv":["A1","A2"],"time":"7–8 мин","t":[7,8],"roles":["хозяин записки"],"score":"Цель класса — собрать все пары «вопрос + ответ»","fmt":"Чётное число учеников: половина — вопросы, половина — ответы","steps":[{"name":"Старт","dur":"1 мин","min":1,"max":1,"text":"Покажи одну «пару» на примере: Who calls you after school? — My mum does."},{"name":"Карточки","dur":"1 мин","min":1,"max":1,"text":"Раздай: половине класса вопросы, половине ответы. Карточки не показываем."},{"name":"Поиск","dur":"4–5 мин","min":4,"max":5,"text":"Ученики ходят и задают свой вопрос, пока не найдут подходящий ответ."},{"name":"Финал","dur":"1 мин","min":1,"max":1,"text":"Пары зачитывают диалоги. Класс проверяет, все ли записки нашли пару."}],"goal":"Задавать Wh- и yes/no вопросы и находить ответы","vocab":"Everyday communication, people","mat":"Карточки вопросов и ответов, доска для пар","story":"На школьной доске объявлений перепутались записки: одни с вопросами, другие с ответами. Нужно вернуть каждому вопросу его ответ.","online":["Вопросы и ответы — в личный чат, пары ищем в общем чате голосом.","Найденную пару учитель переносит в общий документ."],"op":{"A1":["Who is it?","What's your name?","Where do you live?","Do you like music?","Yes, I do. / No, I don't."],"A2":["Who calls you after school?","My mum does.","Where does she live?","Do you know this number?","When does the club start?"],"B1":["Who did you invite to the party?","How often do you call your grandparents?","Could you tell me where the meeting is?","I think this answer goes with your question."],"words":"call · text · message · invite · meet · phone number · club · after school"},"img":"img/05"},{"n":6,"deck":"Роль","title":"Школьный блогер","gc":"Present Simple","gram":"Present Simple, наречия частоты: always, usually, never","level":"A1–A2 · 5–7 класс","lv":["A1","A2"],"time":"6–8 мин","t":[6,8],"roles":["блогер","подписчик с вопросом"],"score":"Цель — 10 вопросов от подписчиков за эфир","fmt":"1–3 «блогера» и класс «подписчиков»","steps":[{"name":"Старт","dur":"1 мин","min":1,"max":1,"text":"Включи «эфир»: блогер выходит к доске с картонным телефоном."},{"name":"Рассказ","dur":"2 мин","min":2,"max":2,"text":"Блогер по карточке рассказывает свой день: I get up at seven…"},{"name":"Вопросы","dur":"2–4 мин","min":2,"max":4,"text":"Подписчики задают вопросы. Каждый вопрос — плюс к общей цели класса."},{"name":"Финал","dur":"1 мин","min":1,"max":1,"text":"Считаем вопросы вместе. Меняем блогера, если есть время."}],"goal":"Рассказывать о привычках и распорядке дня, отвечать на вопросы","vocab":"Daily routine, hobbies","mat":"Карточки ролей, «телефон» из картона, лист опор","story":"Блогер Лиза ведёт канал «День из жизни 7 класса». Сегодня она отвечает на вопросы подписчиков в прямом эфире.","online":["Блогер включает камеру, остальные пишут вопросы в чат и потом задают их голосом.","Счётчик вопросов — на общем экране."],"op":{"A1":["I get up at seven.","I go to school.","I like music.","Do you play games?","What do you like?"],"A2":["I usually have breakfast at half past seven.","Liza always has lunch at school.","I never watch TV in the morning.","What time do you get up?","How often do you play computer games?"],"B1":["On weekdays I usually do my homework before I go out.","I hardly ever go to bed before ten.","What do you usually do after school?","What's the best part of your day?"],"words":"get up · have breakfast · homework · always · usually · sometimes · never · hobby · followers"},"img":"img/06"},{"n":7,"deck":"Роль","title":"Инспектор столовой","gc":"can / must","gram":"can / can’t, must / mustn’t","level":"A2 · 6–7 класс","lv":["A2"],"time":"8–10 мин","t":[8,10],"roles":["инспектор","работник столовой"],"score":"Цель — проверить все пункты чек-листа вместе","fmt":"2–3 инспектора, остальные — работники столовой","steps":[{"name":"Старт","dur":"1 мин","min":1,"max":1,"text":"Раздай роли и чек-лист. Объясни: инспектор не ругает, а проверяет и советует."},{"name":"Подготовка","dur":"2 мин","min":2,"max":2,"text":"Работники читают свои правила, инспекторы готовят вопросы."},{"name":"Проверка","dur":"4–5 мин","min":4,"max":5,"text":"Can we sit here? — Yes, you can. You must wash your hands. Пункты отмечаем в чек-листе."},{"name":"Финал","dur":"1–2 мин","min":1,"max":2,"text":"Класс называет одно новое правило для своей столовой."}],"goal":"Объяснять правила и предлагать изменения","vocab":"School rules, food, places","mat":"Чек-лист инспектора, карточки работников","story":"В школу едет строгий инспектор. Работники столовой объясняют, какие у них правила, и вместе придумывают, что улучшить.","online":["Чек-лист — в общем документе, инспектор отмечает пункты сам.","Работники отвечают по очереди, учитель вызывает по имени."],"op":{"A1":["You can sit here.","You can't run.","You must wash your hands.","Can I eat here?","Yes, you can. / No, you can't."],"A2":["You must wash your hands before lunch.","Students can't run in the canteen.","You mustn't take food outside.","Can we sit at this table?","What must we do after lunch?"],"B1":["Students must put their plates back when they finish.","You can choose a salad, but you can't take two desserts.","Can we suggest a new rule for the canteen?","I think everyone must clean the table after lunch."],"words":"canteen · rule · plate · tray · queue · wash · clean · menu · salad · dessert"},"img":"img/07"},{"n":8,"deck":"Роль","title":"Инопланетянин в 7 классе","gc":"Comparatives","gram":"Comparatives: -er than, more … than, better / worse","level":"A2 · 6–7 класс","lv":["A2"],"time":"8–10 мин","t":[8,10],"roles":["инопланетянин Зорг","землянин-объясняющий"],"score":"Цель — 8 объяснений земных «странностей»","fmt":"1 инопланетянин (можно учитель), класс — земляне","steps":[{"name":"Старт","dur":"1 мин","min":1,"max":1,"text":"Инопланетянин «приземляется» и задаёт первый вопрос классу."},{"name":"Сравнения","dur":"2 мин","min":2,"max":2,"text":"Зорг сравнивает: My planet is colder than Earth. Класс записывает слова-опоры."},{"name":"Объяснения","dur":"4–5 мин","min":4,"max":5,"text":"Земляне объясняют и задают встречные вопросы: Is your school bigger?"},{"name":"Финал","dur":"1–2 мин","min":1,"max":2,"text":"Считаем объяснения вместе и составляем «памятку для пришельца»."}],"goal":"Сравнивать предметы и явления, объяснять «очевидное»","vocab":"School, food, weather, daily life","mat":"Карточка героя, вопросы-«странности», лист опор","story":"Зорг прилетел с холодной планеты Икс и попал на урок. Ему всё кажется странным: зачем каша, почему уроки по 45 минут.","online":["Инопланетянин — с забавным фоном или фильтром на камере.","Объяснения собираем в общий список на экране."],"op":{"A1":["Earth is big.","My planet is cold.","It is hot here.","Is your planet big?","Is it cold?"],"A2":["My planet is colder than Earth.","School is bigger than my ship.","English is more difficult than PE.","Is your school bigger than ours?","Why are lessons longer than breaks?"],"B1":["On Earth lessons are longer, but breaks are more fun.","Porridge is healthier than sweets, so we eat it for breakfast.","Is the weather on Planet X worse than here?","Earth is warmer and much greener than Planet X."],"words":"planet · Earth · spaceship · colder · warmer · bigger · smaller · better · worse · more interesting"},"img":"img/08"},{"n":9,"deck":"Роль","title":"Комментатор двора","gc":"Present Continuous","gram":"Present Continuous: He is running, They aren’t…","level":"A2 · 5–7 класс","lv":["A2"],"time":"5–8 мин","t":[5,8],"roles":["комментатор","актёр пантомимы"],"score":"Цель — эфир без тишины 1 минуту на каждого комментатора","fmt":"1–2 комментатора, 3–4 актёра пантомимы, зрители","steps":[{"name":"Старт","dur":"1 мин","min":1,"max":1,"text":"Дай комментатору «микрофон», актёрам — карточки сцен."},{"name":"Эфир","dur":"2–3 мин","min":2,"max":3,"text":"Актёры показывают, комментатор говорит: Now she is kicking the ball!"},{"name":"Уточнения","dur":"1–2 мин","min":1,"max":2,"text":"Зрители спрашивают: What is the goalkeeper doing? Комментатор отвечает."},{"name":"Смена","dur":"1–2 мин","min":1,"max":2,"text":"Новый комментатор, новая сцена. Отмечаем, сколько эфиров без тишины."}],"goal":"Описывать происходящее прямо сейчас без пауз","vocab":"Sports, actions in the playground","mat":"Карточки-сцены, «микрофон», таймер","story":"На школьном дворе идёт матч «7А против учителей». Телеканал школы ведёт прямой эфир, и тишины в эфире быть не должно.","online":["Актёр показывает пантомиму на камеру, комментатор говорит голосом.","Вместо пантомимы — короткое видео без звука на экране."],"op":{"A1":["He is running.","She is kicking the ball.","They are jumping.","What is he doing?","Is she running?"],"A2":["Now she is kicking the ball!","The goalkeeper is waiting near the goal.","The teachers aren't running very fast.","What is the goalkeeper doing?","Who is shouting now?"],"B1":["The 7A captain is passing the ball to his friend. What a pass!","The teachers are getting tired, but they are still trying.","Why is everyone laughing right now?","The goalkeeper is jumping, and he is catching the ball!"],"words":"ball · goal · goalkeeper · team · kick · pass · catch · run · jump · shout"},"img":"img/09"},{"n":10,"deck":"Роль","title":"Гид выходного дня","gc":"be going to","gram":"be going to: We are going to…, Are we going to…?","level":"A2 · 6–7 класс","lv":["A2"],"time":"8–10 мин","t":[8,10],"roles":["гид","турист с вопросом"],"score":"Цель — маршрут из 3 точек у каждой группы","fmt":"Гиды в парах, группы «туристов» по 3–5","steps":[{"name":"Старт","dur":"1 мин","min":1,"max":1,"text":"Повесь карту города, раздай карточки гидов и туристов."},{"name":"Маршрут","dur":"2 мин","min":2,"max":2,"text":"Гиды готовят 3 точки: First we are going to visit…"},{"name":"Экскурсия","dur":"4–5 мин","min":4,"max":5,"text":"Гид рассказывает, туристы спрашивают: Are we going to eat there?"},{"name":"Финал","dur":"1–2 мин","min":1,"max":2,"text":"Группы показывают маршрут на карте. Собираем общую карту класса."}],"goal":"Рассказывать о планах маршрута и отвечать на вопросы","vocab":"Places in town, light travel","mat":"Карта города, карточки гида, вопросы туристов","story":"Группа туристов приехала в город на один день. Гид знает секретное место, но сначала надо рассказать весь маршрут.","online":["Общая карта — на экране, гид ведёт курсором.","Туристы задают по одному вопросу голосом."],"op":{"A1":["We're going to walk.","We're going to see the park.","Are we going to eat?","Where are we going to go?","Let's go!"],"A2":["First we are going to visit the park.","Then we are going to have lunch in a café.","We aren't going to take a bus.","Are we going to eat there?","What time are we going to come back?"],"B1":["After lunch I'm going to show you a secret place near the river.","Finally, we're going to watch the sunset from the bridge.","How long are we going to stay at the museum?","Are we going to have time to buy souvenirs?"],"words":"map · museum · park · café · bridge · square · river · first · then · finally"},"img":"img/10"},{"n":11,"deck":"Спор","title":"Каникулы летом или зимой?","gc":"Comparatives","gram":"Comparatives: warmer than, more exciting, better","level":"A2 · 5–7 класс","lv":["A2"],"time":"8–10 мин","t":[8,10],"roles":["лагерь «Лето»","лагерь «Зима»"],"score":"Цель — по 4 сильных сравнения с каждой стороны на общей карте","fmt":"Два лагеря: «Лето» и «Зима»","steps":[{"name":"Старт","dur":"1 мин","min":1,"max":1,"text":"Раздели класс на лагеря и нарисуй карту каникул на доске."},{"name":"Подготовка","dur":"2 мин","min":2,"max":2,"text":"Лагеря ищут 4 сравнения: Summer is warmer than winter."},{"name":"Спор","dur":"4–5 мин","min":4,"max":5,"text":"Лагеря говорят по очереди. Каждый добавляет и 1 честный плюс другой стороны."},{"name":"Финал","dur":"1–2 мин","min":1,"max":2,"text":"Читаем общую карту. Победителя нет — есть полная карта."}],"goal":"Сравнивать и аргументировать, слышать другую сторону","vocab":"Holidays, weather, activities","mat":"Карточки команд, «карта каникул» на доске","story":"Школа решает, когда устроить лагерь. Лагеря «Лето» и «Зима» собирают аргументы, чтобы составить общую карту каникул.","online":["Карта каникул — в общем документе, две колонки.","Лагеря готовятся в комнатах, спорят в общей."],"op":{"A1":["Summer is hot.","Winter is cold.","I like snow.","Is summer better?","Do you like winter?"],"A2":["Summer is warmer than winter.","Winter holidays are more exciting.","The days are longer in summer.","Is skiing more fun than swimming?","Which is better for a camp?"],"B1":["Summer is better for a camp because we can sleep in tents.","Winter holidays are shorter, but they feel more special.","To be fair, winter has one big plus: there are no mosquitoes!","Why do you think winter is more exciting than summer?"],"words":"warmer · colder · longer · shorter · better · more exciting · snow · sun · camp · tent"},"img":"img/11"},{"n":12,"deck":"Спор","title":"Лучший питомец","gc":"Present Simple","gram":"Present Simple: A dog helps…, Cats don’t…","level":"A1–A2 · 5–6 класс","lv":["A1","A2"],"time":"7–10 мин","t":[7,10],"roles":["лагерь «Кошки»","лагерь «Собаки»"],"score":"Цель — заполнить общую таблицу плюсов, без голосования","fmt":"Два лагеря: «Кошки» и «Собаки»","steps":[{"name":"Старт","dur":"1 мин","min":1,"max":1,"text":"Прочитай «письмо» семьи Смит и нарисуй таблицу плюсов."},{"name":"Факты","dur":"2 мин","min":2,"max":2,"text":"Лагеря готовят 3–4 факта: Cats sleep a lot."},{"name":"Спор","dur":"3–5 мин","min":3,"max":5,"text":"Говорят по очереди, каждая фраза — в таблицу. Можно уточнять: Does it…?"},{"name":"Финал","dur":"1–2 мин","min":1,"max":2,"text":"Читаем таблицу вслух и пишем «ответ» семье Смит."}],"goal":"Рассказывать о привычках животных и аргументировать","vocab":"Animals, daily habits","mat":"Карточки команд, таблица «Cats / Dogs»","story":"Семья Смит выбирает питомца и просит класс помочь. Лагеря рассказывают, как живут кошки и собаки, а семья решит сама.","online":["Таблица плюсов — в общем документе.","Фото кошки и собаки на экране как опора."],"op":{"A1":["A dog runs.","A cat sleeps.","Cats like fish.","Does a dog eat a lot?","Do you like cats?"],"A2":["Cats sleep a lot.","A dog needs a long walk every day.","A cat doesn't need a walk.","Does a dog like children?","How often does a cat eat?"],"B1":["A dog helps the family because it guards the house.","Cats usually stay at home, so they are good for a small flat.","What does a dog do when the family goes on holiday?","Both pets love people, but they need different things."],"words":"dog · cat · walk · sleep · play · feed · flat · garden · friendly · clean"},"img":"img/12"},{"n":13,"deck":"Спор","title":"Телефон или книга в поездке?","gc":"can / must","gram":"can / can’t, must: You can read…, You must charge…","level":"A2 · 6–7 класс","lv":["A2"],"time":"8–10 мин","t":[8,10],"roles":["лагерь «Телефон»","лагерь «Книга»"],"score":"Цель — общий список в дорогу из аргументов обеих сторон","fmt":"Два лагеря: «Телефон» и «Книга»","steps":[{"name":"Старт","dur":"1 мин","min":1,"max":1,"text":"Нарисуй чемодан на доске и объясни ситуацию."},{"name":"Подготовка","dur":"2 мин","min":2,"max":2,"text":"Лагеря готовят аргументы: You can read without the internet."},{"name":"Спор","dur":"4–5 мин","min":4,"max":5,"text":"По очереди: аргумент + честный плюс другой стороны."},{"name":"Финал","dur":"1–2 мин","min":1,"max":2,"text":"В чемодан попадает только то, что прозвучало. Читаем список вместе."}],"goal":"Говорить о возможностях и обязанностях, спорить вежливо","vocab":"Travel, everyday objects","mat":"Карточки команд, «чемодан» на доске","story":"Класс едет на экскурсию на поезде, в рюкзаке место только для одной вещи. Лагеря спорят, но в итоге собирают общий список.","online":["Чемодан — картинка на экране, учитель «кладёт» в него вещи.","Лагеря готовятся в комнатах."],"op":{"A1":["You can read.","You can play games.","You can't call.","Can I take my phone?","Can you take a book?"],"A2":["You can read a book without the internet.","You must charge your phone.","You can't use a phone when the battery is dead.","Can we take both?","Must we take a charger?"],"B1":["A phone can do many things, but you must remember to charge it.","You can read a book anywhere, even with no signal.","To be fair, you can find a map on a phone, and a book can't do that.","What must we put in the bag for a long train trip?"],"words":"phone · book · charger · battery · internet · signal · map · train · bag · trip"},"img":"img/13"},{"n":14,"deck":"Спор","title":"Если будет дождь…","gc":"First Conditional","gram":"First Conditional: If it rains, we will…","level":"A2–B1 · 6–7 класс","lv":["A2","B1"],"time":"8–10 мин","t":[8,10],"roles":["лагерь «Пикник»","лагерь «Дома»"],"score":"Цель — план Б минимум на 4 разных погоды","fmt":"Два лагеря: «Пикник» и «Дома»","steps":[{"name":"Старт","dur":"1 мин","min":1,"max":1,"text":"Покажи карточки погоды: дождь, солнце, ветер, снег."},{"name":"Подготовка","dur":"2 мин","min":2,"max":2,"text":"Лагеря готовят фразы If…, …will…"},{"name":"Спор","dur":"4–5 мин","min":4,"max":5,"text":"Каждая реплика — только в форме условия. Реплика без If «сгорает»."},{"name":"Финал","dur":"1–2 мин","min":1,"max":2,"text":"Читаем план Б по всем погодам. Голосования нет."}],"goal":"Строить условные предложения и договариваться о плане Б","vocab":"Weather, plans, places","mat":"Карточки погоды, схема «план Б» на доске","story":"Класс планирует пикник в субботу, но прогноз непонятный. Лагеря спорят и вместе собирают план Б на любой случай.","online":["Карточки погоды — на экране по одной.","План Б — общий документ, 4 строки."],"op":{"A1":["If it rains, we'll stay at home.","If it's sunny, we'll go out.","If it's cold, I'll take a coat.","What will we do?","Will it rain?"],"A2":["If it rains, we will go to the museum.","If the sun comes out, we will play football.","If it's windy, we won't eat outside.","What will we do if it snows?","If we stay at home, we will be bored."],"B1":["If it rains in the morning, we'll move the picnic to the school hall.","If it snows, we won't have a picnic, but we'll make a snowman.","What will happen if the weather changes in the afternoon?","If we take umbrellas, we won't need to cancel the trip."],"words":"rain · sun · wind · snow · umbrella · picnic · museum · plan B · will · won't"},"img":"img/14"},{"n":15,"deck":"Спор","title":"Вчера было лучше?","gc":"Past Simple","gram":"Past Simple: We played…, I didn’t…, Did you…?","level":"A2 · 5–7 класс","lv":["A2"],"time":"8–10 мин","t":[8,10],"roles":["лагерь «Обычный день»","лагерь «Праздник»"],"score":"Цель — общая лента событий из реплик обоих лагерей","fmt":"Два лагеря: «Обычный день» и «Праздник»","steps":[{"name":"Старт","dur":"1 мин","min":1,"max":1,"text":"Нарисуй ленту времени с 8:00 до 15:00."},{"name":"Воспоминания","dur":"2 мин","min":2,"max":2,"text":"Лагеря готовят 3–4 события: We played a game."},{"name":"Спор","dur":"4–5 мин","min":4,"max":5,"text":"По очереди: событие + вопрос другому лагерю: Did you see the cake?"},{"name":"Финал","dur":"1–2 мин","min":1,"max":2,"text":"Читаем ленту целиком и закрываем «дыры» в дне."}],"goal":"Рассказывать о прошлом и сравнивать события","vocab":"School day, everyday events","mat":"Карточки команд, лента времени на доске","story":"Вчера в школе был праздник, а у части класса — обычный день. Ребята вспоминают, что было, и собирают одну ленту событий.","online":["Лента времени — на общей доске.","Ученики говорят событие, учитель ставит его на ленту."],"op":{"A1":["We played.","I didn't go.","It was fun.","Did you see it?","What did you do?"],"A2":["We played a game in the hall.","I didn't go to the shop.","We had Maths at nine o'clock.","Did you see the cake?","What did you do at twelve?"],"B1":["At the party we sang songs and watched a show.","Our day was ordinary, but we finished school early.","What happened in your class after lunch?","It wasn't a party for us, but we still had fun."],"words":"yesterday · party · ordinary · lesson · break · show · sang · watched · had · finished"},"img":"img/15"},{"n":16,"deck":"Ограничение","title":"Без слова good","gc":"Comparatives","gram":"Comparatives, adjectives: funnier, more interesting","level":"A2 · 6–7 класс","lv":["A2"],"time":"5–7 мин","t":[5,7],"roles":["говорит без good"],"score":"Цель — копилка из 15 замен слову good","fmt":"Пары или тройки, весь класс","steps":[{"name":"Старт","dur":"1 мин","min":1,"max":1,"text":"Зачеркни на доске good, nice и cool. Нарисуй копилку."},{"name":"Темы","dur":"1 мин","min":1,"max":1,"text":"Каждая пара берёт тему: фильм, урок, друг."},{"name":"Разговор","dur":"2–4 мин","min":2,"max":4,"text":"Рассказ о теме без запретных слов. Новое слово — в копилку."},{"name":"Финал","dur":"1 мин","min":1,"max":1,"text":"Читаем копилку. Выбираем 3 слова на неделю."}],"goal":"Искать точные прилагательные и сравнения","vocab":"Opinions: films, lessons, people","mat":"Карточки тем, «копилка» на доске","story":"Слово good устало и ушло в отпуск. Пока его нет, класс собирает копилку слов, которые его заменят.","online":["Копилка — общий документ или чат.","Запретное слово прозвучало — ученик сам находит замену."],"op":{"A1":["It's funny.","It's great.","She is kind.","Is it interesting?","Was it funny?"],"A2":["The film was more interesting than the book.","The story was really funny.","She is kinder than you think.","Was the lesson exciting?","What was the best part?"],"B1":["The ending was more exciting than I expected.","Our teacher is patient and explains things clearly.","Was the film scarier or funnier than the trailer?","My friend is the most reliable person I know."],"words":"funny · exciting · interesting · kind · brilliant · amazing · helpful · clever · patient"},"img":"img/16"},{"n":17,"deck":"Ограничение","title":"Только вопросы","gc":"Question forms","gram":"Question forms: Do you…? What / Where…?","level":"A1–A2 · 5–6 класс","lv":["A1","A2"],"time":"5–7 мин","t":[5,7],"roles":["задаёт вопросы"],"score":"Цель — 10 открытых секретов на весь класс","fmt":"Пары, затем смена партнёра","steps":[{"name":"Старт","dur":"1 мин","min":1,"max":1,"text":"Покажи пример: What do you like? — Do you like pizza?"},{"name":"Секреты","dur":"1 мин","min":1,"max":1,"text":"Раздай карточки-секреты. Карточку никому не показываем."},{"name":"Разговор","dur":"2–4 мин","min":2,"max":4,"text":"В парах только вопросами. Утверждение «сгорает» — переформулируй."},{"name":"Финал","dur":"1 мин","min":1,"max":1,"text":"Считаем открытые секреты всего класса."}],"goal":"Формулировать вопросы разных типов","vocab":"Food, after-school plans, hobbies","mat":"Карточки-секреты, лист опор","story":"На вечеринке шпионов говорить можно только вопросами. У каждого гостя есть секрет, и его нужно выяснить у партнёра.","online":["Секреты — в личный чат.","Пары в комнатах по 2 минуты, затем смена."],"op":{"A1":["Do you like pizza?","Is it food?","Do you have a pet?","What do you like?","Where do you go?"],"A2":["What do you like for lunch?","Do you go home after school?","Where does he play football?","Is your hobby a sport?","Who do you play with?"],"B1":["What do you usually do after school on Fridays?","Is your secret about food or about a hobby?","Why do you like it so much?","Do you do it alone or with your friends?"],"words":"What? · Where? · When? · Who? · Why? · How often? · secret · hobby · guess"},"img":"img/17"},{"n":18,"deck":"Ограничение","title":"Ровно 30 секунд","gc":"Present Simple","gram":"Present Simple: I play…, I don’t like…","level":"A2 · 5–7 класс","lv":["A2"],"time":"5–8 мин","t":[5,8],"roles":["ведущий радио (30 сек)"],"score":"Цель — 8 договорённых до конца монологов","fmt":"По одному у доски или в мини-группах","steps":[{"name":"Старт","dur":"1 мин","min":1,"max":1,"text":"Включи таймер на экране, вывеси опорные фразы."},{"name":"Тема","dur":"1 мин","min":1,"max":1,"text":"Ученик тянет карточку темы и думает 20 секунд."},{"name":"Эфир","dur":"3–5 мин","min":3,"max":5,"text":"30 секунд речи. Замолчал — класс подсказывает вопросом."},{"name":"Финал","dur":"1 мин","min":1,"max":1,"text":"Считаем состоявшиеся монологи — это общий результат."}],"goal":"Говорить связно 30 секунд о себе","vocab":"Hobbies, daily life","mat":"Карточки тем, таймер на экране, лист опор","story":"Школьное радио даёт каждому 30 секунд эфира. Главное правило — договорить до конца, а класс помогает, если ты замолчал.","online":["Таймер — на общем экране.","Подсказки — вопросы в чат."],"op":{"A1":["I like football.","I don't like mornings.","I have a cat.","Do you like sport?","What do you do after school?"],"A2":["I play football on Saturdays.","After school I walk with my friends.","My favourite day is Friday because I have no homework.","What do you do in the evening?","Why do you like it?"],"B1":["I usually spend my free time drawing because it helps me relax.","One thing I really don't like is getting up early.","What else do you do at the weekend?","That's all for today. Thank you for listening!"],"words":"first · also · then · because · but · usually · my favourite · that's all"},"img":"img/18"},{"n":19,"deck":"Ограничение","title":"Только в прошлом","gc":"Past Simple","gram":"Past Simple: walked, didn’t have, What did you…?","level":"A2 · 5–7 класс","lv":["A2"],"time":"6–8 мин","t":[6,8],"roles":["рассказчик в прошлом"],"score":"Цель — 20 фактов на ленте «что у нас уже было»","fmt":"Пары, тройки или весь класс по кругу","steps":[{"name":"Старт","dur":"1 мин","min":1,"max":1,"text":"Нарисуй ленту и «машину времени». Объясни правило."},{"name":"Разминка","dur":"1 мин","min":1,"max":1,"text":"Повторите 5 нужных глаголов: went, had, saw, ate, did."},{"name":"Рассказы","dur":"3–5 мин","min":3,"max":5,"text":"Реплика в настоящем «сгорает» — переформулируй. Факт — на ленту."},{"name":"Финал","dur":"1 мин","min":1,"max":1,"text":"Считаем факты. Машина починена!"}],"goal":"Рассказывать о прошлом и задавать вопросы в Past Simple","vocab":"Yesterday, last lesson, everyday events","mat":"Лента на доске, лист неправильных глаголов","story":"Машина времени застряла во вчерашнем дне. Чтобы её починить, класс собирает 20 фактов о том, что уже было.","online":["Лента — в общем документе.","Реплика в настоящем — учитель пишет в чат «Past!»."],"op":{"A1":["I went to school.","I had lunch.","I saw my friend.","Did you eat?","What did you do?"],"A2":["Yesterday I walked to school.","We didn't have a test.","I ate pasta for dinner.","What did you eat?","Where did you go after school?"],"B1":["In the last lesson we did a project, but I didn't finish it.","When I got home, I had dinner and watched a film.","What did you do after you finished your homework?","Did anything funny happen yesterday?"],"words":"yesterday · last night · last lesson · went · had · saw · ate · did · walked · didn't"},"img":"img/19"},{"n":20,"deck":"Ограничение","title":"Только «если»","gc":"First Conditional","gram":"First Conditional: If we…, I will…","level":"A2–B1 · 6–7 класс","lv":["A2","B1"],"time":"6–8 мин","t":[6,8],"roles":["продолжает цепочку «если»"],"score":"Цель — цепочка из 12 звеньев","fmt":"Весь класс по кругу или две группы","steps":[{"name":"Старт","dur":"1 мин","min":1,"max":1,"text":"Задай начало цепочки: If there are no lessons, we will…"},{"name":"Пример","dur":"1 мин","min":1,"max":1,"text":"Покажи, как цепляется звено: …we will go to the park. If we go…"},{"name":"Цепочка","dur":"3–5 мин","min":3,"max":5,"text":"По кругу. Реплика без If не засчитывается — помогаем."},{"name":"Финал","dur":"1 мин","min":1,"max":1,"text":"Читаем цепочку целиком и считаем звенья."}],"goal":"Строить цепочки условных предложений","vocab":"School day, wishes, consequences","mat":"Карточки тем, цепочка на доске","story":"Тема дня: «что будет, если отменят уроки». Каждый продолжает цепочку последствий, начиная со следствия предыдущего.","online":["Цепочка — в общем чате или документе.","Порядок — по списку участников."],"op":{"A1":["If I'm tired, I'll sleep.","If we play, we'll have fun.","If it's sunny, I'll go out.","What will you do?","Will you go out?"],"A2":["If there are no lessons, we will go to the park.","If we go to the park, we will play football.","If we have no homework, I will read.","What will you do if the teacher is late?","If the teacher is late, we will wait."],"B1":["If school is closed for a day, I'll finally finish my book.","If we stay at home all day, we'll get bored very quickly.","What will happen if nobody comes to school?","If we play outside, we won't need our phones."],"words":"if · will · won't · then · park · homework · bored · happy · lesson · chain"},"img":"img/20"}];
+const FRONT = {"1":{"label":"ТВОЯ УЛИКА","clue":"Около трёх часов со стола пропал шоколадный торт. Ты — свидетель: расскажи, что ты видел(а).","origin":"written","phrases":["I saw Masha near the table at three o'clock.","Tim didn't go to the table.","Masha left the party early."],"lvChip":"A2","timeChip":"8–10 минут","secs":600},"2":{"label":"ТВОЯ УЛИКА","clue":"В зоне стола учителя есть коробка. Ключей ты не видишь.","origin":"reference","phrases":["There is a box under the teacher's desk.","There aren't any books on the shelf.","Is there a bag near the window?"],"lvChip":"A1–A2","timeChip":"7–8 минут","secs":480},"3":{"label":"ТВОЯ УЛИКА","clue":"У тебя снимок с камеры: одно место в школе. Опиши, что там происходит прямо сейчас.","origin":"written","phrases":["Anna is eating lunch in the canteen.","Two boys are playing football in the yard.","They aren't talking in the corridor."],"lvChip":"A2","timeChip":"7–10 минут","secs":600},"4":{"label":"ТВОЯ УЛИКА","clue":"В классе нашли записку без подписи: «Встречаемся в субботу у кино».","origin":"source","phrases":["I'm going to visit my grandma on Saturday.","Is she going to stay at home on Sunday?","We aren't going to watch a film."],"lvChip":"A2","timeChip":"8–10 минут","secs":600},"5":{"label":"ТВОЯ УЛИКА","clue":"На доске объявлений перепутались записки. У тебя вопрос или ответ — найди свою пару.","origin":"written","phrases":["Who calls you after school?","My mum does.","Where does she live?"],"lvChip":"A1–A2","timeChip":"7–8 минут","secs":480},"6":{"label":"ТВОЯ РОЛЬ","clue":"Ты — школьный блогер. Расскажи, как обычно проходит твой день, и ответь на вопросы подписчиков.","origin":"written","phrases":["I usually have breakfast at half past seven.","Liza always has lunch at school.","I never watch TV in the morning."],"lvChip":"A1–A2","timeChip":"6–8 минут","secs":480},"7":{"label":"ТВОЯ РОЛЬ","clue":"Ты — инспектор столовой. Проверь правила по чек-листу и спроси, что можно улучшить.","origin":"written","phrases":["You must wash your hands before lunch.","Students can't run in the canteen.","You mustn't take food outside."],"lvChip":"A2","timeChip":"8–10 минут","secs":600},"8":{"label":"ТВОЯ РОЛЬ","clue":"Ты — инопланетянин Зорг с холодной планеты. Тебе всё кажется странным: спрашивай и сравнивай.","origin":"written","phrases":["My planet is colder than Earth.","School is bigger than my ship.","English is more difficult than PE."],"lvChip":"A2","timeChip":"8–10 минут","secs":600},"9":{"label":"ТВОЯ РОЛЬ","clue":"Ты — комментатор школьного двора. Описывай, что происходит прямо сейчас. Тишины в эфире быть не должно.","origin":"source","phrases":["Now she is kicking the ball!","The goalkeeper is waiting near the goal.","The teachers aren't running very fast."],"lvChip":"A2","timeChip":"5–8 минут","secs":480},"10":{"label":"ТВОЯ РОЛЬ","clue":"Ты — гид. Расскажи маршрут из трёх точек и ответь на вопросы туристов.","origin":"written","phrases":["First we are going to visit the park.","Then we are going to have lunch in a café.","We aren't going to take a bus."],"lvChip":"A2","timeChip":"8–10 минут","secs":600},"11":{"label":"ТВОЯ ПОЗИЦИЯ","clue":"Ты в лагере «Лето» или «Зима». Дай сильные сравнения, почему твои каникулы лучше.","origin":"written","phrases":["Summer is warmer than winter.","Winter holidays are more exciting.","The days are longer in summer."],"lvChip":"A2","timeChip":"8–10 минут","secs":600},"12":{"label":"ТВОЯ ПОЗИЦИЯ","clue":"Ты в лагере «Кошки» или «Собаки». Расскажи, как живёт этот питомец, и назови его плюсы.","origin":"written","phrases":["Cats sleep a lot.","A dog needs a long walk every day.","A cat doesn't need a walk."],"lvChip":"A1–A2","timeChip":"7–10 минут","secs":600},"13":{"label":"ТВОЯ ПОЗИЦИЯ","clue":"Ты в лагере «Телефон» или «Книга». Объясни, что можно и что нужно взять в поездку.","origin":"written","phrases":["You can read a book without the internet.","You must charge your phone.","You can't use a phone when the battery is dead."],"lvChip":"A2","timeChip":"8–10 минут","secs":600},"14":{"label":"ТВОЯ ПОЗИЦИЯ","clue":"Ты в лагере «Пикник» или «Дома». Скажи, что вы сделаете, если изменится погода.","origin":"written","phrases":["If it rains, we will go to the museum.","If the sun comes out, we will play football.","If it's windy, we won't eat outside."],"lvChip":"A2–B1","timeChip":"8–10 минут","secs":600},"15":{"label":"ТВОЯ ПОЗИЦИЯ","clue":"Ты в лагере «Обычный день» или «Праздник». Вспомни, что было вчера, и добавь событие на ленту.","origin":"written","phrases":["We played a game in the hall.","I didn't go to the shop.","We had Maths at nine o'clock."],"lvChip":"A2","timeChip":"8–10 минут","secs":600},"16":{"label":"ПРАВИЛО","clue":"Слово good устало и ушло в отпуск. Нельзя говорить good, nice и cool — клади замены в копилку.","origin":"source","phrases":["The film was more interesting than the book.","The story was really funny.","She is kinder than you think."],"lvChip":"A2","timeChip":"5–7 минут","secs":420},"17":{"label":"ПРАВИЛО","clue":"Говорить можно только вопросами. У партнёра есть секрет — выясни его вопросами.","origin":"written","phrases":["What do you like for lunch?","Do you go home after school?","Where does he play football?"],"lvChip":"A1–A2","timeChip":"5–7 минут","secs":420},"18":{"label":"ПРАВИЛО","clue":"У тебя ровно 30 секунд эфира. Главное правило — договорить до конца.","origin":"source","phrases":["I play football on Saturdays.","After school I walk with my friends.","My favourite day is Friday because I have no homework."],"lvChip":"A2","timeChip":"5–8 минут","secs":480},"19":{"label":"ПРАВИЛО","clue":"Можно говорить только в Past Simple. Собери факты о том, что уже было вчера.","origin":"written","phrases":["Yesterday I walked to school.","We didn't have a test.","I ate pasta for dinner."],"lvChip":"A2","timeChip":"6–8 минут","secs":480},"20":{"label":"ПРАВИЛО","clue":"Каждая фраза начинается с If… Тема: что будет, если отменят уроки. Продолжи цепочку.","origin":"written","phrases":["If there are no lessons, we will go to the park.","If we go to the park, we will play football.","If we have no homework, I will read."],"lvChip":"A2–B1","timeChip":"6–8 минут","secs":480}};
 const TTC_KEY = 'tutorcall-speaking-decks-v1';
 const DECKS = ['Тайна','Роль','Спор','Ограничение'];
 
@@ -167,7 +203,8 @@ function ttcLoad(){
 function ttcSave(){
   try{
     localStorage.setItem(TTC_KEY, JSON.stringify({
-      deck: S.deck, order: S.order, flipped: [...S.flipped], played: [...S.played], savedAt: Date.now()
+      deck: S.deck, order: S.order, flipped: [...S.flipped], played: [...S.played],
+      sound: !!S.sound, savedAt: Date.now()
     }));
   }catch(e){}
 }
@@ -178,6 +215,7 @@ const S = {
   order: Array.isArray(saved.order) && saved.order.length === GAMES.length ? saved.order.slice() : GAMES.map(g => g.n),
   flipped: new Set(Array.isArray(saved.flipped) ? saved.flipped : []),
   played: new Set(Array.isArray(saved.played) ? saved.played : []),
+  sound: saved.sound !== false,
 };
 
 const $ = sel => document.querySelector(sel);
@@ -189,17 +227,209 @@ function esc(s){
   return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 function deckClass(d){ return String(d).toLowerCase(); }
+function frontOf(n){ return FRONT[String(n)] || FRONT[n] || {}; }
+function defaultSecs(g){
+  const f = frontOf(g.n);
+  if(f.secs) return f.secs;
+  if(g.t && g.t.length) return g.t[g.t.length-1] * 60;
+  return 8 * 60;
+}
+function fmtTime(sec){
+  sec = Math.max(0, Math.round(sec));
+  const m = Math.floor(sec/60), s = sec%60;
+  return m + ':' + String(s).padStart(2,'0');
+}
 
 function listVisible(){
   const nums = S.order.filter(n => byN[n] && (S.deck === 'all' || byN[n].deck === S.deck));
   return nums.map(n => byN[n]);
 }
 
+function frontMarkup(g, played){
+  const f = frontOf(g.n);
+  const nn = String(g.n).padStart(2,'0');
+  const phrases = (f.phrases||[]).map(p => `<li>${esc(p)}</li>`).join('');
+  return `<div class="front-frame">
+      <div class="illu">
+        ${played?'<span class="played-stamp">Сыграли</span>':''}
+        <span class="deck-pill">Колода «${esc(g.deck)}»</span>
+        <picture>
+          <source type="image/webp" srcset="img/${nn}.webp">
+          <img src="img/${nn}.jpg" alt="${esc(g.title)}" width="560" height="420" decoding="async">
+        </picture>
+      </div>
+      <div class="front-panel">
+        <h2 class="front-title">${esc(g.title)}</h2>
+        <div class="front-chips">
+          <span class="fchip gc">${esc(g.gc)}</span>
+          <span class="fchip lv">${esc(f.lvChip||'')}</span>
+          <span class="fchip tm">${esc(f.timeChip||g.time)}</span>
+        </div>
+        <div class="clue">
+          <div class="clue-lab">${esc(f.label||'')}</div>
+          <p>${esc(f.clue||'')}</p>
+        </div>
+        <div class="phrases">
+          <div class="phrases-lab">Опорные фразы</div>
+          <ul>${phrases}</ul>
+        </div>
+        <div class="front-foot">Заговорили! · t.me/game_kwest</div>
+      </div>
+    </div>`;
+}
+
+function timerMarkup(g, large){
+  const st = timerStateFor(g.n);
+  const running = Timer.n === g.n && Timer.running;
+  const startLabel = running ? '⏸ Пауза' : (st.left < st.total && st.left > 0 ? '▶ Продолжить' : '⏱ Старт');
+  return `<div class="card-timer${large?' timer-lg':''}${st.left===0?' timer-done':''}" data-timer-for="${g.n}" data-act="timer-wrap">
+    <div class="timer-clock" aria-live="polite">${fmtTime(st.left)}</div>
+    <div class="timer-bar" aria-hidden="true"><i style="transform:scaleX(${st.total? (st.left/st.total):1})"></i></div>
+    <div class="timer-btns">
+      <button class="btn sm pri" type="button" data-act="t-start">${startLabel}</button>
+      <button class="btn sm ghost" type="button" data-act="t-reset">↺ Сброс</button>
+      <button class="btn sm ghost" type="button" data-act="t-minus">−1 мин</button>
+      <button class="btn sm ghost" type="button" data-act="t-plus">+1 мин</button>
+    </div>
+  </div>`;
+}
+
+/* per-card remaining, not persisted; only the active one ticks */
+const leftMap = new Map();
+const totalMap = new Map();
+function timerStateFor(n){
+  const g = byN[n];
+  const def = g ? defaultSecs(g) : 480;
+  if(!totalMap.has(n)) totalMap.set(n, def);
+  if(!leftMap.has(n)) leftMap.set(n, def);
+  return { left: leftMap.get(n), total: totalMap.get(n), def };
+}
+const Timer = { n:null, running:false, endAt:0, iv:null };
+
+function syncTimerUI(){
+  document.querySelectorAll('[data-timer-for]').forEach(box => {
+    const n = +box.getAttribute('data-timer-for');
+    const st = timerStateFor(n);
+    const clock = box.querySelector('.timer-clock');
+    const bar = box.querySelector('.timer-bar i');
+    const startBtn = box.querySelector('[data-act="t-start"]');
+    if(clock) clock.textContent = fmtTime(st.left);
+    if(bar) bar.style.transform = 'scaleX(' + (st.total ? (st.left/st.total) : 1) + ')';
+    const running = Timer.n === n && Timer.running;
+    if(startBtn) startBtn.textContent = running ? '⏸ Пауза' : (st.left < st.total && st.left > 0 ? '▶ Продолжить' : '⏱ Старт');
+    box.classList.toggle('timer-done', st.left === 0);
+  });
+}
+function stopTick(){
+  if(Timer.iv){ clearInterval(Timer.iv); Timer.iv=null; }
+  Timer.running=false;
+}
+function finishTimer(n){
+  stopTick();
+  leftMap.set(n, 0);
+  Timer.n = n;
+  syncTimerUI();
+  document.querySelectorAll(`[data-timer-for="${n}"]`).forEach(box => {
+    box.classList.remove('timer-flash');
+    void box.offsetWidth;
+    box.classList.add('timer-flash');
+  });
+  playChime();
+}
+function tick(){
+  if(!Timer.running || Timer.n==null) return;
+  const left = Math.max(0, Math.ceil((Timer.endAt - Date.now())/1000));
+  leftMap.set(Timer.n, left);
+  syncTimerUI();
+  if(left<=0) finishTimer(Timer.n);
+}
+function startTimer(n){
+  const st = timerStateFor(n);
+  if(st.left<=0){ leftMap.set(n, st.total || st.def); }
+  /* only one running: pause any other */
+  if(Timer.running && Timer.n !== n){
+    const prev = Timer.n;
+    const prevLeft = Math.max(0, Math.ceil((Timer.endAt - Date.now())/1000));
+    leftMap.set(prev, prevLeft);
+    stopTick();
+  }
+  const nowLeft = timerStateFor(n).left;
+  if(nowLeft<=0) return;
+  Timer.n = n;
+  Timer.running = true;
+  Timer.endAt = Date.now() + nowLeft*1000;
+  if(Timer.iv) clearInterval(Timer.iv);
+  Timer.iv = setInterval(tick, 200);
+  syncTimerUI();
+}
+function pauseTimer(){
+  if(!Timer.running || Timer.n==null) return;
+  const left = Math.max(0, Math.ceil((Timer.endAt - Date.now())/1000));
+  leftMap.set(Timer.n, left);
+  stopTick();
+  syncTimerUI();
+}
+function resetTimer(n){
+  const g = byN[n];
+  const def = g ? defaultSecs(g) : 480;
+  if(Timer.n===n) stopTick();
+  totalMap.set(n, def);
+  leftMap.set(n, def);
+  if(Timer.n===n) Timer.n=null;
+  syncTimerUI();
+}
+function bumpTimer(n, deltaSec){
+  const st = timerStateFor(n);
+  let left = st.left + deltaSec;
+  if(left < 0) left = 0;
+  if(left > 60*30) left = 60*30;
+  let total = st.total;
+  if(left > total) total = left;
+  if(Timer.n===n && Timer.running){
+    Timer.endAt = Date.now() + left*1000;
+  }
+  leftMap.set(n, left);
+  totalMap.set(n, total);
+  if(left===0 && Timer.n===n && Timer.running) finishTimer(n);
+  else syncTimerUI();
+}
+
+function playChime(){
+  if(!S.sound) return;
+  try{
+    const AC = window.AudioContext || window.webkitAudioContext;
+    const ac = playChime.ac || (playChime.ac = new AC());
+    if(ac.state==='suspended') ac.resume();
+    const now = ac.currentTime;
+    [523.25, 659.25, 783.99].forEach((f,i)=>{
+      const o=ac.createOscillator();
+      const g=ac.createGain();
+      o.type='sine';
+      o.frequency.value=f;
+      g.gain.setValueAtTime(0.0001, now+i*0.11);
+      g.gain.exponentialRampToValueAtTime(0.11, now+i*0.11+0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, now+i*0.11+0.45);
+      o.connect(g); g.connect(ac.destination);
+      o.start(now+i*0.11); o.stop(now+i*0.11+0.5);
+    });
+  }catch(e){}
+}
+
+function handleTimerAct(act, n, ev){
+  if(ev){ ev.preventDefault(); ev.stopPropagation(); }
+  if(act==='t-start'){
+    if(Timer.n===n && Timer.running) pauseTimer();
+    else startTimer(n);
+  }else if(act==='t-reset') resetTimer(n);
+  else if(act==='t-minus') bumpTimer(n, -60);
+  else if(act==='t-plus') bumpTimer(n, 60);
+}
+
 function renderCard(g, opts){
   const big = opts && opts.big;
   const flipped = S.flipped.has(g.n);
   const played = S.played.has(g.n);
-  const nn = String(g.n).padStart(2,'0');
+  const front = frontMarkup(g, played);
   const steps = (g.steps||[]).map(st =>
     `<li><b>${esc(st.name)}</b> · ${esc(st.dur)}<br>${esc(st.text||'')}</li>`
   ).join('');
@@ -210,21 +440,9 @@ function renderCard(g, opts){
   }).join('');
   const words = g.op && g.op.words ? `<p class="words">${esc(g.op.words)}</p>` : '';
   return `<div class="card${flipped?' is-flipped':''}${played?' is-played':''}" data-n="${g.n}" ${big?'':'tabindex="0"'} role="button" aria-pressed="${flipped?'true':'false'}" aria-label="${esc(g.title)}, колода ${esc(g.deck)}. Нажмите, чтобы перевернуть.">
+    <div class="card-sizer" aria-hidden="true"><div class="face-front" style="position:relative">${front}</div></div>
     <div class="card-inner">
-      <div class="face face-front">
-        ${played?'<span class="played-stamp">Сыграли</span>':''}
-        <span class="no">№ ${nn}</span>
-        <div class="illu">
-          <picture>
-            <source type="image/webp" srcset="img/${nn}.webp">
-            <img src="img/${nn}.jpg" alt="${esc(g.title)}" width="560" height="420" decoding="async">
-          </picture>
-        </div>
-        <div class="front-meta">
-          <span class="badge ${deckClass(g.deck)}">${esc(g.deck)}</span>
-          <h2 class="front-title">${esc(g.title)}</h2>
-        </div>
-      </div>
+      <div class="face face-front">${front}</div>
       <div class="face face-back">
         <div class="back-scroll">
           <div class="back-head">
@@ -247,6 +465,7 @@ function renderCard(g, opts){
           ${levels}
           ${words}
         </div>
+        ${timerMarkup(g, false)}
         <div class="back-actions">
           <button class="btn sm ${played?'sec':'pri'}" type="button" data-act="played">${played?'✓ Сыграли':'Сыграли'}</button>
           ${big?'':'<button class="btn ghost sm" type="button" data-act="show">Показать классу</button>'}
@@ -295,6 +514,7 @@ function bindCard(root){
       ev.preventDefault();
       ev.stopPropagation();
       const act = btn.getAttribute('data-act');
+      if(act === 'timer-wrap') return;
       if(act === 'flip') toggle();
       else if(act === 'played'){
         if(S.played.has(n)) S.played.delete(n); else S.played.add(n);
@@ -303,6 +523,7 @@ function bindCard(root){
         if($('#spot').classList.contains('open')) openSpot(n);
       }
       else if(act === 'show') openSpot(n);
+      else if(act && act.charAt(0)==='t' && act.charAt(1)==='-') handleTimerAct(act, n, ev);
     });
   });
 }
@@ -315,6 +536,7 @@ function render(){
     t.setAttribute('aria-selected', t.dataset.deck === S.deck ? 'true' : 'false');
   });
   updateStatus();
+  syncTimerUI();
 }
 
 function openSpot(n){
@@ -324,15 +546,35 @@ function openSpot(n){
   wrap.className = 'card spot-card';
   wrap.innerHTML = renderCard(g, {big:true});
   const inner = wrap.querySelector('.card');
-  // hoist inner contents into wrap itself
   wrap.className = inner.className + ' spot-card';
   wrap.dataset.n = String(n);
   wrap.setAttribute('tabindex','0');
   wrap.innerHTML = inner.innerHTML;
+  wrap.classList.remove('is-flipped');
+  wrap.setAttribute('aria-pressed','false');
   bindCard(wrap);
+  const stimer = $('#spot-timer');
+  stimer.hidden = false;
+  stimer.setAttribute('data-timer-for', String(n));
+  stimer.setAttribute('data-act', 'timer-wrap');
+  stimer.className = 'card-timer timer-lg';
+  (function(){
+    const tmp=document.createElement('div');
+    tmp.innerHTML = timerMarkup(g, true);
+    stimer.innerHTML = tmp.firstElementChild.innerHTML;
+  })();
+  stimer.querySelectorAll('[data-act]').forEach(btn => {
+    btn.addEventListener('click', ev => {
+      ev.preventDefault();
+      ev.stopPropagation();
+      const act = btn.getAttribute('data-act');
+      if(act && act.charAt(0)==='t' && act.charAt(1)==='-') handleTimerAct(act, n, ev);
+    });
+  });
   const spot = $('#spot');
   spot.classList.add('open');
   spot.setAttribute('aria-hidden','false');
+  syncTimerUI();
   $('#spot-close').focus();
 }
 function closeSpot(){
@@ -340,6 +582,10 @@ function closeSpot(){
   spot.classList.remove('open');
   spot.setAttribute('aria-hidden','true');
   $('#spot-card').innerHTML = '';
+  const stimer = $('#spot-timer');
+  stimer.hidden = true;
+  stimer.removeAttribute('data-timer-for');
+  stimer.innerHTML = '';
 }
 
 document.querySelectorAll('.tab').forEach(t => {
@@ -408,6 +654,19 @@ document.addEventListener('fullscreenchange', () => {
     $('#btn-stage').textContent = '🖥 Большой экран';
   }
 });
+
+function syncSoundBtn(){
+  const b = $('#btn-sound');
+  b.setAttribute('aria-pressed', S.sound ? 'true' : 'false');
+  b.textContent = S.sound ? '🔔 Звук: вкл' : '🔕 Звук: выкл';
+}
+$('#btn-sound').addEventListener('click', () => {
+  S.sound = !S.sound;
+  ttcSave();
+  syncSoundBtn();
+  if(S.sound) playChime();
+});
+syncSoundBtn();
 
 $('#spot-close').addEventListener('click', closeSpot);
 $('#spot').addEventListener('click', ev => { if(ev.target.id === 'spot') closeSpot(); });
