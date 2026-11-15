@@ -1,0 +1,97 @@
+/* TutorCall overlays: watermark clearance, reset, start-screen fill */
+
+/* The shared watermark pads BOTH html and body (36px !important each).
+   Combined with min-height: 100dvh that added a blank cream strip under the footer.
+   Keep the bar, put clearance on the lesson shell. */
+html.ttc-wm-bar-pad-bottom:root,
+html.ttc-wm-bar-pad-bottom body.ttc-wm-bar-pad-bottom,
+html.ttc-wm-bar-pad-bottom body {
+  padding-bottom: 0 !important;
+}
+html, body, #root {
+  min-height: 100%;
+}
+body {
+  padding-bottom: 0;
+}
+@media print {
+  body { padding-bottom: 0; }
+}
+
+/* Lesson shell fills the viewport and sits above the bar. */
+#root > .min-h-dvh {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: 36px;
+  box-sizing: border-box;
+}
+@media (max-width: 420px) {
+  #root > .min-h-dvh {
+    padding-bottom: 34px;
+  }
+}
+
+.ttc-reset {
+  background: #fff8e7;
+  color: #6b4226;
+  box-shadow: inset 0 0 0 2px #c4a574;
+  cursor: pointer;
+  font-family: inherit;
+}
+.ttc-reset:hover,
+.ttc-reset:focus-visible {
+  background: #fff3c4;
+  outline: 3px solid #6d4f97;
+  outline-offset: 2px;
+}
+
+/* Toasts stay above the watermark bar */
+#root .fixed.bottom-5 {
+  bottom: 4.75rem;
+}
+
+/* Watermark bar — visible in print, never cover controls */
+#tc-watermark,
+.tc-watermark,
+[data-tc-watermark] {
+  z-index: 20 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen-enter,
+  .reveal,
+  .floaty,
+  .flip-in,
+  .shake,
+  .pulse-ring,
+  .mote,
+  .scroll-drift {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Solid caption band so white title never sits on a pale bit of the photo */
+.hero-caption {
+  background: linear-gradient(to top, #2c241c 0%, rgba(44, 36, 28, 0.92) 55%, rgba(44, 36, 28, 0) 100%);
+  text-shadow: 0 1px 2px rgba(20, 14, 10, 0.45);
+}
+
+.choice-badge {
+  background-color: #fff !important;
+  color: #2c241c !important;
+}
+
+/* AA-safe purple for small labels on cream / paper */
+.text-\[\#543b78\] { color: #543b78; }
+.text-\[\#6d4f97\] { color: #543b78; }
+
+/* When three missions are already chosen, dim the decoration only —
+   do not fade the R/W/S badge (opacity-60 dropped its contrast below AA). */
+.choice-tile-dim {
+  filter: saturate(0.75);
+}
+.choice-tile-dim svg {
+  opacity: 0.65;
+}
