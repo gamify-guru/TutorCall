@@ -138,3 +138,33 @@ footer .text-cream\/40 {
 .bg-pine-deep .text-honey-deep {
   color: #ffd27a;
 }
+
+/* Phone: keep the rules button in the header and the start CTAs above the watermark */
+@media (max-width: 430px) {
+  header [title^="Улик"] svg { display: none; }
+  header [title^="Улик"] { padding-left: 0.5rem; padding-right: 0.5rem; gap: 0; }
+  header .btn.btn-honey { padding-left: 0.65rem; padding-right: 0.65rem; }
+  #screen-title {
+    font-size: 1.85rem !important;
+    line-height: 1.1 !important;
+  }
+  #top > section.card [class*="py-7"] {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  #top > section.card .mt-4 { margin-top: 0.55rem; }
+  #top > section.card .mb-4 { margin-bottom: 0.55rem; }
+  #top > section.card .mt-6 { margin-top: 0.7rem; }
+  #top > section.card .mt-2 { margin-top: 0.35rem; }
+}
+@media (max-width: 430px) {
+  #top > section.card .mt-6.flex.flex-wrap {
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+  }
+  #top > section.card .mt-6.flex.flex-wrap > a {
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+    white-space: nowrap;
+  }
+}
