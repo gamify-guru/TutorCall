@@ -1,0 +1,205 @@
+/* TutorCall overlays: watermark clearance, reset, focus, contrast, modal fit */
+
+html.ttc-wm-bar-pad-bottom:root,
+html.ttc-wm-bar-pad-bottom body.ttc-wm-bar-pad-bottom,
+html.ttc-wm-bar-pad-bottom body {
+  padding-bottom: 0 !important;
+}
+html, body, #root {
+  min-height: 100%;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+body { padding-bottom: 0; }
+@media print {
+  body { padding-bottom: 0; }
+}
+
+#root > .min-h-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: 52px;
+  box-sizing: border-box;
+}
+
+.ttc-reset {
+  background: #fff8e7;
+  color: #6b4226;
+  box-shadow: inset 0 0 0 2px #c4a574;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+.ttc-reset:hover,
+.ttc-reset:focus-visible {
+  background: #fff3c4;
+  outline: 3px solid #d97706;
+  outline-offset: 2px;
+}
+
+#tc-watermark,
+.tc-watermark,
+[data-tc-watermark],
+#ttc-wm-bar,
+.ttc-wm-bar-bottom {
+  z-index: 20 !important;
+}
+
+/* Floating "Rules & Clues" chip sits above the watermark bar */
+#root .fixed.bottom-5 {
+  bottom: 4.6rem !important;
+}
+
+[tabindex="-1"]:focus,
+[tabindex="-1"]:focus-visible {
+  outline: none;
+}
+
+/* Rules modal must clear the bar and fit the phone */
+#root .fixed.inset-0.z-50 {
+  width: 100vw;
+  max-width: 100%;
+  left: 0;
+  right: 0;
+  overflow-x: hidden;
+  align-items: flex-start;
+  padding-bottom: 3.4rem;
+  box-sizing: border-box;
+}
+#root .fixed.inset-0.z-50 > div.relative,
+#root .fixed.inset-0.z-50 > [role="dialog"] {
+  width: 100%;
+  max-width: min(56rem, calc(100vw - 1.5rem));
+  min-width: 0;
+  max-height: min(90vh, calc(100dvh - 4.4rem));
+  margin-top: 0.75rem;
+}
+
+/* Parchment certificates: keep ink dark enough on the cream paper */
+.parchment { color: #3b2410; }
+.parchment .text-amber-950,
+.parchment .text-amber-900,
+.parchment .text-amber-900\/80 { color: #4a2e10 !important; }
+.parchment .text-sky-950 { color: #0c4a6e !important; }
+.parchment .text-emerald-800 { color: #065f46 !important; }
+
+/* Gradient title on dark: give it a solid fallback for contrast tools and print */
+#screen-title {
+  color: #fde68a !important;
+  -webkit-text-fill-color: #fde68a;
+}
+
+@media (max-width: 430px) {
+  header.sticky .ttc-reset {
+    padding-left: 0.55rem;
+    padding-right: 0.55rem;
+    font-size: 10px;
+  }
+}
+
+/* Solid backs for translucent tint chips so amber/emerald/indigo text stays 4.5:1 */
+#root .bg-amber-500\/10,
+#root .bg-amber-500\/20 {
+  background-color: #2a1d08 !important;
+}
+#root .bg-amber-500\/10,
+#root .bg-amber-500\/10 *,
+#root .bg-amber-500\/20,
+#root .bg-amber-500\/20 * {
+  color: #fbbf24 !important;
+}
+#root .bg-emerald-500\/10,
+#root .bg-emerald-500\/20 {
+  background-color: #052e24 !important;
+}
+#root .bg-emerald-500\/10,
+#root .bg-emerald-500\/10 *,
+#root .bg-emerald-500\/20,
+#root .bg-emerald-500\/20 * {
+  color: #6ee7b7 !important;
+}
+#root .bg-indigo-500\/10,
+#root .bg-indigo-500\/20 {
+  background-color: #1e1b4b !important;
+}
+#root .bg-indigo-500\/10,
+#root .bg-indigo-500\/10 *,
+#root .bg-indigo-500\/20,
+#root .bg-indigo-500\/20 * {
+  color: #c7d2fe !important;
+}
+#root .bg-purple-500\/10 {
+  background-color: #2e1064 !important;
+}
+#root .bg-purple-500\/10,
+#root .bg-purple-500\/10 * {
+  color: #e9d5ff !important;
+}
+
+/* Gold action buttons: dark ink on solid amber (no washed gradient) */
+#root .from-amber-500,
+#root .bg-amber-500 {
+  background-image: none !important;
+  background-color: #d97706 !important;
+}
+#root .from-amber-500,
+#root .from-amber-500 *,
+#root .bg-amber-500,
+#root .bg-amber-500 * {
+  color: #1c1508 !important;
+}
+
+/* Parchment badges sit on the cream paper, not a dark wash */
+.parchment .bg-amber-900\/10,
+.parchment .bg-sky-900\/10 {
+  background-color: #fae7c8 !important;
+}
+
+/* Muted labels on the near-black canvas need to clear 4.5:1 */
+#root .text-slate-400 { color: #94a3b8; }
+
+/* Darker solid gold + black ink; stop the glow pulse from washing the fill */
+#root .from-amber-500,
+#root .bg-amber-500 {
+  background-image: none !important;
+  background-color: #b45309 !important;
+  animation: none !important;
+}
+#root .from-amber-500,
+#root .from-amber-500 *,
+#root .bg-amber-500,
+#root .bg-amber-500 * {
+  color: #111111 !important;
+}
+#root .animate-pulse-glow { animation: none !important; }
+
+#root .text-slate-500 { color: #94a3b8; }
+
+#root .from-amber-500,
+#root .bg-amber-500,
+#root .bg-amber-400 {
+  background-image: none !important;
+  background-color: #f59e0b !important;
+  animation: none !important;
+}
+#root .from-amber-500,
+#root .from-amber-500 *,
+#root .bg-amber-500,
+#root .bg-amber-500 *,
+#root .bg-amber-400,
+#root .bg-amber-400 * {
+  color: #111111 !important;
+}
+
+#root .bg-purple-500\/20 {
+  background-color: #2e1064 !important;
+}
+#root .bg-purple-500\/20,
+#root .bg-purple-500\/20 * {
+  color: #e9d5ff !important;
+}
+
+/* Header already has Rules; hide the floating chip on phones so it does not cover cards */
+@media (max-width: 430px) {
+  #root .fixed.bottom-5 { display: none !important; }
+}
