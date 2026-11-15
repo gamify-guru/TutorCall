@@ -10042,17 +10042,17 @@ function Ty({
           })]
         })]
       }), c.jsx("div", {
-        className: "mx-auto w-full max-w-2xl fade-up",
+        className: "mx-auto w-full max-w-2xl",
         children: c.jsxs("div", {
           className: "wood-sign rounded-[32px] px-6 py-7 text-center sm:px-10 sm:py-9",
           children: [c.jsx("p", {
-            className: "mb-1 text-sm font-bold uppercase tracking-[0.2em] text-[#ffe082]",
+            className: "mb-1 text-sm font-bold uppercase tracking-[0.2em] text-[#fff3c4]",
             children: "City Farm Tour"
           }), c.jsx("h1", {
             className: "font-display text-4xl font-semibold leading-tight sm:text-5xl",
             children: "Would you like to…?"
           }), c.jsx("p", {
-            className: "mt-2 font-display text-xl text-[#ffe082]",
+            className: "mt-2 font-display text-xl text-[#fff3c4]",
             children: "I’d like to + infinitive"
           }), c.jsxs("p", {
             className: "mx-auto mt-4 max-w-lg text-base font-semibold text-[#fff8e7]/90",
@@ -10077,7 +10077,7 @@ function Ty({
               })]
             }, z))
           }), c.jsxs("label", {
-            className: "mt-6 block text-left text-sm font-bold text-[#ffe082]",
+            className: "mt-6 block text-left text-sm font-bold text-[#fff3c4]",
             children: ["Как зовут гида?", c.jsx("input", {
               value: T,
               onChange: o => A(o.target.value),
@@ -10091,7 +10091,7 @@ function Ty({
             className: "grass-btn mt-5 w-full rounded-2xl py-4 font-display text-2xl font-semibold",
             children: "Начать экскурсию →"
           }), c.jsx("p", {
-            className: "mt-3 text-xs font-semibold text-[#fff8e7]/70",
+            className: "mt-3 text-xs font-semibold text-[#fff8e7]",
             children: "Правила можно открыть в любой момент · 6 заданий · 4 печати"
           })]
         })
@@ -10185,7 +10185,7 @@ function Ay({
           children: Jn.map((z, _) => c.jsx("button", {
             type: "button",
             onClick: () => A(_),
-            className: `h-2.5 rounded-full ${_===T?"w-6 bg-[#5b9a3e]":"w-2.5 bg-[#e6d3b1]"}`
+            className: `h-2.5 rounded-full ${_===T?"w-6 bg-[#3d7a28]":"w-2.5 bg-[#e6d3b1]"}`
           }, _))
         }), T < Jn.length - 1 ? c.jsx("button", {
           type: "button",
@@ -10224,7 +10224,7 @@ function Ht({
   text: T
 }) {
   return p === null ? null : c.jsxs("div", {
-    className: `fade-up rounded-2xl border-3 px-4 py-3 font-bold ${p?"border-[#5b9a3e] bg-[#e8f5d4] text-[#2d5a18]":"border-[#e53935] bg-[#ffe6e4] text-[#8e1c18]"}`,
+    className: `fade-up rounded-2xl border-3 px-4 py-3 font-bold ${p?"border-[#3d7a28] bg-[#e8f5d4] text-[#2d5a18]":"border-[#e53935] bg-[#ffe6e4] text-[#8e1c18]"}`,
     children: [p ? "🌟 Отлично! " : "🌱 Почти! ", T]
   })
 }
@@ -10287,7 +10287,7 @@ function Ua({
     children: Array.from({
       length: p
     }).map((A, o) => c.jsx("span", {
-      className: `h-2.5 rounded-full transition-all ${o===T?"w-7 bg-[#5b9a3e]":o<T?"w-2.5 bg-[#f5c842]":"w-2.5 bg-[#e6d3b1]"}`
+      className: `h-2.5 rounded-full transition-all ${o===T?"w-7 bg-[#3d7a28]":o<T?"w-2.5 bg-[#f5c842]":"w-2.5 bg-[#e6d3b1]"}`
     }, o))
   })
 }
@@ -10368,7 +10368,7 @@ function _y({
     }), c.jsxs("div", {
       className: "mb-4 flex flex-col gap-3",
       children: [c.jsxs("div", {
-        className: "farm-audio-player w-full rounded-2xl bg-[#e8f5d4] p-3 ring-2 ring-[#5b9a3e]",
+        className: "farm-audio-player w-full rounded-2xl bg-[#e8f5d4] p-3 ring-2 ring-[#3d7a28]",
         children: [c.jsx("p", {
           className: "mb-2 text-sm font-extrabold text-[#2d5a18]",
           children: "🔊 Прослушать весь диалог"
@@ -10798,7 +10798,7 @@ function Dy({
         children: o.map(H => c.jsx("button", {
           type: "button",
           onClick: () => q(H),
-          className: "rounded-xl bg-[#5b9a3e] px-3 py-1.5 font-extrabold text-white",
+          className: "rounded-xl bg-[#3d7a28] px-3 py-1.5 font-extrabold text-white",
           children: H.split("#")[0]
         }, H))
       })
@@ -11094,7 +11094,7 @@ function Ry({
           q = _ && K === Z.answer,
           k = _ && K !== Z.answer;
         return c.jsxs("div", {
-          className: `rounded-2xl border-3 px-3 py-3 ${q?"border-[#5b9a3e] bg-[#e8f5d4]":k?"border-[#e53935] bg-[#ffe6e4]":"border-[#c4a574] bg-white"}`,
+          className: `rounded-2xl border-3 px-3 py-3 ${q?"border-[#3d7a28] bg-[#e8f5d4]":k?"border-[#e53935] bg-[#ffe6e4]":"border-[#c4a574] bg-white"}`,
           children: [c.jsx(Ef, {
             who: Z.speaker
           }), c.jsxs("p", {
@@ -11201,7 +11201,7 @@ function Yy({
       children: Hy.map(M => c.jsxs("button", {
         type: "button",
         onClick: () => o(M.id),
-        className: `rounded-full px-3 py-1.5 text-sm font-extrabold ${A===M.id?"bg-[#5b9a3e] text-white":z[M.id]?"bg-[#e8f5d4] text-[#2d5a18]":"bg-[#fff3c4] text-[#6b4226]"}`,
+        className: `rounded-full px-3 py-1.5 text-sm font-extrabold ${A===M.id?"bg-[#3d7a28] text-white":z[M.id]?"bg-[#e8f5d4] text-[#2d5a18]":"bg-[#fff3c4] text-[#6b4226]"}`,
         children: [z[M.id] ? "✓ " : `${M.id}. `, M.title]
       }, M.id))
     }), A === 1 && c.jsx(qy, {
@@ -11861,7 +11861,7 @@ function Ly() {
               onClick: () => {
                 A("lesson"), C(F.id), q(!0)
               },
-              className: `rounded-xl px-3 py-2 text-left text-sm font-extrabold transition ${Fl?"bg-[#5b9a3e] text-white":x?"bg-[#e8f5d4] text-[#2d5a18]":Kl?"cursor-not-allowed bg-[#efe6d6] text-[#6b4226]":"bg-white text-[#6b4226] hover:bg-[#fff3c4]"}`,
+              className: `rounded-xl px-3 py-2 text-left text-sm font-extrabold transition ${Fl?"bg-[#3d7a28] text-white":x?"bg-[#e8f5d4] text-[#2d5a18]":Kl?"cursor-not-allowed bg-[#efe6d6] text-[#6b4226]":"bg-white text-[#6b4226] hover:bg-[#fff3c4]"}`,
               children: [x ? "✓ " : Kl ? "🔒 " : `${F.id}. `, F.titleRu]
             }, F.id)
           }), c.jsxs("button", {
@@ -11870,7 +11870,7 @@ function Ly() {
               M.includes(6) && (A("homework"), q(!1))
             },
             disabled: !M.includes(6),
-            className: `rounded-xl px-3 py-2 text-left text-sm font-extrabold ${T==="homework"?"bg-[#5b9a3e] text-white":M.includes(6)?"bg-[#fff3c4] text-[#6b4226]":"cursor-not-allowed bg-[#efe6d6] text-[#6b4226]"}`,
+            className: `rounded-xl px-3 py-2 text-left text-sm font-extrabold ${T==="homework"?"bg-[#3d7a28] text-white":M.includes(6)?"bg-[#fff3c4] text-[#6b4226]":"cursor-not-allowed bg-[#efe6d6] text-[#6b4226]"}`,
             children: [M.includes(6) ? "🏡 " : "🔒 ", "Домашнее задание"]
           })]
         }), c.jsx("p", {
@@ -11916,7 +11916,7 @@ function Ly() {
     }), c.jsxs("footer", {
       className: "relative mt-4 overflow-hidden pb-6 pt-8 text-center",
       children: [c.jsx("div", {
-        className: "pointer-events-none absolute inset-x-0 top-0 h-10 bg-[radial-gradient(ellipse_at_top,_#5b9a3e_0,_#5b9a3e_40%,_transparent_42%)] opacity-40"
+        className: "pointer-events-none absolute inset-x-0 top-0 h-10 bg-[radial-gradient(ellipse_at_top,_#3d7a28_0,_#3d7a28_40%,_transparent_42%)] opacity-40"
       }), c.jsx("p", {
         className: "relative text-sm font-extrabold text-[#3d7a28]",
         children: "🐑 🍓 🐐 🚜 City Farm · Would you like to…? · I’d like to…"
