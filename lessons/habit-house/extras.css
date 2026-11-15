@@ -100,3 +100,6 @@ body {
 .choice-tile-dim svg {
   opacity: 0.65;
 }
+
+/* no focus ring on programmatically focused headings */
+[tabindex="-1"]:focus,[tabindex="-1"]:focus-visible{outline:none}
