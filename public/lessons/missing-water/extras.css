@@ -1,0 +1,120 @@
+/* TutorCall overlays: watermark clearance, reset, focus, contrast, modal fit */
+
+html.ttc-wm-bar-pad-bottom:root,
+html.ttc-wm-bar-pad-bottom body.ttc-wm-bar-pad-bottom,
+html.ttc-wm-bar-pad-bottom body {
+  padding-bottom: 0 !important;
+}
+html, body, #root {
+  min-height: 100%;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+body { padding-bottom: 0; }
+@media print {
+  body { padding-bottom: 0; }
+}
+
+#root > .min-h-screen,
+#root > .detective-grid-bg {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: 52px;
+  box-sizing: border-box;
+}
+
+.ttc-reset {
+  background: #fff8e7;
+  color: #6b4226;
+  box-shadow: inset 0 0 0 2px #c4a574;
+  cursor: pointer;
+  font-family: inherit;
+}
+.ttc-reset:hover,
+.ttc-reset:focus-visible {
+  background: #fff3c4;
+  outline: 3px solid #d97706;
+  outline-offset: 2px;
+}
+
+#tc-watermark,
+.tc-watermark,
+[data-tc-watermark],
+#ttc-wm-bar,
+.ttc-wm-bar-bottom {
+  z-index: 20 !important;
+}
+
+/* Keep the cheat-sheet dock and homework CTA above the watermark bar */
+#root .fixed.bottom-4 {
+  bottom: 4.6rem !important;
+}
+
+[tabindex="-1"]:focus,
+[tabindex="-1"]:focus-visible {
+  outline: none;
+}
+
+/* Muted labels on cream/white need 4.5:1; keep pale only on dark chrome */
+.text-slate-400 { color: #575f6b; }
+.text-white\/70 { color: rgba(255,255,255,0.86); }
+#root button.text-slate-400[class*="hover:bg-slate-700"] { color: #cbd5e1; }
+
+/* CASE caption sits on a solid navy chip (auditor-safe hex) */
+#root img[src*="detective-hero"] + div.absolute {
+  background-color: #0F172A !important;
+}
+
+/* Rules modal must fit the phone */
+#root .fixed.inset-0.z-50 {
+  width: 100vw;
+  max-width: 100%;
+  left: 0;
+  right: 0;
+  overflow-x: hidden;
+  align-items: flex-start;
+}
+#root .fixed.inset-0.z-50 > div.relative {
+  width: 100%;
+  max-width: min(64rem, calc(100vw - 1.5rem));
+  min-width: 0;
+  margin: auto;
+  max-height: min(90vh, calc(100dvh - 1.5rem));
+}
+#root .fixed.inset-0.z-50 button {
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fadeIn, .float-drop {
+    animation: none !important;
+  }
+}
+
+
+/* Keep photo hotspots clear of the watermark on laptop-height windows */
+#root img[src*="detective-hero"] {
+  max-height: calc(100vh - 15rem);
+  max-height: calc(100dvh - 15rem);
+  width: 100%;
+  object-fit: contain;
+  object-position: top center;
+  background: #e8dfd2;
+}
+
+@media (max-height: 900px) {
+  .ttc-route-card { display: none; }
+}
+
+
+/* Contrast: white text on sky/amber, and sky/amber text on cream, must be >= 4.5:1 */
+:root, :host {
+  --color-sky-600: #0369A1;
+  --color-amber-600: #B45309;
+}
+.bg-\[\#0284C7\] { background-color: #0369A1 !important; }
+.border-\[\#0284C7\] { border-color: #0369A1 !important; }
+.text-\[\#0284C7\] { color: #0369A1 !important; }
+.bg-\[\#D97706\] { background-color: #B45309 !important; }
+.border-\[\#D97706\] { border-color: #B45309 !important; }
+.text-\[\#D97706\] { color: #B45309 !important; }
