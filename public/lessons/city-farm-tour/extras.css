@@ -1,12 +1,50 @@
-/* TutorCall overlays: watermark bar clearance, audio player, reset button */
-html, body {
+/* TutorCall overlays: watermark clearance, audio player, reset, start-screen fill */
+
+/* The shared watermark pads BOTH html and body (36px !important each). Combined
+   with the welcome hero's min-height: 100vh, that added ~72px of empty body
+   green (#e8f4c9) under the footer. Keep the bar, put clearance on the screens. */
+/* Specificity higher than the watermark's html.ttc-wm-bar-pad-bottom rule,
+   which is injected later with !important and would otherwise stack 36px
+   on <html> on top of the hero. */
+html.ttc-wm-bar-pad-bottom:root,
+html.ttc-wm-bar-pad-bottom body.ttc-wm-bar-pad-bottom,
+html.ttc-wm-bar-pad-bottom body {
+  padding-bottom: 0 !important;
+}
+html, body, #root {
   min-height: 100%;
 }
 body {
-  padding-bottom: 56px;
+  padding-bottom: 0;
 }
 @media print {
-  body { padding-bottom: 56px; }
+  body { padding-bottom: 0; }
+}
+
+/* Welcome hero: fill the viewport, sit the tagline above the bar, keep the
+   photo (position:absolute; inset:0) covering the area behind the bar. */
+#root > .relative.min-h-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: 36px;
+  box-sizing: border-box;
+}
+/* The inner flex column was also min-h-screen (100vh) and overflowed the
+   padded hero, extending the page into the body green. Fill the hero instead. */
+#root > .relative.min-h-screen .flex.min-h-screen {
+  min-height: 100%;
+  height: 100%;
+}
+/* Lesson + certificate shells */
+.farm-bg.min-h-screen {
+  padding-bottom: 36px;
+  box-sizing: border-box;
+}
+@media (max-width: 420px) {
+  #root > .relative.min-h-screen,
+  .farm-bg.min-h-screen {
+    padding-bottom: 34px;
+  }
 }
 
 .ttc-reset {
@@ -33,9 +71,25 @@ body {
   bottom: 4.75rem;
 }
 
-/* Watermark bar from _shared/watermark.js — keep visible in print, never cover controls */
+/* Watermark bar — visible in print, never cover controls */
 #tc-watermark,
 .tc-watermark,
 [data-tc-watermark] {
   z-index: 20 !important;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-up,
+  .floaty,
+  .wiggle {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Utilities for the darker AA-safe green (replaces #5b9a3e fills behind white text) */
+.bg-\[\#3d7a28\] { background-color: #3d7a28; }
+.border-\[\#3d7a28\] { border-color: #3d7a28; }
+.ring-\[\#3d7a28\] { --tw-ring-color: #3d7a28; }
+.bg-\[\#5b9a3e\] { background-color: #3d7a28; }
