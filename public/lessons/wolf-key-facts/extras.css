@@ -1,0 +1,140 @@
+/* TutorCall overlays: watermark clearance, reset, focus, contrast */
+
+html.ttc-wm-bar-pad-bottom:root,
+html.ttc-wm-bar-pad-bottom body.ttc-wm-bar-pad-bottom,
+html.ttc-wm-bar-pad-bottom body {
+  padding-bottom: 0 !important;
+}
+html, body, #root {
+  min-height: 100%;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+body { padding-bottom: 0; }
+@media print {
+  body { padding-bottom: 0; }
+}
+
+#root > .min-h-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: 52px;
+  box-sizing: border-box;
+}
+
+.ttc-reset {
+  background: #fff8e7;
+  color: #5a3a16;
+  box-shadow: inset 0 0 0 2px #c4a574;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 800;
+}
+.ttc-reset:hover,
+.ttc-reset:focus-visible {
+  background: #fff3c4;
+  outline: 3px solid #c8801f;
+  outline-offset: 2px;
+}
+
+#tc-watermark,
+.tc-watermark,
+[data-tc-watermark],
+#ttc-wm-bar,
+.ttc-wm-bar-bottom {
+  z-index: 20 !important;
+}
+
+[tabindex="-1"]:focus,
+[tabindex="-1"]:focus-visible {
+  outline: none;
+}
+
+/* Footer muted text on navy must meet 4.5:1 */
+footer .text-cream\/70,
+footer .text-cream\/40 {
+  color: #e8d9b0;
+}
+
+/* Placeholder / low-contrast ink on cream */
+.text-pine\/35 { color: #4d6758; }
+.text-pine\/40 { color: #3f5749; }
+.text-cream\/25 { color: #b7c4b0; }
+.text-cream\/20 { color: #b7c4b0; }
+.text-ink\/60 { color: #3a4a34; }
+.text-holo\/40 { color: #0e746c; }
+
+/* Keep the sticky dossier above the watermark if a page is short */
+#root aside.sticky {
+  margin-bottom: 52px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .firefly, .floaty, .confetti-paw, .pop-in, .glow-pulse, .holo-scan {
+    animation: none !important;
+  }
+}
+
+
+/* Rules sheet must sit above the watermark, especially on phones */
+#root .fixed.inset-0.z-50 {
+  padding-bottom: 3.4rem !important;
+  overflow-x: hidden;
+}
+#root .fixed.inset-0.z-50 > div {
+  max-height: min(90vh, calc(100dvh - 4.5rem));
+  overflow-y: auto;
+  width: 100%;
+  max-width: min(64rem, 100%);
+}
+
+
+/* Reveals must be fully opaque — faded content fails contrast and is hard to read */
+.reveal,
+.reveal:not(.is-in) {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+/* Token tweaks so text meets 4.5:1 on cream and on dark badges */
+:root, :host {
+  --color-moss: #2c5a2a;
+  --color-bark: #4a2e14;
+  --color-berry: #9a2f22;
+  --color-holo-deep: #0a5852;
+}
+.stamp { color: #9a2f22; }
+
+/* Gold numbers on pine badges */
+.bg-pine.text-honey,
+[class*="bg-pine"][class*="text-honey"] {
+  color: #ffe08a !important;
+}
+
+/* Holographic card: solid backing so title contrast is computable */
+.holo {
+  background-color: #0a221e;
+  color: #e7fffa;
+}
+.holo .text-holo,
+.holo .font-display.text-holo {
+  color: #d6fff8;
+}
+
+/* Hero caption chip: solid backing + light title */
+#root .floaty {
+  background-color: #0f2c20 !important;
+  background-image: none !important;
+}
+#root .floaty .text-holo {
+  color: #d6fff8 !important;
+}
+
+/* Honey-on-honey labels (e.g. 0 / 8) */
+.text-honey-deep { color: #7a4a0c; }
+.bg-night .text-honey-deep,
+.bg-pine .text-honey-deep,
+.bg-pine-deep .text-honey-deep {
+  color: #ffd27a;
+}
