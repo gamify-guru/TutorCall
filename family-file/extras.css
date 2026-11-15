@@ -1,0 +1,188 @@
+/* TutorCall overlays: watermark clearance, reset, focus, contrast, modal fit */
+
+html.ttc-wm-bar-pad-bottom:root,
+html.ttc-wm-bar-pad-bottom body.ttc-wm-bar-pad-bottom,
+html.ttc-wm-bar-pad-bottom body {
+  padding-bottom: 0 !important;
+}
+html, body, #root {
+  min-height: 100%;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+body { padding-bottom: 0; }
+@media print {
+  body { padding-bottom: 0; }
+}
+
+/* One padding owner: the lesson shell, so the bar never stacks a blank strip */
+#root > .relative.min-h-svh,
+#root > .min-h-svh {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: 52px;
+  box-sizing: border-box;
+}
+
+/* Cover CTA and copy must sit above the bar */
+.cover-copy {
+  padding-bottom: 5.2rem !important;
+}
+
+.ttc-reset {
+  background: #fff8e7;
+  color: #5a3214;
+  box-shadow: inset 0 0 0 2px #c4a574;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+.ttc-reset:hover,
+.ttc-reset:focus-visible {
+  background: #fff3c4;
+  outline: 3px solid #d97706;
+  outline-offset: 2px;
+}
+
+#tc-watermark,
+.tc-watermark,
+[data-tc-watermark],
+#ttc-wm-bar,
+.ttc-wm-bar-bottom {
+  z-index: 20 !important;
+}
+
+[tabindex="-1"]:focus,
+[tabindex="-1"]:focus-visible {
+  outline: none;
+}
+
+/* Overlays must clear the watermark bar, but keep each modal's own placement
+   (the case map docks to the bottom; do not force align-items). */
+#root .fixed.inset-0.z-50 {
+  width: 100vw;
+  max-width: 100%;
+  left: 0;
+  right: 0;
+  overflow-x: hidden;
+  padding-bottom: 3.4rem;
+  box-sizing: border-box;
+}
+
+/* Footer ink on the dark walnut ground */
+#root footer,
+#root footer p,
+#root footer button {
+  color: #f0e2c4;
+}
+#root footer .ttc-reset {
+  color: #5a3214;
+}
+
+/* Soft cream-on-dark labels that otherwise fail 4.5:1 */
+#root .text-cream\/45,
+#root .text-cream\/60,
+#root .text-cream\/65,
+#root .text-cream\/70,
+#root .text-cream\/72,
+#root .text-cream\/75,
+#root .text-cream\/80,
+#root .text-cream\/85,
+#root .text-cream\/92 {
+  color: #f3e7d2 !important;
+}
+
+/* Coursebook player already uses solid ink; keep controls tappable */
+.tc-course-audio audio {
+  width: 100%;
+  min-height: 40px;
+}
+
+/* Chips and tiles: solid cream so translucent /10 backs are not misread */
+.chip,
+.tile {
+  background: #fffaf3;
+  color: #241c15;
+  box-shadow: inset 0 0 0 1px #e0d0b6;
+}
+.chip[aria-pressed="true"],
+.tile[aria-pressed="true"] {
+  background: #f3e2c4;
+  color: #241c15;
+}
+
+/* Keep ink on manila/paper surfaces dark enough */
+.paper, .paper-flat, .manila, .notebook {
+  color: #241c15;
+}
+
+/* Cover: the full-height copy column must not swallow taps on the top Rules button */
+#root .cover-copy {
+  pointer-events: none;
+}
+#root .cover-copy > * {
+  pointer-events: auto;
+}
+#root section.relative.min-h-svh > header.absolute {
+  z-index: 30;
+}
+
+/* Solid surfaces so translucent Tailwind /10 and ruled-paper lines are not
+   read as opaque pale/sky fills, and so photo captions have a real backing. */
+#root .bg-white\/10,
+#root button.bg-white\/10 {
+  background-color: #3a2a20 !important;
+  color: #f3e7d2 !important;
+}
+
+.kicker-light {
+  color: #f7f1e6 !important;
+  background: #140e0a;
+  display: inline-block;
+  padding: 0.15em 0.55em;
+  border-radius: 999px;
+}
+
+.answer-line {
+  background-color: #fffaf3 !important;
+  background-image: repeating-linear-gradient(transparent, transparent 31px, #e0d0b6 32px) !important;
+  color: #241c15;
+}
+
+.notebook {
+  background-color: #fbf8f1 !important;
+  background-image: repeating-linear-gradient(transparent, transparent 31px, #e0d0b6 32px) !important;
+  color: #241c15 !important;
+}
+.notebook .kicker { color: #5a3214 !important; }
+.notebook .text-ink-soft { color: #5c4938 !important; }
+
+.tc-course-audio {
+  background: #24180f !important;
+  color: #f3e7d2 !important;
+}
+.tc-course-audio h2 { color: #fffaf3 !important; }
+.tc-course-audio p,
+.tc-course-audio li {
+  color: #f3e7d2 !important;
+}
+.tc-course-audio .kicker-light {
+  display: inline-block;
+  padding: 0.15em 0.55em;
+  background: #140e0a;
+  color: #f7f1e6 !important;
+  border-radius: 999px;
+}
+.tc-course-audio button.rounded-full {
+  background: #c6a15b !important;
+  color: #2a1c14 !important;
+}
+.tc-course-audio > button {
+  color: #e8c57a !important;
+  background: transparent !important;
+}
+
+header .ttc-reset { display: none; }
+@media (min-width: 1024px) {
+  header .ttc-reset { display: inline-flex !important; align-items: center; }
+}
