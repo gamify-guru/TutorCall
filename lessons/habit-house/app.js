@@ -4104,7 +4104,7 @@ function Fp({
       children: [s.jsx("img", {
         src: Vt.hero,
         alt: "",
-        className: "h-28 w-full object-cover object-[center_22%] sm:h-36"
+        className: "h-20 w-full object-cover object-[center_22%] sm:h-24"
       }), s.jsxs("div", {
         className: "p-5 sm:p-7",
         children: [s.jsx("p", {

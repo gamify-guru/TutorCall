@@ -22,12 +22,15 @@ body {
 #root > .min-h-dvh {
   min-height: 100vh;
   min-height: 100dvh;
-  padding-bottom: 36px;
+  padding-bottom: 48px;
   box-sizing: border-box;
+}
+#main {
+  padding-bottom: 8px;
 }
 @media (max-width: 420px) {
   #root > .min-h-dvh {
-    padding-bottom: 34px;
+    padding-bottom: 48px;
   }
 }
 
@@ -53,7 +56,9 @@ body {
 /* Watermark bar — visible in print, never cover controls */
 #tc-watermark,
 .tc-watermark,
-[data-tc-watermark] {
+[data-tc-watermark],
+#ttc-wm-bar,
+.ttc-wm-bar-bottom {
   z-index: 20 !important;
 }
 
