@@ -1209,9 +1209,17 @@ function fy({
           }), i.jsx("div", {
             className: "space-y-4 text-[17px] leading-relaxed font-semibold text-ink/90 sm:text-lg",
             children: Px.map((U, j) => i.jsx("p", {
-              children: U.map((x, Y) => x.fact ? i.jsx("button", {
-                type: "button",
+              children: U.map((x, Y) => x.fact ? i.jsx("span", {
+                role: "button",
+                tabIndex: f[x.fact] ? -1 : 0,
+                "aria-label": x.t,
                 onClick: () => v(x.fact),
+                onKeyDown: ev => {
+                  if (ev.key === "Enter" || ev.key === " ") {
+                    ev.preventDefault();
+                    v(x.fact);
+                  }
+                },
                 className: xe("fact-hit", f[x.fact] && "fact-found", o && !f[x.fact] && "fact-peek"),
                 children: x.t
               }, Y) : i.jsx("span", {
