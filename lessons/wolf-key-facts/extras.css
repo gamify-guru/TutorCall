@@ -168,3 +168,27 @@ footer .text-cream\/40 {
     white-space: nowrap;
   }
 }
+
+/* Task 1: clickable facts must flow as inline text, not centered inline-blocks */
+#task-1 article,
+#task-1 article p {
+  text-align: left;
+}
+#task-1 article button.fact-hit,
+#task-1 .fact-hit {
+  display: inline !important;
+  text-align: left;
+  margin: 0;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  /* allow the dashed underline / found highlight to wrap per line */
+  padding-top: 0.02em;
+  padding-bottom: 0.02em;
+  vertical-align: baseline;
+  line-height: inherit;
+  font: inherit;
+  font-weight: inherit;
+}
+#task-1 .fact-hit.fact-found {
+  font-weight: 800;
+}
