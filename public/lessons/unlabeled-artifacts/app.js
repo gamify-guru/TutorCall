@@ -107,14 +107,23 @@
     loadState();
 
     function ensureShuffles() {
+      // Keep already-saved option orders when a mission grows (e.g. M1 8→10).
+      function migrateOrder(prev, items) {
+        const old = Array.isArray(prev) ? prev : [];
+        return items.map((item, i) => {
+          const prior = old[i];
+          if (Array.isArray(prior) && prior.length === item.options.length) return prior;
+          return tcShuffle(item.options.slice());
+        });
+      }
       if (!Array.isArray(state.m1Order) || state.m1Order.length !== M1_ITEMS.length) {
-        state.m1Order = M1_ITEMS.map(item => tcShuffle(item.options.slice()));
+        state.m1Order = migrateOrder(state.m1Order, M1_ITEMS);
       }
       if (!Array.isArray(state.m2Order) || state.m2Order.length !== M2_ITEMS.length) {
-        state.m2Order = M2_ITEMS.map(item => tcShuffle(item.options.slice()));
+        state.m2Order = migrateOrder(state.m2Order, M2_ITEMS);
       }
       if (!Array.isArray(state.hwMatrixOrder) || state.hwMatrixOrder.length !== HW_MATRIX.length) {
-        state.hwMatrixOrder = HW_MATRIX.map(item => tcShuffle(item.options.slice()));
+        state.hwMatrixOrder = migrateOrder(state.hwMatrixOrder, HW_MATRIX);
       }
     }
 
@@ -448,7 +457,7 @@
     }
 
     /* ====================================================
-       MISSION 1: IDENTIFICATION (8 TASKS)
+       MISSION 1: IDENTIFICATION (10 TASKS)
        ==================================================== */
     const M1_ITEMS = [
       {
@@ -498,6 +507,18 @@
         options: ["coin", "tool", "necklace", "knife"],
         correct: "tool",
         targetWord: "tool"
+      },
+      {
+        q: "Look at fallen floor label 9. What do we call the building where historical objects are kept and shown?",
+        options: ["museum", "history", "sculpture", "tool"],
+        correct: "museum",
+        targetWord: "museum"
+      },
+      {
+        q: "Look at fallen floor label 10. What word means the study of past events and ancient civilisations?",
+        options: ["fire", "coin", "history", "necklace"],
+        correct: "history",
+        targetWord: "history"
       }
     ];
 
@@ -926,18 +947,25 @@
     }
 
     function updateSubmissionScores() {
-      // Calculate each mission solved count
-      let m1 = 0, m2 = 0, m3 = 0, m4 = 0;
-      for (let i = 0; i < 8; i++) {
-        if (document.getElementById(`m1-status-${i}`)?.innerText.includes('✓')) m1++;
-        if (document.getElementById(`m2-status-${i}`)?.innerText.includes('✓')) m2++;
-        if (document.getElementById(`m3-status-${i}`)?.innerText.includes('✓')) m3++;
-        if (document.getElementById(`m4-status-${i}`)?.innerText.includes('✓')) m4++;
+      function solvedCount(prefix, len) {
+        let n = 0;
+        for (let i = 0; i < len; i++) {
+          if (document.getElementById(`${prefix}${i}`)?.innerText.includes('✓')) n++;
+        }
+        return n;
       }
-      document.getElementById('badge-m1').innerText = `${m1}/8`;
-      document.getElementById('badge-m2').innerText = `${m2}/8`;
-      document.getElementById('badge-m3').innerText = `${m3}/8`;
-      document.getElementById('badge-m4').innerText = `${m4}/8`;
+      const m1 = solvedCount('m1-status-', M1_ITEMS.length);
+      const m2 = solvedCount('m2-status-', M2_ITEMS.length);
+      const m3 = solvedCount('m3-status-', M3_ITEMS.length);
+      const m4 = solvedCount('m4-status-', M4_ITEMS.length);
+      const b1 = document.getElementById('badge-m1');
+      const b2 = document.getElementById('badge-m2');
+      const b3 = document.getElementById('badge-m3');
+      const b4 = document.getElementById('badge-m4');
+      if (b1) b1.innerText = `${m1}/${M1_ITEMS.length}`;
+      if (b2) b2.innerText = `${m2}/${M2_ITEMS.length}`;
+      if (b3) b3.innerText = `${m3}/${M3_ITEMS.length}`;
+      if (b4) b4.innerText = `${m4}/${M4_ITEMS.length}`;
     }
 
     /* ====================================================
@@ -1601,10 +1629,55 @@
       });
     }
 
+
+    /* ====================================================
+       COMPACT HALL SCENE (above tasks that need the picture)
+       ==================================================== */
+    const SCENE_MARKERS = [
+      { n: 1, word: "sculpture", at: "left", top: "27%", left: "88%" },
+      { n: 2, word: "necklace", at: "top", top: "57%", left: "90%" },
+      { n: 3, word: "bowl", at: "left", top: "64%", left: "71%" },
+      { n: 4, word: "knife", at: "bottom", top: "69%", left: "82%" },
+      { n: 5, word: "coin", at: "bottom", top: "75%", left: "94%" },
+      { n: 6, word: "musical instrument", at: "right", top: "45%", left: "18%", wide: true },
+      { n: 7, word: "fire", at: "top", top: "91%", left: "8%" },
+      { n: 8, word: "tool", at: "top", top: "92%", left: "20%" },
+      { n: 9, word: "museum", at: "top", top: "91%", left: "40%" },
+      { n: 10, word: "history", at: "top", top: "92%", left: "66%" }
+    ];
+
+    function buildTaskScene() {
+      const fig = document.createElement('figure');
+      fig.className = 'task-scene';
+      const marks = SCENE_MARKERS.map(m => {
+        const wide = m.wide ? ' hotspot-label-wide' : '';
+        return `<span class="hotspot" data-at="${m.at}" style="top: ${m.top}; left: ${m.left};" aria-hidden="true">
+          <span class="hotspot-dot">${m.n}</span>
+          <span class="hotspot-label${wide}">${m.word}</span>
+        </span>`;
+      }).join('');
+      fig.innerHTML = `
+        <div class="task-scene-frame">
+          <img src="images/crime-scene.jpg" alt="Museum Hall of Prehistory with numbered artifacts and fallen floor labels">
+          ${marks}
+        </div>
+        <figcaption>Prehistory Hall — use the numbered exhibits and fallen floor labels (7–10) to help you.</figcaption>
+      `;
+      return fig;
+    }
+
+    function renderTaskScenes() {
+      document.querySelectorAll('.task-scene-slot').forEach(slot => {
+        slot.innerHTML = '';
+        slot.appendChild(buildTaskScene());
+      });
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       ensureShuffles();
       saveState();
 
+      renderTaskScenes();
       renderMission1();
       renderMission2();
       renderMission3();
