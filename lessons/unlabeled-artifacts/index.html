@@ -294,104 +294,70 @@
       </div>
 
       <!-- MAIN ATTACHED DESIGN HERO: INTERACTIVE CRIME SCENE -->
-      <div class="crime-scene-wrap relative rounded-2xl overflow-hidden border-2 border-amber-700/60 shadow-2xl bg-black group">
-        <img id="crime-scene-img" src="images/crime-scene.jpg" alt="Museum Hall of Prehistory with a young detective, glass cases of prehistoric artifacts, and fallen golden labels on the floor" class="w-full h-auto object-cover max-h-[640px] block transition duration-700 filter group-hover:brightness-105" />
+      <div class="crime-scene-wrap rounded-2xl border-2 border-amber-700/60 shadow-2xl bg-black group">
+        <img id="crime-scene-img" src="images/crime-scene.jpg" alt="Museum Hall of Prehistory with a young detective, glass cases of prehistoric artifacts, and fallen golden labels on the floor" />
 
-        <!-- Overlay subtle ambient vignette -->
-        <div class="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/80 via-transparent to-black/30"></div>
+        <div class="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/55 via-transparent to-black/25"></div>
 
-        <!-- Interactive Artifact Hotspots on the attached illustration -->
-        <!-- 1. Head Sculpture (right showcase) -->
-        <button onclick="inspectArtifact('sculpture')" style="top: 28%; right: 12%;" 
-                class="absolute transform -translate-x-1/2 -translate-y-1/2 group/spot z-20 flex flex-col items-center focus:outline-none"
-                title="Inspect Stone Head">
-          <span class="w-8 h-8 rounded-full bg-amber-500/90 text-amber-950 flex items-center justify-center font-bold text-xs shadow-lg border-2 border-white magnifier-pulse">
-            1
-          </span>
-          <span class="mt-1 px-2 py-0.5 bg-black/80 text-amber-300 text-[11px] rounded border border-amber-500/50 backdrop-blur font-semibold shadow">
-            sculpture
-          </span>
+        <button type="button" class="hotspot" data-at="left" style="top: 27%; left: 88%;" onclick="inspectArtifact('sculpture')" title="Inspect Stone Head">
+          <span class="hotspot-dot">1</span>
+          <span class="hotspot-label">sculpture</span>
         </button>
 
-        <!-- 2. Golden Necklace (right showcase shelf) -->
-        <button onclick="inspectArtifact('necklace')" style="top: 55%; right: 12%;" 
-                class="absolute transform -translate-x-1/2 -translate-y-1/2 group/spot z-20 flex flex-col items-center focus:outline-none"
-                title="Inspect Gold Necklace">
-          <span class="w-8 h-8 rounded-full bg-amber-500/90 text-amber-950 flex items-center justify-center font-bold text-xs shadow-lg border-2 border-white magnifier-pulse">
-            2
-          </span>
-          <span class="mt-1 px-2 py-0.5 bg-black/80 text-amber-300 text-[11px] rounded border border-amber-500/50 backdrop-blur font-semibold shadow">
-            necklace
-          </span>
+        <button type="button" class="hotspot" data-at="top" style="top: 57%; left: 90%;" onclick="inspectArtifact('necklace')" title="Inspect Gold Necklace">
+          <span class="hotspot-dot">2</span>
+          <span class="hotspot-label">necklace</span>
         </button>
 
-        <!-- 3. Ancient Clay Bowl (right showcase shelf) -->
-        <button onclick="inspectArtifact('bowl')" style="top: 62%; right: 24%;" 
-                class="absolute transform -translate-x-1/2 -translate-y-1/2 group/spot z-20 flex flex-col items-center focus:outline-none"
-                title="Inspect Ancient Bowl">
-          <span class="w-8 h-8 rounded-full bg-amber-500/90 text-amber-950 flex items-center justify-center font-bold text-xs shadow-lg border-2 border-white magnifier-pulse">
-            3
-          </span>
-          <span class="mt-1 px-2 py-0.5 bg-black/80 text-amber-300 text-[11px] rounded border border-amber-500/50 backdrop-blur font-semibold shadow">
-            bowl
-          </span>
+        <button type="button" class="hotspot" data-at="left" style="top: 64%; left: 71%;" onclick="inspectArtifact('bowl')" title="Inspect Ancient Bowl">
+          <span class="hotspot-dot">3</span>
+          <span class="hotspot-label">bowl</span>
         </button>
 
-        <!-- 4. Ancient Knife (right showcase right side) -->
-        <button onclick="inspectArtifact('knife')" style="top: 68%; right: 16%;" 
-                class="absolute transform -translate-x-1/2 -translate-y-1/2 group/spot z-20 flex flex-col items-center focus:outline-none"
-                title="Inspect Ancient Knife">
-          <span class="w-8 h-8 rounded-full bg-amber-500/90 text-amber-950 flex items-center justify-center font-bold text-xs shadow-lg border-2 border-white magnifier-pulse">
-            4
-          </span>
-          <span class="mt-1 px-2 py-0.5 bg-black/80 text-amber-300 text-[11px] rounded border border-amber-500/50 backdrop-blur font-semibold shadow">
-            knife
-          </span>
+        <button type="button" class="hotspot" data-at="bottom" style="top: 69%; left: 82%;" onclick="inspectArtifact('knife')" title="Inspect Ancient Knife">
+          <span class="hotspot-dot">4</span>
+          <span class="hotspot-label">knife</span>
         </button>
 
-        <!-- 5. Ancient Coins (right showcase in front of bowl) -->
-        <button onclick="inspectArtifact('coin')" style="top: 70%; right: 8%;" 
-                class="absolute transform -translate-x-1/2 -translate-y-1/2 group/spot z-20 flex flex-col items-center focus:outline-none"
-                title="Inspect Ancient Coins">
-          <span class="w-8 h-8 rounded-full bg-amber-500/90 text-amber-950 flex items-center justify-center font-bold text-xs shadow-lg border-2 border-white magnifier-pulse">
-            5
-          </span>
-          <span class="mt-1 px-2 py-0.5 bg-black/80 text-amber-300 text-[11px] rounded border border-amber-500/50 backdrop-blur font-semibold shadow">
-            coin
-          </span>
+        <button type="button" class="hotspot" data-at="bottom" style="top: 75%; left: 94%;" onclick="inspectArtifact('coin')" title="Inspect Ancient Coins">
+          <span class="hotspot-dot">5</span>
+          <span class="hotspot-label">coin</span>
         </button>
 
-        <!-- 6. Musical Instruments (drum & flute on left showcase) -->
-        <button onclick="inspectArtifact('musical instrument')" style="top: 45%; left: 18%;" 
-                class="absolute transform -translate-x-1/2 -translate-y-1/2 group/spot z-20 flex flex-col items-center focus:outline-none"
-                title="Inspect Musical Instruments">
-          <span class="w-8 h-8 rounded-full bg-amber-500/90 text-amber-950 flex items-center justify-center font-bold text-xs shadow-lg border-2 border-white magnifier-pulse">
-            6
-          </span>
-          <span class="mt-1 px-2 py-0.5 bg-black/80 text-amber-300 text-[11px] rounded border border-amber-500/50 backdrop-blur font-semibold shadow">
-            musical instrument
-          </span>
+        <button type="button" class="hotspot" data-at="right" style="top: 45%; left: 18%;" onclick="inspectArtifact('musical instrument')" title="Inspect Musical Instruments">
+          <span class="hotspot-dot">6</span>
+          <span class="hotspot-label hotspot-label-wide">musical instrument</span>
         </button>
 
-        <!-- 7. Fallen labels on the floor -->
-        <button onclick="inspectFloorLabels()" style="top: 85%; left: 58%;" 
-                class="absolute transform -translate-x-1/2 -translate-y-1/2 group/spot z-20 flex flex-col items-center focus:outline-none"
-                title="Inspect Fallen Labels">
-          <span class="px-3 py-1 bg-red-600/90 text-white text-xs font-bold rounded-full shadow-lg border-2 border-amber-300 animate-bounce">
-            ⚠️ Fallen Labels on Floor!
-          </span>
+        <button type="button" class="hotspot" data-at="top" style="top: 91%; left: 8%;" onclick="inspectArtifact('fire')" title="Inspect Fire Label">
+          <span class="hotspot-dot">7</span>
+          <span class="hotspot-label">fire</span>
         </button>
 
-        <!-- Floating instructions panel on image bottom -->
-        <div class="absolute bottom-4 left-4 right-4 bg-[#140e0be8] backdrop-blur-md p-3.5 rounded-xl border border-amber-600/50 flex flex-wrap items-center justify-between gap-3 text-xs">
-          <div class="flex items-center gap-2.5 text-stone-200">
-            <span class="text-xl">🔎</span>
-            <span><strong>Click any numbered hotspot</strong> on the exhibits to inspect an artifact, hear its English pronunciation, and unlock its clue file!</span>
-          </div>
-          <button onclick="switchTab('hunt')" class="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-amber-950 font-extrabold rounded-lg tracking-wide uppercase transition shadow-md">
-            Start Mission 1: Treasure Hunt →
-          </button>
+        <button type="button" class="hotspot" data-at="top" style="top: 92%; left: 20%;" onclick="inspectArtifact('tool')" title="Inspect Tool Label">
+          <span class="hotspot-dot">8</span>
+          <span class="hotspot-label">tool</span>
+        </button>
+
+        <button type="button" class="hotspot" data-at="top" style="top: 91%; left: 40%;" onclick="inspectArtifact('museum')" title="Inspect Museum Label">
+          <span class="hotspot-dot">9</span>
+          <span class="hotspot-label">museum</span>
+        </button>
+
+        <button type="button" class="hotspot" data-at="top" style="top: 92%; left: 66%;" onclick="inspectArtifact('history')" title="Inspect History Label">
+          <span class="hotspot-dot">10</span>
+          <span class="hotspot-label">history</span>
+        </button>
+      </div>
+
+      <div class="crime-scene-hint flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div class="flex items-center gap-2.5 text-stone-200">
+          <span class="text-xl">🔎</span>
+          <span><strong>Click any numbered hotspot</strong> on the exhibits or the fallen floor labels to inspect an artifact, hear its English pronunciation, and unlock its clue file!</span>
         </div>
+        <button type="button" onclick="switchTab('hunt')" class="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-amber-950 font-extrabold rounded-lg tracking-wide uppercase transition shadow-md">
+          Start Mission 1: Treasure Hunt →
+        </button>
       </div>
 
       <!-- Quick Inspection Inspector Modal / Drawer result -->
