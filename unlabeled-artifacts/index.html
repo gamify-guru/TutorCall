@@ -416,7 +416,7 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-2 pt-2 border-t border-stone-800">
           <button onclick="switchMission(1)" id="subtab-m1" class="hunt-subtab px-3 py-2 rounded-xl text-xs font-bold text-amber-200 bg-amber-900/40 border border-amber-600/50 text-left transition flex items-center justify-between">
             <span>Mission 1: Identify</span>
-            <span id="badge-m1" class="text-[10px] px-1.5 py-0.2 rounded bg-amber-800/80 text-amber-200">0/8</span>
+            <span id="badge-m1" class="text-[10px] px-1.5 py-0.2 rounded bg-amber-800/80 text-amber-200">0/10</span>
           </button>
           <button onclick="switchMission(2)" id="subtab-m2" class="hunt-subtab px-3 py-2 rounded-xl text-xs font-bold text-stone-400 hover:text-amber-200 bg-[#211810] border border-stone-800 text-left transition flex items-center justify-between">
             <span>Mission 2: What was it for?</span>
@@ -434,16 +434,18 @@
       </div>
 
       <!-- ============================================== -->
-      <!-- SUB-MISSION 1: IDENTIFICATION (8 TASKS) -->
+      <!-- SUB-MISSION 1: IDENTIFICATION (10 TASKS) -->
       <!-- ============================================== -->
       <div id="mission-container-1" class="space-y-6">
         <div class="flex items-center justify-between">
           <div>
             <h3 class="font-cinzel text-xl font-bold text-amber-200">Mission 1: Artifact Identification</h3>
-            <p class="text-xs sm:text-sm text-stone-300">Look at the museum clue description and select the correct word to return the label.</p>
+            <p class="text-xs sm:text-sm text-stone-300">Look at the museum hall picture and the clue, then select the correct word to return the label.</p>
           </div>
-          <span class="text-xs text-amber-400 font-mono">8 questions</span>
+          <span class="text-xs text-amber-400 font-mono">10 questions</span>
         </div>
+
+        <div class="task-scene-slot" aria-label="Prehistory Hall reference picture"></div>
 
         <div id="m1-questions-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <!-- Populated dynamically via JS with 8 items -->
@@ -457,10 +459,12 @@
         <div class="flex items-center justify-between">
           <div>
             <h3 class="font-cinzel text-xl font-bold text-amber-200">Mission 2: What Was It For? (Function & Purpose)</h3>
-            <p class="text-xs sm:text-sm text-stone-300">Grammar pattern: <strong class="text-amber-300">It was for [verb]-ing</strong>. Match each prehistoric artifact to its true purpose!</p>
+            <p class="text-xs sm:text-sm text-stone-300">Grammar pattern: <strong class="text-amber-300">It was for [verb]-ing</strong>. Look at the hall picture and match each prehistoric artifact to its true purpose!</p>
           </div>
           <span class="text-xs text-amber-400 font-mono">8 questions</span>
         </div>
+
+        <div class="task-scene-slot" aria-label="Prehistory Hall reference picture"></div>
 
         <div id="m2-questions-container" class="space-y-4">
           <!-- Populated dynamically with 8 matching functions -->
@@ -474,10 +478,12 @@
         <div class="flex items-center justify-between">
           <div>
             <h3 class="font-cinzel text-xl font-bold text-amber-200">Mission 3: Detective Logic (True or False)</h3>
-            <p class="text-xs sm:text-sm text-stone-300">Test each witness statement about prehistoric life and museum artifacts. Choose TRUE or FALSE.</p>
+            <p class="text-xs sm:text-sm text-stone-300">Look at the hall picture if you need it. Test each witness statement about prehistoric life and museum artifacts. Choose TRUE or FALSE.</p>
           </div>
           <span class="text-xs text-amber-400 font-mono">8 questions</span>
         </div>
+
+        <div class="task-scene-slot" aria-label="Prehistory Hall reference picture"></div>
 
         <div id="m3-questions-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <!-- Populated dynamically with 8 True/False items -->
@@ -491,10 +497,12 @@
         <div class="flex items-center justify-between">
           <div>
             <h3 class="font-cinzel text-xl font-bold text-amber-200">Mission 4: Field Report Log (Gap-Fill)</h3>
-            <p class="text-xs sm:text-sm text-stone-300">Fill in the blank in each field log sentence using the word bank.</p>
+            <p class="text-xs sm:text-sm text-stone-300">Look at the hall picture if you need a reminder, then fill in the blank in each field log sentence using the word bank.</p>
           </div>
           <span class="text-xs text-amber-400 font-mono">8 sentences</span>
         </div>
+
+        <div class="task-scene-slot" aria-label="Prehistory Hall reference picture"></div>
 
         <!-- Word bank chips -->
         <div class="bg-[#18110c] p-4 rounded-xl border border-amber-600/40">
@@ -571,6 +579,8 @@
           </div>
         </div>
       </div>
+
+        <div class="task-scene-slot" aria-label="Prehistory Hall reference picture"></div>
 
       <!-- Mode 1: Unscramble Container -->
       <div id="dictation-mode-unscramble" class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -759,6 +769,8 @@
           <span class="px-2.5 py-1 rounded bg-amber-900/40 text-amber-300 text-xs font-mono">6 items</span>
         </div>
 
+        <div class="task-scene-slot" aria-label="Prehistory Hall reference picture"></div>
+
         <div id="hw-matrix-container" class="space-y-3">
           <!-- Populated dynamically with 6 fresh tasks -->
         </div>
@@ -774,6 +786,8 @@
           </div>
           <span class="px-2.5 py-1 rounded bg-amber-200 text-amber-900 text-xs font-mono font-bold">Story Gap-Fill</span>
         </div>
+
+        <div class="task-scene-slot" aria-label="Prehistory Hall reference picture"></div>
 
         <div class="font-typewriter text-stone-900 text-sm sm:text-base leading-loose space-y-3">
           <p>
