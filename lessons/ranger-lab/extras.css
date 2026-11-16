@@ -1,0 +1,392 @@
+/* TutorCall overlays: watermark clearance, reset, focus, contrast, modal fit */
+
+html.ttc-wm-bar-pad-bottom:root,
+html.ttc-wm-bar-pad-bottom body.ttc-wm-bar-pad-bottom,
+html.ttc-wm-bar-pad-bottom body {
+  padding-bottom: 0 !important;
+}
+html, body, #root {
+  min-height: 100%;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+body { padding-bottom: 0; margin: 0; background: #082a23; }
+.app.intro-mode { background: #082a23; }
+.app.lesson-mode { background: #f5f2e8; }
+@media print {
+  body { padding-bottom: 0; }
+}
+
+/* One padding owner: the lesson shell, so the bar never stacks a blank strip */
+#root > .app {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: 52px;
+  box-sizing: border-box;
+}
+
+#tc-watermark,
+.tc-watermark,
+[data-tc-watermark],
+#ttc-wm-bar,
+.ttc-wm-bar-bottom {
+  z-index: 20 !important;
+}
+
+.app-header {
+  z-index: 60;
+}
+
+[tabindex="-1"]:focus,
+[tabindex="-1"]:focus-visible {
+  outline: none;
+}
+
+.ttc-reset,
+button.ttc-reset,
+.app-footer .ttc-reset,
+.restart-link.ttc-reset {
+  background: #efb44d;
+  color: #082a23;
+  box-shadow: inset 0 0 0 2px #8a5a12;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  border: 0;
+  border-radius: 10px;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 6px 11px;
+  font-size: 12px;
+  font-weight: 800;
+  display: inline-flex;
+}
+.ttc-reset:hover,
+.ttc-reset:focus-visible {
+  background: #ffd27a;
+  outline: 3px solid #efb44d;
+  outline-offset: 2px;
+  color: #082a23;
+}
+
+.header-reset {
+  margin-left: 4px;
+}
+
+/* Footer and intro muted ink on forest-deep */
+.app-footer,
+.app-footer > span,
+.app-footer p {
+  color: #e8f3ee !important;
+}
+.app-footer > button:not(.ttc-reset) {
+  color: #8bf5f2 !important;
+}
+.restart-link.ttc-reset {
+  color: #082a23 !important;
+  margin-top: 0;
+}
+.hero-facts,
+.hero-facts > span {
+  color: #e8f3ee !important;
+}
+
+/* Floating rules: sit above the watermark; hide on narrow screens (header has the button) */
+.floating-rules {
+  bottom: 72px !important;
+  z-index: 40 !important;
+}
+@media (max-width: 720px) {
+  .floating-rules {
+    display: none !important;
+  }
+}
+
+/* Rules modal clears the bar; keep drawer centred */
+.modal-backdrop {
+  padding-bottom: 3.4rem;
+  box-sizing: border-box;
+}
+
+/* Solid muted ink on cream paper (auditor-safe) */
+.muted,
+.hint,
+.task-hint,
+.reflection-note {
+  color: #3d4f47;
+}
+
+/* Header links: solid near-white on forest-deep */
+.header-link {
+  color: #e8f3ee;
+}
+
+/* Write-in reflection field */
+.reflection-writein {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px 12px;
+  border: 2px solid #dfe4da;
+  border-radius: 12px;
+  background: #fffefa;
+  color: #173b32;
+  font: inherit;
+  box-sizing: border-box;
+}
+
+/* Sticky step nav should not hide under the bar on short screens */
+.lesson-step-nav {
+  z-index: 50;
+}
+
+
+/* Header ink and compact actions on narrow screens */
+.header-lesson-meta span,
+.brand-copy small {
+  color: #d7efe8 !important;
+}
+@media (max-width: 720px) {
+  .header-reset span {
+    display: none;
+  }
+  .header-reset {
+    width: 40px;
+    min-width: 40px;
+    justify-content: center;
+    padding: 6px;
+  }
+  .header-rules {
+    width: 40px;
+    justify-content: center;
+    padding: 0;
+  }
+  .brand-copy small {
+    display: none;
+  }
+}
+
+
+/* Keep mission/homework actions above the watermark bar */
+.lesson-main,
+.homework-page,
+.briefing-screen,
+.puzzle-screen,
+.certificate-screen,
+.mission-complete {
+  padding-bottom: 8rem !important;
+}
+@media (max-width: 720px) {
+  .task-panel {
+    min-height: 0 !important;
+  }
+}
+
+
+@media (max-width: 720px) {
+  .mission-scene-column .ranger-visual {
+    aspect-ratio: 16 / 9;
+    max-height: 118px;
+  }
+  .mission-layout { gap: 8px; }
+  .mission-heading { margin-bottom: 8px !important; gap: 10px !important; }
+  .mission-number { width: 44px !important; height: 44px !important; flex-basis: 44px !important; font-size: 18px !important; }
+  .choice-option { min-height: 46px; padding: 8px 10px; }
+  .task-panel { padding: 14px !important; }
+  .task-prompt { padding-bottom: 8px !important; margin-bottom: 0 !important; }
+  .task-answer-area { padding: 10px 0 8px !important; }
+  .task-actions { padding-top: 10px !important; flex-direction: row !important; flex-wrap: nowrap !important; align-items: center !important; gap: 8px !important; }
+  .task-actions > .button,
+  .task-actions .button { min-height: 42px; padding: 8px 12px; flex: 0 0 auto; width: auto !important; }
+  .task-help { gap: 4px; }
+  .task-help button {
+    font-size: 0 !important;
+    gap: 0 !important;
+    min-width: 32px;
+    justify-content: center;
+    padding: 6px !important;
+  }
+  .mission-scene-column .ranger-visual,
+  .mission-scene-column .ranger-visual img {
+    overflow: hidden;
+    object-fit: cover;
+    max-height: 118px;
+  }
+
+
+}
+
+
+/* Contrast: solid surfaces + darker inks on cream */
+:root {
+  --muted: #3d4f47;
+  --cyan-dark: #0a5c64;
+}
+
+.lesson-main,
+.homework-page,
+.briefing-screen,
+.rules-drawer,
+.mission-engine,
+.puzzle-screen,
+.certificate-screen {
+  background-color: #f5f2e8;
+  color: #173b32;
+}
+
+.eyebrow,
+.success-kicker,
+.fragment-counter,
+.speaker-badge,
+.sheet-number,
+.mission-number,
+.briefing-objective {
+  color: #0a5c64 !important;
+}
+.header-lesson-meta span {
+  color: #d7efe8 !important;
+}
+
+.muted,
+.back-link,
+.briefing-copy > p,
+.task-help button,
+.choice-letter,
+.examples-label,
+.homework-hero p,
+.ranger-briefing,
+.task-prompt p,
+.hint,
+.instruction {
+  color: #3d4f47 !important;
+}
+
+.steps-scroll > button,
+.step-dot,
+.fragment-counter span,
+.support-card strong,
+.rule-card [class*="number"],
+.rule-card-detail .rule-number {
+  color: #3d4f47;
+}
+.is-current .step-dot {
+  color: #0a5c64 !important;
+  background: #d7efea !important;
+  border-color: #0a5c64 !important;
+}
+.is-done .step-dot {
+  color: #fff !important;
+  background: #123c31 !important;
+}
+
+/* Intro / dark chrome: opaque surfaces so white text stays readable */
+.hero-story {
+  background-color: #0e3830 !important;
+  border-color: #2a6a5c !important;
+  color: #e8f3ee !important;
+}
+.hero-lead,
+.hero-story p,
+.hero-story span {
+  color: #e8f3ee !important;
+}
+.button-ghost-light {
+  background-color: #1c5142 !important;
+  border-color: #8bf5f2 !important;
+  color: #fff !important;
+}
+.timer-chip {
+  background-color: #1c5142 !important;
+  border-color: #8bf5f2 !important;
+  color: #fff !important;
+}
+.scan-stats {
+  background-color: #052721 !important;
+  color: #fff !important;
+}
+.scan-stat {
+  background-color: #164038 !important;
+}
+.scan-stat strong {
+  color: #8bf5f2 !important;
+}
+.scan-stat span,
+.scan-stat.is-empty span {
+  color: #e8f3ee !important;
+}
+.scan-stat.is-empty strong {
+  color: #f0d9a8 !important;
+}
+.ranger-briefing {
+  background-color: #eef3ea !important;
+  color: #3d4f47 !important;
+}
+
+/* Rules cards */
+.rule-card-main {
+  background-color: #123c31 !important;
+  color: #fff !important;
+}
+.rule-card-main h3,
+.rule-card-main p,
+.rule-card-main li,
+.rule-card-main span {
+  color: #fff !important;
+}
+.rule-card-main .rule-number {
+  color: #8bf5f2 !important;
+}
+.rule-examples,
+.examples-label {
+  background-color: #f4f1e6;
+}
+.examples-label { color: #3d4f47 !important; }
+
+.button-outline {
+  color: #123c31;
+  background: #fff;
+  border-color: #8aa090;
+}
+
+.homework-hero h1,
+.briefing-copy h1 {
+  color: #173b32;
+}
+
+.choice-letter {
+  background-color: #e4ece6 !important;
+  color: #2a3b34 !important;
+}
+
+
+.support-number { color: #5c6b63 !important; }
+.sheet-score strong span,
+.mission-question-count strong span {
+  color: #3d4f47 !important;
+}
+.rule-tab span {
+  color: #3d4f47 !important;
+}
+.rule-tab.is-active span,
+.rule-tab.is-active > span {
+  color: #8bf5f2 !important;
+}
+.rule-line {
+  background-color: #1c5142 !important;
+  border-color: #2e6d60 !important;
+  color: #fff !important;
+}
+.rule-line span,
+.rule-line {
+  color: #fff !important;
+}
+.rule-line .icon-button {
+  background: #0e3830 !important;
+  border-color: #8bf5f2 !important;
+  color: #8bf5f2 !important;
+}
+
+.briefing-rule-card > span {
+  color: #3d4f47 !important;
+}
