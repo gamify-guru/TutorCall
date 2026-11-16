@@ -1,1 +1,1234 @@
-See /tmp/full_lesson.html - content too large for this call, please upload manually
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Case of the Unlabeled Artifacts | Academy Stars 3 Unit 8</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect fill='%23f2b84b' width='16' height='16' rx='3'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./extras.css" />
+  <script src="../_shared/watermark.js" data-mode="bar" data-position="bottom" defer></script>
+  <!-- Tailwind CSS v4 Browser CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Special+Elite&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #dfb15b;
+      --gold-dark: #b8860b;
+      --gold-light: #fef08a;
+      --wood-dark: #120e0b;
+      --wood-panel: #1e1713;
+      --parchment: #fbf7ee;
+      --parchment-border: #e2d7be;
+      --brass: #c59b27;
+    }
+    
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #0b0907;
+      color: #f3ede2;
+      overflow-x: hidden;
+    }
+
+    .font-cinzel {
+      font-family: 'Cinzel', serif;
+    }
+
+    .font-typewriter {
+      font-family: 'Special Elite', cursive, monospace;
+    }
+
+    /* Custom Glass & Brass styling */
+    .brass-border {
+      border: 2px solid #c59b27;
+      box-shadow: 0 0 15px rgba(197, 155, 39, 0.25), inset 0 0 10px rgba(197, 155, 39, 0.15);
+    }
+
+    .brass-glow {
+      box-shadow: 0 0 20px rgba(223, 177, 91, 0.35);
+    }
+
+    .parchment-card {
+      background: #fbf7ee;
+      color: #261c12;
+      border: 1px solid #d8caa7;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(184, 134, 11, 0.2);
+    }
+
+    .museum-plate {
+      background: linear-gradient(135deg, #2a2016 0%, #17110c 100%);
+      border: 2px solid #b8860b;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,215,0,0.3);
+    }
+
+    /* Magnifier effect styling */
+    .magnifier-pulse {
+      animation: magPulse 2.2s infinite ease-in-out;
+    }
+    @keyframes magPulse {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(223,177,91,0.4)); }
+      50% { transform: scale(1.08); filter: drop-shadow(0 0 12px rgba(223,177,91,0.85)); }
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #140f0c;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #4a3821;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #c59b27;
+    }
+
+    .stamp-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      border: 2px dashed #b91c1c;
+      color: #b91c1c;
+      transform: rotate(-4deg);
+      border-radius: 4px;
+      font-family: 'Special Elite', monospace;
+    }
+
+    .stamp-solved {
+      border-color: #15803d;
+      color: #15803d;
+      transform: rotate(3deg);
+    }
+
+    /* Confetti particle animation */
+    @keyframes fall {
+      to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-amber-600 selection:text-white">
+
+  <!-- TOP DETECTIVE HUD / NAVIGATION BAR -->
+  <header class="sticky top-0 z-40 bg-[#120e0b] border-b border-[#3d2c1c] shadow-xl px-4 py-3">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Brand & Mission title -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-500 to-amber-800 flex items-center justify-center shadow-lg border border-amber-300/40">
+          <svg class="w-6 h-6 text-amber-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8" stroke-width="2"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65" stroke-width="2.5"></line>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs uppercase tracking-widest text-amber-400/90 font-bold">Academy Stars 3 • Unit 8</span>
+            <span class="px-2 py-0.5 text-[10px] bg-red-950/80 text-red-300 border border-red-700/60 rounded font-mono">CASE #08-PREHISTORY</span>
+          </div>
+          <h1 class="text-sm md:text-base font-cinzel font-bold text-amber-100 tracking-wide">The Case of the Unlabeled Artifacts</h1>
+        </div>
+      </div>
+
+      <!-- Navigation tabs -->
+      <nav class="hidden lg:flex items-center gap-1 bg-[#1c140e] p-1 rounded-xl border border-[#3d2c1c]">
+        <button onclick="switchTab('briefing')" id="nav-briefing" class="nav-tab px-3 py-1.5 text-xs font-semibold rounded-lg text-amber-200 bg-amber-900/50 border border-amber-600/40 transition">
+          1. Briefing
+        </button>
+        <button onclick="switchTab('hunt')" id="nav-hunt" class="nav-tab px-3 py-1.5 text-xs font-semibold rounded-lg text-stone-400 hover:text-amber-200 transition">
+          2. Treasure Hunt
+        </button>
+        <button onclick="switchTab('dictation')" id="nav-dictation" class="nav-tab px-3 py-1.5 text-xs font-semibold rounded-lg text-stone-400 hover:text-amber-200 transition">
+          3. Dictation Prep
+        </button>
+        <button onclick="switchTab('report')" id="nav-report" class="nav-tab px-3 py-1.5 text-xs font-semibold rounded-lg text-stone-400 hover:text-amber-200 transition">
+          4. Final Report
+        </button>
+        <button onclick="switchTab('homework')" id="nav-homework" class="nav-tab px-3 py-1.5 text-xs font-semibold rounded-lg text-stone-400 hover:text-amber-200 transition">
+          5. Homework
+        </button>
+      </nav>
+
+      <!-- Right controls: Timer, Labels Counter, Vocabulary Modal Button, Sound Toggle -->
+      <div class="flex items-center gap-2 md:gap-3">
+        <!-- Labels recovered badge -->
+        <div class="flex items-center gap-2 px-3 py-1.5 bg-[#1b140d] border border-amber-600/40 rounded-lg shadow-inner">
+          <span class="text-amber-400 text-xs hidden sm:inline">Labels:</span>
+          <span id="label-score" class="font-bold text-amber-300 text-sm font-mono tracking-wider">0 / 10</span>
+          <div class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping"></div>
+        </div>
+
+        <!-- 45-min Lesson Timer -->
+        <div class="flex items-center gap-1.5 px-2.5 py-1.5 bg-[#18110b] border border-stone-800 rounded-lg text-stone-300 text-xs font-mono">
+          <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke-width="2"></circle>
+            <polyline points="12 6 12 12 16 14" stroke-width="2"></polyline>
+          </svg>
+          <span id="lesson-timer">45:00</span>
+          <button onclick="toggleTimer()" id="timer-toggle-btn" title="Pause / Play Lesson Timer" class="text-stone-400 hover:text-amber-300 ml-0.5">
+            ▶
+          </button>
+        </div>
+
+        <!-- Audio effects switch -->
+        <button onclick="toggleAudio()" id="audio-toggle" class="p-2 rounded-lg bg-[#221810] border border-stone-700 text-amber-300 hover:border-amber-500 transition" title="Sound Effects">
+          🔊
+        </button>
+
+        <!-- ALWAYS ACCESSIBLE CASEBOOK / HELP / VOCABULARY MODAL BUTTON -->
+        <button onclick="openCasebookModal()" class="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-amber-950 font-bold text-xs uppercase tracking-wider shadow-lg border border-amber-300 transition transform active:scale-95">
+          <svg class="w-4 h-4 text-amber-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+          <span>Help / Vocabulary</span>
+        </button>
+        <button type="button" class="ttc-reset" onclick="tcResetLesson()" title="Начать заново">
+          ↺ <span class="ttc-reset-label">Начать заново</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile secondary bar for tabs -->
+    <div class="flex lg:hidden overflow-x-auto gap-2 pt-2.5 mt-2 border-t border-stone-800/80 text-xs">
+      <button onclick="switchTab('briefing')" id="m-nav-briefing" class="whitespace-nowrap px-3 py-1 rounded bg-amber-900/60 text-amber-200 border border-amber-600/50">1. Briefing</button>
+      <button onclick="switchTab('hunt')" id="m-nav-hunt" class="whitespace-nowrap px-3 py-1 rounded bg-[#221810] text-stone-300">2. Treasure Hunt</button>
+      <button onclick="switchTab('dictation')" id="m-nav-dictation" class="whitespace-nowrap px-3 py-1 rounded bg-[#221810] text-stone-300">3. Dictation Prep</button>
+      <button onclick="switchTab('report')" id="m-nav-report" class="whitespace-nowrap px-3 py-1 rounded bg-[#221810] text-stone-300">4. Report</button>
+      <button onclick="switchTab('homework')" id="m-nav-homework" class="whitespace-nowrap px-3 py-1 rounded bg-[#221810] text-stone-300">5. Homework</button>
+      <button type="button" class="ttc-reset whitespace-nowrap" onclick="tcResetLesson()">↺ Начать заново</button>
+    </div>
+  </header>
+
+  <!-- MAIN INTERACTIVE CONTAINER -->
+  <main id="main" class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-6 lg:p-8">
+
+    <!-- ========================================== -->
+    <!-- SECTION 1: CASE BRIEFING & CRIME SCENE -->
+    <!-- ========================================== -->
+    <section id="section-briefing" class="space-y-6">
+      <!-- Detective Dossier Intro Banner -->
+      <div class="briefing-top grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+        <div class="lg:col-span-7 space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-950/80 border border-amber-600/50 text-amber-300 text-xs">
+            <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+            CONFIDENTIAL • SCOTLAND YARD JUNIOR DIVISION
+          </div>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-cinzel font-extrabold text-amber-100 leading-tight">
+            The Case of the <br/><span class="gold-text">Unlabeled Artifacts</span>
+          </h2>
+          <p class="briefing-lead text-stone-300 text-sm sm:text-base leading-relaxed">
+            Last night at the National Museum of History, an intruder knocked down every golden label in the <strong class="text-amber-300">Prehistory Hall</strong>! Ten priceless ancient treasures are now left mystery objects. 
+          </p>
+
+          <!-- Detective Registration & Mission Objectives -->
+          <div class="bg-[#18120d] border border-amber-700/40 rounded-xl p-4 sm:p-5 shadow-2xl space-y-4">
+            <div class="flex flex-wrap items-center gap-3">
+              <label class="text-xs uppercase tracking-wider text-amber-400 font-bold">Junior Detective Name:</label>
+              <input type="text" id="detective-name-input" value="" placeholder="Your name..." autocomplete="name" 
+                     class="bg-[#241a12] border border-amber-600/50 rounded-lg px-3 py-1.5 text-amber-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 font-typewriter"
+                     oninput="updateDetectiveName(this.value)" onchange="updateDetectiveName(this.value)" />
+              <button onclick="startMission()" class="px-4 py-2 bg-gradient-to-r from-amber-500 to-amber-700 hover:from-amber-400 hover:to-amber-600 text-amber-950 font-bold rounded-lg text-sm shadow-md transition transform active:scale-95">
+                Accept Case & Inspect Scene 🔍
+              </button>
+            </div>
+
+            <!-- Objectives bullet points -->
+            <div class="briefing-objectives grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs border-t border-stone-800 text-stone-300">
+              <div class="flex items-center gap-2">
+                <span class="text-amber-400 font-bold">✓ 1.</span>
+                <span>Identify 10 prehistoric objects</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-amber-400 font-bold">✓ 2.</span>
+                <span>Discover what each was for</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-amber-400 font-bold">✓ 3.</span>
+                <span>File the Official Police Dossier</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick audio speaker helper badge -->
+        <div class="audio-brief-card lg:col-span-5 bg-gradient-to-br from-[#241a12] to-[#140e0b] border-2 border-amber-600/40 rounded-2xl p-5 shadow-2xl relative overflow-hidden">
+          <div class="absolute -right-10 -bottom-10 w-36 h-36 bg-amber-500/10 rounded-full blur-2xl"></div>
+          <div class="flex items-start gap-4">
+            <div class="p-3 bg-amber-900/40 rounded-xl border border-amber-600/40 text-amber-300">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"></path>
+              </svg>
+            </div>
+            <div>
+              <div class="stamp-badge mb-1">INSPECTOR'S DISPATCH</div>
+              <h3 class="font-cinzel text-base font-bold text-amber-200">Audio Briefing</h3>
+              <p class="text-xs text-stone-300 mt-1 leading-relaxed">
+                Click to hear your chief inspector outline the mission and review pronunciation for our 10 target museum artifacts.
+              </p>
+              <div class="mt-3 flex flex-wrap items-center gap-2">
+                <button type="button" onclick="speakText('Attention Junior Detective. Ten prehistoric artifacts in the museum have lost their labels. Examine the glass cases, study their functions, spell their names, and return the labels. Good luck!')" 
+                        class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold text-xs rounded-lg flex items-center gap-1.5 transition">
+                  <span>▶ Listen to Chief Inspector</span>
+                </button>
+                <button type="button" onclick="openCasebookModal()" class="px-3 py-1.5 bg-[#332215] hover:bg-[#442c1c] text-amber-200 text-xs rounded-lg border border-amber-700/50 transition">
+                  📖 Open Casebook
+                </button>
+              </div>
+              <div class="track-player mt-3">
+                <div class="text-[11px] uppercase tracking-wider text-amber-400 font-bold">Track 2.30 · Unit 8, Lesson 1, Activity 2</div>
+                <p class="text-[11px] text-stone-300 mt-0.5 leading-snug">Listen and repeat the ten words. After “Now you”, number the five pairs.</p>
+                <audio id="track-230" controls preload="metadata" class="mt-1.5">
+                  <source src="audio/track-2-30.mp3" type="audio/mpeg">
+                </audio>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN ATTACHED DESIGN HERO: INTERACTIVE CRIME SCENE -->
+      <div class="crime-scene-wrap relative rounded-2xl overflow-hidden border-2 border-amber-700/60 shadow-2xl bg-black group">
+        <img id="crime-scene-img" src="images/crime-scene.jpg" alt="Museum Hall of Prehistory with a young detective, glass cases of prehistoric artifacts, and fallen golden labels on the floor" class="w-full h-auto object-cover max-h-[640px] block transition duration-700 filter group-hover:brightness-105" />
+
+        <!-- Overlay subtle ambient vignette -->
+        <div class="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/80 via-transparent to-black/30"></div>
+
+        <!-- Interactive Artifact Hotspots on the attached illustration -->
+        <!-- 1. Head Sculpture (right showcase) -->
+        <button onclick="inspectArtifact('sculpture')" style="top: 28%; right: 12%;" 
+                class="absolute transform -translate-x-1/2 -translate-y-1/2 group/spot z-20 flex flex-col items-center focus:outline-none"
+                title="Inspect Stone Head">
+          <span class="w-8 h-8 rounded-full bg-amber-500/90 text-amber-950 flex items-center justify-center font-bold text-xs shadow-lg border-2 border-white magnifier-pulse">
+            1
+          </span>
+          <span class="mt-1 px-2 py-0.5 bg-black/80 text-amber-300 text-[11px] rounded border border-amber-500/50 backdrop-blur font-semibold shadow">
+            sculpture
+          </span>
+        </button>
+
+        <!-- 2. Golden Necklace (right showcase shelf) -->
+        <button onclick="inspectArtifact('necklace')" style="top: 55%; right: 12%;" 
+                class="absolute transform -translate-x-1/2 -translate-y-1/2 group/spot z-20 flex flex-col items-center focus:outline-none"
+                title="Inspect Gold Necklace">
+          <span class="w-8 h-8 rounded-full bg-amber-500/90 text-amber-950 flex items-center justify-center font-bold text-xs shadow-lg border-2 border-white magnifier-pulse">
+            2
+          </span>
+          <span class="mt-1 px-2 py-0.5 bg-black/80 text-amber-300 text-[11px] rounded border border-amber-500/50 backdrop-blur font-semibold shadow">
+            necklace
+          </span>
+        </button>
+
+        <!-- 3. Ancient Clay Bowl (right showcase shelf) -->
+        <button onclick="inspectArtifact('bowl')" style="top: 62%; right: 24%;" 
+                class="absolute transform -translate-x-1/2 -translate-y-1/2 group/spot z-20 flex flex-col items-center focus:outline-none"
+                title="Inspect Ancient Bowl">
+          <span class="w-8 h-8 rounded-full bg-amber-500/90 text-amber-950 flex items-center justify-center font-bold text-xs shadow-lg border-2 border-white magnifier-pulse">
+            3
+          </span>
+          <span class="mt-1 px-2 py-0.5 bg-black/80 text-amber-300 text-[11px] rounded border border-amber-500/50 backdrop-blur font-semibold shadow">
+            bowl
+          </span>
+        </button>
+
+        <!-- 4. Ancient Knife (right showcase right side) -->
+        <button onclick="inspectArtifact('knife')" style="top: 68%; right: 16%;" 
+                class="absolute transform -translate-x-1/2 -translate-y-1/2 group/spot z-20 flex flex-col items-center focus:outline-none"
+                title="Inspect Ancient Knife">
+          <span class="w-8 h-8 rounded-full bg-amber-500/90 text-amber-950 flex items-center justify-center font-bold text-xs shadow-lg border-2 border-white magnifier-pulse">
+            4
+          </span>
+          <span class="mt-1 px-2 py-0.5 bg-black/80 text-amber-300 text-[11px] rounded border border-amber-500/50 backdrop-blur font-semibold shadow">
+            knife
+          </span>
+        </button>
+
+        <!-- 5. Ancient Coins (right showcase in front of bowl) -->
+        <button onclick="inspectArtifact('coin')" style="top: 70%; right: 8%;" 
+                class="absolute transform -translate-x-1/2 -translate-y-1/2 group/spot z-20 flex flex-col items-center focus:outline-none"
+                title="Inspect Ancient Coins">
+          <span class="w-8 h-8 rounded-full bg-amber-500/90 text-amber-950 flex items-center justify-center font-bold text-xs shadow-lg border-2 border-white magnifier-pulse">
+            5
+          </span>
+          <span class="mt-1 px-2 py-0.5 bg-black/80 text-amber-300 text-[11px] rounded border border-amber-500/50 backdrop-blur font-semibold shadow">
+            coin
+          </span>
+        </button>
+
+        <!-- 6. Musical Instruments (drum & flute on left showcase) -->
+        <button onclick="inspectArtifact('musical instrument')" style="top: 45%; left: 18%;" 
+                class="absolute transform -translate-x-1/2 -translate-y-1/2 group/spot z-20 flex flex-col items-center focus:outline-none"
+                title="Inspect Musical Instruments">
+          <span class="w-8 h-8 rounded-full bg-amber-500/90 text-amber-950 flex items-center justify-center font-bold text-xs shadow-lg border-2 border-white magnifier-pulse">
+            6
+          </span>
+          <span class="mt-1 px-2 py-0.5 bg-black/80 text-amber-300 text-[11px] rounded border border-amber-500/50 backdrop-blur font-semibold shadow">
+            musical instrument
+          </span>
+        </button>
+
+        <!-- 7. Fallen labels on the floor -->
+        <button onclick="inspectFloorLabels()" style="top: 85%; left: 58%;" 
+                class="absolute transform -translate-x-1/2 -translate-y-1/2 group/spot z-20 flex flex-col items-center focus:outline-none"
+                title="Inspect Fallen Labels">
+          <span class="px-3 py-1 bg-red-600/90 text-white text-xs font-bold rounded-full shadow-lg border-2 border-amber-300 animate-bounce">
+            ⚠️ Fallen Labels on Floor!
+          </span>
+        </button>
+
+        <!-- Floating instructions panel on image bottom -->
+        <div class="absolute bottom-4 left-4 right-4 bg-[#140e0be8] backdrop-blur-md p-3.5 rounded-xl border border-amber-600/50 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div class="flex items-center gap-2.5 text-stone-200">
+            <span class="text-xl">🔎</span>
+            <span><strong>Click any numbered hotspot</strong> on the exhibits to inspect an artifact, hear its English pronunciation, and unlock its clue file!</span>
+          </div>
+          <button onclick="switchTab('hunt')" class="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-amber-950 font-extrabold rounded-lg tracking-wide uppercase transition shadow-md">
+            Start Mission 1: Treasure Hunt →
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Inspection Inspector Modal / Drawer result -->
+      <div id="quick-inspect-box" class="hidden bg-[#18110b] border-2 border-amber-500/60 rounded-xl p-5 shadow-2xl relative">
+        <button onclick="closeQuickInspect()" class="absolute top-3 right-3 text-stone-400 hover:text-white text-lg">✕</button>
+        <div class="flex flex-col sm:flex-row items-center gap-5">
+          <div id="quick-inspect-icon" class="w-16 h-16 rounded-xl bg-amber-950/60 border border-amber-600/50 flex items-center justify-center text-3xl shadow">
+            🏺
+          </div>
+          <div class="space-y-1 flex-1">
+            <div class="flex items-center gap-3">
+              <h4 id="quick-inspect-title" class="font-cinzel text-xl font-bold text-amber-200">Sculpture</h4>
+              <button onclick="speakCurrentInspect()" class="px-2 py-0.5 rounded bg-amber-500/20 hover:bg-amber-500/40 text-amber-300 text-xs flex items-center gap-1 border border-amber-500/30">
+                🔊 Listen
+              </button>
+            </div>
+            <p id="quick-inspect-desc" class="text-stone-300 text-sm"></p>
+            <p id="quick-inspect-func" class="text-amber-400 text-xs font-semibold"></p>
+          </div>
+          <button onclick="proceedToTreasureHunt()" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs rounded-lg transition whitespace-nowrap">
+            Solve in Treasure Hunt →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 2: TREASURE HUNT (HALL OF OBJECTS) -->
+    <!-- ========================================== -->
+    <section id="section-hunt" class="hidden space-y-8">
+      
+      <!-- Treasure Hunt Sub-navigation & Progress bar -->
+      <div class="bg-[#18120c] border border-amber-700/50 rounded-2xl p-5 shadow-2xl space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs uppercase font-bold text-amber-400 tracking-wider">Hall of Objects • Phase 2</span>
+              <span class="text-xs px-2 py-0.5 rounded bg-amber-950 border border-amber-700/50 text-amber-300">Target: 4 Missions</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-cinzel font-bold text-amber-100">Treasure Hunt: Return the Golden Labels</h2>
+          </div>
+
+          <!-- Progress counter visual -->
+          <div class="flex items-center gap-3 bg-[#110c08] px-4 py-2 rounded-xl border border-amber-600/30">
+            <div class="text-right">
+              <div class="text-[11px] uppercase tracking-wider text-stone-400">Labels Restored</div>
+              <div id="hunt-score-badge" class="font-cinzel text-xl font-bold text-amber-300">0 of 10</div>
+            </div>
+            <div class="w-12 h-12 rounded-lg bg-amber-950/60 border border-amber-500 flex items-center justify-center text-2xl shadow">
+              🏷️
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Sub-mission selection tabs -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 pt-2 border-t border-stone-800">
+          <button onclick="switchMission(1)" id="subtab-m1" class="hunt-subtab px-3 py-2 rounded-xl text-xs font-bold text-amber-200 bg-amber-900/40 border border-amber-600/50 text-left transition flex items-center justify-between">
+            <span>Mission 1: Identify</span>
+            <span id="badge-m1" class="text-[10px] px-1.5 py-0.2 rounded bg-amber-800/80 text-amber-200">0/8</span>
+          </button>
+          <button onclick="switchMission(2)" id="subtab-m2" class="hunt-subtab px-3 py-2 rounded-xl text-xs font-bold text-stone-400 hover:text-amber-200 bg-[#211810] border border-stone-800 text-left transition flex items-center justify-between">
+            <span>Mission 2: What was it for?</span>
+            <span id="badge-m2" class="text-[10px] px-1.5 py-0.2 rounded bg-stone-800 text-stone-300">0/8</span>
+          </button>
+          <button onclick="switchMission(3)" id="subtab-m3" class="hunt-subtab px-3 py-2 rounded-xl text-xs font-bold text-stone-400 hover:text-amber-200 bg-[#211810] border border-stone-800 text-left transition flex items-center justify-between">
+            <span>Mission 3: True / False</span>
+            <span id="badge-m3" class="text-[10px] px-1.5 py-0.2 rounded bg-stone-800 text-stone-300">0/8</span>
+          </button>
+          <button onclick="switchMission(4)" id="subtab-m4" class="hunt-subtab px-3 py-2 rounded-xl text-xs font-bold text-stone-400 hover:text-amber-200 bg-[#211810] border border-stone-800 text-left transition flex items-center justify-between">
+            <span>Mission 4: Field Gap-Fill</span>
+            <span id="badge-m4" class="text-[10px] px-1.5 py-0.2 rounded bg-stone-800 text-stone-300">0/8</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- SUB-MISSION 1: IDENTIFICATION (8 TASKS) -->
+      <!-- ============================================== -->
+      <div id="mission-container-1" class="space-y-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="font-cinzel text-xl font-bold text-amber-200">Mission 1: Artifact Identification</h3>
+            <p class="text-xs sm:text-sm text-stone-300">Look at the museum clue description and select the correct word to return the label.</p>
+          </div>
+          <span class="text-xs text-amber-400 font-mono">8 questions</span>
+        </div>
+
+        <div id="m1-questions-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Populated dynamically via JS with 8 items -->
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- SUB-MISSION 2: WHAT WAS IT FOR? (8 TASKS) -->
+      <!-- ============================================== -->
+      <div id="mission-container-2" class="hidden space-y-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="font-cinzel text-xl font-bold text-amber-200">Mission 2: What Was It For? (Function & Purpose)</h3>
+            <p class="text-xs sm:text-sm text-stone-300">Grammar pattern: <strong class="text-amber-300">It was for [verb]-ing</strong>. Match each prehistoric artifact to its true purpose!</p>
+          </div>
+          <span class="text-xs text-amber-400 font-mono">8 questions</span>
+        </div>
+
+        <div id="m2-questions-container" class="space-y-4">
+          <!-- Populated dynamically with 8 matching functions -->
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- SUB-MISSION 3: TRUE OR FALSE (8 TASKS) -->
+      <!-- ============================================== -->
+      <div id="mission-container-3" class="hidden space-y-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="font-cinzel text-xl font-bold text-amber-200">Mission 3: Detective Logic (True or False)</h3>
+            <p class="text-xs sm:text-sm text-stone-300">Test each witness statement about prehistoric life and museum artifacts. Choose TRUE or FALSE.</p>
+          </div>
+          <span class="text-xs text-amber-400 font-mono">8 questions</span>
+        </div>
+
+        <div id="m3-questions-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Populated dynamically with 8 True/False items -->
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- SUB-MISSION 4: COMPLETE THE LOG / GAP-FILL (8 TASKS) -->
+      <!-- ============================================== -->
+      <div id="mission-container-4" class="hidden space-y-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="font-cinzel text-xl font-bold text-amber-200">Mission 4: Field Report Log (Gap-Fill)</h3>
+            <p class="text-xs sm:text-sm text-stone-300">Fill in the blank in each field log sentence using the word bank.</p>
+          </div>
+          <span class="text-xs text-amber-400 font-mono">8 sentences</span>
+        </div>
+
+        <!-- Word bank chips -->
+        <div class="bg-[#18110c] p-4 rounded-xl border border-amber-600/40">
+          <div class="text-xs uppercase font-bold text-amber-400 mb-2">Word Bank:</div>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <span class="px-2.5 py-1 rounded bg-[#2a1e14] border border-amber-600/40 text-amber-200">museum</span>
+            <span class="px-2.5 py-1 rounded bg-[#2a1e14] border border-amber-600/40 text-amber-200">history</span>
+            <span class="px-2.5 py-1 rounded bg-[#2a1e14] border border-amber-600/40 text-amber-200">fire</span>
+            <span class="px-2.5 py-1 rounded bg-[#2a1e14] border border-amber-600/40 text-amber-200">tool</span>
+            <span class="px-2.5 py-1 rounded bg-[#2a1e14] border border-amber-600/40 text-amber-200">sculpture</span>
+            <span class="px-2.5 py-1 rounded bg-[#2a1e14] border border-amber-600/40 text-amber-200">necklace</span>
+            <span class="px-2.5 py-1 rounded bg-[#2a1e14] border border-amber-600/40 text-amber-200">bowl</span>
+            <span class="px-2.5 py-1 rounded bg-[#2a1e14] border border-amber-600/40 text-amber-200">knife</span>
+            <span class="px-2.5 py-1 rounded bg-[#2a1e14] border border-amber-600/40 text-amber-200">coin</span>
+            <span class="px-2.5 py-1 rounded bg-[#2a1e14] border border-amber-600/40 text-amber-200">musical instrument</span>
+          </div>
+        </div>
+
+        <div id="m4-questions-container" class="space-y-3">
+          <!-- Populated dynamically with 8 gap fills -->
+        </div>
+      </div>
+
+      <!-- Restored Gallery Display of All 10 Golden Labels -->
+      <div class="mt-8 bg-[#150f0a] border-2 border-amber-600/40 rounded-2xl p-6 shadow-2xl">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-2">
+            <span class="text-xl">🏛️</span>
+            <h3 class="font-cinzel text-lg font-bold text-amber-200">Prehistory Hall Pedestal: Returned Labels</h3>
+          </div>
+          <span class="text-xs text-stone-400">Restoration Status</span>
+        </div>
+
+        <div id="labels-pedestal-grid" class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+          <!-- 10 dynamic plaque items -->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 3: DICTATION PREP (SPELLING LAB) -->
+    <!-- ========================================== -->
+    <section id="section-dictation" class="hidden space-y-6">
+      
+      <!-- Header -->
+      <div class="bg-[#18110c] border border-amber-700/50 rounded-2xl p-6 shadow-2xl">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs uppercase font-bold text-amber-400 tracking-wider">Spelling & Memory • Phase 3</span>
+              <span class="text-xs px-2 py-0.5 rounded bg-emerald-950 border border-emerald-700/50 text-emerald-300">Dictation Training</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-cinzel font-bold text-amber-100">Detective Spelling Master</h2>
+            <p class="text-xs sm:text-sm text-stone-300 mt-1">
+              Prepare for the vocabulary dictation! Practice spelling 8 key prehistoric words through 4 challenging formats.
+            </p>
+          </div>
+
+          <!-- Mode selector pills -->
+          <div class="flex flex-wrap gap-1 bg-[#120c08] p-1.5 rounded-xl border border-stone-800">
+            <button onclick="setDictationMode('unscramble')" id="dict-btn-unscramble" class="dict-mode-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-amber-600 text-amber-950 transition">
+              1. Unscramble (Anagram)
+            </button>
+            <button onclick="setDictationMode('firstletter')" id="dict-btn-firstletter" class="dict-mode-btn px-3 py-1.5 text-xs font-bold rounded-lg text-stone-400 hover:text-amber-200 transition">
+              2. Missing Letters
+            </button>
+            <button onclick="setDictationMode('spell')" id="dict-btn-spell" class="dict-mode-btn px-3 py-1.5 text-xs font-bold rounded-lg text-stone-400 hover:text-amber-200 transition">
+              3. Spell from Clue
+            </button>
+            <button onclick="setDictationMode('quickfire')" id="dict-btn-quickfire" class="dict-mode-btn px-3 py-1.5 text-xs font-bold rounded-lg text-stone-400 hover:text-amber-200 transition">
+              4. Quick Fire ⚡
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mode 1: Unscramble Container -->
+      <div id="dictation-mode-unscramble" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- 8 Anagram unscramble cards generated via JS -->
+      </div>
+
+      <!-- Mode 2: Missing Letters Container -->
+      <div id="dictation-mode-firstletter" class="hidden grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- 8 Missing letter tasks -->
+      </div>
+
+      <!-- Mode 3: Spell from Clue Container -->
+      <div id="dictation-mode-spell" class="hidden grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- 8 Spell from clue tasks -->
+      </div>
+
+      <!-- Mode 4: Quick Fire Interactive Flashcards -->
+      <div id="dictation-mode-quickfire" class="hidden bg-[#18120c] border border-amber-600/50 rounded-2xl p-6 shadow-2xl max-w-2xl mx-auto space-y-5 text-center">
+        <div class="flex items-center justify-between text-xs text-amber-300">
+          <span>Quick Fire Card <span id="qf-current">1</span> of 8</span>
+          <span class="flex items-center gap-1 font-mono">⚡ Rapid Memory</span>
+        </div>
+
+        <div class="p-8 rounded-2xl bg-gradient-to-b from-[#241a12] to-[#120d09] border-2 border-amber-500/50 shadow-inner space-y-4">
+          <div id="qf-icon" class="text-6xl animate-bounce">🏺</div>
+          <div id="qf-clue" class="text-base text-stone-200 font-semibold italic">"This is an art object carved from stone."</div>
+          
+          <div class="flex justify-center items-center gap-2 pt-2">
+            <input type="text" id="qf-input" placeholder="Type word here..." 
+                   class="bg-[#120c08] border-2 border-amber-500/60 rounded-xl px-4 py-2 text-center text-amber-100 font-mono text-lg focus:outline-none focus:ring-2 focus:ring-amber-400 uppercase"
+                   onkeydown="if(event.key==='Enter') checkQuickFireAnswer()" />
+            <button onclick="checkQuickFireAnswer()" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold rounded-xl transition shadow">
+              Check
+            </button>
+          </div>
+
+          <div id="qf-feedback" class="text-xs font-bold min-h-[1.5rem]"></div>
+        </div>
+
+        <div class="flex justify-between items-center text-xs">
+          <button onclick="prevQuickFire()" class="px-3 py-1.5 rounded bg-stone-800 text-stone-300 hover:bg-stone-700">← Previous</button>
+          <button onclick="speakQuickFireWord()" class="px-3 py-1.5 rounded bg-amber-950 border border-amber-700/60 text-amber-300 flex items-center gap-1">
+            🔊 Pronounce Clue
+          </button>
+          <button onclick="nextQuickFire()" class="px-3 py-1.5 rounded bg-stone-800 text-stone-300 hover:bg-stone-700">Next →</button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 4: FINAL DETECTIVE REPORT -->
+    <!-- ========================================== -->
+    <section id="section-report" class="hidden space-y-6">
+      <div class="bg-[#18110c] border border-amber-700/50 rounded-2xl p-6 shadow-2xl">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="text-xs uppercase font-bold text-amber-400 tracking-wider">Official Case Dossier • Phase 4</span>
+          <span class="text-xs px-2 py-0.5 rounded bg-amber-950 border border-amber-700/50 text-amber-300">Closing the Case</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-cinzel font-bold text-amber-100">Scotland Yard Junior Detective Report</h2>
+        <p class="text-xs sm:text-sm text-stone-300 mt-1">
+          Summarize what you found in the Prehistory Hall. Write 4 to 6 sentences using the target museum vocabulary.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Report Writing Workspace -->
+        <div class="lg:col-span-8 parchment-card rounded-2xl p-6 sm:p-8 space-y-5 relative">
+          <!-- Watermark seal -->
+          <div class="absolute top-4 right-4 text-xs font-mono font-bold border-2 border-stone-800/40 px-2 py-1 rounded rotate-2 opacity-70">
+            OFFICIAL POLICE DOSSIER
+          </div>
+
+          <div>
+            <div class="text-xs text-stone-600 uppercase font-mono font-bold tracking-wider">Case Reference</div>
+            <div class="font-cinzel text-xl font-extrabold text-stone-900">CASE #AS3-U8: THE UNLABELED PREHISTORIC EXHIBITS</div>
+            <div class="text-xs text-stone-600 font-mono mt-0.5">Investigating Officer: <span id="report-officer-name" class="font-bold underline">Junior Detective</span></div>
+          </div>
+
+          <!-- Guided sentence starters or Freeform Mode -->
+          <div class="space-y-4">
+            <div class="flex items-center justify-between text-xs text-stone-700 border-b border-stone-300 pb-2">
+              <span class="font-bold">Write or complete your 4–6 sentence summary:</span>
+              <button type="button" onclick="insertTemplateReport()" class="text-amber-800 hover:text-amber-950 underline font-semibold">
+                Use guided starters ✍️
+              </button>
+            </div>
+
+            <textarea id="final-report-text" rows="7" 
+                      class="w-full bg-[#fdfcf9] border-2 border-amber-900/30 rounded-xl p-4 text-stone-900 font-typewriter text-sm sm:text-base leading-relaxed focus:outline-none focus:border-amber-700 focus:ring-1 focus:ring-amber-700 placeholder:text-stone-400"
+                      placeholder="In the museum I found a sculpture, a necklace, and some ancient coins. They are from prehistory. People used a bowl for eating and a knife for cutting food. They also made fire to keep warm and played a musical instrument for songs..."
+                      oninput="analyzeReportText()"></textarea>
+
+            <!-- Vocabulary words tracker inside text -->
+            <div class="space-y-2">
+              <div class="text-xs font-bold text-stone-700 flex items-center justify-between">
+                <span>Vocabulary Words Used in Report:</span>
+                <span id="report-word-count-badge" class="font-mono text-amber-800 font-bold">0 / 10 words detected</span>
+              </div>
+              <div id="report-chips-container" class="flex flex-wrap gap-1.5 text-xs">
+                <!-- 10 pill chips turning green when detected in text -->
+              </div>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="flex flex-wrap items-center gap-3 pt-3 border-t border-stone-300">
+              <button onclick="submitFinalReport()" class="px-6 py-2.5 bg-gradient-to-r from-amber-700 to-amber-900 hover:from-amber-600 hover:to-amber-800 text-amber-100 font-bold text-sm rounded-xl shadow-lg transition transform active:scale-95 flex items-center gap-2">
+                <span>Stamp & Close Case File</span>
+                <span class="text-lg">🔖</span>
+              </button>
+              <button onclick="speakReport()" class="px-4 py-2 bg-stone-200 hover:bg-stone-300 text-stone-800 text-xs font-bold rounded-xl transition flex items-center gap-1.5">
+                <span>🔊 Read Report Aloud</span>
+              </button>
+              <button onclick="copyReport()" class="px-4 py-2 bg-stone-200 hover:bg-stone-300 text-stone-800 text-xs font-bold rounded-xl transition">
+                📋 Copy Text
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Official Detective Certificate & Badge -->
+        <div class="lg:col-span-4 space-y-4">
+          <div id="case-closed-card" class="bg-gradient-to-b from-[#221810] to-[#120c08] border-2 border-amber-600/50 rounded-2xl p-5 shadow-2xl text-center space-y-4 relative overflow-hidden">
+            <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-amber-400 to-amber-700 flex items-center justify-center text-4xl shadow-lg border-2 border-amber-200">
+              🎖️
+            </div>
+            <div>
+              <div class="stamp-badge stamp-solved mb-1" id="stamp-indicator">CASE PENDING</div>
+              <h3 class="font-cinzel text-xl font-bold text-amber-100">Master Detective Badge</h3>
+              <p class="text-xs text-stone-300 mt-1">Awarded for successfully restoring the Prehistory Wing labels at the National Museum of History.</p>
+            </div>
+
+            <div class="bg-[#18110b] p-3 rounded-xl border border-stone-800 text-xs text-stone-300 space-y-1.5 text-left font-mono">
+              <div class="flex justify-between"><span>Detective:</span> <strong id="cert-det-name" class="text-amber-200">Junior Detective</strong></div>
+              <div class="flex justify-between"><span>Labels Restored:</span> <strong id="cert-labels-count" class="text-amber-300">0 / 10</strong></div>
+              <div class="flex justify-between"><span>Curriculum:</span> <strong class="text-stone-400">Academy Stars 3 (Unit 8)</strong></div>
+              <div class="flex justify-between"><span>Status:</span> <strong id="cert-status" class="text-amber-400 font-bold">In Progress</strong></div>
+            </div>
+
+            <button onclick="printCertificate()" class="w-full py-2 bg-amber-600 hover:bg-amber-500 text-amber-950 font-bold text-xs rounded-xl transition shadow">
+              🖨️ Print / Save Detective Certificate
+            </button>
+          </div>
+
+          <!-- Quick teacher summary score block -->
+          <div class="bg-[#18110c] border border-amber-800/40 rounded-xl p-4 text-xs text-stone-300 space-y-2">
+            <div class="font-bold text-amber-400 font-cinzel">Teacher & Student Notes:</div>
+            <p>Target vocabulary acquired: <strong>10/10</strong> items. Use this report for your classroom portfolio or speak aloud for fluency assessment.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 5: HOMEWORK (DISTINCT TREASURE HUNT) -->
+    <!-- ========================================== -->
+    <section id="section-homework" class="hidden space-y-8">
+      
+      <!-- Homework Title Banner -->
+      <div class="bg-gradient-to-r from-[#20150d] via-[#1a110a] to-[#20150d] border-2 border-amber-600/50 rounded-2xl p-6 shadow-2xl">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs uppercase font-bold text-amber-400 tracking-wider">Independent Home Study</span>
+              <span class="text-xs px-2.5 py-0.5 rounded-full bg-amber-500 text-amber-950 font-bold">6–8 Tasks</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-cinzel font-bold text-amber-100 mt-1">Treasure Hunt Homework: The Secret Vault</h2>
+            <p class="text-xs sm:text-sm text-stone-300 mt-1">
+              These tasks are brand new and separate from the lesson. Complete the 4 independent detective assignments at home.
+            </p>
+          </div>
+          <div class="text-right">
+            <span class="text-3xl">📜</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Task A: Connect Artifact + Function Matrix (Different combinations) -->
+      <div class="bg-[#18120c] border border-amber-700/50 rounded-2xl p-6 shadow-2xl space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="text-amber-400 text-xs font-bold font-mono">ASSIGNMENT A</div>
+            <h3 class="font-cinzel text-lg font-bold text-amber-200">The Function Matrix: What was each used for?</h3>
+            <p class="text-xs text-stone-300">Select the correct prehistoric object from the dropdown for each new real-world scenario.</p>
+          </div>
+          <span class="px-2.5 py-1 rounded bg-amber-900/40 text-amber-300 text-xs font-mono">6 items</span>
+        </div>
+
+        <div id="hw-matrix-container" class="space-y-3">
+          <!-- Populated dynamically with 6 fresh tasks -->
+        </div>
+      </div>
+
+      <!-- Task B: Mini-Story Completion -->
+      <div class="parchment-card rounded-2xl p-6 sm:p-8 space-y-4">
+        <div class="flex items-center justify-between border-b border-stone-300 pb-3">
+          <div>
+            <div class="text-amber-800 text-xs font-bold font-mono">ASSIGNMENT B</div>
+            <h3 class="font-cinzel text-xl font-bold text-stone-900">Prehistoric Mini-Story: "A Night in Prehistory"</h3>
+            <p class="text-xs text-stone-700">Choose the right words to complete this adventure story about an ancient family.</p>
+          </div>
+          <span class="px-2.5 py-1 rounded bg-amber-200 text-amber-900 text-xs font-mono font-bold">Story Gap-Fill</span>
+        </div>
+
+        <div class="font-typewriter text-stone-900 text-sm sm:text-base leading-loose space-y-3">
+          <p>
+            Long ago, people did not have modern houses. Today, we study this time in our 
+            <select id="hw-story-1" class="bg-amber-100/80 border border-amber-800/40 rounded px-2 py-1 text-xs font-sans font-bold">
+              <option value="">[choose word]</option>
+              <option value="history">history</option>
+              <option value="sculpture">sculpture</option>
+              <option value="necklace">necklace</option>
+            </select>
+            lessons. In the evening, the family sat together around a warm 
+            <select id="hw-story-2" class="bg-amber-100/80 border border-amber-800/40 rounded px-2 py-1 text-xs font-sans font-bold">
+              <option value="">[choose word]</option>
+              <option value="knife">knife</option>
+              <option value="fire">fire</option>
+              <option value="coin">coin</option>
+            </select>
+            to cook meat and keep wild animals away. 
+          </p>
+          <p>
+            The mother poured clean spring water into a large clay 
+            <select id="hw-story-3" class="bg-amber-100/80 border border-amber-800/40 rounded px-2 py-1 text-xs font-sans font-bold">
+              <option value="">[choose word]</option>
+              <option value="tool">tool</option>
+              <option value="bowl">bowl</option>
+              <option value="coin">coin</option>
+            </select>
+            . To prepare the dinner, the father used a sharp flint 
+            <select id="hw-story-4" class="bg-amber-100/80 border border-amber-800/40 rounded px-2 py-1 text-xs font-sans font-bold">
+              <option value="">[choose word]</option>
+              <option value="knife">knife</option>
+              <option value="necklace">necklace</option>
+              <option value="sculpture">sculpture</option>
+            </select>
+            . In their culture, people didn't use paper money; they sometimes traded with a rare bronze 
+            <select id="hw-story-5" class="bg-amber-100/80 border border-amber-800/40 rounded px-2 py-1 text-xs font-sans font-bold">
+              <option value="">[choose word]</option>
+              <option value="coin">coin</option>
+              <option value="tool">tool</option>
+              <option value="fire">fire</option>
+            </select>
+            or stone goods. After eating, the grandfather played a bone 
+            <select id="hw-story-6" class="bg-amber-100/80 border border-amber-800/40 rounded px-2 py-1 text-xs font-sans font-bold">
+              <option value="">[choose word]</option>
+              <option value="musical instrument">musical instrument</option>
+              <option value="bowl">bowl</option>
+              <option value="museum">museum</option>
+            </select>
+            and everyone sang ancient songs. Today, all these amazing items are preserved inside our city 
+            <select id="hw-story-7" class="bg-amber-100/80 border border-amber-800/40 rounded px-2 py-1 text-xs font-sans font-bold">
+              <option value="">[choose word]</option>
+              <option value="museum">museum</option>
+              <option value="fire">fire</option>
+              <option value="history">history</option>
+            </select>
+            !
+          </p>
+        </div>
+
+        <div class="flex items-center justify-between pt-3 border-t border-stone-300">
+          <button onclick="checkHomeworkStory()" class="px-5 py-2 bg-amber-800 hover:bg-amber-900 text-amber-100 font-bold text-xs rounded-xl shadow transition">
+            Check Mini-Story Answers
+          </button>
+          <span id="hw-story-feedback" class="text-xs font-bold font-mono"></span>
+        </div>
+      </div>
+
+      <!-- Task C: Self-Dictation Memory Challenge (Pick 6 words & test from memory) -->
+      <div class="bg-[#18120c] border border-amber-700/50 rounded-2xl p-6 shadow-2xl space-y-4">
+        <div>
+          <div class="text-amber-400 text-xs font-bold font-mono">ASSIGNMENT C</div>
+          <h3 class="font-cinzel text-lg font-bold text-amber-200">Self-Dictation Memory Vault</h3>
+          <p class="text-xs text-stone-300">
+            Write 6 words from memory without looking at your Casebook. Type them below, then click "Reveal & Grade" to self-evaluate!
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+          <div class="space-y-1">
+            <label class="text-[11px] text-amber-300 font-mono">Word 1:</label>
+            <input type="text" id="hw-dict-1" placeholder="type word..." class="w-full bg-[#241a12] border border-stone-700 rounded-lg px-3 py-1.5 text-xs text-amber-100 focus:outline-none focus:border-amber-500">
+          </div>
+          <div class="space-y-1">
+            <label class="text-[11px] text-amber-300 font-mono">Word 2:</label>
+            <input type="text" id="hw-dict-2" placeholder="type word..." class="w-full bg-[#241a12] border border-stone-700 rounded-lg px-3 py-1.5 text-xs text-amber-100 focus:outline-none focus:border-amber-500">
+          </div>
+          <div class="space-y-1">
+            <label class="text-[11px] text-amber-300 font-mono">Word 3:</label>
+            <input type="text" id="hw-dict-3" placeholder="type word..." class="w-full bg-[#241a12] border border-stone-700 rounded-lg px-3 py-1.5 text-xs text-amber-100 focus:outline-none focus:border-amber-500">
+          </div>
+          <div class="space-y-1">
+            <label class="text-[11px] text-amber-300 font-mono">Word 4:</label>
+            <input type="text" id="hw-dict-4" placeholder="type word..." class="w-full bg-[#241a12] border border-stone-700 rounded-lg px-3 py-1.5 text-xs text-amber-100 focus:outline-none focus:border-amber-500">
+          </div>
+          <div class="space-y-1">
+            <label class="text-[11px] text-amber-300 font-mono">Word 5:</label>
+            <input type="text" id="hw-dict-5" placeholder="type word..." class="w-full bg-[#241a12] border border-stone-700 rounded-lg px-3 py-1.5 text-xs text-amber-100 focus:outline-none focus:border-amber-500">
+          </div>
+          <div class="space-y-1">
+            <label class="text-[11px] text-amber-300 font-mono">Word 6:</label>
+            <input type="text" id="hw-dict-6" placeholder="type word..." class="w-full bg-[#241a12] border border-stone-700 rounded-lg px-3 py-1.5 text-xs text-amber-100 focus:outline-none focus:border-amber-500">
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 pt-2">
+          <button onclick="checkSelfDictation()" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-amber-950 font-bold text-xs rounded-lg transition shadow">
+            Reveal & Check Spelling
+          </button>
+          <div id="hw-dict-feedback" class="text-xs font-mono font-bold text-amber-300"></div>
+        </div>
+      </div>
+
+      <!-- Task D: Sentence Construction Challenge -->
+      <div class="bg-[#18120c] border border-amber-700/50 rounded-2xl p-6 shadow-2xl space-y-4">
+        <div>
+          <div class="text-amber-400 text-xs font-bold font-mono">ASSIGNMENT D</div>
+          <h3 class="font-cinzel text-lg font-bold text-amber-200">Creative Detective Sentences</h3>
+          <p class="text-xs text-stone-300">
+            Write your own original sentences using at least 5 target words. Follow the pattern: <em class="text-amber-300">"In prehistory, people used a [word] for [verb]-ing..."</em>
+          </p>
+        </div>
+
+        <textarea id="hw-sentences-input" rows="4" 
+                  class="w-full bg-[#120d09] border border-amber-600/40 rounded-xl p-3 text-amber-100 text-xs sm:text-sm font-mono focus:outline-none focus:border-amber-400"
+                  placeholder="1. People made a fire for staying warm at night.&#10;2. A hunter had a sharp knife for cutting meat.&#10;3. A woman wore a beautiful necklace.&#10;4. They played a musical instrument for celebrations.&#10;5. An artist carved a stone sculpture..."></textarea>
+
+        <div class="flex justify-between items-center text-xs">
+          <button onclick="saveHomeworkSentences()" class="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold rounded-lg transition">
+            Save Homework Sentences 💾
+          </button>
+          <span id="hw-sentences-saved-msg" class="text-emerald-400 font-mono hidden">✓ Saved to lesson record!</span>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ==================================================== -->
+  <!-- ALWAYS ACCESSIBLE MODAL: DETECTIVE CASEBOOK & VOCABULARY -->
+  
+  <footer class="app-footer">
+    <button type="button" class="ttc-reset" onclick="tcResetLesson()">↺ Начать заново</button>
+  </footer>
+
+<!-- ==================================================== -->
+  <div id="casebook-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-[#18120c] border-2 border-amber-500/80 rounded-2xl w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl relative overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      
+      <!-- Modal Top bar -->
+      <div class="bg-gradient-to-r from-[#241a12] to-[#160f0a] border-b border-amber-700/60 p-4 sm:p-5 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-amber-600 flex items-center justify-center text-amber-950 text-xl font-bold shadow">
+            📖
+          </div>
+          <div>
+            <div class="text-[10px] uppercase tracking-widest text-amber-400 font-bold">Field Handbook & Rules</div>
+            <h3 class="font-cinzel text-lg sm:text-xl font-bold text-amber-100">Detective Casebook: Vocabulary & Grammar</h3>
+          </div>
+        </div>
+        <button type="button" onclick="closeCasebookModal()" aria-label="Close" class="w-8 h-8 rounded-lg bg-[#2a1c12] border border-amber-600/40 text-stone-300 hover:text-white flex items-center justify-center text-lg transition">
+          ✕
+        </button>
+      </div>
+
+      <!-- Modal Nav Pills -->
+      <div class="flex border-b border-stone-800 bg-[#120c08] px-4 py-2 gap-2 text-xs">
+        <button onclick="setCasebookTab('vocab')" id="cb-tab-vocab" class="px-3 py-1.5 rounded-lg bg-amber-600 text-amber-950 font-bold transition">
+          10 Vocabulary Cards
+        </button>
+        <button onclick="setCasebookTab('grammar')" id="cb-tab-grammar" class="px-3 py-1.5 rounded-lg text-stone-400 hover:text-amber-200 transition">
+          Grammar: "What was it for?"
+        </button>
+        <button onclick="setCasebookTab('clues')" id="cb-tab-clues" class="px-3 py-1.5 rounded-lg text-stone-400 hover:text-amber-200 transition">
+          Detective Tips
+        </button>
+      </div>
+
+      <!-- Modal Body (Scrollable) -->
+      <div class="p-4 sm:p-6 overflow-y-auto space-y-6 flex-1 text-stone-200">
+        
+        <!-- Tab 1: 10 Vocabulary cards with pronunciation & examples -->
+        <div id="cb-content-vocab" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- 1. Museum -->
+          <div class="bg-[#20160f] border border-amber-700/40 rounded-xl p-3.5 space-y-2 relative group hover:border-amber-500 transition">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl">🏛️</span>
+                <div>
+                  <h4 class="font-cinzel font-bold text-amber-200 text-base">museum</h4>
+                  <span class="text-[11px] font-mono text-amber-400/80">/mjuːˈziː.əm/ • noun</span>
+                </div>
+              </div>
+              <button onclick="speakText('museum')" class="p-1.5 rounded bg-amber-500/20 text-amber-300 hover:bg-amber-500/40 text-xs">🔊</button>
+            </div>
+            <p class="text-xs text-stone-300 leading-relaxed">A building where people can see important objects connected with art, history, or science.</p>
+            <div class="p-2 rounded bg-[#150e09] border border-stone-800 text-[11px] text-amber-300 font-mono">
+              💬 "We are visiting the history museum today."
+            </div>
+          </div>
+
+          <!-- 2. History -->
+          <div class="bg-[#20160f] border border-amber-700/40 rounded-xl p-3.5 space-y-2 relative group hover:border-amber-500 transition">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl">📜</span>
+                <div>
+                  <h4 class="font-cinzel font-bold text-amber-200 text-base">history</h4>
+                  <span class="text-[11px] font-mono text-amber-400/80">/ˈhɪs.tər.i/ • noun</span>
+                </div>
+              </div>
+              <button onclick="speakText('history')" class="p-1.5 rounded bg-amber-500/20 text-amber-300 hover:bg-amber-500/40 text-xs">🔊</button>
+            </div>
+            <p class="text-xs text-stone-300 leading-relaxed">The study of things that happened in the past, including prehistoric times.</p>
+            <div class="p-2 rounded bg-[#150e09] border border-stone-800 text-[11px] text-amber-300 font-mono">
+              💬 "In history class, we study how early humans lived."
+            </div>
+          </div>
+
+          <!-- 3. Fire -->
+          <div class="bg-[#20160f] border border-amber-700/40 rounded-xl p-3.5 space-y-2 relative group hover:border-amber-500 transition">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl">🔥</span>
+                <div>
+                  <h4 class="font-cinzel font-bold text-amber-200 text-base">fire</h4>
+                  <span class="text-[11px] font-mono text-amber-400/80">/faɪər/ • noun</span>
+                </div>
+              </div>
+              <button onclick="speakText('fire')" class="p-1.5 rounded bg-amber-500/20 text-amber-300 hover:bg-amber-500/40 text-xs">🔊</button>
+            </div>
+            <p class="text-xs text-stone-300 leading-relaxed">Heat and bright light from burning wood. It was hot and gave light and warmth.</p>
+            <div class="p-2 rounded bg-[#150e09] border border-stone-800 text-[11px] text-amber-300 font-mono">
+              💬 "Fire was for keeping warm and cooking food."
+            </div>
+          </div>
+
+          <!-- 4. Tool -->
+          <div class="bg-[#20160f] border border-amber-700/40 rounded-xl p-3.5 space-y-2 relative group hover:border-amber-500 transition">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl">🪓</span>
+                <div>
+                  <h4 class="font-cinzel font-bold text-amber-200 text-base">tool</h4>
+                  <span class="text-[11px] font-mono text-amber-400/80">/tuːl/ • noun</span>
+                </div>
+              </div>
+              <button onclick="speakText('tool')" class="p-1.5 rounded bg-amber-500/20 text-amber-300 hover:bg-amber-500/40 text-xs">🔊</button>
+            </div>
+            <p class="text-xs text-stone-300 leading-relaxed">An instrument you hold in your hand and use to make or repair things or build shelters.</p>
+            <div class="p-2 rounded bg-[#150e09] border border-stone-800 text-[11px] text-amber-300 font-mono">
+              💬 "A stone axe was an ancient tool for making things."
+            </div>
+          </div>
+
+          <!-- 5. Sculpture -->
+          <div class="bg-[#20160f] border border-amber-700/40 rounded-xl p-3.5 space-y-2 relative group hover:border-amber-500 transition">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl">🗿</span>
+                <div>
+                  <h4 class="font-cinzel font-bold text-amber-200 text-base">sculpture</h4>
+                  <span class="text-[11px] font-mono text-amber-400/80">/ˈskʌlp.tʃər/ • noun</span>
+                </div>
+              </div>
+              <button onclick="speakText('sculpture')" class="p-1.5 rounded bg-amber-500/20 text-amber-300 hover:bg-amber-500/40 text-xs">🔊</button>
+            </div>
+            <p class="text-xs text-stone-300 leading-relaxed">A work of art that is carved from stone, wood, or made from clay.</p>
+            <div class="p-2 rounded bg-[#150e09] border border-stone-800 text-[11px] text-amber-300 font-mono">
+              💬 "The stone head in the glass showcase is a sculpture."
+            </div>
+          </div>
+
+          <!-- 6. Necklace -->
+          <div class="bg-[#20160f] border border-amber-700/40 rounded-xl p-3.5 space-y-2 relative group hover:border-amber-500 transition">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl">📿</span>
+                <div>
+                  <h4 class="font-cinzel font-bold text-amber-200 text-base">necklace</h4>
+                  <span class="text-[11px] font-mono text-amber-400/80">/ˈnek.ləs/ • noun</span>
+                </div>
+              </div>
+              <button onclick="speakText('necklace')" class="p-1.5 rounded bg-amber-500/20 text-amber-300 hover:bg-amber-500/40 text-xs">🔊</button>
+            </div>
+            <p class="text-xs text-stone-300 leading-relaxed">A piece of jewellery that people wear around their neck.</p>
+            <div class="p-2 rounded bg-[#150e09] border border-stone-800 text-[11px] text-amber-300 font-mono">
+              💬 "This is a gold necklace. It was for wearing."
+            </div>
+          </div>
+
+          <!-- 7. Bowl -->
+          <div class="bg-[#20160f] border border-amber-700/40 rounded-xl p-3.5 space-y-2 relative group hover:border-amber-500 transition">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl">🥣</span>
+                <div>
+                  <h4 class="font-cinzel font-bold text-amber-200 text-base">bowl</h4>
+                  <span class="text-[11px] font-mono text-amber-400/80">/bəʊl/ • noun</span>
+                </div>
+              </div>
+              <button onclick="speakText('bowl')" class="p-1.5 rounded bg-amber-500/20 text-amber-300 hover:bg-amber-500/40 text-xs">🔊</button>
+            </div>
+            <p class="text-xs text-stone-300 leading-relaxed">A round container open at the top, used for holding food or liquids.</p>
+            <div class="p-2 rounded bg-[#150e09] border border-stone-800 text-[11px] text-amber-300 font-mono">
+              💬 "A clay bowl was for eating soup and drinking water."
+            </div>
+          </div>
+
+          <!-- 8. Knife -->
+          <div class="bg-[#20160f] border border-amber-700/40 rounded-xl p-3.5 space-y-2 relative group hover:border-amber-500 transition">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl">🗡️</span>
+                <div>
+                  <h4 class="font-cinzel font-bold text-amber-200 text-base">knife</h4>
+                  <span class="text-[11px] font-mono text-amber-400/80">/naɪf/ (plural: knives) • noun</span>
+                </div>
+              </div>
+              <button onclick="speakText('knife')" class="p-1.5 rounded bg-amber-500/20 text-amber-300 hover:bg-amber-500/40 text-xs">🔊</button>
+            </div>
+            <p class="text-xs text-stone-300 leading-relaxed">A sharp tool or weapon used for cutting meat, plants, and animal skins.</p>
+            <div class="p-2 rounded bg-[#150e09] border border-stone-800 text-[11px] text-amber-300 font-mono">
+              💬 "The prehistoric knife was for cutting meat."
+            </div>
+          </div>
+
+          <!-- 9. Coin -->
+          <div class="bg-[#20160f] border border-amber-700/40 rounded-xl p-3.5 space-y-2 relative group hover:border-amber-500 transition">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl">🪙</span>
+                <div>
+                  <h4 class="font-cinzel font-bold text-amber-200 text-base">coin</h4>
+                  <span class="text-[11px] font-mono text-amber-400/80">/kɔɪn/ • noun</span>
+                </div>
+              </div>
+              <button onclick="speakText('coin')" class="p-1.5 rounded bg-amber-500/20 text-amber-300 hover:bg-amber-500/40 text-xs">🔊</button>
+            </div>
+            <p class="text-xs text-stone-300 leading-relaxed">A small round piece of metal used as money for buying and trading goods.</p>
+            <div class="p-2 rounded bg-[#150e09] border border-stone-800 text-[11px] text-amber-300 font-mono">
+              💬 "An ancient coin was for buying and trading."
+            </div>
+          </div>
+
+          <!-- 10. Musical Instrument -->
+          <div class="bg-[#20160f] border border-amber-700/40 rounded-xl p-3.5 space-y-2 relative group hover:border-amber-500 transition">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl">🥁</span>
+                <div>
+                  <h4 class="font-cinzel font-bold text-amber-200 text-base">musical instrument</h4>
+                  <span class="text-[11px] font-mono text-amber-400/80">/ˈmjuː.zɪ.kəl ˈɪn.strə.mənt/ • noun</span>
+                </div>
+              </div>
+              <button onclick="speakText('musical instrument')" class="p-1.5 rounded bg-amber-500/20 text-amber-300 hover:bg-amber-500/40 text-xs">🔊</button>
+            </div>
+            <p class="text-xs text-stone-300 leading-relaxed">An object such as a drum or a flute that you play to produce musical sounds.</p>
+            <div class="p-2 rounded bg-[#150e09] border border-stone-800 text-[11px] text-amber-300 font-mono">
+              💬 "The prehistoric drum was a musical instrument for ceremonies."
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Grammar & Function Rules -->
+        <div id="cb-content-grammar" class="hidden space-y-4">
+          <div class="p-4 rounded-xl bg-[#221810] border border-amber-600/50 space-y-3">
+            <h4 class="font-cinzel text-amber-200 font-bold text-base">Grammar Focus: What was it for?</h4>
+            <p class="text-xs text-stone-300">
+              In Academy Stars 3 Unit 8, we ask about the purpose of ancient artifacts using the past tense pattern:
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 text-xs">
+              <div class="p-3 bg-[#150e0a] rounded-lg border border-amber-500/30">
+                <div class="text-amber-400 font-bold mb-1">Pattern 1: for + -ing verb</div>
+                <div class="font-mono text-amber-100">"What was it for?"</div>
+                <div class="font-mono text-stone-300 mt-1">→ "It was <strong>for wear<span class="text-amber-400">ing</span></strong> around the neck."</div>
+                <div class="font-mono text-stone-300 mt-0.5">→ "It was <strong>for cut<span class="text-amber-400">ting</span></strong> meat."</div>
+              </div>
+
+              <div class="p-3 bg-[#150e0a] rounded-lg border border-amber-500/30">
+                <div class="text-amber-400 font-bold mb-1">Pattern 2: used to + verb</div>
+                <div class="font-mono text-amber-100">"What did they use it for?"</div>
+                <div class="font-mono text-stone-300 mt-1">→ "People <strong>used it to make</strong> tools."</div>
+                <div class="font-mono text-stone-300 mt-0.5">→ "They <strong>used it to cook</strong> food."</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Detective Tips -->
+        <div id="cb-content-clues" class="hidden space-y-4 text-xs text-stone-300">
+          <div class="p-4 rounded-xl bg-[#221810] border border-amber-600/50 space-y-2">
+            <h4 class="font-cinzel text-amber-200 font-bold text-base">Detective Field Tips</h4>
+            <ul class="list-disc list-inside space-y-1.5 text-stone-300">
+              <li><strong>Look closely at materials:</strong> Prehistoric people used stone, clay, wood, animal bone, and early metals (gold and bronze).</li>
+              <li><strong>Check spelling carefully:</strong> Notice silent letters like the <strong class="text-amber-300">k</strong> in <em>knife</em> and the ending <strong class="text-amber-300">-ture</strong> in <em>sculpture</em>.</li>
+              <li><strong>Compound words:</strong> <em>Musical instrument</em> is two words! Don't forget the space.</li>
+              <li><strong>Need help?</strong> You can open this Casebook at any point during tasks without losing your answers!</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="bg-[#140e0a] border-t border-stone-800 p-3 sm:p-4 flex items-center justify-between">
+        <span class="text-xs text-stone-400">Detective Handbook AS3-U8</span>
+        <button type="button" onclick="closeCasebookModal()" aria-label="Close" class="px-5 py-2 bg-amber-600 hover:bg-amber-500 text-amber-950 font-bold text-xs rounded-xl shadow transition">
+          Return to Investigation ✓
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FLOATING CONFETTI CONTAINER -->
+  <div id="confetti-container" class="fixed inset-0 pointer-events-none z-50 overflow-hidden"></div>
+
+  <!-- SCRIPT LOGIC -->
+  
+  <script src="./app.js"></script>
+</body>
+</html>
