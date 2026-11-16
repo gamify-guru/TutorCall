@@ -173,6 +173,21 @@ textarea::placeholder {
   .briefing-top .p-5,
   .briefing-top .sm\:p-5,
   .briefing-top .p-4 { padding: 0.7rem 0.85rem !important; }
+  /* Keep the Start Mission control above the watermark on short desktops */
+  #section-briefing.space-y-6 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 0.75rem !important;
+  }
+  main#main { padding-top: 1rem !important; }
+  .audio-brief-card > .flex.items-start > div > p.text-xs { display: none; }
+  .audio-brief-card .track-player p { display: none; }
+  .audio-brief-card .track-player { margin-top: 0.45rem !important; }
+  .crime-scene-hint {
+    flex-wrap: nowrap;
+    margin-top: 0.4rem;
+    padding: 0.35rem 0 0;
+    gap: 0.5rem;
+  }
+  .crime-scene-hint button { padding: 0.35rem 0.85rem; flex-shrink: 0; }
 }
 @media (max-width: 640px) {
   .briefing-top h2 { font-size: 1.55rem !important; }
@@ -181,26 +196,143 @@ textarea::placeholder {
   .briefing-top > div.space-y-4 > * + * { margin-top: 0.5rem !important; }
 }
 
-/* Keep crime-scene hotspots above the watermark on the first screen */
+/* Keep the crime scene 16:9 so hotspot percentages match the art, even on short screens */
 #section-briefing {
   padding-bottom: 5rem;
   scroll-margin-bottom: 5rem;
 }
-#crime-scene-img {
+.crime-scene-wrap {
+  position: relative;
+  width: min(100%, calc(min(640px, 100dvh - 32rem) * 16 / 9));
   max-height: min(640px, calc(100dvh - 32rem));
+  aspect-ratio: 16 / 9;
+  margin-inline: auto;
+  overflow: hidden;
 }
-@media (max-height: 900px) {
-  #crime-scene-img {
-    max-height: calc(100dvh - 32rem);
-  }
+#crime-scene-img {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+  display: block;
 }
+.crime-scene-hint {
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem 0;
+}
+.hotspot {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  cursor: pointer;
+  appearance: none;
+}
+.hotspot:focus-visible {
+  outline: 2px solid #fde68a;
+  outline-offset: 3px;
+  border-radius: 999px;
+}
+.hotspot-dot {
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #f59e0be6;
+  color: #1a0e05;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: 0 0 0 2px #fff, 0 2px 8px rgba(0,0,0,.45);
+}
+.hotspot-label {
+  position: absolute;
+  z-index: 21;
+  pointer-events: none;
+  white-space: nowrap;
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.3rem;
+  border: 1px solid rgba(245, 158, 11, 0.55);
+  background: #140e0bf2;
+  color: #fde68a;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.15;
+  box-shadow: 0 2px 6px rgba(0,0,0,.4);
+}
+.hotspot-label-wide {
+  white-space: normal;
+  width: 4.7rem;
+  text-align: center;
+}
+.hotspot[data-at="top"] .hotspot-label {
+  left: 50%;
+  bottom: calc(100% + 5px);
+  transform: translateX(-50%);
+}
+.hotspot[data-at="bottom"] .hotspot-label {
+  left: 50%;
+  top: calc(100% + 5px);
+  transform: translateX(-50%);
+}
+.hotspot[data-at="left"] .hotspot-label {
+  right: calc(100% + 5px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+.hotspot[data-at="right"] .hotspot-label {
+  left: calc(100% + 5px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+.hotspot[data-at="top-left"] .hotspot-label {
+  right: calc(100% + 5px);
+  bottom: calc(100% + 3px);
+  transform: none;
+}
+.hotspot[data-at="top-right"] .hotspot-label {
+  left: calc(100% + 5px);
+  bottom: calc(100% + 3px);
+  transform: none;
+}
+.hotspot[data-at="bottom-left"] .hotspot-label {
+  right: calc(100% + 5px);
+  top: calc(100% + 3px);
+  transform: none;
+}
+.hotspot[data-at="bottom-right"] .hotspot-label {
+  left: calc(100% + 5px);
+  top: calc(100% + 3px);
+  transform: none;
+}
+
 @media (max-width: 640px) {
-  #crime-scene-img {
-    max-height: min(420px, calc(100dvh - 14rem));
-  }
-  /* Keep first-screen hotspots from sitting under the bar; scene is reached by scroll */
   .crime-scene-wrap {
-    margin-top: 5.5rem;
+    width: 100%;
+    max-height: none;
+    margin-top: 0;
+  }
+  .crime-scene-hint {
+    flex-wrap: wrap;
+    padding: 0.5rem 0 0;
+  }
+  .hotspot-label,
+  .hotspot-dot {
+    font-size: 10px;
+  }
+  .hotspot,
+  .hotspot-dot {
+    width: 1.7rem;
+    height: 1.7rem;
+  }
+  .hotspot-label-wide {
+    width: 4.2rem;
   }
 }
 
