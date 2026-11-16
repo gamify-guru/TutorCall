@@ -1,0 +1,336 @@
+/* TutorCall overlays: watermark clearance, reset, focus, contrast, modal fit */
+
+html.ttc-wm-bar-pad-bottom:root,
+html.ttc-wm-bar-pad-bottom body.ttc-wm-bar-pad-bottom,
+html.ttc-wm-bar-pad-bottom body {
+  padding-bottom: 0 !important;
+}
+html, body, #root {
+  min-height: 100%;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+body { padding-bottom: 0; }
+@media print {
+  body { padding-bottom: 0; }
+}
+
+/* One padding owner: the lesson shell, so the bar never stacks a blank strip */
+#root > .min-h-screen,
+#root > .min-h-svh,
+#root > .relative.min-h-svh {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: 52px;
+  box-sizing: border-box;
+}
+
+#tc-watermark,
+.tc-watermark,
+[data-tc-watermark],
+#ttc-wm-bar,
+.ttc-wm-bar-bottom {
+  z-index: 20 !important;
+}
+
+header.fixed {
+  z-index: 40;
+}
+
+[tabindex="-1"]:focus,
+[tabindex="-1"]:focus-visible {
+  outline: none;
+}
+
+.ttc-reset {
+  background: #f2a12c;
+  color: #062228;
+  box-shadow: inset 0 0 0 2px #8a5a12;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+.ttc-reset:hover,
+.ttc-reset:focus-visible {
+  background: #ffbf4d;
+  outline: 3px solid #f2a12c;
+  outline-offset: 2px;
+}
+
+/* Overlays must clear the watermark bar, but keep each modal's own placement. */
+#root .fixed.inset-0.z-50 {
+  width: 100vw;
+  max-width: 100%;
+  left: 0;
+  right: 0;
+  overflow-x: hidden;
+  padding-bottom: 3.4rem;
+  box-sizing: border-box;
+}
+
+/* Cover CTA and “scroll down” sit above the bar */
+#mission {
+  padding-bottom: 1.25rem;
+}
+
+/* Footer ink on the dark night ground — avoid washed /45 /50 utilities */
+#root footer,
+#root footer p,
+#root footer span,
+#root footer button:not(.ttc-reset) {
+  color: #f4efe4;
+}
+#root footer .ttc-reset {
+  color: #062228;
+}
+
+/* Course audio player: solid text on night-900 */
+.tc-course-audio,
+.tc-course-audio p,
+.tc-course-audio h3,
+.tc-course-audio li,
+.tc-course-audio button {
+  color: #f4efe4;
+}
+.tc-course-audio button.bg-sun-500,
+.tc-course-audio button[class*="bg-sun-500"] {
+  color: #062228;
+}
+
+/* Low-contrast paper/ripple utilities on dark surfaces */
+#root .text-paper-100\/75,
+#root .text-paper-100\/70,
+#root .text-paper-100\/60,
+#root .text-paper-100\/50,
+#root .text-paper-100\/45,
+#root .text-paper-100\/40,
+#root .text-paper-100\/30,
+#root .text-ripple-300\/80,
+#root .text-paper-100\/80 {
+  color: #e9e0d0;
+}
+
+/* Homework textareas: readable ink on night */
+#homework textarea {
+  color: #f4efe4;
+  background: #071c22;
+}
+
+/* Don't let the sticky shopping list sit under the header + bar overlap on short screens */
+@media (max-width: 1023px) {
+  #task3 .lg\:sticky {
+    position: static;
+  }
+}
+
+/* Solid paper: the gold radial overlays were being read as an opaque background */
+.paper {
+  background-image: none !important;
+  background-color: #f6efe0 !important;
+  color: #1c160e;
+}
+.paper .text-ink-500,
+.paper .text-ink-700,
+.paper h3 {
+  color: #1c160e;
+}
+.paper .bg-night-900\/85,
+.paper [class*="bg-night-9"] {
+  background-color: #0a2c34 !important;
+  color: #ffc85a !important;
+}
+
+/* Translucent Tailwind tints → solid, readable surfaces */
+#root .bg-sun-500\/15,
+#root .bg-sun-500\/20 {
+  background-color: #1a160c !important;
+  color: #ffc85a !important;
+}
+#root .bg-ink-900\/10 {
+  background-color: #ece4d2 !important;
+  color: #1c160e !important;
+}
+#root .bg-leaf-400\/10,
+#root .bg-leaf-400\/15,
+#root .bg-leaf-500\/15,
+#root .bg-leaf-500\/10 {
+  background-color: #e6f4ea !important;
+}
+#root .bg-leaf-400\/10,
+#root .bg-leaf-400\/15,
+#root .bg-leaf-500\/15,
+#root .bg-leaf-500\/10,
+#root .bg-leaf-400\/10 .text-ink-900,
+#root .bg-leaf-500\/15 .text-ink-900 {
+  color: #1c160e;
+}
+#root .bg-coral-500\/5,
+#root .bg-coral-500\/10 {
+  background-color: #fde8e3 !important;
+}
+#root .bg-sun-400\/20,
+#root .bg-sun-400\/30 {
+  background-color: #ffe8b8 !important;
+  color: #1c160e;
+}
+#root .bg-berry-500\/20,
+#root .bg-berry-500\/15 {
+  background-color: #f3e6fa !important;
+  color: #1c160e;
+}
+#root .bg-ripple-400\/25,
+#root .bg-ripple-400\/20 {
+  background-color: #d7f3f0 !important;
+  color: #1c160e;
+}
+#root .bg-white\/50,
+#root .bg-white\/55,
+#root .bg-white\/60,
+#root .bg-white\/65 {
+  background-color: #fffaf3 !important;
+}
+
+/* Course player: opaque night + visible outline buttons */
+.tc-course-audio {
+  background-color: #0a2c34 !important;
+  color: #f4efe4 !important;
+}
+.tc-course-audio button:not([class*="bg-sun-500"]) {
+  color: #ffe7a8 !important;
+  background-color: #12343c !important;
+  border: 2px solid #e0b14a !important;
+}
+.tc-course-audio button[class*="bg-sun-500"] {
+  color: #062228 !important;
+  background-color: #f2a12c !important;
+}
+
+/* Gradient title: solid readable gold fallback (keeps clip if supported) */
+#mission h1 span.bg-clip-text,
+#mission h1 span.text-transparent {
+  color: #ffc85a !important;
+  -webkit-text-fill-color: #ffc85a !important;
+  background-image: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+}
+
+/* Polaroid caption on the photo vs caption on the cream frame */
+#mission .font-hand.absolute {
+  color: #fff8e8 !important;
+  background-color: rgba(6, 34, 40, 0.82) !important;
+  padding: 0.1em 0.45em;
+  border-radius: 8px;
+  text-shadow: none;
+}
+#mission p.font-hand {
+  color: #1c160e !important;
+  text-shadow: none;
+  background: transparent !important;
+}
+#mission .stamp,
+#mission [class*="stamp"] {
+  color: #7a1e12 !important;
+  background-color: #f6efe0 !important;
+}
+
+/* Final + homework option buttons */
+#final .paper button {
+  color: #1c160e;
+}
+#final .text-ink-500,
+#homework .text-ink-500,
+#final .text-ink-700,
+#homework .text-ink-700 {
+  color: #3f3428 !important;
+}
+#final .bg-night-900\/90,
+#final .bg-night-900,
+#homework .bg-night-950\/80,
+#homework .bg-night-900 {
+  background-color: #0a2c34 !important;
+  color: #f4efe4 !important;
+}
+
+/* Berry homework index only — listen "Mum" bubbles stay light */
+#homework .bg-berry-500\/20 {
+  background-color: #3a1848 !important;
+  color: #f3d9ff !important;
+}
+#task2 .bg-berry-500\/20,
+#task2 .bg-berry-500\/15 {
+  background-color: #f3e6fa !important;
+  color: #1c160e !important;
+}
+#task3 [class*="font-display"] {
+  color: inherit;
+}
+#task3 .paper [class*="title"],
+#task3 .paper h3,
+#task3 .paper .font-display {
+  color: #1c160e;
+}
+
+
+/* Shopping list and item rows: solid cream, dark ink, strong coral counts */
+#task3 .paper {
+  background-color: #f6efe0 !important;
+  background-image: none !important;
+}
+#task3 .paper h3 {
+  color: #1c160e !important;
+}
+#task3 .font-hand {
+  color: #8a160c !important;
+}
+#task3 li, #task3 li span {
+  color: #1c160e;
+}
+
+/* Homework visible immediately (no stalled whileInView opacity 0) */
+#homework, #homework *,
+#final, #final * {
+  opacity: 1 !important;
+}
+
+/* Course player stays an opaque island on mobile */
+#task2 .tc-course-audio,
+.tc-course-audio {
+  background-color: #0a2c34 !important;
+  background-image: none !important;
+  isolation: isolate;
+  position: relative;
+  z-index: 1;
+}
+.tc-course-audio p,
+.tc-course-audio h3,
+.tc-course-audio li {
+  color: #f4efe4 !important;
+}
+
+/* Homework chips and berry labels on the dark dossier */
+#homework .text-berry-500,
+#homework [class*="text-berry-500"] {
+  color: #f8e7ff !important;
+}
+#homework .bg-berry-500\/20,
+#homework [class*="bg-berry-500"] {
+  background-color: #4a1d5c !important;
+  color: #f8e7ff !important;
+}
+#homework button.bg-night-800,
+#homework .bg-night-800 {
+  background-color: #0a2c34 !important;
+  color: #e9f7f4 !important;
+  border-color: #4fd1c5 !important;
+}
+/* Do not paint every homework button as dark ink */
+#homework button:not([class*="bg-night"]):not([class*="bg-sun"]):not([class*="bg-leaf"]):not([class*="bg-berry"]):not(.ttc-reset) {
+  color: #e9f7f4;
+}
+
+/* Rules numbered badges: brighter gold on solid night */
+.paper [class*="bg-night-9"] {
+  background-color: #062228 !important;
+  color: #ffe9a8 !important;
+}
