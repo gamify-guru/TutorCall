@@ -1,0 +1,232 @@
+/* TutorCall overlays: watermark clearance, reset, focus, contrast, modal fit */
+
+html.ttc-wm-bar-pad-bottom:root,
+html.ttc-wm-bar-pad-bottom body.ttc-wm-bar-pad-bottom,
+html.ttc-wm-bar-pad-bottom body {
+  padding-bottom: 0 !important;
+}
+html.ttc-wm-bar-pad-top:root,
+html.ttc-wm-bar-pad-top body.ttc-wm-bar-pad-top,
+html.ttc-wm-bar-pad-top body {
+  padding-top: 0 !important;
+}
+html, body {
+  min-height: 100%;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+body {
+  padding-bottom: 0;
+  margin: 0;
+  background: #0b0907;
+}
+@media print {
+  body { padding-bottom: 0; }
+}
+
+/* One padding owner: main, so the bar never stacks a blank strip */
+main#main {
+  padding-bottom: 4.75rem;
+  box-sizing: border-box;
+}
+
+#tc-watermark,
+.tc-watermark,
+[data-tc-watermark],
+#ttc-wm-bar,
+.ttc-wm-bar-bottom {
+  z-index: 25 !important;
+}
+
+header.sticky { z-index: 40; }
+#casebook-modal { z-index: 70; }
+
+[tabindex="-1"]:focus,
+[tabindex="-1"]:focus-visible {
+  outline: none;
+}
+
+.ttc-reset,
+button.ttc-reset,
+.app-footer .ttc-reset {
+  background: #f2b84b;
+  color: #0d0805;
+  box-shadow: inset 0 0 0 2px #a87323;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  border: 0;
+  border-radius: 999px;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 800;
+  display: inline-flex;
+}
+.ttc-reset:hover { filter: brightness(1.06); }
+.ttc-reset:focus-visible { outline: 2px solid #fde68a; outline-offset: 2px; }
+
+.app-footer {
+  text-align: center;
+  padding: 0.75rem 1rem 4.5rem;
+}
+
+/* Gold title: gradient + transparent fill fails contrast auditor */
+.gold-text {
+  color: #fde68a !important;
+  -webkit-text-fill-color: #fde68a !important;
+  background-image: none !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+}
+
+/* Opaque sticky header (was /95, which multiplies contrast) */
+header.sticky {
+  background: #120e0b !important;
+}
+
+/* Stronger muted text on dark surfaces */
+.text-stone-400 { color: #c4b8a8 !important; }
+.text-stone-300 { color: #ddd3c4 !important; }
+.text-stone-500 { color: #b3a798 !important; }
+.text-amber-200\/90 { color: #fde68a !important; }
+.text-amber-400\/90 { color: #fbbf24 !important; }
+
+/* Placeholders on dark inputs */
+input::placeholder,
+textarea::placeholder {
+  color: #c4b8a8 !important;
+  opacity: 1;
+}
+
+/* Parchment / cream cards keep dark ink */
+.parchment-card,
+.parchment-card p,
+.parchment-card span,
+.parchment-card label,
+.parchment-card h3,
+.parchment-card .text-stone-900,
+.parchment-card .text-stone-700,
+.parchment-card .text-stone-600,
+.parchment-card .text-amber-800 {
+  color: #261c12;
+}
+.parchment-card .text-stone-700 { color: #3f3326 !important; }
+.parchment-card .text-stone-600 { color: #4a3d2e !important; }
+.parchment-card .text-amber-800 { color: #7a4e0a !important; }
+.parchment-card .text-amber-950 { color: #3f2a08 !important; }
+.parchment-card select {
+  color: #261c12;
+  background: #f6edd8;
+}
+
+/* Audio player */
+.track-player audio {
+  width: 100%;
+  height: 2.5rem;
+  accent-color: #d97706;
+}
+
+/* Modal should fit short viewports and not sit under the bar */
+#casebook-modal {
+  align-items: flex-start;
+  padding-top: 1rem;
+  padding-bottom: 3.5rem;
+}
+#casebook-modal > div {
+  max-height: min(90vh, calc(100dvh - 5rem));
+}
+
+/* Short screens: keep last controls above the bar */
+@media (max-width: 640px) {
+  main#main {
+    padding-bottom: 5.75rem;
+  }
+  header.sticky .ttc-reset span.ttc-reset-label {
+    /* keep full label; it wraps via flex */
+  }
+}
+
+@media (max-height: 700px) {
+  main#main { padding-bottom: 5.25rem; }
+}
+
+/* Prevent floating inspect box overlapping the bar */
+#quick-inspect-box {
+  scroll-margin-bottom: 5rem;
+}
+
+
+
+/* Compact the tall briefing intro so the crime scene isn't pushed under the fold */
+@media (max-height: 900px) {
+  .briefing-top { gap: 0.85rem !important; }
+  .briefing-top h2 {
+    font-size: 1.65rem !important;
+    line-height: 1.15 !important;
+  }
+  .briefing-top > div.space-y-4 > * + * { margin-top: 0.55rem !important; }
+  .briefing-lead { display: none; }
+  .briefing-objectives { display: none; }
+  .briefing-top .p-5,
+  .briefing-top .sm\:p-5,
+  .briefing-top .p-4 { padding: 0.7rem 0.85rem !important; }
+}
+@media (max-width: 640px) {
+  .briefing-top h2 { font-size: 1.55rem !important; }
+  .briefing-lead { display: none; }
+  .briefing-objectives { display: none; }
+  .briefing-top > div.space-y-4 > * + * { margin-top: 0.5rem !important; }
+}
+
+/* Keep crime-scene hotspots above the watermark on the first screen */
+#section-briefing {
+  padding-bottom: 5rem;
+  scroll-margin-bottom: 5rem;
+}
+#crime-scene-img {
+  max-height: min(640px, calc(100dvh - 32rem));
+}
+@media (max-height: 900px) {
+  #crime-scene-img {
+    max-height: calc(100dvh - 32rem);
+  }
+}
+@media (max-width: 640px) {
+  #crime-scene-img {
+    max-height: min(420px, calc(100dvh - 14rem));
+  }
+  /* Keep first-screen hotspots from sitting under the bar; scene is reached by scroll */
+  .crime-scene-wrap {
+    margin-top: 5.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .audio-brief-card { padding: 0.7rem 0.8rem !important; }
+  .audio-brief-card .p-3 { padding: 0.4rem !important; }
+  .audio-brief-card svg.w-8 { width: 1.15rem; height: 1.15rem; }
+  .audio-brief-card > .flex.items-start { gap: 0.6rem; }
+  .audio-brief-card p.text-xs { display: none; }
+  .audio-brief-card .track-player p { display: none; }
+  .audio-brief-card .track-player { margin-top: 0.4rem !important; }
+  .audio-brief-card audio { margin-bottom: 0; }
+}
+
+/* Contrast: stamp ink on dark wood, and solid fill for gradient CTAs */
+.stamp-badge {
+  color: #fca5a5 !important;
+  border-color: #f87171 !important;
+}
+.stamp-solved {
+  color: #86efac !important;
+  border-color: #4ade80 !important;
+}
+button[onclick="startMission()"] {
+  background-image: none !important;
+  background-color: #e8a426 !important;
+  color: #1a0e05 !important;
+  -webkit-text-fill-color: #1a0e05 !important;
+}
