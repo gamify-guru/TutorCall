@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ravenhill Academy — Скетчбук знает больше | Интерактивный урок A2–B1</title>
+  <meta name="description" content="Детективный онлайн-урок английского A2–B1, подготовка к ЕГЭ. Расшифруй секретную запись №07 из Ravenhill Academy." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect fill='%2307070b' width='16' height='16' rx='3'/%3E%3Ctext x='8' y='12' text-anchor='middle' font-size='11' fill='%23c9a86a'%3EΨ%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./extras.css" />
+  <script src="../_shared/watermark.js" data-mode="bar" data-position="bottom" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="topbar-brand" href="#top">
+      <span class="psi" aria-hidden="true">Ψ</span>
+      <span>
+        <span class="brand-kicker font-mono">Ravenhill Academy</span>
+        <span class="brand-sub font-mono">Файл 07 · Profiles</span>
+      </span>
+    </a>
+    <div class="topbar-meta">
+      <button type="button" class="chip" id="timer-chip" aria-label="Таймер">⏱ 45:00</button>
+      <span class="chip" id="xp-chip">XP 0</span>
+      <span class="chip" id="rank-chip">Стажёр архива</span>
+      <span class="chip" id="clue-chip">Улики 0/6</span>
+      <button type="button" class="btn" id="help-btn">Карты агента</button>
+      <button type="button" class="btn ttc-reset" id="reset-btn">↺ Начать заново</button>
+    </div>
+  </header>
+
+  <nav class="nav-dots" aria-label="Навигация по уроку">
+    <a href="#brief">Бриф</a>
+    <a href="#audio">Видео</a>
+    <a href="#m1">01</a>
+    <a href="#m2">02</a>
+    <a href="#m3">03</a>
+    <a href="#final">Финал</a>
+    <a href="#hw">ДЗ</a>
+  </nav>
+
+  <main id="main">
+    <header class="hero" id="top">
+      <div class="hero-bg">
+        <img src="images/hero.jpg" alt="Героиня со скетчбуком в готической библиотеке Ravenhill Academy" />
+      </div>
+      <div class="hero-inner">
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+          <span class="pill rec"><span class="dot"></span> REC · Секретная запись 07</span>
+          <span class="pill">A2–B1 · ЕГЭ Listening · 45 мин</span>
+        </div>
+        <p class="kicker" style="margin-top:1.2rem">Ravenhill Academy · Profiles · Дело №07</p>
+        <h1 class="hero-title">Скетчбук<br>знает <em>больше</em></h1>
+        <p class="lede">Она заметила то, что проигнорировали все. Посмотри видеозапись и прослушай её как <strong>седьмой участник</strong> — и вылови минимум <strong>4 вещи, которые она подразумевает, но не говорит прямо</strong>.</p>
+        <div style="margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:.7rem">
+          <a class="btn btn-gold" href="#brief">Начать расследование</a>
+          <button type="button" class="btn" id="help-btn-hero">Карты агента</button>
+        </div>
+        <div class="stat-grid">
+          <div><strong id="stat-timer">45:00</strong><span>на всё дело</span></div>
+          <div><strong>4</strong><span>миссии + финал</span></div>
+          <div><strong>6</strong><span>скрытых улик</span></div>
+          <div><strong id="stat-rank">Стажёр архива</strong><span>твоё звание</span></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>DO NOT TRUST THE EASY STORY · THE SKETCHBOOK KNOWS MORE · NOT ENOUGH, NOT YET · MAIN HALL · DO NOT TRUST THE EASY STORY · THE SKETCHBOOK KNOWS MORE · NOT ENOUGH, NOT YET · MAIN HALL · </span>
+        <span>DO NOT TRUST THE EASY STORY · THE SKETCHBOOK KNOWS MORE · NOT ENOUGH, NOT YET · MAIN HALL · DO NOT TRUST THE EASY STORY · THE SKETCHBOOK KNOWS MORE · NOT ENOUGH, NOT YET · MAIN HALL · </span>
+      </div>
+    </div>
+
+    <section id="brief" class="wrap" tabindex="-1">
+      <p class="kicker">Брифинг · 0–5 мин</p>
+      <h2>Вчера в <em>Main Hall</em> что-то случилось. Отчёт уже готов. Он врёт.</h2>
+      <div class="grid-3">
+        <article class="card gold-edge span-2">
+          <p class="kicker">Сюжетный вход</p>
+          <p style="margin:1rem 0 0;font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-style:italic;color:#f2ead6;line-height:1.3">«Нас позвали в главный зал так, будто это честь. Я смотрела на лица, а не на речь…»</p>
+          <p class="sub">В академию Ravenhill прибыли шесть участников церемонии. Была речь. Был приз. Были аплодисменты. А потом — тишина, которой не должно быть. Одна ученица записала видео и наговорила 16 строк. Официальный отчёт называет вечер «безупречным». Её скетчбук — нет.</p>
+          <dl style="margin-top:1.1rem;padding:0.9rem 1rem;border:1px solid var(--line);border-radius:0.8rem;background:rgba(0,0,0,0.3)">
+            <div class="meta-row"><dt>Объект</dt><dd>Ученица, тёмные волосы, скетчбук с эмблемой Ψ</dd></div>
+            <div class="meta-row"><dt>Место</dt><dd>Готическая библиотека · Зал PROFILES</dd></div>
+            <div class="meta-row"><dt>Статус</dt><dd style="color:var(--danger)">Свидетель. Возможно, следующая цель.</dd></div>
+            <div class="meta-row"><dt>Риск</dt><dd>Допрос назначен. Время — 45 минут.</dd></div>
+          </dl>
+          <div style="text-align:center"><span class="tape">Совершенно секретно</span></div>
+        </article>
+        <article class="card">
+          <h3>Твоя роль: седьмой</h3>
+          <p class="sub">Тебя не было в зале — поэтому ты видишь чище. Ты <strong style="color:#e8d5a8">расшифровщик записи</strong>: смотришь видео, сверяешь с картами агента и собираешь улики из того, что <em>не сказано прямо</em>.</p>
+          <p class="ex" style="margin-top:0.9rem;padding:0.7rem 0.8rem;background:rgba(0,0,0,0.3);border-radius:0.6rem;color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.5">Правило №1: никому не показывай скетчбук. Правило №2: верь лицам, а не речам.</p>
+        </article>
+        <article class="card danger-edge">
+          <h3>Главная миссия</h3>
+          <p class="sub">Вылови минимум <strong style="color:#fff">4 из 6 вещей</strong>, которые героиня подразумевает, но не говорит вслух.</p>
+          <p class="sub">Все главы, миссии и домашка открыты сразу — проходи в любом порядке. Улики открываются, когда задание решено верно.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="audio" class="band" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Вещдок · видеозапись 07</p>
+        <h2>Слушай как детектив. <em>Не читай.</em></h2>
+        <p class="sub">Текст специально спрятан ниже в сейфе. Сначала — только глаза и уши: так работают задания ЕГЭ Listening. Нажми play — это видео свидетеля.</p>
+        <div class="video-block">
+          <div>
+            <figure class="video-stage">
+              <video id="main-video" controls playsinline preload="metadata" poster="images/poster.jpg">
+                <source src="video/recording-07.mp4" type="video/mp4" />
+              </video>
+            </figure>
+            <p class="hint" id="play-count" style="margin-top:0.6rem">просмотрено раз: 0</p>
+            <div class="listen-passes">
+              <div><strong>1-й раз</strong><span style="display:block;margin-top:0.25rem;color:var(--muted);font-size:0.86rem">Только смысл: кто? где? опасно?</span></div>
+              <div><strong>2-й раз</strong><span style="display:block;margin-top:0.25rem;color:var(--muted);font-size:0.86rem">Детали: лица, приз, отчёт</span></div>
+              <div><strong>3-й раз</strong><span style="display:block;margin-top:0.25rem;color:var(--muted);font-size:0.86rem">Подтекст: что скрывает?</span></div>
+            </div>
+          </div>
+          <article class="card gold-edge">
+            <p class="kicker">Тактика прослушивания</p>
+            <ul class="tactics">
+              <li>Не ставь на паузу каждые 5 секунд — в ЕГЭ запись звучит 1 раз.</li>
+              <li>Сначала читай утверждения, подчёркивай имена и not / never.</li>
+              <li>Услышал то же слово, что в вопросе? Осторожно — это часто ловушка. Ищи синоним.</li>
+            </ul>
+            <p style="margin-top:1rem;padding:0.8rem 0.9rem;border-radius:0.7rem;background:rgba(201,168,106,0.1);color:var(--gold-soft);font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.5">Слова-маяки записи: faces · prize · missing · smiles · easy story · will sound · not yet</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="help-inline" class="wrap">
+      <p class="kicker">Карты агента · 10</p>
+      <h2>Подсказки, лексика и грамматика</h2>
+      <p class="sub">Карты доступны всегда. Открой нужную вкладку до или во время миссий.</p>
+      <div class="tabs" id="help-tabs" role="tablist"></div>
+      <div class="help-grid" id="help-grid"></div>
+    </section>
+
+    <section id="m1" class="band" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Миссия 01 · Первый прослуш</p>
+        <h2>Задание 1.1 · Формат ЕГЭ · 10 утверждений</h2>
+        <p class="sub">Посмотри видео и отметь True / False / Not Stated. Не додумывай: если дня, времени или факта в записи нет — это Not Stated.</p>
+        <div class="task-video" data-video-slot></div>
+        <div id="tf-list"></div>
+        <div class="actions">
+          <button type="button" class="btn btn-gold" id="tf-check">Проверить</button>
+          <span class="score" id="tf-score"></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="m2" class="wrap" tabindex="-1">
+      <p class="kicker">Миссия 02 · Слова-ключи</p>
+      <h2>Задание 2.1 · Соедини слово и перевод · 8 пар</h2>
+      <p class="sub">Нажми слово слева, затем его перевод справа. Пары запоминаются. Сброс урока перемешает их заново.</p>
+      <div class="task-video" data-video-slot></div>
+      <div class="match" id="match-box"></div>
+      <p class="score" id="match-score"></p>
+
+      <h2 style="margin-top:2.4rem">Задание 2.2 · Восстанови запись · 8 пропусков</h2>
+      <p class="sub">Нажми на слово из банка — оно подставится в активный пропуск. Или печатай сам(а).</p>
+      <div class="bank" id="gap-bank"></div>
+      <div id="gap-list"></div>
+      <div class="actions">
+        <button type="button" class="btn btn-gold" id="gap-check">Проверить</button>
+        <span class="score" id="gap-score"></span>
+      </div>
+    </section>
+
+    <section id="m3" class="band" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Миссия 03 · Что она НЕ говорит</p>
+        <h2>Задание 3.1 · Что она НЕ говорит · 6 шифровок</h2>
+        <p class="sub">Прочитай цитату и выбери скрытый смысл. Варианты перемешаны; правильный ответ проверяется по тексту, а не по номеру.</p>
+        <div class="task-video" data-video-slot></div>
+        <div id="mcq-list"></div>
+        <div class="actions">
+          <button type="button" class="btn btn-gold" id="mcq-check">Проверить</button>
+          <span class="score" id="mcq-score"></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="clues" class="wrap">
+      <p class="kicker">Доска улик · прогресс дела</p>
+      <h2>Что она подразумевает? <em id="clue-title-count">0/6</em></h2>
+      <p class="sub">Цель: минимум 4 улики к финалу. Карточки открываются, когда ты верно решаешь связанные задания. Раздел виден всегда.</p>
+      <div class="clue-grid" id="clue-grid"></div>
+    </section>
+
+    <section id="safe" class="band">
+      <div class="wrap">
+        <p class="kicker">Сейф · расшифровка</p>
+        <h2>Письменная версия скрыта</h2>
+        <p class="sub">Сейф можно открыть в любой момент. Совет архива: сначала пройди миссии 01–02 на слух — так улики ценятся выше.</p>
+        <div class="safe" id="safe-box">
+          <ol class="transcript-list blurred" id="transcript-list" aria-hidden="true"></ol>
+          <div class="safe-lock" id="safe-lock">
+            <div class="kicker">Досье опечатано</div>
+            <div class="font-display" style="font-size:1.6rem;color:var(--cream)">16 строк свидетеля</div>
+            <button type="button" class="btn btn-gold" id="safe-open">Взломать сейф</button>
+          </div>
+        </div>
+        <div class="actions" id="safe-tools" hidden>
+          <button type="button" class="btn" id="safe-ru">Показать перевод</button>
+          <button type="button" class="btn" id="safe-hide">Скрыть</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="choice" class="wrap">
+      <p class="kicker">Момент выбора · перед финалом</p>
+      <h2>Кому ты веришь: <em>отчёту</em> или <em>скетчбуку?</em></h2>
+      <p class="sub">Выбор не блокирует финал, но меняет тон последнего задания. Отчёт — лёгкий путь отличника. Скетчбук — путь детектива.</p>
+      <div class="choice-grid">
+        <button type="button" class="side-btn report" id="side-report" aria-pressed="false">
+          <span class="kicker" style="color:var(--blue)">Путь А · Легкий</span>
+          <h3 style="margin-top:0.6rem">Верю отчёту</h3>
+          <p>«Всё было безупречно. Девочка преувеличивает». Твоё финальное задание: найди 3 места, где запись <em>противоречит</em> отчёту, — и объясни, почему отчёт всё равно прав. Сложно? Вот именно.</p>
+        </button>
+        <button type="button" class="side-btn" id="side-sketch" aria-pressed="false">
+          <span class="kicker">Путь Б · Путь правды</span>
+          <h3 style="margin-top:0.6rem">Верю скетчбуку</h3>
+          <p>«Do not trust the easy story». Твоё финальное задание: составь протокол из 4 ответов и защити свидетеля тремя цитатами. Так поступает седьмой участник.</p>
+        </button>
+      </div>
+      <p class="sub" id="side-note" hidden></p>
+    </section>
+
+    <section id="final" class="band" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Финал · Протокол №7</p>
+        <h2>Задание 4.1 · Протокол №7 · 4 коротких ответа на английском</h2>
+        <p class="sub">Пиши 1–2 предложения сам(а). Проверка ищет ключевые слова; образец откроется только после сдачи.</p>
+        <div class="task-video" data-video-slot></div>
+        <div id="proto-list"></div>
+        <div class="actions">
+          <button type="button" class="btn btn-gold" id="proto-check">Сдать протокол</button>
+          <span class="score" id="proto-score"></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="reflect" class="wrap">
+      <p class="kicker">Рефлексия · 42–45 мин</p>
+      <h2>Дело №07 · Приговор архива</h2>
+      <div class="card gold-edge" style="margin-top:1.2rem">
+        <p class="kicker" id="reflect-rank">Стажёр архива</p>
+        <p class="sub" id="reflect-text">Пройди миссии и собери улики — архив вынесет звание.</p>
+        <p class="score" id="reflect-xp"></p>
+      </div>
+    </section>
+
+    <section id="hw" class="band" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Homework · Secret envelope</p>
+        <h2>Домашнее задание · запечатанный конверт</h2>
+        <p class="sub">Four tasks in English, different from the classwork. Write your own sentences. You may seal the envelope when Part C has 40+ words and Part D has 20+ words.</p>
+
+        <article class="card" style="margin-top:1.3rem">
+          <h3>A. Find and correct the mistake · 6 sentences</h3>
+          <p class="sub">Each sentence has one grammar mistake. Type the full corrected sentence.</p>
+          <div id="hw-a"></div>
+          <div class="actions">
+            <button type="button" class="btn btn-gold" id="hwa-check">Check Part A</button>
+            <span class="score" id="hwa-score"></span>
+          </div>
+        </article>
+
+        <article class="card" style="margin-top:1rem">
+          <h3>B. Sentence transformation · 4 sentences</h3>
+          <p class="sub">Rewrite each sentence as instructed. Start as shown. Do not copy a ready-made key — write it yourself.</p>
+          <div id="hw-b"></div>
+          <div class="actions">
+            <button type="button" class="btn btn-gold" id="hwb-check">Check Part B</button>
+            <span class="score" id="hwb-score"></span>
+          </div>
+        </article>
+
+        <article class="card" style="margin-top:1rem">
+          <h3>C+D. Writing and a short sequel</h3>
+          <div class="choice-grid">
+            <div>
+              <h3 style="font-size:1.2rem">C. Give your opinion <span class="hint">(40–60 words)</span></h3>
+              <p class="sub">«Should we trust official reports?» Use: I think / because / for example / in the recording…</p>
+              <textarea id="hw-c" rows="6" placeholder="I think we should / should not trust official reports because…"></textarea>
+              <p class="wc" id="hwc-wc">0 / 40+ words</p>
+            </div>
+            <div>
+              <h3 style="font-size:1.2rem">D. Continue the monologue <span class="hint">(6 lines)</span></h3>
+              <p class="sub">Start with «If they ask…». Use: not yet, already, too, as if. Write at least 20 words.</p>
+              <textarea id="hw-d" rows="6" placeholder="If they ask where the sketchbook is…"></textarea>
+              <p class="wc" id="hwd-wc">0 / 20+ words</p>
+            </div>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-gold" id="hw-seal">Запечатать конверт ДЗ</button>
+            <span class="stamp" id="hw-stamp" hidden>ДЗ принято</span>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <nav>
+      <a href="#brief">Брифинг</a>
+      <a href="#audio">Видео</a>
+      <a href="#hw">ДЗ</a>
+      <a href="#top">Наверх ↑</a>
+    </nav>
+    <p class="font-display" style="font-size:1.1rem;font-style:italic;color:rgba(232,226,210,0.82)">The sketchbook already knows more than the report.</p>
+  </footer>
+
+  <div class="modal" id="help-modal" role="dialog" aria-modal="true" aria-labelledby="help-modal-title">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h2 id="help-modal-title" style="font-size:1.8rem">Карты агента</h2>
+        <button type="button" class="btn" id="help-close">Закрыть</button>
+      </div>
+      <div class="tabs" id="help-modal-tabs"></div>
+      <div class="help-grid" id="help-modal-grid"></div>
+    </div>
+  </div>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
