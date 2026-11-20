@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Animal Fact File Lab · Academy Stars 2 — Lesson 8 Writing</title>
+  <meta name="description" content="Animal Fact File Lab — интерактивный урок английского письма для уровня A1. Academy Stars 2, Unit 1, Lesson 8: заглавные буквы, точки и структура animal fact file." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23173f2c'/%3E%3Cg fill='%23e6b055'%3E%3Cellipse cx='50' cy='60' rx='17' ry='14'/%3E%3Cellipse cx='31' cy='42' rx='8' ry='10' transform='rotate(-22 31 42)'/%3E%3Cellipse cx='69' cy='42' rx='8' ry='10' transform='rotate(22 69 42)'/%3E%3C/g%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./extras.css" />
+  <script src="../_shared/watermark.js" data-mode="bar" data-position="bottom" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top">
+      <span class="badge">8</span>
+      <span><strong class="font-display">Fact File Lab</strong><small>Junior Wildlife Bureau</small></span>
+    </a>
+    <div class="top-actions">
+      <button type="button" class="chip" id="timer-chip">▶ 45:00</button>
+      <button type="button" class="btn" id="rules-btn">Правила</button>
+      <button type="button" class="btn" id="book-btn">Учебник, p.17</button>
+      <button type="button" class="btn ttc-reset" id="reset-btn">↺ Начать заново</button>
+    </div>
+  </header>
+
+  <nav class="nav-dots" aria-label="Навигация по уроку">
+    <a href="#brief">Старт</a>
+    <a href="#m1">01</a>
+    <a href="#m2">02</a>
+    <a href="#m3">03</a>
+    <a href="#hw">ДЗ</a>
+    <a href="#cert">Сертификат</a>
+  </nav>
+
+  <main id="main">
+    <header class="hero" id="top">
+      <div class="hero-copy">
+        <p class="kicker">Unit 1 · Lesson 8 · Writing · A1</p>
+        <h1>Напиши animal<br><em>fact file</em></h1>
+        <p class="lede">Три миссии, и у тебя готово досье о животном: большая буква в начале, точка в конце, страны — с заглавной. 45 минут, Academy Stars 2.</p>
+        <p class="goal">К концу урока я могу написать 6–7 предложений об animal с заглавными буквами и точками.</p>
+        <div class="name-row" style="margin-top:1.1rem">
+          <label for="agent-name" class="kicker" style="color:#f4d9a0">Твой позывной</label>
+          <input id="agent-name" type="text" maxlength="26" placeholder="Напиши своё имя" aria-label="Имя ученика" />
+        </div>
+        <div class="actions">
+          <a class="btn btn-gold" href="#m1">Начать расследование</a>
+          <a class="btn" href="#hw" style="background:transparent;color:#f7f0de;border-color:rgba(247,240,222,0.35)">Take-home pack</a>
+        </div>
+      </div>
+      <figure class="hero-fig">
+        <img src="images/hero.jpg" alt="Юный исследователь с тигром и крокодилом читает светящуюся книгу animal fact file в старом архиве" />
+      </figure>
+    </header>
+
+    <section id="brief" class="wrap" tabindex="-1">
+      <p class="kicker" style="color:var(--clay)">Брифинг · карта урока</p>
+      <h2>Три миссии до готового досье</h2>
+      <p class="sub">Все миссии, домашка и сертификат открыты сразу. Проходи в любом порядке. Прогресс сохраняется сам.</p>
+      <div class="grid grid-3" id="map-grid" style="margin-top:1.1rem"></div>
+      <div class="grid grid-2" style="margin-top:1.1rem">
+        <article class="card">
+          <p class="kicker" style="color:var(--clay)">Секрет хорошего письма</p>
+          <h3>Две привычки — и досье готово</h3>
+          <div class="grid" style="margin-top:0.8rem">
+            <div class="sent" style="margin:0">
+              <strong>Capital letters</strong>
+              <p class="sub">Начало предложения и название страны — с большой буквы.</p>
+              <p style="margin:0.45rem 0 0;font-weight:800"><span class="word cap">There</span> are tigers in <span class="word cap">India</span>.</p>
+            </div>
+            <div class="sent" style="margin:0">
+              <strong>Full stop</strong>
+              <p class="sub">Одно предложение — одна точка в самом конце.</p>
+              <p style="margin:0.45rem 0 0;font-weight:800">Tigers are big cats<span class="dot-btn on">.</span></p>
+            </div>
+          </div>
+        </article>
+        <article class="card">
+          <p class="kicker" style="color:var(--clay)">Шаблон fact file</p>
+          <ol style="margin:0.6rem 0 0;padding-left:1.2rem;font-weight:700;line-height:1.7">
+            <li>This is a …</li>
+            <li>There are … in …</li>
+            <li>There aren't any … in …</li>
+            <li>… are …</li>
+            <li>They've got …</li>
+            <li>They can …</li>
+            <li>My own fact.</li>
+          </ol>
+          <p class="font-hand" style="margin:0.7rem 0 0;font-size:1.25rem;color:var(--forest)">Example: This is a panda. There are pandas in China.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="m1" class="wrap" tabindex="-1">
+      <p class="kicker" style="color:var(--clay)">Mission 01 · The Tiger Files · 8–10 мин</p>
+      <h2>Разоблачи фейки о тигре</h2>
+      <p class="sub">Прочитай 7 записей. Если ошибка — нажми на слово, чтобы сделать букву большой, и добавь точку. Некоторые записи уже верные.</p>
+      <div class="task-pic">
+        <img src="images/tiger.jpg" alt="Портрет бенгальского тигра" />
+        <p>Посмотри на портрет и исправь досье. Нужны большая буква в начале, большая буква в названиях стран и точка в конце.</p>
+      </div>
+      <div id="m1-list"></div>
+      <p class="score" id="m1-score"></p>
+    </section>
+
+    <section id="m2" class="wrap" tabindex="-1">
+      <p class="kicker" style="color:var(--clay)">Mission 02 · The Crocodile Dossier · 10–12 мин</p>
+      <h2>Собери досье крокодила</h2>
+      <p class="sub">Выбери факт и вставь его в нужную строку. Лишние факты — ловушки. Чипсы перемешаны, порядок запоминается.</p>
+      <div class="task-pic">
+        <img src="images/crocodile.jpg" alt="Портрет крокодила" />
+        <p>Какого цвета крокодил? Что у него есть? Где он живёт? Подсказка также есть в учебнике, p.17.</p>
+      </div>
+      <div class="chip-bank" id="m2-bank"></div>
+      <div id="m2-slots"></div>
+      <article class="card" style="margin-top:1rem">
+        <h3>Proof-check</h3>
+        <p class="sub">Какое предложение написано верно?</p>
+        <div id="m2-proof"></div>
+      </article>
+      <div class="actions">
+        <button type="button" class="btn btn-gold" id="m2-seal">Запечатать досье</button>
+        <span class="stamp" id="m2-stamp" hidden>Досье запечатано</span>
+        <span class="score" id="m2-score"></span>
+      </div>
+    </section>
+
+    <section id="m3" class="wrap" tabindex="-1">
+      <p class="kicker" style="color:var(--clay)">Mission 03 · Your Own Fact File · 12–15 мин</p>
+      <h2>Создай свой animal fact file</h2>
+      <p class="sub">Выбери одного из четырёх героев и напиши 7 предложений. В строках 2–6 выбери факт, затем нажми Aa и точку. Седьмое предложение напиши сам(а).</p>
+      <div class="animal-pick" id="m3-pick"></div>
+      <div class="task-pic" id="m3-pic" hidden></div>
+      <div id="m3-lines"></div>
+      <div class="actions">
+        <button type="button" class="btn btn-gold" id="m3-check">Проверить моё досье</button>
+        <span class="score" id="m3-score"></span>
+      </div>
+    </section>
+
+    <section id="hw" class="wrap" tabindex="-1">
+      <p class="kicker" style="color:var(--clay)">Homework · after the lesson · 15–20 минут</p>
+      <h2>Закрепи <em>animal fact file</em> дома</h2>
+      <p class="sub">Three tasks, different from classwork. You work as an archive editor: fix mistakes, write your own file and check facts.</p>
+
+      <article class="card" style="margin-top:1.1rem">
+        <h3>01 · Fix the fact file</h3>
+        <p class="sub">Read the wolf file. There are 6 sentences. Some capital letters and full stops are missing. Tap words and the dot to repair each sentence, then press Check.</p>
+        <div class="task-pic">
+          <img src="images/wolf.jpg" alt="Волк" />
+          <p>Wolf · Canis lupus · 6 предложений, в некоторых пропали большие буквы и точки.</p>
+        </div>
+        <div id="hw1-list"></div>
+        <p class="score" id="hw1-score"></p>
+      </article>
+
+      <article class="card" style="margin-top:1rem">
+        <h3>02 · Write your own mini fact file</h3>
+        <p class="sub">Write 6 or more sentences about an animal you like. Do not copy a ready-made file. Use the structure: This is a… / There are… / There aren't any… / … are… / They've got… / They can… Start every sentence with a capital letter and end with a full stop.</p>
+        <div class="chip-bank" id="hw2-starters"></div>
+        <textarea id="hw2-text" rows="8" placeholder="This is a…"></textarea>
+        <div class="checkrow" id="hw2-check"></div>
+        <div class="actions">
+          <button type="button" class="btn btn-gold" id="hw2-btn">Check my writing</button>
+          <span class="score" id="hw2-score"></span>
+        </div>
+      </article>
+
+      <article class="card" style="margin-top:1rem">
+        <h3>03 · True or False + correct</h3>
+        <p class="sub">Read each sentence. Choose True or False. If it is false, write a correct sentence (capital letter, full stop, at least 4 words).</p>
+        <div id="hw3-list"></div>
+        <div class="actions">
+          <button type="button" class="btn btn-gold" id="hw3-btn">Check Part 3</button>
+          <span class="score" id="hw3-score"></span>
+        </div>
+      </article>
+    </section>
+
+    <section id="cert" class="wrap" tabindex="-1">
+      <p class="kicker" style="color:var(--clay)">Итог урока</p>
+      <h2>Сертификат почти <em>твой</em></h2>
+      <p class="sub" id="cert-note">Раздел открыт всегда. Именной сертификат появляется, когда собраны все три штампа миссий.</p>
+      <div id="cert-path" class="grid grid-3" style="margin:1rem 0"></div>
+      <div class="diploma" id="diploma"></div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <a href="#brief">Брифинг</a>
+    <a href="#hw">Домашка</a>
+    <a href="#top">Наверх ↑</a>
+    <p class="font-hand" style="font-size:1.3rem;margin:0.6rem 0 0">Let's investigate!</p>
+  </footer>
+
+  <div class="modal" id="rules-modal" role="dialog" aria-modal="true" aria-labelledby="rules-title">
+    <div class="modal-back" data-close="rules"></div>
+    <div class="modal-card">
+      <div class="modal-head">
+        <h2 id="rules-title">Правила <em>под рукой</em></h2>
+        <button type="button" class="btn" id="rules-close">Закрыть</button>
+      </div>
+      <p class="sub">Можно открывать в любой момент. Каждое предложение: большая буква в начале, точка в конце.</p>
+      <div id="rules-body"></div>
+    </div>
+  </div>
+
+  <div class="modal" id="book-modal" role="dialog" aria-modal="true" aria-labelledby="book-title">
+    <div class="modal-back" data-close="book"></div>
+    <div class="modal-card">
+      <div class="modal-head">
+        <h2 id="book-title">Учебник, p.17</h2>
+        <button type="button" class="btn" id="book-close">Закрыть</button>
+      </div>
+      <p class="kicker" style="color:var(--clay)">Unit 1 · Write an animal fact file</p>
+      <div id="book-body"></div>
+    </div>
+  </div>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
