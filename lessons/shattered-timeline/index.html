@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#15121e" />
+  <meta name="description" content="Solve The Case of the Shattered Timeline, an interactive Academy Stars 3 English lesson about am, is, are, was and were." />
+  <title>The Case of the Shattered Timeline | Timeline Agency</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232C2230'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-size='16'%3E%E2%8C%9A%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./extras.css" />
+  <script src="../_shared/watermark.js" data-mode="bar" data-position="bottom" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="#briefing">
+        <span class="brand-mark" aria-hidden="true">⏱</span>
+        <span><strong>Timeline Agency</strong><small>English field unit</small></span>
+      </a>
+      <nav class="top-actions" aria-label="Lesson navigation">
+        <a class="btn" href="#briefing">Briefing</a>
+        <a class="btn" href="#fieldwork">Missions</a>
+        <a class="btn" href="#homework">Homework</a>
+        <button type="button" class="btn" id="grammar-btn">Grammar Cards</button>
+        <button type="button" class="btn ttc-reset" id="reset-btn">↺ Начать заново</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="briefing" tabindex="-1">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Case file 03 / Grammar</p>
+          <h1>The Case of the <em>Shattered Timeline</em></h1>
+          <p class="hero-summary">Glitch has scrambled yesterday and today. You’re the <strong>Timeline Agent</strong>: use the right form of <em>to be</em> to repair each witness’s clue.</p>
+          <p><a class="btn btn-gold" href="#fieldwork" id="begin-case">Start investigation</a></p>
+        </div>
+        <figure class="hero-art">
+          <picture>
+            <source srcset="images/case-art.webp" type="image/webp" />
+            <img id="case-art" src="images/case-art.jpg" width="1168" height="784" alt="A young detective holds a glowing timeline device in the city square. Above her, Glitch looms over a shattered clock." fetchpriority="high" />
+          </picture>
+          <figcaption>The city square: the Timeline Agent, the glowing device, and Glitch above the shattered clock.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="stability wrap" id="stability" tabindex="-1">
+      <div class="stability-head">
+        <div>
+          <p class="eyebrow">Field status</p>
+          <h2 id="stability-title">Timeline Stability</h2>
+          <p class="sub">Solve a clue at each location to recover its seal.</p>
+        </div>
+        <div class="stability-readout"><span id="seal-count">0 / 10 seals</span><span id="stability-percent">0%</span></div>
+      </div>
+      <div class="meter" id="stability-meter" role="progressbar" aria-labelledby="stability-title" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0 of 10 seals recovered"><div id="stability-fill" aria-hidden="true"></div></div>
+      <ul class="seals" id="city-seals" aria-label="Location seals"></ul>
+    </section>
+
+    <section class="section wrap" id="fieldwork" tabindex="-1">
+      <p class="eyebrow">Agent training</p>
+      <h2 id="fieldwork-title">Investigation Desk</h2>
+      <p class="lede">Listen, collect the testimony, and send your report to the agency. All missions are open — work in any order.</p>
+      <p class="lesson-id"><span>Academy Stars 3 · Unit 3 · Lesson 4</span><span>45 min · One-to-one</span></p>
+      <figure class="task-pic">
+        <picture>
+          <source srcset="images/case-art.webp" type="image/webp" />
+          <img src="images/case-art.jpg" width="1168" height="784" alt="The city square from the case: the Timeline Agent and Glitch over the shattered clock." />
+        </picture>
+        <p>Look at the square. What can the agent see today? What was there yesterday?</p>
+      </figure>
+      <nav class="mission-nav" id="mission-nav" aria-label="Missions"></nav>
+
+      <article class="mission" id="m-dictation" tabindex="-1">
+        <p class="eyebrow" id="tag-dictation"></p>
+        <h3>City Word Intercept</h3>
+        <p class="sub">Listen as your teacher reads ten places in town. Type the words in the order you hear them, then check your spelling to unlock the word bank.</p>
+        <form data-task="dictation" novalidate>
+          <ol class="clues dictation-grid" id="list-dictation"></ol>
+          <div class="word-bank" id="word-bank-dictation" hidden><strong>Recovered word bank</strong><p id="word-bank-text"></p></div>
+          <div class="actions"><button class="btn btn-gold" type="submit">Check spelling</button></div>
+          <p class="score" data-summary></p>
+        </form>
+      </article>
+
+      <article class="mission" id="m-signals" tabindex="-1">
+        <p class="eyebrow" id="tag-signals"></p>
+        <h3>Signals from the Square</h3>
+        <p class="sub">The first signals are broken. Choose am, is, are, was or were. Read the time clue at the end and check who the sentence is about.</p>
+        <figure class="task-pic">
+          <picture>
+            <source srcset="images/case-art.webp" type="image/webp" />
+            <img src="images/case-art.jpg" width="1168" height="784" alt="Signals from the city square: the detective, the cinema and Glitch in the evening sky." />
+          </picture>
+          <p>Signals are coming from the square in the picture.</p>
+        </figure>
+        <form data-task="signals" novalidate>
+          <ol class="clues" id="list-signals"></ol>
+          <div class="word-bank lookup-bank" hidden></div>
+          <div class="actions"><button class="btn btn-gold" type="submit">Check signals</button></div>
+          <p class="score" data-summary></p>
+        </form>
+      </article>
+
+      <article class="mission" id="m-statements" tabindex="-1">
+        <p class="eyebrow" id="tag-statements"></p>
+        <h3>Witness Statements</h3>
+        <p class="sub">Four more locations have lost their signals. Type one form of to be in each gap to restore the witnesses’ statements.</p>
+        <form data-task="statements" novalidate>
+          <ol class="clues" id="list-statements"></ol>
+          <div class="word-bank lookup-bank" hidden></div>
+          <div class="actions"><button class="btn btn-gold" type="submit">Check statements</button></div>
+          <p class="score" data-summary></p>
+        </form>
+      </article>
+
+      <article class="mission" id="m-sort" tabindex="-1">
+        <p class="eyebrow" id="tag-sort"></p>
+        <h3>Sort the Time Chips</h3>
+        <p class="sub">Glitch took the time labels. Look at the verb in each record, then match the record with its past or present label.</p>
+        <form data-task="sort" novalidate>
+          <ol class="clues" id="list-sort"></ol>
+          <div class="word-bank lookup-bank" hidden></div>
+          <div class="actions"><button class="btn btn-gold" type="submit">Check matches</button></div>
+          <p class="score" data-summary></p>
+        </form>
+      </article>
+
+      <article class="mission" id="m-pairs" tabindex="-1">
+        <p class="eyebrow" id="tag-pairs"></p>
+        <h3>Rebuild the Pairs</h3>
+        <p class="sub">Each witness should have two sentences, one for the past and one for the present. Read the first clue and write its partner using the words below. Use full forms.</p>
+        <form data-task="pairs" novalidate>
+          <ol class="clues" id="list-pairs"></ol>
+          <div class="word-bank lookup-bank" hidden></div>
+          <div class="actions"><button class="btn btn-gold" type="submit">Check sentence pairs</button></div>
+          <p class="score" data-summary></p>
+        </form>
+      </article>
+
+      <article class="mission" id="m-report" tabindex="-1">
+        <p class="eyebrow" id="tag-report"></p>
+        <h3>Timeline Report</h3>
+        <p class="sub">Choose three or four witnesses. Complete a past and a present sentence for each, then read your report aloud to your teacher.</p>
+        <form data-task="report" novalidate>
+          <p class="sub" id="pick-label" data-pick-count></p>
+          <div class="witness-picker" id="witness-picker" role="group" aria-labelledby="pick-label"></div>
+          <div id="report-rows"></div>
+          <div class="word-bank lookup-bank" hidden></div>
+          <div class="actions"><button class="btn btn-gold" type="submit" data-check>Check &amp; file report</button></div>
+          <p class="score" data-summary></p>
+          <section class="report-document" id="report-document" hidden>
+            <h4>Report filed</h4>
+            <ul id="report-text"></ul>
+            <button type="button" class="btn" id="copy-report">Copy report</button>
+          </section>
+        </form>
+      </article>
+    </section>
+
+    <section class="section homework wrap" id="homework" tabindex="-1">
+      <p class="eyebrow">After the lesson</p>
+      <h2>Homework</h2>
+      <p class="lede">Take the case one step further: switch the time, repair faulty sentences, and write your own witness file.</p>
+      <figure class="task-pic">
+        <picture>
+          <source srcset="images/case-art.webp" type="image/webp" />
+          <img src="images/case-art.jpg" width="1168" height="784" alt="The same city square from the lesson, to help you write about yesterday and today." />
+        </picture>
+        <p>Use the square and the time clues from the case when you write.</p>
+      </figure>
+      <nav class="mission-nav" id="home-nav" aria-label="Homework tasks"></nav>
+
+      <article class="mission" id="m-switch" tabindex="-1">
+        <p class="eyebrow" id="tag-switch"></p>
+        <h3>Switch the Time</h3>
+        <p class="sub">Rewrite each full sentence using the new time clue. Keep the subject and place, but change the form of to be.</p>
+        <form data-task="switch" novalidate>
+          <ol class="clues" id="list-switch"></ol>
+          <div class="actions"><button class="btn btn-gold" type="submit">Check changes</button></div>
+          <p class="score" data-summary></p>
+        </form>
+      </article>
+
+      <article class="mission" id="m-fix" tabindex="-1">
+        <p class="eyebrow" id="tag-fix"></p>
+        <h3>Fix Glitch’s Errors</h3>
+        <p class="sub">Each sentence has one wrong form of to be. Rewrite the whole sentence with the correct verb. Keep the time, subject and place the same.</p>
+        <form data-task="fix" novalidate>
+          <ol class="clues" id="list-fix"></ol>
+          <div class="actions"><button class="btn btn-gold" type="submit">Check corrections</button></div>
+          <p class="score" data-summary></p>
+        </form>
+      </article>
+
+      <article class="mission" id="m-write" tabindex="-1">
+        <p class="eyebrow" id="tag-write"></p>
+        <h3>Your Own Witness File</h3>
+        <p class="sub">Write two sentences about each of three people or groups you know. Use a name or pronoun, a full form of to be, at or in + a place, and a time clue. For example: “I was at home yesterday.”</p>
+        <form data-task="write" novalidate>
+          <ol class="clues" id="list-write"></ol>
+          <div class="actions"><button class="btn btn-gold" type="submit">Check form and time</button></div>
+          <p class="score" data-summary></p>
+        </form>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site">
+    <p id="save-note">Progress saved on this device.</p>
+    <p>Academy Stars 3 · Unit 3 · Lesson 4 · Timeline Agency</p>
+  </footer>
+
+  <div class="modal" id="grammar-modal" role="dialog" aria-modal="true" aria-labelledby="grammar-title" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div>
+          <p class="eyebrow">Agent reference</p>
+          <h2 id="grammar-title">Grammar Cards</h2>
+        </div>
+        <button type="button" class="btn" id="grammar-close">Close</button>
+      </div>
+      <p class="sub">Find the time clue first. Then look at who the sentence is about.</p>
+      <article class="gram-card">
+        <h3>01 / Present Simple of <i>to be</i></h3>
+        <p>Use <strong>am / is / are</strong> for where someone is <strong>today</strong> or <strong>now</strong>.</p>
+        <ul>
+          <li>I <strong>am</strong> at the café today.</li>
+          <li>Mia <strong>is</strong> at the library today.</li>
+          <li>They <strong>are</strong> at the swimming pool now.</li>
+        </ul>
+      </article>
+      <article class="gram-card">
+        <h3>02 / Past Simple of <i>to be</i></h3>
+        <p>Use <strong>was / were</strong> for where someone was <strong>yesterday</strong> or <strong>last Saturday</strong>.</p>
+        <ul>
+          <li>Mia <strong>was</strong> at the cinema yesterday.</li>
+          <li>I <strong>was</strong> at the train station yesterday.</li>
+          <li>They <strong>were</strong> at the shopping centre last Saturday.</li>
+        </ul>
+      </article>
+      <article class="gram-card">
+        <h3>03 / Today vs Yesterday</h3>
+        <table>
+          <thead><tr><th scope="col">Yesterday / last Saturday</th><th scope="col">Today / now</th></tr></thead>
+          <tbody>
+            <tr><td>She <strong>was</strong> at the cinema.</td><td>She <strong>is</strong> at the library.</td></tr>
+            <tr><td>They <strong>were</strong> at the shopping centre.</td><td>They <strong>are</strong> at the swimming pool.</td></tr>
+          </tbody>
+        </table>
+      </article>
+      <article class="gram-card">
+        <h3>04 / Quick subject check</h3>
+        <table>
+          <thead><tr><th scope="col">Subject</th><th scope="col">Present</th><th scope="col">Past</th></tr></thead>
+          <tbody>
+            <tr><td>I</td><td><strong>am</strong></td><td><strong>was</strong></td></tr>
+            <tr><td>he / she / it</td><td><strong>is</strong></td><td><strong>was</strong></td></tr>
+            <tr><td>we / you / they</td><td><strong>are</strong></td><td><strong>were</strong></td></tr>
+          </tbody>
+        </table>
+        <p>One name works like <strong>he</strong> or <strong>she</strong>. Two names work like <strong>they</strong>.</p>
+      </article>
+    </div>
+  </div>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
