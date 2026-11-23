@@ -21,10 +21,10 @@ const Al = [
 ];
 const Ku = Object.fromEntries(Al.map(f => [f.id, f]));
 const Fu = [
-  { n: 1, title: "Pick the Word", tag: "Warm-up", description: "Alex reads ready-made sentences with a gap. Students choose when or while. He only confirms correct answers.", task: "Choose when or while to complete Alex's sentence." },
-  { n: 2, title: "Catch the Mistake", tag: "Accuracy", description: "Alex tells his story, but he uses the wrong word on purpose. Students correct each sentence.", task: "Write Alex's sentence again, with the correct word." },
-  { n: 3, title: "Ask Your Own", tag: "Questions", description: "Students ask their own questions. Alex answers briefly, and only when when or while is used correctly.", task: "Ask Alex your own questions with when or while." },
-  { n: 4, title: "Free Interrogation", tag: "Final stage", description: "No help. Alex is nervous and gives more detail. Rebuild the whole timeline to make him confirm his alibi.", task: "Rebuild Alex's whole timeline with correct when/while statements." }
+  { n: 1, title: "Pick the Word", tag: "Warm-up", description: "Alex reads ready-made sentences with a gap. Choose when or while. He only confirms correct answers.", task: "Choose when or while to complete Alex's sentence." },
+  { n: 2, title: "Catch the Mistake", tag: "Accuracy", description: "Alex tells his story, but he uses the wrong word on purpose. Write each sentence again, correctly.", task: "Write Alex's sentence again, with the correct word." },
+  { n: 3, title: "Ask Your Own", tag: "Questions", description: "Ask your own questions with when or while. Collect six facts about his afternoon. When a fact is mentioned, say it back to confirm it.", task: "Ask about the time, the café, Emma, the rain, the walk, and home. Confirm all 6 facts." },
+  { n: 4, title: "Free Interrogation", tag: "Final stage", description: "Alex is nervous and gives more detail. Rebuild the whole timeline with correct when/while statements, then open the final report.", task: "Rebuild Alex's whole timeline with correct when/while statements." }
 ];
 const El = [
   { text: "___ I arrived at Maple & Mug café, it was 14:40.", answer: "when", full: "When I arrived at Maple & Mug café, it was 14:40.", image: "cafe", why: "“Arrived” is a short action at one moment, so we use when." },
@@ -43,7 +43,8 @@ const Oa = [
   { wrong: "While the waitress Emma brought the bill, I paid.", correct: "When the waitress Emma brought the bill, I paid.", answer: "when", image: "waitress", why: "“Brought” is a short action, so it needs when." },
   { wrong: "While I left the café, it started raining.", correct: "When I left the café, it started raining.", answer: "when", image: "leaving", why: "“Left” happens at one moment, so it needs when." },
   { wrong: "When I was walking home in the rain, I called my friend.", correct: "While I was walking home in the rain, I called my friend.", answer: "while", image: "phone", why: "“Was walking” is a longer background action, so it needs while." },
-  { wrong: "While I arrived home, it was 15:25.", correct: "When I arrived home, it was 15:25.", answer: "when", image: "phone", why: "This is one exact moment, so it needs when." }
+  { wrong: "While I arrived home, it was 15:25.", correct: "When I arrived home, it was 15:25.", answer: "when", image: "phone", why: "This is one exact moment, so it needs when." },
+  { wrong: "It started raining while I left the café.", correct: "It started raining when I left the café.", answer: "when", image: "leaving", why: "Two short actions in order, so it needs when (even in the middle of the sentence)." }
 ];
 const L0 = ["What were you doing when ", "What did you do while you were ", "What happened when ", "Who did you call while ", "What time was it when ", "When did you "];
 const k0 = "I don’t understand the question. Please rephrase.";
@@ -53,7 +54,7 @@ const K0 = [
   ["When", "Yesterday, 15:00"],
   ["Suspect", "Alex, a young man"],
   ["His claim", "“I was at Maple & Mug café.”"],
-  ["Language", "English only"]
+  ["Possible witness", "Emma, the waitress"]
 ];
 const J0 = [
   { n: "01", title: "When or while — or nothing", body: "Alex only answers questions and statements that use when or while correctly. Everything else gets the same reply." },
@@ -61,6 +62,31 @@ const J0 = [
   { n: "03", title: "Short answers only", body: "Alex is nervous but honest. He gives his alibi one piece at a time, so you need to put the timeline together." }
 ];
 
+const CASE_CODE = "CASE-0715-MAPLE";
+const WORDS = [
+  { en: "alibi", ru: "доказательство, что человека не было на месте преступления" },
+  { en: "robbery", ru: "ограбление" },
+  { en: "jewelry store", ru: "ювелирный магазин" },
+  { en: "café", ru: "кафе" },
+  { en: "waitress", ru: "официантка" },
+  { en: "bill", ru: "счёт" },
+  { en: "arrive", ru: "прибывать, приходить" },
+  { en: "leave", ru: "уходить, покидать" }
+];
+const MISTAKES = [
+  ["While Emma brought the bill, I paid.", "When Emma brought the bill, I paid."],
+  ["When I was walking home, I called my friend.", "While I was walking home, I called my friend."],
+  ["While did you arrive?", "When did you arrive?"],
+  ["What you were doing when it started raining?", "What were you doing when it started raining?"]
+];
+const REFLECT = [
+  { id: "r1", prompt: "Write a sentence with when about Alex arriving at the café." },
+  { id: "r2", prompt: "Write a sentence with while about coffee or the book." },
+  { id: "r3", prompt: "Write a sentence with when about the rain and leaving the café." },
+  { id: "r4", prompt: "The robbery was at 15:00. Where does Alex say he was at that time?" },
+  { id: "r5", prompt: "Name one person who could check his story, and how." },
+  { id: "r6", prompt: "Write one more when or while sentence from the timeline, in your own words." }
+];
 
 const lh = {
         "no-connector": "Alex only answers sentences with when or while.",
@@ -275,7 +301,7 @@ function og(f) {
     }];
     return f === 1 ? d.push({
         from: "alex",
-        text: "Okay… your teacher wants easy sentences first. Complete my sentence. Is it when or while?",
+        text: "Okay… let’s start with easy sentences. Complete my sentence. Is it when or while?",
         exercise: uh(0)
     }) : f === 2 ? d.push({
         from: "alex",
@@ -283,10 +309,10 @@ function og(f) {
         exercise: ih(0)
     }) : f === 3 ? d.push({
         from: "system",
-        text: "Level 3 · Ask your own questions. Alex only answers when you use when or while correctly."
+        text: "Level 3 · Ask your own questions with when or while. Try to collect six facts: the café time, coffee and the book, Emma and the bill, the rain, the walk and the phone call, and the time he got home. When a fact is only mentioned, say it back with when or while to confirm it."
     }) : d.push({
         from: "system",
-        text: "Level 4 · Free interrogation. Alex is nervous. Rebuild the whole timeline with correct when/while statements, and he will confirm his alibi."
+        text: "Level 4 · Free interrogation. Alex is nervous. Rebuild the whole timeline with correct when/while statements. When all six facts are confirmed, open the final report and give your verdict."
     }), d
 }
 const Cs = /\b(14[:.]40|2[:.]40|two forty|twenty to three)\b/,
@@ -632,7 +658,7 @@ function vg(f, d, x) {
                 tone: "neutral"
             }), ae.push({
                 from: "system",
-                text: "Level 2 complete! All seven sentences are fixed. Try Level 3: Ask Your Own."
+                text: "Level 2 complete! All eight sentences are fixed. Try Level 3: Ask Your Own."
             })), {
                 replies: ae,
                 next: r
@@ -739,7 +765,17 @@ function vg(f, d, x) {
 
 
 function defaultState() {
-  return { level: null, game: null, messages: [], shown: [], hints: false };
+  return {
+    level: null,
+    game: null,
+    messages: [],
+    shown: [],
+    doneLevels: [],
+    l3Celebrated: false,
+    caseFacts: {},
+    reflection: { r1: "", r2: "", r3: "", r4: "", r5: "", r6: "" },
+    verdict: { choice: "", facts: [], because: "", submitted: false }
+  };
 }
 
 function load() {
@@ -751,12 +787,18 @@ function load() {
     const out = Object.assign({}, base, saved);
     if (!Array.isArray(out.messages)) out.messages = [];
     if (!Array.isArray(out.shown)) out.shown = [];
+    if (!Array.isArray(out.doneLevels)) out.doneLevels = [];
+    out.doneLevels = out.doneLevels.map(Number).filter(n => n >= 1 && n <= 4);
+    out.l3Celebrated = !!out.l3Celebrated;
+    if (!out.caseFacts || typeof out.caseFacts !== "object") out.caseFacts = {};
+    out.reflection = Object.assign({ r1: "", r2: "", r3: "", r4: "", r5: "", r6: "" }, out.reflection || {});
+    out.verdict = Object.assign({ choice: "", facts: [], because: "", submitted: false }, out.verdict || {});
+    if (!Array.isArray(out.verdict.facts)) out.verdict.facts = [];
     if (out.game && typeof out.game === "object") {
       out.game = Object.assign({}, rg(out.game.level || 1), out.game);
       if (!out.game.facts) out.game.facts = fg();
     } else out.game = null;
     if (out.level != null) out.level = Number(out.level);
-    out.hints = !!out.hints;
     return out;
   } catch (err) {
     return base;
@@ -764,7 +806,17 @@ function load() {
 }
 
 function save() {
-  const dump = { level: state.level, game: state.game, messages: state.messages, shown: state.shown, hints: state.hints };
+  const dump = {
+    level: state.level,
+    game: state.game,
+    messages: state.messages,
+    shown: state.shown,
+    doneLevels: state.doneLevels,
+    l3Celebrated: state.l3Celebrated,
+    caseFacts: state.caseFacts,
+    reflection: state.reflection,
+    verdict: state.verdict
+  };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(dump));
 }
 
@@ -813,14 +865,43 @@ function revealImages(keys) {
   keys.forEach(k => { if (k && !state.shown.includes(k)) state.shown.push(k); });
 }
 
+function markDone(n) {
+  if (!state.doneLevels.includes(n)) state.doneLevels.push(n);
+}
+
+function mergeCaseFacts() {
+  if (!state.game || !state.game.facts) return;
+  Object.keys(state.game.facts).forEach(id => {
+    const st = state.game.facts[id];
+    const prev = state.caseFacts[id];
+    if (st === "confirmed" || (st === "heard" && prev !== "confirmed")) state.caseFacts[id] = st;
+  });
+}
+
+function confirmedCount(source) {
+  const facts = source || state.caseFacts;
+  return Al.filter(u => facts[u.id] === "confirmed").length;
+}
+
+function isLevelComplete(n, game) {
+  const g = game || state.game;
+  if (!g) return state.doneLevels.includes(n);
+  if (n === 1) return g.l1 >= El.length;
+  if (n === 2) return g.l2 >= Oa.length;
+  if (n === 3) return Al.every(u => g.facts[u.id] === "confirmed");
+  if (n === 4) return !!g.solved;
+  return false;
+}
+
 function startLevel(n, force) {
   if (!force && state.level === n && state.game) {
-    if (!confirm("Restart this level? Progress in the current session will be lost.")) return;
+    if (!confirm("Начать этот уровень заново? Прогресс этой сессии сотрётся.")) return;
   }
   state.level = n;
   state.game = rg(n);
   state.messages = og(n);
   state.shown = [];
+  if (n !== 3) state.l3Celebrated = false;
   state.messages.forEach(m => revealImages(m.images));
   const ex0 = currentExercise();
   if (ex0) {
@@ -837,7 +918,7 @@ function pushYou(text) {
 }
 
 function applyTurn(text) {
-  const result = vg(state.game, text, state.hints);
+  const result = vg(state.game, text, true);
   state.game = result.next;
   result.replies.forEach(rep => {
     state.messages.push(rep);
@@ -847,13 +928,24 @@ function applyTurn(text) {
       revealImages([item.image]);
     }
   });
-  // also reveal the image of a just-confirmed L1/L2 item already handled
+  mergeCaseFacts();
+  if (state.level && isLevelComplete(state.level)) markDone(state.level);
+  if (state.level === 3 && isLevelComplete(3) && !state.l3Celebrated) {
+    state.l3Celebrated = true;
+    state.messages.push({
+      from: "system",
+      text: "Excellent — all six facts are confirmed. Open Level 4 to make Alex confirm his whole alibi, then write your final report and verdict."
+    });
+  }
   save();
 }
 
 function sendText(raw) {
   const text = String(raw || "").trim();
   if (!text || !state.game || busy) return;
+  if (isLevelComplete(state.level) && state.level !== 3 && state.level !== 4) return;
+  if (state.level === 4 && state.game.solved) return;
+  if (state.level === 3 && isLevelComplete(3)) return;
   busy = true;
   pushYou(text);
   render();
@@ -869,6 +961,13 @@ function onGap(word) {
   sendText(word);
 }
 
+function nextBar(fromLevel) {
+  if (fromLevel < 4) {
+    return `<div class="next-bar"><button type="button" class="btn btn-amber" data-start="${fromLevel + 1}">Дальше: Level ${fromLevel + 1}</button><a class="btn" href="#ending">К финалу</a></div>`;
+  }
+  return `<div class="next-bar"><a class="btn btn-amber" href="#ending">К финалу: вердикт</a></div>`;
+}
+
 function renderCase() {
   const facts = document.getElementById("case-facts");
   facts.innerHTML = K0.map(([k, v]) => `<li><span class="k">${esc(k)}</span><span>${esc(v)}</span></li>`).join("");
@@ -877,7 +976,18 @@ function renderCase() {
   ).join("");
 }
 
+function renderStaticSupport() {
+  document.getElementById("word-bank").innerHTML = WORDS.map(w =>
+    `<li><strong>${esc(w.en)}</strong><span class="gloss">${esc(w.ru)}</span></li>`
+  ).join("");
+  document.getElementById("mistakes-list").innerHTML = MISTAKES.map(([bad, good]) =>
+    `<li><p class="bad"><span class="mark-bad">✗</span> ${esc(bad)}</p><p class="good"><span class="mark-good">✓</span> ${esc(good)}</p></li>`
+  ).join("");
+}
+
 function renderLevels() {
+  const done = state.doneLevels.length;
+  document.getElementById("levels-progress").textContent = `Уровни: ${done} / 4 готовы`;
   document.getElementById("level-cards").innerHTML = Fu.map(lv => `
     <article class="level-card${state.level === lv.n ? " is-on" : ""}">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:.5rem">
@@ -885,9 +995,9 @@ function renderLevels() {
         <span class="tag">${esc(lv.tag)}</span>
       </div>
       <div class="dots" aria-label="Difficulty ${lv.n} of 4" aria-hidden="true">${[1,2,3,4].map(d => `<div class="${d <= lv.n ? "on" : ""}"></div>`).join("")}</div>
-      <h3>${esc(lv.title)}</h3>
+      <h3>${esc(lv.title)}${state.doneLevels.includes(lv.n) ? ' <span class="done-tag">готово</span>' : ""}</h3>
       <p>${esc(lv.description)}</p>
-      <button type="button" class="${state.level === lv.n ? "btn btn-string" : "btn btn-ink"}" data-start="${lv.n}">${state.level === lv.n ? "Restart level" : "Start Level " + lv.n}</button>
+      <button type="button" class="${state.level === lv.n ? "btn btn-string" : "btn btn-ink"}" data-start="${lv.n}">${state.level === lv.n ? "Начать уровень заново" : "Start Level " + lv.n}</button>
     </article>
   `).join("");
 }
@@ -895,6 +1005,9 @@ function renderLevels() {
 function renderScene() {
   const frame = document.getElementById("scene-frame");
   const key = currentSceneKey();
+  if (!key || !Fe[key] || isLevelComplete(state.level) && (state.level === 1 || state.level === 2)) {
+    // still show last scene after complete
+  }
   if (!key || !Fe[key]) { frame.hidden = true; frame.innerHTML = ""; return; }
   const img = Fe[key];
   frame.hidden = false;
@@ -905,7 +1018,7 @@ function renderScene() {
 function renderLog() {
   const log = document.getElementById("chat-log");
   if (!state.level) {
-    log.innerHTML = `<div class="idle"><strong>Alex is waiting at the table.</strong> Choose any level above to start the interrogation.</div>`;
+    log.innerHTML = `<div class="idle"><strong>Алекс ждёт за столом.</strong> Выбери любой уровень выше — лучше начать с Level 1. Все уровни открыты.</div>`;
     return;
   }
   log.innerHTML = state.messages.map(m => {
@@ -922,38 +1035,48 @@ function renderLog() {
   log.scrollTop = log.scrollHeight;
 }
 
+function lastWhy() {
+  for (let i = state.messages.length - 1; i >= 0; i--) {
+    const m = state.messages[i];
+    if (m.from === "teacher") return m.text;
+    if (m.from === "you" || m.from === "system" || (m.from === "alex" && m.tone === "confirm")) break;
+  }
+  return "";
+}
+
 function renderForm() {
   const box = document.getElementById("chat-form");
   const ex = currentExercise();
-  const doneL1 = state.game && state.level === 1 && state.game.l1 >= El.length;
-  const doneL2 = state.game && state.level === 2 && state.game.l2 >= Oa.length;
   const waiting = !state.level || !state.game;
   if (waiting) {
-    box.innerHTML = `<p class="hint-line">Choose a level to begin. All four levels are open.</p>`;
+    box.innerHTML = `<div class="next-bar"><button type="button" class="btn btn-amber" data-start="1">Начать Level 1</button></div><p class="hint-line">Или выбери любой другой уровень выше. Все четыре открыты.</p>`;
+    return;
+  }
+  if (isLevelComplete(state.level)) {
+    box.innerHTML = nextBar(state.level);
     return;
   }
   let tools = "";
-  if (state.level === 1 && ex && ex.kind === "gap" && !doneL1) {
+  if (state.level === 1 && ex && ex.kind === "gap") {
     tools += `<div class="gap-btns">${["when","while"].map(w => `<button type="button" data-gap="${w}">${w}</button>`).join("")}</div>`;
   }
-  if ((state.level === 3 || state.level === 4) && !state.game.solved) {
+  if (state.level === 3 || state.level === 4) {
     tools += `<div class="starters">${L0.map(s => `<button type="button" data-starter="${esc(s)}">${esc(s.trim())}…</button>`).join("")}</div>`;
   }
-  const showComposer = state.level !== 1 || doneL1;
-  const ph = state.level === 1 ? "Type when or while, or tap a button…"
-    : state.level === 2 ? "Write Alex's sentence again, correctly…"
-    : state.level === 3 ? "Ask a question with when or while…"
+  const showComposer = state.level !== 1;
+  const ph = state.level === 2 ? "Write Alex's sentence again, correctly…"
+    : state.level === 3 ? "Ask a question with when or while, or say a fact back…"
     : "Ask a question, or say part of the timeline…";
-  if (showComposer && !(state.level === 2 && doneL2 && !ex)) {
+  if (showComposer) {
     tools += `<form class="composer" id="say-form" autocomplete="off">
       <label class="sr-only" for="say-input" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Your sentence</label>
       <input id="say-input" name="say" type="text" maxlength="400" placeholder="${esc(ph)}" ${busy ? "disabled" : ""} />
       <button class="send" type="submit" ${busy ? "disabled" : ""} aria-label="Send">➜</button>
     </form>`;
-  } else if (state.level === 1) {
-    tools += `<p class="hint-line">Alex only answers sentences that use <span class="hl">when</span> or <span class="hl">while</span> correctly.</p>`;
   }
-  if (state.level !== 1) tools += `<p class="hint-line">Alex only answers sentences that use <span class="hl">when</span> or <span class="hl">while</span> correctly.</p>`;
+  const why = lastWhy();
+  const whyBox = why ? `<p class="why-now"><strong>Why.</strong> ${esc(why)}</p>` : "";
+  tools += `${whyBox}<p class="hint-line">Alex only answers sentences that use <span class="hl">when</span> or <span class="hl">while</span> correctly.</p>`;
   box.innerHTML = tools;
 }
 
@@ -981,7 +1104,7 @@ function renderSidebar() {
         const st = g ? (g.facts[u.id] || "locked") : "locked";
         const label = st === "locked" ? "? ? ?" : u.label;
         const time = u.time && st !== "locked" ? `<span class="time">${u.time}</span>` : "";
-        const sent = st === "confirmed" ? `<p class="sent">${esc(u.sentence)}</p>` : (st === "heard" && lv === 4 ? `<p class="hint">Mentioned · now say it back with when/while</p>` : "");
+        const sent = st === "confirmed" ? `<p class="sent">${esc(u.sentence)}</p>` : (st === "heard" ? `<p class="hint">Mentioned · now say it back with when/while</p>` : "");
         return `<li class="${st}"><div class="lab"><span>${esc(label)}</span>${time}</div>${sent}</li>`;
       }).join("")}</ol>
     </section>`;
@@ -997,12 +1120,11 @@ function renderSidebar() {
     }).join("")}</div>
   </section>`;
   const tools = `<section class="side-card">
-    <header><strong>Help</strong></header>
-    <div class="tools">
-      <button type="button" class="switch" id="hints-toggle" role="switch" aria-checked="${state.hints ? "true" : "false"}">
-        <span>Show grammar hints<small>A note explains why Alex didn't understand.</small></span>
-        <span class="knob" aria-hidden="true"><i></i></span>
-      </button>
+    <header><strong>Rule reminder</strong></header>
+    <div class="rule-mini">
+      <p><strong>when</strong> + past simple — a short action or an exact moment.</p>
+      <p><strong>while</strong> + was/were + -ing — a longer action or two actions at the same time.</p>
+      <p><a href="#grammar">When vs while</a> · <a href="#words">Словарь</a> · <a href="#ending">Финал</a></p>
     </div>
   </section>`;
   side.innerHTML = `
@@ -1012,7 +1134,7 @@ function renderSidebar() {
         <div style="flex:1">
           <p class="eyebrow">Suspect</p>
           <h3>Alex</h3>
-          <p>${lv ? "Level " + lv + " session" : "Choose a level to begin"}</p>
+          <p>${lv ? "Level " + lv + " session" : "Выбери уровень, чтобы начать"}</p>
         </div>
         ${g && g.solved ? `<span class="cleared">Cleared</span>` : ""}
       </div>
@@ -1029,24 +1151,122 @@ function renderSidebar() {
 function renderHeaderBits() {
   const lv = Fu.find(x => x.n === state.level);
   document.getElementById("session-label").textContent = lv ? "Level " + lv.n + " · " + lv.title : "No session yet";
-  document.getElementById("task-line").textContent = lv ? lv.task : "Pick any of the four levels. You do not have to finish one before opening the next.";
+  document.getElementById("task-line").textContent = lv
+    ? lv.task
+    : "Выбери любой из четырёх уровней. Можно не заканчивать один, чтобы открыть следующий.";
+}
+
+function factStatus(id) {
+  if (state.game && state.game.facts && state.game.facts[id]) return state.game.facts[id];
+  return state.caseFacts[id] || "locked";
+}
+
+function renderClosed() {
+  const n = Al.filter(u => factStatus(u.id) === "confirmed").length;
+  const pending = n < 6;
+  const stamp = pending ? "In progress" : "Case closed";
+  const lines = Al.map(u => {
+    const st = factStatus(u.id);
+    const label = st === "locked" ? "? ? ?" : u.label;
+    const time = u.time && st !== "locked" ? `<span class="time">${u.time}</span>` : "";
+    const sent = st === "confirmed" ? `<p class="sent">${esc(u.sentence)}</p>` : (st === "heard" ? `<p class="hint">Mentioned, not yet confirmed</p>` : `<p class="hint">Not confirmed yet</p>`);
+    return `<li class="${st}"><div class="lab"><span>${esc(label)}</span>${time}</div>${sent}</li>`;
+  }).join("");
+  const note = pending
+    ? `<p class="note-gap">Некоторые факты ещё не подтверждены (${n} / 6). Можно вынести вердикт сейчас или сначала собрать улики на допросе.</p>`
+    : `<p class="note-gap">Все шесть фактов подтверждены. Сравни время ограбления (15:00) с таймлайном Алекса (14:40–15:25) и вынеси вердикт.</p>`;
+  document.getElementById("closed-card").className = "closed-card" + (pending ? " pending" : "");
+  document.getElementById("closed-card").innerHTML = `
+    <span class="big-stamp">${stamp}</span>
+    <h3>Official timeline</h3>
+    <p>Robbery: <strong>15:00</strong> at the jewelry store. Alex’s story: <strong>14:40–15:25</strong>.</p>
+    <ol class="timeline">${lines}</ol>
+    <p class="case-code" id="case-code">${CASE_CODE}</p>
+    ${note}
+  `;
+}
+
+function renderReflection() {
+  document.getElementById("reflect-list").innerHTML = REFLECT.map(item => `
+    <li>
+      <label for="${item.id}">${esc(item.prompt)}</label>
+      <textarea id="${item.id}" data-reflect="${item.id}" rows="2" maxlength="400" placeholder="Write your answer here.">${esc(state.reflection[item.id] || "")}</textarea>
+    </li>
+  `).join("");
+}
+
+function verdictFeedback() {
+  const n = Al.filter(u => factStatus(u.id) === "confirmed").length;
+  const choice = state.verdict.choice;
+  const because = (state.verdict.because || "").trim();
+  const picks = state.verdict.facts || [];
+  const hasWW = /\bwhen\b|\bwhile\b/i.test(because);
+  const bits = [];
+  if (picks.length < 2) bits.push("Choose at least two facts from the timeline to support your verdict.");
+  if (!because) bits.push("Write a because sentence.");
+  else if (!hasWW) bits.push("Try to use when or while in your because sentence.");
+  if (n < 6) bits.push("Note: some timeline facts are still unconfirmed.");
+  bits.push("The robbery was at 15:00. Alex says he arrived at the café at 14:40 and got home at 15:25. If that is true, he was not in the jewelry store at 15:00 — he may already have been walking home in the rain.");
+  bits.push("Emma the waitress could confirm that he paid the bill and was in the café. The phone call with a friend could also be checked.");
+  bits.push("There are still gaps: we do not have an exact time for the bill or for the moment he left. “While I was walking home” covers 15:00 only if he had already left. We have his story and possible witnesses, not full proof.");
+  bits.push("The times in his story can fit an alibi, but a careful detective still checks Emma and the phone call. Your verdict is yours — as long as you used the evidence.");
+  if (choice === "guilty") bits.push("You chose guilty. That can be reasonable if you think the gaps are too large, or that we only have his word.");
+  if (choice === "not-guilty") bits.push("You chose not guilty. The 14:40–15:25 story can support his alibi, especially if Emma and the friend confirm it.");
+  if (choice === "not-sure") bits.push("You chose not sure yet. That is a fair detective’s answer when some facts are missing or still need to be checked.");
+  return bits;
+}
+
+function renderVerdict() {
+  const v = state.verdict;
+  const choices = [
+    ["not-guilty", "Not guilty"],
+    ["guilty", "Guilty"],
+    ["not-sure", "Not sure yet"]
+  ];
+  const facts = Al.map(u => {
+    const st = factStatus(u.id);
+    const checked = v.facts.includes(u.id) ? " checked" : "";
+    const extra = u.time ? ` (${u.time})` : "";
+    const label = st === "locked" ? u.label + extra + " — not confirmed yet" : u.label + extra;
+    return `<li><label><input type="checkbox" data-vfact="${u.id}"${checked} /><span>${esc(label)}</span></label></li>`;
+  }).join("");
+  let fb = "";
+  if (v.submitted) {
+    fb = `<div class="feedback" id="verdict-feedback">${verdictFeedback().map(p => `<p>${esc(p)}</p>`).join("")}</div>`;
+  }
+  document.getElementById("verdict-card").innerHTML = `
+    <h3>Your verdict</h3>
+    <p>Is Alex guilty or not? Choose one, tick 2–3 facts that support your idea, and write a because sentence with when or while.</p>
+    <div class="choice-row" role="group" aria-label="Verdict">
+      ${choices.map(([id, lab]) => `<button type="button" data-verdict="${id}" class="${v.choice === id ? "is-on" : ""}">${lab}</button>`).join("")}
+    </div>
+    <p>Supporting facts</p>
+    <ul class="fact-picks">${facts}</ul>
+    <label for="verdict-because">Because… (use when or while)</label>
+    <textarea id="verdict-because" rows="3" maxlength="400" placeholder="I think Alex is … because when / while …">${esc(v.because || "")}</textarea>
+    <p style="margin-top:.8rem"><button type="button" class="btn btn-amber" id="verdict-submit">Save my verdict</button></p>
+    ${fb}
+  `;
 }
 
 function render() {
   renderCase();
+  renderStaticSupport();
   renderLevels();
   renderHeaderBits();
   renderScene();
   renderLog();
   renderForm();
   renderSidebar();
+  renderClosed();
+  renderReflection();
+  renderVerdict();
 }
 
 function openLightbox(key) {
   const img = Fe[key];
   if (!img) return;
   if (!state.shown.includes(key)) {
-    // case-file portrait and interrogation are always viewable from the dossier
     if (key !== "portrait" && key !== "interrogation") return;
   }
   lightboxKey = key;
@@ -1064,12 +1284,28 @@ function closeLightbox() {
   lightboxKey = null;
 }
 
+function closeNav() {
+  document.getElementById("site-header").classList.remove("is-open");
+  document.getElementById("nav-toggle").setAttribute("aria-expanded", "false");
+}
+
+document.getElementById("nav-toggle").addEventListener("click", () => {
+  const header = document.getElementById("site-header");
+  const open = !header.classList.contains("is-open");
+  header.classList.toggle("is-open", open);
+  document.getElementById("nav-toggle").setAttribute("aria-expanded", open ? "true" : "false");
+});
+document.getElementById("site-nav").addEventListener("click", ev => {
+  if (ev.target.closest("a")) closeNav();
+});
+
 document.getElementById("reset-btn").addEventListener("click", () => {
   if (!confirm(RESET_MSG)) return;
   localStorage.removeItem(STORAGE_KEY);
   state = defaultState();
   busy = false;
   closeLightbox();
+  closeNav();
   save();
   render();
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -1077,7 +1313,7 @@ document.getElementById("reset-btn").addEventListener("click", () => {
 
 document.addEventListener("click", ev => {
   const start = ev.target.closest("[data-start]");
-  if (start) { startLevel(Number(start.getAttribute("data-start"))); return; }
+  if (start) { startLevel(Number(start.getAttribute("data-start"))); closeNav(); return; }
   const open = ev.target.closest("[data-open]");
   if (open && !open.disabled) { openLightbox(open.getAttribute("data-open")); return; }
   const gap = ev.target.closest("[data-gap]");
@@ -1088,10 +1324,45 @@ document.addEventListener("click", ev => {
     if (input) { input.value = st.getAttribute("data-starter"); input.focus(); }
     return;
   }
-  if (ev.target.closest("#hints-toggle")) {
-    state.hints = !state.hints;
+  const vbtn = ev.target.closest("[data-verdict]");
+  if (vbtn) {
+    state.verdict.choice = vbtn.getAttribute("data-verdict");
     save();
-    render();
+    renderVerdict();
+    return;
+  }
+  if (ev.target.closest("#verdict-submit")) {
+    const area = document.getElementById("verdict-because");
+    if (area) state.verdict.because = area.value;
+    state.verdict.submitted = true;
+    save();
+    renderVerdict();
+    const fb = document.getElementById("verdict-feedback");
+    if (fb) fb.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+});
+
+document.addEventListener("change", ev => {
+  const fact = ev.target.closest("[data-vfact]");
+  if (fact) {
+    const id = fact.getAttribute("data-vfact");
+    const set = new Set(state.verdict.facts);
+    if (fact.checked) set.add(id); else set.delete(id);
+    state.verdict.facts = [...set];
+    save();
+  }
+});
+
+document.addEventListener("input", ev => {
+  const ref = ev.target.closest("[data-reflect]");
+  if (ref) {
+    state.reflection[ref.getAttribute("data-reflect")] = ref.value;
+    save();
+    return;
+  }
+  if (ev.target.id === "verdict-because") {
+    state.verdict.because = ev.target.value;
+    save();
   }
 });
 
@@ -1110,16 +1381,7 @@ document.addEventListener("keydown", ev => {
   if (ev.key === "Escape" && !document.getElementById("lightbox").hidden) closeLightbox();
 });
 
-// First visit: do not auto-start a level. Opening dossier photos should work.
-if (!state.shown.includes("portrait")) state.shown.push("portrait");
-if (!state.shown.includes("interrogation")) state.shown.push("interrogation");
-// Those two are in the case file already, so they start visible in evidence as well if a session later begins? 
-// Keep them visible in the case file always; evidence board still starts locked until the session reveals them,
-// except we just pushed them. For a fair game, evidence should unlock during the interrogation.
-// Revert auto-show on first load — case file has its own copies.
-if (!state.level) {
-  state.shown = [];
-}
+if (!state.level) state.shown = [];
 
 render();
 save();
@@ -1129,5 +1391,6 @@ window.__qa = {
   startLevel,
   sendText,
   getState: () => state,
-  El, Oa, Al, Fu
+  markDone,
+  El, Oa, Al, Fu, CASE_CODE, REFLECT
 };
