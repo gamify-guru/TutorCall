@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#070E1E" />
+  <meta name="description" content="Интерактивный квест Shadow School «Забытый шкафчик»: Past Perfect, глава II. Пять испытаний в заброшенном крыле школы-интерната." />
+  <title>Забытый шкафчик — Past Perfect (Shadow School, глава II)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23070E1E'/%3E%3Cpath d='M8 24V12l8-6 8 6v12' fill='none' stroke='%23FFD27A' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='2.5' fill='%23FFD27A'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./extras.css" />
+  <script src="../_shared/watermark.js" data-mode="bar" data-position="bottom" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">II</span>
+      <span>
+        <strong>Shadow School</strong>
+        <small>Глава II · Past Perfect</small>
+      </span>
+    </a>
+    <nav class="top-actions" aria-label="Навигация урока">
+      <a class="btn" href="#vocab">Досье</a>
+      <a class="btn" href="#rules">Правила</a>
+      <a class="btn" href="#quest">Квест</a>
+      <a class="btn" href="#finale">Финал</a>
+      <button type="button" class="btn ttc-reset" id="reset-btn">↺ Начать заново</button>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" tabindex="-1">
+      <img class="cover" src="images/locker-wing.jpg" alt="Заброшенный коридор школы: открытые шкафчики, ключ, дневник на полу и лунный свет из разбитого окна" />
+      <div class="veil"></div>
+      <div class="hero-inner">
+        <div class="pill"><div class="dot" aria-hidden="true"></div><span class="mono">Глава II · Забытый шкафчик · Past Perfect</span></div>
+        <h1>Забытый<br><em>шкафчик</em></h1>
+        <p class="lede">Прошлые тайны • 50 лет молчания</p>
+        <div class="plot-grid">
+          <div class="card">
+            <p class="kicker">Сюжет • Часть II</p>
+            <p class="plot">В заброшенном крыле школы находится <span class="hl">locker</span> ученицы, которая <span class="hl2">vanished</span> пятьдесят лет назад. Ты находишь старый <span class="hl">key</span> и <span class="hl">diary</span> с <span class="hl2">warning</span>. Нужно узнать, что произошло <em>до</em> того, как дверь заперли навсегда.</p>
+          </div>
+          <div class="card">
+            <p class="kicker">Грамматика ночи</p>
+            <p class="plot" style="font-weight:800;margin-top:.45rem">had + V₃</p>
+            <p class="gram-mini">до того, как...</p>
+            <p class="sub">Past Perfect = завершённое действие к моменту в Past Simple</p>
+          </div>
+        </div>
+        <p style="margin:1.2rem 0 0">
+          <a class="btn btn-lilac" href="#quest">Открыть шкафчик</a>
+          <span class="sub" style="display:inline-block;margin-left:.7rem">10 слов • 5 заданий</span>
+        </p>
+      </div>
+    </section>
+
+    <section class="wrap" id="vocab" tabindex="-1">
+      <p class="kicker">Досье лексики</p>
+      <h2>Кликни — услышь шёпот из 1974 года</h2>
+      <p class="sub">10 слов крыла. Нажми на карточку: британский голос браузера прочитает слово и пример, откроются перевод и транскрипция.</p>
+      <div class="vocab" id="vocab-list"></div>
+    </section>
+
+    <section class="wrap" id="rules" tabindex="-1">
+      <p class="kicker">Правила времени</p>
+      <h2>Заклинание Past Perfect</h2>
+      <p class="sub">Ключ к разгадке: что случилось раньше, а что — позже.</p>
+      <div class="rules" id="rules-list"></div>
+    </section>
+
+    <section class="wrap" id="quest" tabindex="-1">
+      <p class="kicker">Квест • Забытый шкафчик</p>
+      <h2>Пять испытаний прошлого</h2>
+      <p class="sub">Все задания и финал открыты сразу — проходи в любом порядке. Каждое задание — свой формат. Прогресс сохраняется сам.</p>
+      <div class="task-pic">
+        <img src="images/locker-wing.jpg" alt="Заброшенный коридор с открытым шкафчиком, ключом и дневником" />
+        <p>Крыло не открывали с 1974 года. Смотри на коридор, читая задания: шкафчик, ключ и дневник — всё здесь.</p>
+      </div>
+
+      <article class="mission" id="m1" tabindex="-1">
+        <p class="kicker">Испытание 01 · ⏳</p>
+        <h3>Хронология исчезновения</h3>
+        <p class="sub"><strong>Механика: Хронология.</strong> Для каждой пары событий выбери правильную форму: что happened earlier (Past Perfect — had + V₃), а что позже (Past Simple).</p>
+        <div id="t1-list"></div>
+        <div class="checkrow">
+          <p class="score" id="t1-score"></p>
+          <button type="button" class="btn btn-gold" id="t1-btn">Проверить хронологию</button>
+        </div>
+      </article>
+
+      <article class="mission" id="m2" tabindex="-1">
+        <p class="kicker">Испытание 02 · 📔</p>
+        <h3>Загадка дневника</h3>
+        <p class="sub"><strong>Механика: Cloze Test.</strong> Страницы дневника повреждены временем. Восстанови пропущенные глаголы. Помни: Past Perfect для более раннего действия, Past Simple для более позднего.</p>
+        <div class="task-pic">
+          <img src="images/locker-wing.jpg" alt="Дневник и книга на полу заброшенного коридора" />
+        </div>
+        <div id="t2-list"></div>
+        <div class="checkrow">
+          <p class="score" id="t2-score"></p>
+          <button type="button" class="btn btn-gold" id="t2-btn">Сшить страницы</button>
+        </div>
+      </article>
+
+      <article class="mission" id="m3" tabindex="-1">
+        <p class="kicker">Испытание 03 · 🔍</p>
+        <h3>Поиск улик</h3>
+        <p class="sub"><strong>Механика: Sentence Builder.</strong> Собери предложения из разрозненных слов. Нажми на слово внизу — оно перейдёт наверх. Нажми наверх — вернётся. Используй подсказку для порядка.</p>
+        <div id="t3-list"></div>
+        <div class="checkrow">
+          <p class="score" id="t3-score"></p>
+          <button type="button" class="btn btn-gold" id="t3-btn">Собрать улики</button>
+        </div>
+      </article>
+
+      <article class="mission" id="m4" tabindex="-1">
+        <p class="kicker">Испытание 04 · 👻</p>
+        <h3>Исправление записок</h3>
+        <p class="sub"><strong>Механика: Error Correction.</strong> Призрак Лилии пытается рассказать свою историю, но путает времена и формы. Найди и выбери правильный вариант для каждого предложения.</p>
+        <div id="t4-list"></div>
+        <div class="checkrow">
+          <p class="score" id="t4-score"></p>
+          <button type="button" class="btn btn-gold" id="t4-btn">Исправить записки</button>
+        </div>
+      </article>
+
+      <article class="mission" id="m5" tabindex="-1">
+        <p class="kicker">Испытание 05 · 📜</p>
+        <h3>Хроника интерната</h3>
+        <p class="sub"><strong>Механика: Story Chain.</strong> Составь хронику пятидесятилетней давности. В каждом предложении определи: какое действие было раньше (had + V₃), а какое позже (Past Simple).</p>
+        <div id="t5-list"></div>
+        <div class="checkrow">
+          <p class="score" id="t5-score"></p>
+          <button type="button" class="btn btn-gold" id="t5-btn">Сохранить хронику</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="wrap" id="finale" tabindex="-1">
+      <p class="kicker">Финал • Отражение</p>
+      <h2>Что даётся сложнее всего?</h2>
+      <p class="sub">Раздел открыт всегда. Ты прошла через тайны прошлого. Теперь, по-русски, честно — что в изучении английского даётся с трудом? Это поможет школе настроить следующие главы под тебя.</p>
+      <div class="card" style="margin-top:1rem">
+        <p class="kicker" id="finale-progress"></p>
+        <p class="kicker" style="margin-top:1rem">Что вызывает трудности?</p>
+        <div class="hard-grid" id="finale-hard"></div>
+        <label class="kicker" for="finale-text" style="display:block;margin:1rem 0 .45rem">Расскажи подробнее, по-русски</label>
+        <textarea id="finale-text" rows="6" placeholder="Например: не могу понять, когда использовать had + V₃, путаю с Past Simple; мне сложно запоминать глаголы; боюсь говорить вслух..."></textarea>
+        <p style="margin:0.9rem 0 0">
+          <button type="button" class="btn btn-lilac" id="finale-btn">Отправить в архив школы →</button>
+        </p>
+        <p class="sub" id="finale-note">Твои данные останутся только в дневнике Shadow School, на этом устройстве.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">Shadow School · Chapter II · Past Perfect · The Abandoned Locker</footer>
+  <script src="./app.js" defer></script>
+</body>
+</html>
