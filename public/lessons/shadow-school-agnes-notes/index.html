@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080d17" />
+  <meta name="description" content="Reading: Agnes’s Notes — an interactive Grade 7 English investigation at Shadow School." />
+  <title>Reading: Agnes’s Notes | Shadow School</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%101827'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-size='16'%3E%F0%9F%95%B3%EF%B8%8F%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./extras.css" />
+  <script src="../_shared/watermark.js" data-mode="bar" data-position="bottom" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="#top">
+        <span class="brand-mark" aria-hidden="true">👁</span>
+        <span><strong>Shadow School</strong><small>Junior Investigator Programme</small></span>
+      </a>
+      <nav class="top-actions" aria-label="Lesson navigation">
+        <a class="btn" href="#questions">Questions</a>
+        <a class="btn" href="#class-mission">Class Mission</a>
+        <a class="btn" href="#homework-mission">Homework</a>
+        <a class="btn" href="#case-file">Case File</a>
+        <button type="button" class="btn" id="grammar-btn">Grammar &amp; Rules</button>
+        <button type="button" class="btn ttc-reset" id="reset-btn">↺ Начать заново</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" tabindex="-1">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Case continuing from The Witness Reports</p>
+          <p class="sub">Grade 7 English · Reading · Lesson 08</p>
+          <h1 id="lessonTitle">Reading:<span>Agnes’s Notes</span></h1>
+          <p class="hero-summary">The witness reports are still on the desk. Now Agnes has found <strong>four handwritten notes</strong>. Read closely, follow the small details, and add new clues to the same Case File.</p>
+          <p><a class="btn btn-gold" href="#class-mission" id="continueBtn">Begin the class investigation</a></p>
+          <div class="hero-meta"><span>Case 02 · Still open</span><span>Storage Room · 16:42</span></div>
+        </div>
+        <figure class="hero-art">
+          <picture>
+            <source srcset="images/scene.webp" type="image/webp" />
+            <img id="img-scene" src="images/scene.jpg" width="1168" height="784" alt="Two girls in the Shadow School storage room study a glowing device and a hand-drawn map." fetchpriority="high" />
+          </picture>
+          <figcaption>Junior Investigator and Agnes · New evidence from the storage room.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section wrap" id="questions" tabindex="-1">
+      <p class="eyebrow">From the previous lesson</p>
+      <h2 id="questionsTitle">Three questions. Still open.</h2>
+      <p class="lede">You studied <strong>7 reports from 4 witnesses</strong>. Their stories did not explain everything. Agnes’s notes may connect the missing pieces.</p>
+      <div class="q-grid" id="questionGrid"></div>
+      <p class="eyebrow" style="margin-top:1.4rem">The witnesses are still in the case</p>
+      <h3 style="margin-top:0.3rem">Select a portrait to read their reports</h3>
+      <div class="witness-row" id="witnessRow"></div>
+    </section>
+
+    <section class="section wrap" id="reports" tabindex="-1">
+      <p class="eyebrow">Case File · original evidence</p>
+      <h2>Seven witness reports</h2>
+      <p class="lede">The same four witnesses. Read each source before you add Agnes’s new clues.</p>
+      <div class="report-grid" id="reportGrid"></div>
+    </section>
+
+    <section class="section wrap" id="class-mission" tabindex="-1">
+      <p class="eyebrow">I · In the storage room · Together</p>
+      <h2 id="classTitle">Class Mission</h2>
+      <p class="lede">Decipher all four notes. Match them, mark the grammar clues, and connect Agnes’s details to the earlier witness reports. All four tasks are open — work in any order.</p>
+      <p class="progress" id="classProgressText">0 / 4 tasks</p>
+      <div class="track" aria-hidden="true"><div id="classProgressFill"></div></div>
+      <figure class="task-pic">
+        <picture>
+          <source srcset="images/scene.webp" type="image/webp" />
+          <img src="images/scene.jpg" width="1168" height="784" alt="The Shadow School storage room, where Agnes found the four notes." />
+        </picture>
+        <p>Look at the storage room. The notes, the lamps and the map are part of the same scene.</p>
+      </figure>
+
+      <div class="note-stack" id="noteStack"></div>
+
+      <article class="mission" id="task-match" tabindex="-1">
+        <p class="eyebrow">Task 1 · Match</p>
+        <h3>Which question does each note help?</h3>
+        <p class="sub">Read all four notes. Choose the <strong>main</strong> open question for this first sort. You can mark extra links in Task 3. <strong>Two notes focus on the spare key.</strong></p>
+        <div id="matchList"></div>
+        <div class="actions"><button class="btn btn-gold" type="button" data-check="class-match">Check matches</button></div>
+        <p class="score" id="score-match"></p>
+      </article>
+
+      <article class="mission" id="task-highlight" tabindex="-1">
+        <p class="eyebrow">Task 2 · Highlight</p>
+        <h3>Find every grammar clue</h3>
+        <p class="sub">In the four notes above, select every complete phrase with <strong>too</strong> or <strong>enough</strong>. Some other phrases are only distractions. There are <strong>7 correct phrases</strong>.</p>
+        <p class="tip" id="highlightCount"></p>
+        <div class="actions"><button class="btn btn-gold" type="button" data-check="class-highlight">Check phrases</button></div>
+        <p class="score" id="score-highlight"></p>
+      </article>
+
+      <article class="mission" id="task-useful" tabindex="-1">
+        <p class="eyebrow">Task 3 · Evidence</p>
+        <h3>What does each note prove useful for?</h3>
+        <p class="sub">Select every question that receives useful information from each note. One note helps with <strong>two questions</strong>. Empty boxes mean “not useful here”.</p>
+        <div id="usefulTable"></div>
+        <div class="actions"><button class="btn btn-gold" type="button" data-check="class-useful">Check the evidence map</button></div>
+        <p class="score" id="score-useful"></p>
+      </article>
+
+      <article class="mission" id="task-links" tabindex="-1">
+        <p class="eyebrow">Task 4 · Connect</p>
+        <h3>Connect each detail to a witness</h3>
+        <p class="sub">Drag each detail onto the right witness. On a touch screen, <strong>tap a detail, then tap a witness</strong>. These links return to the earlier reports.</p>
+        <p class="tip" id="linkStatus"></p>
+        <div id="detailTray" class="actions" style="margin-top:0.6rem"></div>
+        <div class="drop-grid" id="witnessDrops"></div>
+        <div class="actions"><button class="btn btn-gold" type="button" data-check="class-links">Check connections</button></div>
+        <p class="score" id="score-links"></p>
+      </article>
+    </section>
+
+    <section class="section wrap" id="homework-mission" tabindex="-1">
+      <p class="eyebrow">II · At your own desk · New evidence</p>
+      <h2 id="homeworkTitle">Homework Mission</h2>
+      <p class="lede">Agnes has uncovered five longer field notes. Put events in order, repair the grammar, and test each detail against a witness report. All four homework tasks are open now.</p>
+      <p class="progress" id="homeworkProgressText">0 / 4 tasks</p>
+      <div class="track" aria-hidden="true"><div id="homeworkProgressFill"></div></div>
+      <figure class="task-pic">
+        <picture>
+          <source srcset="images/scene.webp" type="image/webp" />
+          <img src="images/scene.jpg" width="1168" height="784" alt="The same storage room, used when you test the new field notes against the case." />
+        </picture>
+        <p>Use the storage-room scene and the notes from class when you work at your own desk.</p>
+      </figure>
+
+      <article class="mission" id="task-sort" tabindex="-1">
+        <p class="eyebrow">Assignment A · Sort</p>
+        <h3>Rebuild Agnes’s timeline</h3>
+        <p class="sub">Move the five new notes into time order, from earliest to latest. Use the arrow buttons, or drag. The times are hidden until you check.</p>
+        <div id="sortList"></div>
+        <div class="actions"><button class="btn btn-gold" type="button" data-check="hw-sort">Check the order</button></div>
+        <p class="score" id="score-sort"></p>
+      </article>
+
+      <article class="mission" id="task-grammar" tabindex="-1">
+        <p class="eyebrow">Assignment B · Grammar</p>
+        <h3>Repair the field notebook</h3>
+        <p class="sub">Choose the correct sentence in each pair. Remember: <strong>too + adjective</strong>, but <strong>adjective + enough</strong>.</p>
+        <div id="grammarList"></div>
+        <div class="actions"><button class="btn btn-gold" type="button" data-check="hw-grammar">Check sentences</button></div>
+        <p class="score" id="score-grammar"></p>
+      </article>
+
+      <article class="mission" id="task-reportLinks" tabindex="-1">
+        <p class="eyebrow">Assignment C · Compare</p>
+        <h3>Test the notes against the reports</h3>
+        <p class="sub">For each note, choose the witness whose earlier report it connects to. Then decide if it <strong>supports, challenges, or explains</strong> that report.</p>
+        <div id="reportLinkList"></div>
+        <div class="actions"><button class="btn btn-gold" type="button" data-check="hw-reportLinks">Check comparisons</button></div>
+        <p class="score" id="score-reportLinks"></p>
+      </article>
+
+      <article class="mission" id="task-conclusions" tabindex="-1">
+        <p class="eyebrow">Assignment D · Conclude</p>
+        <h3>Choose the strongest conclusions</h3>
+        <p class="sub">A good investigator does not guess. Choose the statement that is supported by the notes <strong>without claiming too much</strong>.</p>
+        <div id="conclusionList"></div>
+        <div class="actions"><button class="btn btn-gold" type="button" data-check="hw-conclusions">Check conclusions</button></div>
+        <p class="score" id="score-conclusions"></p>
+      </article>
+    </section>
+
+    <section class="section wrap" id="case-file" tabindex="-1">
+      <p class="eyebrow">Case 02 · Open since The Witness Reports</p>
+      <h2>Junior Investigator’s Case File</h2>
+      <p class="lede">New clues sit beside the original reports; they do not replace them. Complete tasks to file Agnes’s evidence here.</p>
+      <p class="progress" id="clueCount">0 Agnes clues filed</p>
+      <div class="clue-list" id="clueList"></div>
+    </section>
+
+    <section class="section wrap" id="closing" tabindex="-1">
+      <h2>The investigation continues.</h2>
+      <p class="lede">Three questions are clearer. None are closed. Keep your Case File ready for the next lesson.</p>
+    </section>
+  </main>
+
+  <footer class="site">
+    <p>Shadow School · Grade 7 English · Reading Investigation</p>
+    <p id="saveLabel">Progress saves automatically on this device.</p>
+  </footer>
+
+  <div class="modal" id="grammar-modal" role="dialog" aria-modal="true" aria-labelledby="grammar-title" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div>
+          <p class="eyebrow">Your detective language kit</p>
+          <h2 id="grammar-title">Grammar &amp; Rules</h2>
+        </div>
+        <button type="button" class="btn" id="grammar-close">Close</button>
+      </div>
+      <p class="sub">Open a rule whenever you need it. These exact patterns appear in Agnes’s notes.</p>
+      <article class="rule">
+        <h3>01 / too + adjective / adverb</h3>
+        <span class="formula">too + adjective / adverb</span>
+        <p>Use <strong>too</strong> for more than you want or need. It often shows a problem.</p>
+        <p class="ex">The corridor was <strong>too dark</strong> to read the tag.<br>The ink was <strong>too faint</strong> to read.</p>
+      </article>
+      <article class="rule">
+        <h3>02 / adjective / adverb + enough</h3>
+        <span class="formula">adjective / adverb + enough</span>
+        <p><strong>Enough</strong> comes after an adjective or adverb. It means sufficient.</p>
+        <p class="ex">The handwriting was neat <strong>enough</strong>.<br>Voss did not write clearly <strong>enough</strong>.</p>
+      </article>
+      <article class="rule">
+        <h3>03 / enough + noun</h3>
+        <span class="formula">enough + noun</span>
+        <p>Before a noun, <strong>enough</strong> tells us the amount is sufficient.</p>
+        <p class="ex">Abernathy had <strong>enough time</strong> to reach the storage room.<br>We have <strong>enough clues</strong> for a new lead.</p>
+      </article>
+      <article class="rule">
+        <h3>04 / Word order check</h3>
+        <span class="formula">too small · small enough · enough time</span>
+        <p>Do not put <strong>enough</strong> before an adjective. Do not put <strong>too</strong> after it.</p>
+        <p class="ex"><span class="wrong">enough faint</span> → <strong>too faint</strong><br><span class="wrong">enough careful</span> → <strong>careful enough</strong></p>
+      </article>
+      <p class="tip"><strong>Meaning matters, detective.</strong> “Too dark” means the darkness caused a problem. “Dark enough” means there was sufficient darkness for a purpose.</p>
+    </div>
+  </div>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
