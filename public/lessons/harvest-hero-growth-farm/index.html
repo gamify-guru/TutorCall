@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#FFFBEB" />
+  <meta name="description" content="Interactive A1 English lesson: How the food grows. Collect 3 Keys of Growth on the magical Growth Farm." />
+  <title>Harvest Hero — Growth Farm | How the food grows</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23166534'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='16'%3E%F0%9F%8D%87%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./extras.css" />
+  <script src="../_shared/watermark.js" data-mode="bar" data-position="bottom" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">🌱</span>
+      <span>
+        <strong>Growth Farm</strong>
+        <small>Harvest Hero · A1</small>
+      </span>
+    </a>
+    <nav class="top-actions" aria-label="Lesson navigation">
+      <a class="btn" href="#warm">Warm-up</a>
+      <a class="btn" href="#missions">Missions</a>
+      <a class="btn" href="#guardian">Guardian</a>
+      <a class="btn" href="#feast">Feast</a>
+      <button type="button" class="btn" id="help-btn">Rules &amp; Help</button>
+      <button type="button" class="btn ttc-reset" id="reset-btn">↺ Начать заново</button>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" tabindex="-1">
+      <img class="cover" src="images/farm.jpg" alt="Harvest Hero kids digging potatoes on the Growth Farm" />
+      <div class="veil"></div>
+      <div class="hero-inner">
+        <div class="pills">
+          <span class="pill">45 minutes</span>
+          <span class="pill">Grade 3 · A1</span>
+          <span class="pill green">Academy Stars 2 · Unit 8</span>
+        </div>
+        <p class="kicker" style="margin-top:0.8rem">How the food grows · Revision</p>
+        <h1>Harvest Hero<br><em>on the Growth Farm</em></h1>
+        <p class="lede">The Seasonal Guardian will not open the gates to the Harvest Feast… until you prove your knowledge. Collect <strong>3 Keys of Growth</strong> and invite the Guardian to the feast!</p>
+        <p>
+          <a class="btn btn-gold" href="#missions">Start the Adventure</a>
+          <button type="button" class="btn" id="help-btn-2">Rules &amp; Help</button>
+        </p>
+      </div>
+    </section>
+
+    <section class="wrap" id="brief" tabindex="-1">
+      <div class="grid-2">
+        <article class="card">
+          <div style="display:flex;gap:0.8rem;align-items:flex-start">
+            <img src="images/guardian.jpg" alt="The Seasonal Guardian at the farm gate" style="width:7rem;height:9rem;object-fit:cover;object-position:top;border-radius:1rem;border:3px solid #F3D19A;flex-shrink:0" />
+            <div>
+              <p class="kicker">The Seasonal Guardian</p>
+              <button type="button" class="speak" id="guardian-speak" aria-label="Listen to the Guardian">🔊</button>
+              <blockquote class="sub" style="margin-top:0.4rem">“Welcome, Harvest Hero! My farm is full of food — apples on trees, grapes on vines, potatoes in the ground. But the Harvest Feast gates will not open until you show me what you know. Complete any 3 missions to win 3 Keys of Growth. At least one mission must be speaking or writing. Then pass my final challenge and invite me to the feast!”</blockquote>
+            </div>
+          </div>
+        </article>
+        <article class="card">
+          <p class="kicker">How the lesson works</p>
+          <div class="grid-3" style="margin-top:0.7rem">
+            <div class="stat"><b>3</b> Keys of Growth</div>
+            <div class="stat"><b>9</b> Missions to choose</div>
+            <div class="stat"><b>6–8</b> Sentences to say</div>
+          </div>
+          <ol class="sub" style="margin-top:0.8rem;padding-left:1.15rem">
+            <li><strong>Choose 3 missions.</strong> Sorting, reading, speaking, writing, matching and more.</li>
+            <li><strong>Guardian Challenge.</strong> Speak or write 6–8 sentences and invite the Guardian.</li>
+            <li><strong>Celebrate!</strong> Open the gates and get your Harvest Hero certificate.</li>
+          </ol>
+          <p class="sub">All missions, the Guardian and the feast are open now — go in any order. Progress saves on this device.</p>
+        </article>
+      </div>
+      <div class="card" style="margin-top:0.9rem" id="words">
+        <p class="kicker">Words for today — tap to listen</p>
+        <div class="foods" id="word-bank" style="margin-top:0.6rem"></div>
+        <div class="grid-2" id="place-legend" style="margin-top:0.8rem"></div>
+      </div>
+      <p class="checkrow" style="margin-top:0.8rem">
+        <span class="keys" id="keys-hud"></span>
+      </p>
+    </section>
+
+    <section class="wrap" id="warm" tabindex="-1">
+      <p class="kicker">Step 1 · Warm-up</p>
+      <h2>Name the food in the picture!</h2>
+      <p class="sub">Tap a food to hear it. Say: “I see <strong>a potato</strong>. It grows <strong>in the ground</strong>.”</p>
+      <div class="task-pic">
+        <img src="images/farm.jpg" alt="Farm scene with potatoes, lemons, oranges, grapes, watermelon, peppers, peas and a tomato" />
+        <p>Speaking challenge: say 3 sentences about the picture.</p>
+      </div>
+      <div class="grid-2">
+        <div>
+          <h3>Tap the foods you see</h3>
+          <div class="foods" id="warm-foods" style="margin-top:0.55rem"></div>
+          <p class="score" id="warm-explored"></p>
+        </div>
+        <div>
+          <h3>Quick check</h3>
+          <p class="sub" id="warm-q"></p>
+          <div class="opts" id="warm-opts" style="margin-top:0.5rem"></div>
+          <p class="score" id="warm-score"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" id="missions" tabindex="-1">
+      <p class="kicker">Missions</p>
+      <h2>Nine missions on the farm</h2>
+      <p class="sub">Choose any three to earn Keys of Growth. At least one should be speaking or writing (marked ✏️). Everything is open — play more if you like!</p>
+      <div id="mission-nav" class="foods" style="margin:0.7rem 0 0.2rem"></div>
+
+      <article class="mission" id="m-sort" tabindex="-1">
+        <p class="kicker">01 · Sorting · 5 min</p>
+        <h3>Sort the Harvest</h3>
+        <p class="sub">Tap a food, then tap the right basket. Put 8 foods in the right place: on a tree, on a vine, on a bush, in the ground.</p>
+        <div id="sort-foods" class="foods" style="margin-top:0.6rem"></div>
+        <div id="sort-baskets" class="grid-2" style="margin-top:0.7rem"></div>
+        <p class="score" id="sort-score"></p>
+      </article>
+
+      <article class="mission" id="m-read" tabindex="-1">
+        <p class="kicker">02 · Reading · 6 min</p>
+        <h3>How Oranges Grow</h3>
+        <p class="sub">Read a short story about seeds, flowers and bees. Then answer 6 questions.</p>
+        <div class="story" id="read-story"></div>
+        <div id="read-list"></div>
+        <div class="checkrow">
+          <p class="score" id="read-score"></p>
+          <button type="button" class="btn btn-gold" id="read-btn">Check answers</button>
+        </div>
+      </article>
+
+      <article class="mission" id="m-compare" tabindex="-1">
+        <p class="kicker">03 · Comparing + speaking · 6 min ✏️</p>
+        <h3>Potato vs Watermelon</h3>
+        <p class="sub">Compare a potato and a watermelon. Choose 6 true sentences, listen, and say them aloud.</p>
+        <div id="compare-list"></div>
+        <div class="checkrow">
+          <p class="score" id="compare-score"></p>
+          <button type="button" class="btn btn-gold" id="compare-btn">Check sentences</button>
+        </div>
+      </article>
+
+      <article class="mission" id="m-write" tabindex="-1">
+        <p class="kicker">04 · Writing · 7 min ✏️</p>
+        <h3>Would You Like…?</h3>
+        <p class="sub">Build 8 sentences. Tap the correct words, then listen and say them. Write one extra sentence of your own.</p>
+        <div id="write-list"></div>
+        <div class="card" style="margin-top:0.7rem">
+          <p class="kicker">Bonus: write your own sentence</p>
+          <div style="display:flex;gap:0.45rem;flex-wrap:wrap;margin-top:0.45rem">
+            <input type="text" id="write-own" placeholder="e.g. Would you like some beans?" style="flex:1;min-width:12rem" />
+            <button type="button" class="btn" id="write-own-say">🔊 Say</button>
+          </div>
+        </div>
+        <p class="score" id="write-score"></p>
+      </article>
+
+      <article class="mission" id="m-market" tabindex="-1">
+        <p class="kicker">05 · Speaking dialogue · 7 min ✏️</p>
+        <h3>Market Role-Play</h3>
+        <p class="sub">You are at the farm market. Choose the best reply for each of the 8 lines.</p>
+        <div id="market-list"></div>
+        <div class="checkrow">
+          <p class="score" id="market-score"></p>
+          <button type="button" class="btn btn-gold" id="market-btn">Check the dialogue</button>
+        </div>
+      </article>
+
+      <article class="mission" id="m-invite" tabindex="-1">
+        <p class="kicker">06 · Creating + writing · 7 min ✏️</p>
+        <h3>Party Invitation</h3>
+        <p class="sub">Build your Harvest Feast invitation. Choose at least 4 parts, write your own line, then read it aloud.</p>
+        <div id="invite-build"></div>
+        <div id="invite-preview"></div>
+      </article>
+
+      <article class="mission" id="m-match" tabindex="-1">
+        <p class="kicker">07 · Matching · 5 min</p>
+        <h3>Match Farm Activities</h3>
+        <p class="sub">Tap a sentence on the left, then tap the matching activity on the right. Match all 8 pairs.</p>
+        <div class="match-grid" id="match-grid" style="margin-top:0.6rem"></div>
+        <p class="score" id="match-score"></p>
+      </article>
+
+      <article class="mission" id="m-drag" tabindex="-1">
+        <p class="kicker">08 · Drag &amp; drop · 5 min</p>
+        <h3>Where Does It Grow?</h3>
+        <p class="sub">Drag a food to a basket — or tap a food, then tap a basket. 8 foods!</p>
+        <div class="task-pic">
+          <img src="images/farm.jpg" alt="The Growth Farm where foods grow in different places" />
+        </div>
+        <div id="drag-foods" class="foods"></div>
+        <div id="drag-baskets" class="grid-2" style="margin-top:0.7rem"></div>
+        <p class="score" id="drag-score"></p>
+      </article>
+
+      <article class="mission" id="m-gap" tabindex="-1">
+        <p class="kicker">09 · Gap-fill · 5 min</p>
+        <h3>At the Harvest Feast</h3>
+        <p class="sub">Complete 8 sentences. Choose a, an or some — and Yes, please / No, thanks.</p>
+        <div id="gap-list"></div>
+        <div class="checkrow">
+          <p class="score" id="gap-score"></p>
+          <button type="button" class="btn btn-gold" id="gap-btn">Check the gaps</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="wrap" id="guardian" tabindex="-1">
+      <p class="kicker">Final Challenge</p>
+      <h2>Invite the Guardian!</h2>
+      <p class="sub">This section is always open. Speak or write 6–8 sentences. You must: name food, say how it grows, and invite the Guardian.</p>
+      <div class="task-pic tall">
+        <img src="images/guardian.jpg" alt="The Seasonal Guardian at the farm gate, holding three golden keys" />
+      </div>
+      <div class="grid-2">
+        <div>
+          <div id="guard-checks"></div>
+          <div class="card" style="margin-top:0.7rem">
+            <p class="kicker">Your invitation (<span id="guard-count">0</span>/6–8)</p>
+            <ol id="guard-lines"></ol>
+            <div style="display:flex;gap:0.4rem;flex-wrap:wrap;margin-top:0.5rem">
+              <input type="text" id="guard-own" placeholder="Or write your own sentence…" style="flex:1;min-width:12rem" />
+              <button type="button" class="btn btn-green" id="guard-add">Add</button>
+              <button type="button" class="btn" id="guard-listen">🔊 Listen</button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p class="kicker">Sentence bank — tap to add</p>
+          <div class="bank" id="guard-bank" style="margin-top:0.5rem"></div>
+          <p class="score" id="guard-ready"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" id="feast" tabindex="-1">
+      <p class="kicker">Harvest Feast</p>
+      <h2 id="feast-title">The gates are almost open</h2>
+      <div class="task-pic">
+        <img src="images/farm.jpg" alt="The Harvest Feast on the Growth Farm" />
+      </div>
+      <p class="sub" id="feast-note"></p>
+      <div class="grid-2" style="margin-top:0.8rem">
+        <div class="card">
+          <h3>What I can do now</h3>
+          <p class="sub">Tap each one when you can do it. Say it to your teacher!</p>
+          <div class="checklist" id="cando-list"></div>
+          <p class="score" id="cando-score"></p>
+        </div>
+        <div class="diploma">
+          <p class="kicker">Harvest Hero Certificate</p>
+          <h3>This hero can…</h3>
+          <p class="sub" style="color:#1C1917">name food, say how it grows, ask “Would you like…?”, say “I'd like…, please” and invite friends with “Would you like to…?”</p>
+          <input type="text" id="hero-name" maxlength="28" placeholder="Type your name…" aria-label="Your name" style="margin:0.8rem auto 0;max-width:18rem;display:block" />
+          <p class="font-display" id="hero-line" style="font-size:1.4rem;font-weight:700;margin:0.7rem 0 0.2rem">Harvest Hero</p>
+          <p style="font-size:0.75rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase">Academy Stars 2 · Unit 8 · How the food grows</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">Growth Farm · Harvest Hero · Academy Stars 2 · Unit 8 · How the food grows</footer>
+
+  <div class="modal" id="help-modal" role="dialog" aria-modal="true" aria-labelledby="help-title" aria-hidden="true">
+    <div class="modal-back" data-close="help"></div>
+    <div class="modal-card">
+      <div class="modal-head">
+        <h2 id="help-title">Rules &amp; Help</h2>
+        <button type="button" class="btn" id="help-close">Close</button>
+      </div>
+      <div id="help-body"></div>
+    </div>
+  </div>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
