@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Maple &amp; Mug Alibi · A When &amp; While Interrogation</title>
+  <meta name="description" content="The Maple &amp; Mug Alibi — an interactive English lesson. Interrogate Alex about the jewelry store robbery using when and while." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Special+Elite&family=Permanent+Marker&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./extras.css" />
+  <script src="../_shared/watermark.js" data-mode="bar" data-position="bottom" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">0715</span>
+      <span>
+        <strong>The Maple &amp; Mug Alibi</strong>
+        <span>Riverdale Riddle · when &amp; while</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#case">Case File</a>
+      <a href="#levels">Levels</a>
+      <a href="#interrogation">Interrogation</a>
+      <a href="#grammar">When vs While</a>
+      <button type="button" class="btn-amber" id="reset-btn">↺ Начать заново</button>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow">English lesson · Past continuous</p>
+        <h1>The Maple&nbsp;&amp;&nbsp;Mug <em>Alibi</em></h1>
+        <p class="lede">Yesterday at <strong>15:00</strong>, someone robbed a jewelry store. Alex says he was at a café. Question him — but he only answers when you use <em>when</em> and <em>while</em> correctly.</p>
+        <div class="hero-actions">
+          <a class="btn btn-amber" href="#levels">Choose a level</a>
+          <a class="btn" href="#case">Read the case file</a>
+        </div>
+        <dl class="stats">
+          <div><strong>15:00</strong><span>Time of crime</span></div>
+          <div><strong>1</strong><span>Suspect</span></div>
+          <div><strong>4</strong><span>Levels</span></div>
+        </dl>
+      </div>
+      <figure class="hero-art">
+        <picture>
+          <source srcset="images/interrogation.webp" type="image/webp" />
+          <img id="img-interrogation" src="images/interrogation.jpg" width="1400" height="933" alt="Two young detectives question Alex at a wooden table in front of a cork evidence board." />
+        </picture>
+        <figcaption>Interrogation room · Case: Riverdale Riddle</figcaption>
+      </figure>
+    </section>
+
+    <section class="section" id="case">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="section-kicker">Case file · Riverdale Riddle</p>
+          <h2>Meet the suspect.</h2>
+          <p>The detectives have one name and one story. Read the file, then start the interrogation.</p>
+        </header>
+        <div class="case-grid">
+          <article class="dossier">
+            <span class="stamp">Confidential</span>
+            <div class="dossier-grid">
+              <button type="button" class="polaroid" data-open="portrait" aria-label="View Alex's portrait">
+                <picture>
+                  <source srcset="images/alex_portrait.webp" type="image/webp" />
+                  <img id="img-portrait" src="images/alex_portrait.jpg" width="933" height="1400" alt="Portrait of Alex, a young man with messy brown hair and a blue shirt." />
+                </picture>
+                <span>Alex</span>
+              </button>
+              <div>
+                <p class="eyebrow" style="color:#6a4d2c">Suspect profile</p>
+                <h3>Alex</h3>
+                <dl class="facts">
+                  <div class="facts"><!-- filled --></div>
+                </dl>
+                <ul class="facts" id="case-facts"></ul>
+                <div class="note">
+                  <strong>Detective's note</strong>
+                  <p>He says he was at the café, then walked home. Who did he see? What was the weather like? What time did he get home? <strong>Find out — one correct question at a time.</strong></p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <div>
+            <button type="button" class="room-card" data-open="interrogation" aria-label="View the interrogation room">
+              <picture>
+                <source srcset="images/interrogation.webp" type="image/webp" />
+                <img src="images/interrogation.jpg" width="1400" height="933" alt="Two young detectives question Alex at a wooden table in front of a cork evidence board." />
+              </picture>
+              <span class="cap"><span>Room B</span><b>The interrogation room</b></span>
+            </button>
+            <div class="rules" id="case-rules"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="levels">
+      <div class="wrap">
+        <header class="section-head" style="margin-inline:auto;text-align:center">
+          <p class="section-kicker">The interrogation</p>
+          <h2>Choose the difficulty.</h2>
+          <p>Pick any level to start a session. Alex changes how he answers for each level. Every level stays open — you can jump ahead or go back at any time.</p>
+        </header>
+        <div class="cork">
+          <div class="levels" id="level-cards"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="interrogation">
+      <div class="wrap">
+        <header class="play-head">
+          <p class="section-kicker">Room B · Live session</p>
+          <h2>The interrogation.</h2>
+          <p id="task-line"></p>
+        </header>
+        <div class="play-grid">
+          <div>
+            <figure class="scene-frame" id="scene-frame" hidden></figure>
+            <div class="chat-card">
+              <div class="chat-head">
+                <strong>Interview log</strong>
+                <span id="session-label">No session yet</span>
+              </div>
+              <div class="chat-log" id="chat-log" tabindex="-1"></div>
+              <div class="chat-form" id="chat-form"></div>
+            </div>
+          </div>
+          <aside class="side" id="sidebar"></aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="grammar">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="section-kicker">Detective's handbook</p>
+          <h2>When vs. while</h2>
+          <p>Two small words, one big difference. Learn this and Alex will talk.</p>
+        </header>
+        <div class="grammar-grid">
+          <article class="gcard">
+            <h3>while</h3>
+            <p class="rule">A longer action, a background, or two actions at the same time.</p>
+            <p class="formchip">while + was/were + -ing</p>
+            <ul>
+              <li>While I was walking home, I called my friend.</li>
+              <li>I was reading a book while I was drinking coffee.</li>
+            </ul>
+            <p class="ask">What were you doing while you were sitting at the table?</p>
+          </article>
+          <article class="gcard">
+            <h3>when</h3>
+            <p class="rule">A short action, an exact moment, or one action after another.</p>
+            <p class="formchip">when + past simple</p>
+            <ul>
+              <li>When I left the café, it started raining.</li>
+              <li>When Emma brought the bill, I paid.</li>
+            </ul>
+            <p class="ask">What happened when you left the café?</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site">
+    <div class="foot">
+      <p>The Maple &amp; Mug Alibi <span class="case">· Case #0715</span></p>
+      <p class="fine">An English lesson on when &amp; while. Truth · Coffee · Justice.</p>
+    </div>
+  </footer>
+  <div id="lightbox" hidden>
+    <div class="box" role="dialog" aria-modal="true" aria-labelledby="lightbox-cap">
+      <img id="lightbox-img" src="images/interrogation.jpg" alt="" />
+      <figcaption id="lightbox-cap"></figcaption>
+      <button type="button" class="btn btn-amber" id="lightbox-close">Close</button>
+    </div>
+  </div>
+  <script src="./app.js" defer></script>
+</body>
+</html>
