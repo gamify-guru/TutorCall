@@ -28,8 +28,10 @@
     <nav class="nav" id="site-nav" aria-label="Main">
       <a href="#top">Старт</a>
       <a href="#words">Слова</a>
+      <a href="#practice">Тренировка</a>
       <a href="#plan">Задания</a>
       <a href="#ending">Финал</a>
+      <a href="#homework">ДЗ</a>
       <button type="button" class="tool" id="snd" aria-pressed="true" title="Sound on/off">🔊</button>
       <button type="button" class="btn-reset" id="reset-btn">↺ Начать заново</button>
     </nav>
@@ -48,18 +50,18 @@
       <div class="hero-copy">
         <p class="eyebrow">Unit 9 · Lesson 1 · A1 · 7–9 years</p>
         <h1>Room Scanner <em>Mission</em></h1>
-        <div class="brief">
-          <p><strong>Твоя роль.</strong> Ты — юный астронавт на корабле Spaceship Home. В руках у тебя сканер комнат.</p>
-          <p><strong>Что случилось.</strong> Гравитация на корабле нестабильна. Нужно проверить все комнаты и закрепить мебель.</p>
-          <p><strong>Цель.</strong> Выучи 9 слов, пройди миссии сканера и напиши доклад капитана. Когда всё будет готово, шкала Gravity дойдёт до 100% и появится код миссии.</p>
-          <p><strong>С чего начать.</strong> Сначала рассмотри картинку и ключ к дверям, послушай слова, затем открой карточки Scanner Cards. Все задания доступны сразу.</p>
-        </div>
-        <p class="lede">Junior Astronaut, the ship’s gravity is not stable! Scan every room, say its name and lock the furniture.</p>
         <div class="hero-actions">
-          <a class="btn btn-pink" href="#flip">Начать с карточек</a>
+          <a class="btn btn-pink" href="#practice">Начать тренировку</a>
           <a class="btn" href="#words">Слова миссии</a>
           <a class="btn" href="#ending">К финалу</a>
         </div>
+        <div class="brief">
+          <p><strong>Твоя роль.</strong> Ты — юный астронавт на корабле Spaceship Home. В руках у тебя сканер комнат.</p>
+          <p><strong>Что случилось.</strong> Гравитация на корабле нестабильна. Нужно проверить все комнаты и закрепить мебель.</p>
+          <p><strong>Цель.</strong> Выучи 9 слов, сыграй в тренировку, пройди миссии сканера и напиши доклад капитана. Когда миссии будут готовы, шкала Gravity дойдёт до 100% и появится код. Домашняя миссия — отдельно, у неё свой код.</p>
+          <p><strong>С чего начать.</strong> Сначала рассмотри картинку и ключ к дверям, послушай слова и сыграй в три игры «Тренировка слов». Потом открой карточки Scanner Cards. В конце есть домашняя миссия. Все задания открыты сразу.</p>
+        </div>
+        <p class="lede">Junior Astronaut, the ship’s gravity is not stable! Scan every room, say its name and lock the furniture.</p>
         <label class="name-field"><span>Astronaut name · Твоё имя <small>(по желанию)</small></span>
           <input id="nm" type="text" maxlength="24" placeholder="Your name" autocomplete="off" />
         </label>
@@ -121,7 +123,18 @@
           <h2>All stages are open.</h2>
           <p lang="ru" class="ru">Можно идти по порядку или выбрать любое задание. Прогресс сохраняется.</p>
         </header>
-        <ol class="plan" id="plan-list"></ol>
+        <div id="plan-list"></div>
+      </div>
+    </section>
+
+    <section class="section practice-intro" id="practice">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="section-kicker">Warm-up · Тренировка слов</p>
+          <h2>Play with the nine new words.</h2>
+          <p>Three short games: memory pairs, listen and tap the door, listen and spell. Then start the missions on the ship.</p>
+          <p lang="ru" class="ru">Сначала сыграй в три игры. Таймер сам не запускается — каждая игра начинается по нажатию. Прогресс сохраняется.</p>
+        </header>
       </div>
     </section>
 
@@ -143,6 +156,19 @@
             <p class="cert" id="cert" role="status"></p>
           </article>
         </div>
+      </div>
+    </section>
+
+    <section class="section" id="homework">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="section-kicker">Домашняя миссия · Homework</p>
+          <h2>A bonus mission at home.</h2>
+          <p>Four short parts. Write in English. This mission is always open. It has its own bonus code.</p>
+          <p lang="ru" class="ru">Домашняя миссия не закрывает классную. Её можно делать в любом порядке. Ответы сохраняются.</p>
+        </header>
+        <article class="panel closed-card" id="hw-card"></article>
+        <div id="hw-parts"></div>
       </div>
     </section>
   </main>
