@@ -5,6 +5,7 @@
 const STORAGE_KEY = "tutorcall-spaceship-home-scanner-v1";
 const RESET_MSG = "Начать заново? Все ответы на этом устройстве сотрутся.";
 const CASE_CODE = "SCAN-U9L1-HOME";
+const HW_CODE = "HOME-U9L1-STAR";
 const ALT = "A cheerful junior astronaut in a white suit with orange and lilac accents stands in a spaceship hall and holds a scanner. Four rounded doors open onto a pink living room with a sofa, a blue bathroom with a glass shower capsule, a purple bedroom with a bookcase, and a yellow kitchen with food.";
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -126,9 +127,69 @@ const SP = [
   { st: "My favourite room is the", ex: "My favourite room is the bedroom." }
 ];
 
+const MEMORY_IDS = ["living", "kitchen", "bathroom", "bedroom", "hall", "sofa", "shower", "bookcase"];
+const LISTEN = [
+  { id: "living", door: "living" },
+  { id: "kitchen", door: "kitchen" },
+  { id: "bathroom", door: "bathroom" },
+  { id: "bedroom", door: "bedroom" },
+  { id: "dining", door: "dining" },
+  { id: "hall", door: "hall" },
+  { id: "sofa", door: "living" },
+  { id: "shower", door: "bathroom" }
+];
+const SPELL_IDS = ["living", "kitchen", "bathroom", "bedroom", "dining", "hall", "sofa", "bookcase"];
+const DOORS = [
+  { id: "living", label: "Pink door", sub: "living room" },
+  { id: "bathroom", label: "Blue door", sub: "bathroom" },
+  { id: "bedroom", label: "Purple door", sub: "bedroom" },
+  { id: "kitchen", label: "Yellow door", sub: "kitchen" },
+  { id: "hall", label: "The hall", sub: "the corridor" },
+  { id: "dining", label: "Deck 2", sub: "dining room" }
+];
+const IN_ROOM = { sofa: "living", shower: "bathroom", bookcase: "bedroom" };
+const HW = [
+  { id: "hwHome", short: "My home", tag: "Homework A", min: 8, title: "My Home", lead: "Write 6 sentences about your home.", ru: "Напиши 6 предложений о своём доме.", keys: range(6), total: 6, href: "#hw-home" },
+  { id: "hwOdd", short: "Odd one", tag: "Homework B", min: 6, title: "Odd One Out", lead: "Read four words. Tap the word that does not belong.", ru: "Прочитай четыре слова и нажми то, которое лишнее.", keys: range(8), total: 8, href: "#hw-odd" },
+  { id: "hwRiddle", short: "Riddles", tag: "Homework C", min: 6, title: "Room Riddles", lead: "Read the riddle and choose the word.", ru: "Прочитай загадку и выбери слово.", keys: range(8), total: 8, href: "#hw-riddle" },
+  { id: "hwPost", short: "Postcard", tag: "Homework D", min: 8, title: "Ship Postcard", lead: "Read the postcard and answer the questions.", ru: "Прочитай открытку с корабля и ответь на вопросы.", keys: range(6), total: 6, href: "#hw-post" }
+];
+const ODD = [
+  { q: "Which word is the odd one out?", opts: ["sofa", "bookcase", "shower", "banana"], a: "banana", why: "Banana is not furniture. Sofa, bookcase and shower are things in the rooms." },
+  { q: "Which word is the odd one out?", opts: ["kitchen", "bathroom", "hall", "fridge"], a: "fridge", why: "Fridge is not a room. Kitchen, bathroom and hall are rooms." },
+  { q: "Which word is the odd one out?", opts: ["pink", "yellow", "purple", "sofa"], a: "sofa", why: "Sofa is not a door colour. Pink, yellow and purple are door colours on the ship." },
+  { q: "Which word is the odd one out?", opts: ["bed", "bookcase", "lamp", "kitchen"], a: "kitchen", why: "Kitchen is a room, not furniture. Bed, bookcase and lamp are things." },
+  { q: "Which word is the odd one out?", opts: ["dining room", "living room", "bedroom", "shower"], a: "shower", why: "Shower is not a room. The other three words are rooms." },
+  { q: "Which word is the odd one out?", opts: ["cook", "sleep", "eat", "sofa"], a: "sofa", why: "Sofa is not an action. Cook, sleep and eat are things we do." },
+  { q: "Which word is the odd one out?", opts: ["hall", "kitchen", "bathroom", "apple"], a: "apple", why: "Apple is not a room. Hall, kitchen and bathroom are rooms." },
+  { q: "Which word is the odd one out?", opts: ["There is", "There are", "This is", "bookcase"], a: "bookcase", why: "Bookcase is a thing, not a sentence starter. We use There is, There are and This is to make sentences." }
+];
+const RIDDLES = [
+  { q: "I have a pink sofa and a lamp. What room am I?", a: "living" },
+  { q: "We cook here. The door is yellow. What room am I?", a: "kitchen" },
+  { q: "The blue capsule (the shower) is here. What room am I?", a: "bathroom" },
+  { q: "I have a bed and a bookcase. The door is purple. What room am I?", a: "bedroom" },
+  { q: "We eat dinner here. This room is on Deck 2. What room am I?", a: "dining" },
+  { q: "The astronaut stands here, between the doors. What room am I?", a: "hall" },
+  { q: "I am pink. You can sit on me in the living room. What am I?", a: "sofa" },
+  { q: "Books are in me. I am in the bedroom. What am I?", a: "bookcase" }
+];
+const POST_TEXT = "Hello from Spaceship Home!\n\nToday I scanned four doors in the hall. The pink door is the living room. There is a sofa there. The blue door is the bathroom. The shower is a blue capsule! The purple door is the bedroom, and the yellow door is the kitchen. There is food in the kitchen. We eat dinner in the dining room on Deck 2.\n\nLove,\nJunior Astronaut";
+const POST = [
+  { q: "How many doors are in the hall?", why: "The postcard says: I scanned four doors in the hall.", test: s => /\b(4|four)\b/.test(s) },
+  { q: "What colour is the living room door?", why: "The postcard says: The pink door is the living room.", test: s => /pink/.test(s) },
+  { q: "Where is the shower?", why: "The shower is in the bathroom. It is a blue capsule.", test: s => /bathroom|capsule|blue/.test(s) },
+  { q: "Is there food in the kitchen?", why: "The postcard says: There is food in the kitchen.", test: s => /^(yes|yeah|yep)\b|food/.test(s) },
+  { q: "Where do they eat dinner?", why: "They eat dinner in the dining room on Deck 2.", test: s => /dining|deck 2|deck two/.test(s) },
+  { q: "Who wrote the postcard?", why: "The postcard is from Junior Astronaut.", test: s => /astronaut|junior/.test(s) }
+];
+
 const STAGES = [
-  { id: "flip", short: "Cards", tag: "Warm-up", min: 3, title: "Scanner Cards", lead: "Tap a card. Look, listen and say the word.", ru: "Нажми на карточку. Посмотри, послушай и повтори слово вслух.", keys: IDS },
-  { id: "find", short: "Find", tag: "Warm-up", min: 4, title: "Find the Room", lead: "Tap the scan points and listen. Then find the rooms for the scanner.", ru: "Нажимай на точки и слушай слова. Потом найди то, что просит сканер.", keys: IDS },
+  { id: "memory", short: "Pairs", tag: "Warm-up", group: "warm", min: 4, title: "Memory Pairs", lead: "Flip two cards. Find the word and its picture. Listen when a card opens.", ru: "Переверни две карточки. Найди слово и его картинку. Когда карточка открывается, слово звучит.", keys: MEMORY_IDS },
+  { id: "listen", short: "Doors", tag: "Warm-up", group: "warm", min: 4, title: "Listen and Tap the Door", lead: "Press Play, listen, then tap the right door. Furniture lives behind a coloured door.", ru: "Нажми Play, послушай слово и нажми нужную дверь. Диван — за розовой, душ — за синей.", keys: range(8) },
+  { id: "spell", short: "Spell", tag: "Warm-up", group: "warm", min: 5, title: "Listen and Spell", lead: "Press Listen, then build the word with the letters. The game does not start a timer.", ru: "Нажми Listen, потом собери слово из букв. Таймер сам не запускается.", keys: SPELL_IDS },
+  { id: "flip", short: "Cards", tag: "On the ship", min: 3, title: "Scanner Cards", lead: "Tap a card. Look, listen and say the word.", ru: "Нажми на карточку. Посмотри, послушай и повтори слово вслух.", keys: IDS },
+  { id: "find", short: "Find", tag: "On the ship", min: 4, title: "Find the Room", lead: "Tap the scan points and listen. Then find the rooms for the scanner.", ru: "Нажимай на точки и слушай слова. Потом найди то, что просит сканер.", keys: IDS },
   { id: "match", short: "Match", tag: "Mission 1", min: 3, title: "Match the Scan", lead: "Tap a word, then tap its picture.", ru: "Нажми на слово, потом на его картинку.", keys: IDS.filter(i => i !== "hall") },
   { id: "mc", short: "Choose", tag: "Mission 2", min: 4, title: "Choose the Word", lead: "Read and choose the right word.", ru: "Прочитай и выбери правильное слово.", keys: range(8) },
   { id: "gaps", short: "Gaps", tag: "Mission 3", min: 4, title: "Fix the Ship Log", lead: "Tap a word to fill the gap.", ru: "Заполни пропуски: выбери пропуск и нажми на нужное слово.", keys: range(8) },
@@ -163,10 +224,14 @@ let S = load();
 const tries = {};
 const save = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(S));
 const solvedArr = id => S.solved[id] || (S.solved[id] = []);
-const isSolved = (id, k) => solvedArr(id).includes(k);
+const isSolved = (id, k) => solvedArr(id).some(x => String(x) === String(k));
 const stDone = st => Math.min(st.total, solvedArr(st.id).length);
 const stComplete = st => stDone(st) >= st.total;
-const gravity = () => Math.round(100 * STAGES.filter(stComplete).length / STAGES.length);
+const classStages = () => STAGES.filter(s => s.group !== "warm");
+const gravity = () => {
+  const arr = classStages();
+  return Math.round(100 * arr.filter(stComplete).length / arr.length);
+};
 const roomsOf = () => WORDS.filter(w => w.room);
 
 function say(t) {
@@ -250,8 +315,16 @@ function renderHelp() {
   $("#help-body").innerHTML = HELP[helpTab].h;
 }
 
+function planItems(arr) {
+  return `<ol class="plan">${arr.map((s, i) => `<li><a class="plan-card ${stComplete(s) ? "done" : ""}" href="${s.href || ("#stage-" + s.id)}"><span class="n">${stComplete(s) ? "✓" : i + 1}</span><span class="t"><small>${esc(s.tag)} · ${s.min} min</small><b>${esc(s.title)}</b><i class="pbar"><i style="width:${100 * stDone(s) / s.total}%"></i></i></span></a></li>`).join("")}</ol>`;
+}
 function renderPlan() {
-  $("#plan-list").innerHTML = STAGES.map((s, i) => `<li><a class="plan-card ${stComplete(s) ? "done" : ""}" href="#stage-${s.id}"><span class="n">${stComplete(s) ? "✓" : i + 1}</span><span class="t"><small>${esc(s.tag)} · ${s.min} min</small><b>${esc(s.title)}</b><i class="pbar"><i style="width:${100 * stDone(s) / s.total}%"></i></i></span></a></li>`).join("");
+  const warm = STAGES.filter(s => s.group === "warm");
+  const ship = STAGES.filter(s => s.group !== "warm");
+  $("#plan-list").innerHTML = `
+    <div class="plan-group"><h3>Warm-up · Тренировка слов</h3><p class="ru" lang="ru">Три игры на новые слова. Можно начать с любой.</p>${planItems(warm)}</div>
+    <div class="plan-group"><h3>Missions on the ship</h3><p class="ru" lang="ru">Классные миссии. Gravity считает только их.</p>${planItems(ship)}</div>
+    <div class="plan-group"><h3>Домашняя миссия</h3><p class="ru" lang="ru">Бонусная миссия со своим кодом. Всегда открыта.</p>${planItems(HW)}</div>`;
 }
 
 function nextBar(st) {
@@ -262,7 +335,10 @@ function nextBar(st) {
 }
 
 function renderStages() {
-  $("#stages").innerHTML = STAGES.map(st => `<section class="stage s-${st.id}" id="stage-${st.id}"><header class="st-head"><span class="badge">${esc(st.tag)} · ${st.min} min</span><h2>${esc(st.title)} <span class="done-tag-slot">${stComplete(st) ? '<span class="done-tag">Готово</span>' : ""}</span></h2><p class="lead">${esc(st.lead)}</p><p class="ru" lang="ru">${esc(st.ru)}</p></header><div id="task-${st.id}"></div>${nextBar(st)}</section>`).join("");
+  $("#stages").innerHTML = STAGES.map(st => {
+    const banner = st.id === "flip" ? `<div class="group-banner"><h3>On the ship · Миссии</h3></div>` : "";
+    return `${banner}<section class="stage s-${st.id}" id="stage-${st.id}"><header class="st-head"><span class="badge">${esc(st.tag)} · ${st.min} min</span><h2>${esc(st.title)} <span class="done-tag-slot">${stComplete(st) ? '<span class="done-tag">Готово</span>' : ""}</span></h2><p class="lead">${esc(st.lead)}</p><p class="ru" lang="ru">${esc(st.ru)}</p></header><div id="task-${st.id}"></div>${nextBar(st)}</section>`;
+  }).join("");
   STAGES.forEach(st => R[st.id]($("#task-" + st.id), st));
 }
 
@@ -276,6 +352,158 @@ function persistShuffle(key, ids) {
 }
 
 const R = {};
+
+
+R.memory = el => {
+  const ids = persistShuffle("memoryIds", MEMORY_IDS);
+  const deck = persistShuffle("memoryDeck", ids.flatMap(id => [id + "|word", id + "|pic"]));
+  let open = [], lock = false;
+  const paint = () => {
+    el.innerHTML = `<div class="mem-grid">${deck.map((key, i) => {
+      const [id, side] = key.split("|");
+      const w = W[id];
+      const done = isSolved("memory", id);
+      const isOpen = done || open.includes(i);
+      const label = side === "word" ? `${w.en} ${w.ipa}` : `Picture: ${w.en}`;
+      return `<button type="button" class="mem-card ${done ? "ok" : ""} ${isOpen ? "on" : ""}" data-i="${i}" ${done ? "disabled" : ""} aria-pressed="${isOpen}" aria-label="${isOpen ? esc(label) : "Hidden card. Tap to flip."}"><span class="mem-face mem-back" aria-hidden="true">✦</span><span class="mem-face mem-front">${side === "word" ? `<b>${esc(w.en)}</b><i>${esc(w.ipa)}</i>` : ICON[id]}</span></button>`;
+    }).join("")}</div><p class="fb" role="status">${isSolved && MEMORY_IDS.every(id => isSolved("memory", id)) ? "All pairs found!" : "Flip two cards."}</p>`;
+  };
+  el.onclick = e => {
+    if (lock) return;
+    const b = e.target.closest(".mem-card"); if (!b || b.disabled) return;
+    const i = +b.dataset.i;
+    if (open.includes(i) || open.length >= 2) return;
+    open.push(i);
+    const [id] = deck[i].split("|");
+    say(W[id].en);
+    paint();
+    if (open.length < 2) return;
+    const [ka, kb] = open.map(n => deck[n]);
+    const [ida, sa] = ka.split("|"), [idb, sb] = kb.split("|");
+    if (ida === idb && sa !== sb) {
+      fb(el, `A pair! ${W[ida].en}.`, "ok", `${W[ida].en} — ${W[ida].ru}. ${W[ida].ex}`);
+      solve("memory", ida);
+      open = [];
+      paint();
+    } else {
+      miss("memory", ida);
+      lock = true;
+      fb(el, "Not a pair. Try again!", "bad", `One card was ${W[ida].en}, the other was ${W[idb].en}. Find the word and its picture.`);
+      setTimeout(() => { open = []; lock = false; paint(); }, 1000);
+    }
+  };
+  paint();
+};
+
+R.listen = el => {
+  const order = persistShuffle("listenOrder", range(LISTEN.length));
+  const doorOf = id => DOORS.find(d => d.id === id);
+  const draw = () => {
+    const left = order.filter(i => !isSolved("listen", i));
+    const i = left[0];
+    const p = i == null ? null : LISTEN[i];
+    const doneDoors = new Set(order.filter(n => isSolved("listen", n)).map(n => LISTEN[n].door));
+    el.innerHTML = `<div class="listen-layout">${scene(true)}<div class="listen-box">
+      <p class="listen-prompt">${p ? "Press Play, then tap the door." : "All doors found! ✓"}</p>
+      <div class="play-row">${p ? `<button type="button" class="btn btn-pink" id="play-word">▶ Play the word</button><span lang="ru" class="ru">Слово само не звучит — нажми Play.</span>` : ""}</div>
+      <div class="door-pad">${DOORS.map(d => `<button type="button" class="door-btn c-${d.id}" data-door="${d.id}"><b>${esc(d.label)}</b><small>${esc(d.sub)}</small></button>`).join("")}</div>
+      <p class="fb" role="status">${p ? `Word ${8 - left.length + 1} of 8.` : "Stage complete!"}</p>
+    </div></div>`;
+  };
+  el.onclick = e => {
+    if (e.target.closest("#play-word")) {
+      const left = order.filter(i => !isSolved("listen", i));
+      if (!left.length) return;
+      say(W[LISTEN[left[0]].id].en);
+      return;
+    }
+    const b = e.target.closest("[data-door]"); if (!b) return;
+    const left = order.filter(i => !isSolved("listen", i));
+    if (!left.length) return;
+    const i = left[0], p = LISTEN[i], door = b.dataset.door;
+    if (door === p.door) {
+      const d = doorOf(p.door);
+      const same = p.id === p.door;
+      fb(el, same ? `Yes! ${W[p.id].en}.` : `Yes! The ${W[p.id].en} is in the ${W[p.door].en}.`, "ok",
+        same ? `${W[p.id].en} is the ${d.label.toLowerCase()} (${d.sub}).` : `The ${W[p.id].en} is behind the ${d.label.toLowerCase()} — the ${d.sub}.`);
+      say(W[p.id].en);
+      solve("listen", i);
+      b.classList.add("ok");
+      setTimeout(draw, 800);
+    } else {
+      const want = doorOf(p.door), got = doorOf(door);
+      miss("listen", i); shake(b);
+      fb(el, `That is the ${got.sub}. Try again!`, "bad", `Listen again. The word was not the ${got.sub}. Tap the ${want.label.toLowerCase()} (${want.sub}).`);
+    }
+  };
+  draw();
+};
+
+R.spell = el => {
+  const order = persistShuffle("spellOrder", SPELL_IDS);
+  S.data.spellBuilt = S.data.spellBuilt || {};
+  const lettersOf = id => [...W[id].en];
+  const mixOf = id => {
+    const letters = lettersOf(id);
+    const key = "spellMix_" + id;
+    let p = S.data[key];
+    if (!Array.isArray(p) || p.length !== letters.length) {
+      p = shuffle(range(letters.length));
+      if (p.every((k, j) => k === j)) p = p.slice().reverse();
+      S.data[key] = p; save();
+    }
+    return p;
+  };
+  const draw = () => {
+    const left = order.filter(id => !isSolved("spell", id));
+    const id = left[0];
+    if (!id) { el.innerHTML = `<p class="fb ok">All words built! ✓</p>`; return; }
+    const w = W[id], letters = lettersOf(id), mix = mixOf(id);
+    const built = Array.isArray(S.data.spellBuilt[id]) ? S.data.spellBuilt[id] : (S.data.spellBuilt[id] = []);
+    const used = new Set(built);
+    const hint = (tries["spell|" + id] || 0) > 0 ? `<div class="tile">${ICON[id]}</div>` : "";
+    el.innerHTML = `<div class="spell-box">
+      <p class="listen-prompt">Word ${SPELL_IDS.length - left.length + 1} of ${SPELL_IDS.length}.</p>
+      <div class="play-row"><button type="button" class="btn btn-pink" id="play-word">▶ Listen</button><span lang="ru" class="ru">Слово само не звучит — нажми Listen, потом собери его из букв.</span></div>
+      ${hint}
+      <div class="spell-slots" id="slots">${built.map((idx, n) => `<button type="button" class="let in-slot ${letters[mix[idx]] === " " ? "space" : ""}" data-pop="${n}">${letters[mix[idx]] === " " ? "space" : esc(letters[mix[idx]])}</button>`).join("") || `<span class="ph">Tap the letters.</span>`}</div>
+      <div class="spell-bank">${mix.map((src, i) => `<button type="button" class="let ${letters[src] === " " ? "space" : ""}" data-add="${i}" ${used.has(i) ? "disabled" : ""}>${letters[src] === " " ? "space" : esc(letters[src])}</button>`).join("")}</div>
+      <p class="fb" role="status"></p>
+    </div>`;
+  };
+  const check = id => {
+    const letters = lettersOf(id), mix = mixOf(id);
+    const built = S.data.spellBuilt[id] || [];
+    if (built.length !== letters.length) return;
+    const got = built.map(i => letters[mix[i]]).join("");
+    if (got === letters.join("")) {
+      fb(el, `Yes! ${W[id].en}.`, "ok", `${W[id].en} — ${W[id].ru}. ${W[id].ex}`);
+      say(W[id].en);
+      solve("spell", id);
+      setTimeout(draw, 800);
+    } else {
+      miss("spell", id);
+      fb(el, "Not yet. Listen again and try a new order.", "bad", `The word is ${letters.length} letters long${letters.includes(" ") ? " and has a space" : ""}.`);
+    }
+  };
+  el.onclick = e => {
+    const left = order.filter(id => !isSolved("spell", id));
+    const id = left[0]; if (!id) return;
+    if (e.target.closest("#play-word")) { say(W[id].en); return; }
+    const add = e.target.closest("[data-add]");
+    if (add && !add.disabled) {
+      S.data.spellBuilt[id] = S.data.spellBuilt[id] || [];
+      S.data.spellBuilt[id].push(+add.dataset.add); save();
+      draw(); check(id); return;
+    }
+    const pop = e.target.closest("[data-pop]");
+    if (pop) {
+      S.data.spellBuilt[id].splice(+pop.dataset.pop, 1); save();
+      draw();
+    }
+  };
+  draw();
+};
 
 R.flip = el => {
   el.innerHTML = `<div class="cards">${WORDS.map(w => `<button type="button" class="flip ${isSolved("flip", w.id) ? "seen" : ""}" data-id="${w.id}" aria-pressed="false" aria-label="Picture card. Tap to scan."><span class="flip-in"><span class="face front">${ICON[w.id]}<em>Tap to scan</em></span><span class="face back c-${w.id}"><b>${esc(w.en)}</b><i>${esc(w.ipa)}</i><small lang="ru">${esc(w.ru)}</small><q>${esc(w.ex)}</q></span></span></button>`).join("")}</div>`;
@@ -323,10 +551,21 @@ R.find = (el, st) => {
       return;
     }
     if (isSolved("find", id) || !target) { say(W[id].en); return; }
+    const markOk = spotId => {
+      const n = el.querySelector(`[data-spot="${spotId}"]`);
+      if (n) { n.classList.add("ok"); if (spotId === "dining") { const tg = $(".cam-tag", n); if (tg) tg.textContent = "dining room"; } }
+    };
     if (id === target) {
-      b.classList.add("ok"); if (id === "dining") { const t = $(".cam-tag", b); if (t) t.textContent = "dining room"; }
-      say(W[id].en); fb(el, `Yes! This is the ${W[id].en}.`, "ok"); solve("find", id); target = null;
+      markOk(id); say(W[id].en); fb(el, `Yes! This is the ${W[id].en}.`, "ok"); solve("find", id); target = null;
       setTimeout(() => { if (d.phase === "quiz") ask(); }, 900);
+    } else if (IN_ROOM[id] === target) {
+      markOk(target); say(W[target].en);
+      fb(el, `Yes! The ${W[id].en} is in the ${W[target].en}.`, "ok", `You tapped the ${W[id].en}. That is inside the ${W[target].en}.`);
+      solve("find", target); target = null;
+      setTimeout(() => { if (d.phase === "quiz") ask(); }, 900);
+    } else if (IN_ROOM[target] === id) {
+      miss("find", target); shake(b);
+      fb(el, `This is the ${W[id].en}. The ${W[target].en} is in here — tap it!`, "bad", `Look inside the ${W[id].en} for the ${W[target].en}.`);
     } else {
       miss("find", target); shake(b);
       fb(el, `This is the ${W[id].en}. Try again!`, "bad", `The scanner asked for the ${W[target].en}.`);
@@ -414,9 +653,40 @@ R.dnd = el => {
     else { miss("dnd", d.id); shake($(`.zone[data-room="${room}"]`, el)); fb(el, `Not the ${W[room].en}. Read the scanner again.`, "bad", `${d.s} Look at the picture key if you need help.`); }
   };
   el.onclick = e => {
+    if (el._dragged) { el._dragged = false; return; }
     const b = e.target.closest(".item"); if (b) { pick(b.dataset.id); return; }
     const z = e.target.closest(".zone"); if (z) { if (sel) drop(z.dataset.room); else fb(el, "First tap a thing, then tap a room."); }
   };
+  let ghost = null, dragId = null, startX = 0, startY = 0;
+  const clearGhost = () => { if (ghost) ghost.remove(); ghost = null; dragId = null; };
+  el.addEventListener("pointerdown", e => {
+    const it = e.target.closest(".item"); if (!it) return;
+    pick(it.dataset.id);
+    dragId = it.dataset.id; startX = e.clientX; startY = e.clientY;
+    it.setPointerCapture(e.pointerId);
+  });
+  el.addEventListener("pointermove", e => {
+    if (!dragId) return;
+    if (!ghost && (Math.abs(e.clientX - startX) > 6 || Math.abs(e.clientY - startY) > 6)) {
+      const it = el.querySelector(`.item[data-id="${dragId}"]`);
+      ghost = (it || document.createElement("div")).cloneNode(true);
+      ghost.classList.add("drag-ghost");
+      ghost.setAttribute("aria-hidden", "true");
+      document.body.appendChild(ghost);
+    }
+    if (ghost) {
+      ghost.style.left = (e.clientX - 40) + "px";
+      ghost.style.top = (e.clientY - 20) + "px";
+    }
+  });
+  el.addEventListener("pointerup", e => {
+    if (!dragId) return;
+    const moved = !!ghost;
+    const z = document.elementFromPoint(e.clientX, e.clientY)?.closest?.(".zone");
+    if (moved && z) { el._dragged = true; drop(z.dataset.room); }
+    clearGhost();
+  });
+  el.addEventListener("pointercancel", clearGhost);
   paint();
 };
 
@@ -509,6 +779,147 @@ R.final = el => {
   };
 };
 
+
+const norm = s => String(s || "").toLowerCase().replace(/[’']/g, "'").replace(/[^a-z0-9' ]+/g, " ").replace(/\s+/g, " ").trim();
+function solveHw(id, k) {
+  if (isSolved(id, k)) return;
+  solvedArr(id).push(k);
+  S.score += tries[id + "|" + k] ? 5 : 10;
+  save(); hud(); renderPlan(); renderHwCard();
+  const tag = document.querySelector(`#${HW.find(h => h.id === id).href.slice(1)} .done-tag-slot`);
+  const st = HW.find(h => h.id === id);
+  if (tag) tag.innerHTML = stComplete(st) ? '<span class="done-tag">Готово</span>' : "";
+}
+function hwAllDone() { return HW.every(stComplete); }
+function renderHwCard() {
+  const el = $("#hw-card"); if (!el) return;
+  const n = HW.filter(stComplete).length, full = hwAllDone();
+  el.className = "panel closed-card" + (full ? "" : " pending");
+  el.innerHTML = `<span class="big-stamp">${full ? "Homework complete" : "In progress"}</span>
+    <p class="eyebrow">Домашняя миссия</p>
+    <h3>${full ? "Bonus mission complete!" : "Bonus mission"} <span>${n} / ${HW.length}</span></h3>
+    <p class="lead">${full ? "Well done! Here is your homework code." : "This mission is always open. You can read the bonus code now."}</p>
+    <p class="case-code">${HW_CODE}</p>
+    <p class="note-gap">${full ? `Код домашней миссии: ${HW_CODE}.` : "Части можно выполнять в любом порядке. Ответы сохраняются."}</p>`;
+}
+
+function homeOk(s) {
+  const t = norm(s);
+  if (t.length < 10) return false;
+  const start = /^(there is|there are|there's|there is a|there is an|there are some)\b/.test(t) || /\bthere is\b|\bthere are\b|\bthere's\b/.test(t);
+  const place = /\bin my\b|\bin the\b|\bin a\b|\bin an\b/.test(t) || /\b(living room|kitchen|bathroom|bedroom|dining room|hall|home|house|flat|apartment)\b/.test(t);
+  return start && place;
+}
+
+function renderHomework() {
+  const box = $("#hw-parts"); if (!box) return;
+  renderHwCard();
+  S.data.hwHome = Array.isArray(S.data.hwHome) ? S.data.hwHome : ["", "", "", "", "", ""];
+  S.data.hwPost = Array.isArray(S.data.hwPost) ? S.data.hwPost : ["", "", "", "", "", ""];
+  const home = HW[0];
+  const oddMix = k => persistShuffle("oddOpts" + k, range(ODD[k].opts.length));
+  const ridMix = k => persistShuffle("ridOpts" + k, IDS);
+  box.innerHTML = `
+    <article class="hw-part" id="hw-home">
+      <header><span class="badge">${esc(home.tag)} · ${home.min} min</span><h3>My Home <span class="done-tag-slot">${stComplete(home) ? '<span class="done-tag">Готово</span>' : ""}</span></h3>
+        <p class="lead">Write 6 sentences about your home. Use <b>There is</b> or <b>There are</b> and <b>in my</b>.</p>
+        <p class="ru" lang="ru">Пиши свои предложения, например: There is a sofa in my living room.</p></header>
+      <ol class="hw-home">${range(6).map(i => `<li><label for="hm-${i}">Sentence ${i + 1}</label><textarea id="hm-${i}" data-home="${i}" rows="2" maxlength="160" placeholder="There is a … in my …">${esc(S.data.hwHome[i] || "")}</textarea></li>`).join("")}</ol>
+      <button type="button" class="btn btn-pink" id="check-home">Check my sentences</button>
+      <p class="fb" role="status"></p>
+    </article>
+    <article class="hw-part" id="hw-odd">
+      <header><span class="badge">Homework B · 6 min</span><h3>Odd One Out <span class="done-tag-slot">${stComplete(HW[1]) ? '<span class="done-tag">Готово</span>' : ""}</span></h3>
+        <p class="lead">Read four words. Tap the word that does not belong.</p>
+        <p class="ru" lang="ru">Найди лишнее слово и нажми на него.</p></header>
+      ${ODD.map((o, i) => `<div class="odd-row" data-odd="${i}"><p>${i + 1}. ${esc(o.q)}</p><div class="odd-opts">${oddMix(i).map(k => { const w = o.opts[k]; const done = isSolved("hwOdd", i); const ok = done && w === o.a; return `<button type="button" class="chip ${ok ? "ok" : ""}" data-odd-opt="${esc(w)}" ${done ? "disabled" : ""}>${esc(w)}</button>`; }).join("")}</div><p class="fb ${isSolved("hwOdd", i) ? "ok" : ""}" role="status">${isSolved("hwOdd", i) ? "Correct. " + o.why : ""}</p></div>`).join("")}
+    </article>
+    <article class="hw-part" id="hw-riddle">
+      <header><span class="badge">Homework C · 6 min</span><h3>Room Riddles <span class="done-tag-slot">${stComplete(HW[2]) ? '<span class="done-tag">Готово</span>' : ""}</span></h3>
+        <p class="lead">Read the riddle and choose the word.</p>
+        <p class="ru" lang="ru">Прочитай загадку и выбери слово из девяти.</p></header>
+      ${scene(true)}
+      ${RIDDLES.map((r, i) => `<div class="riddle-q" data-rid="${i}"><blockquote>${i + 1}. ${esc(r.q)}</blockquote><div class="odd-opts">${ridMix(i).map(id => { const done = isSolved("hwRiddle", i); const ok = done && id === r.a; return `<button type="button" class="chip ${ok ? "ok" : ""}" data-rid-opt="${id}" ${done ? "disabled" : ""}><span class="ico">${ICON[id]}</span>${esc(W[id].en)}</button>`; }).join("")}</div><p class="fb ${isSolved("hwRiddle", i) ? "ok" : ""}" role="status">${isSolved("hwRiddle", i) ? "Yes! " + W[r.a].en + "." : ""}</p></div>`).join("")}
+    </article>
+    <article class="hw-part" id="hw-post">
+      <header><span class="badge">Homework D · 8 min</span><h3>Ship Postcard <span class="done-tag-slot">${stComplete(HW[3]) ? '<span class="done-tag">Готово</span>' : ""}</span></h3>
+        <p class="lead">Read the postcard and answer in English.</p>
+        <p class="ru" lang="ru">Прочитай открытку и напиши короткие ответы.</p></header>
+      ${scene(true)}
+      <div class="postcard">${POST_TEXT.split("\n").map(line => line ? `<p>${esc(line)}</p>` : "<p></p>").join("")}</div>
+      ${POST.map((q, i) => `<div class="hw-q"><label for="pq-${i}">${i + 1}. ${esc(q.q)}</label><input id="pq-${i}" type="text" maxlength="80" data-post="${i}" value="${esc(S.data.hwPost[i] || "")}" ${isSolved("hwPost", i) ? "readonly" : ""} autocomplete="off" /></div>`).join("")}
+      <button type="button" class="btn btn-pink" id="check-post">Check my answers</button>
+      <p class="fb" role="status" id="post-fb"></p>
+    </article>`;
+
+  const homeFb = box.querySelector("#hw-home .fb");
+  box.querySelectorAll("[data-home]").forEach(ta => {
+    ta.addEventListener("input", () => {
+      S.data.hwHome[+ta.dataset.home] = ta.value; save();
+    });
+  });
+  box.querySelector("#check-home").addEventListener("click", () => {
+    let n = 0, bad = 0;
+    S.data.hwHome.forEach((s, i) => {
+      const ta = box.querySelector(`[data-home="${i}"]`);
+      if (homeOk(s)) { solveHw("hwHome", i); ta.classList.add("ok"); n++; }
+      else { if (norm(s)) { miss("hwHome", i); bad++; } ta.classList.toggle("bad", !!norm(s)); }
+    });
+    if (n === 6) fb(box.querySelector("#hw-home"), "Great! Six sentences about your home.", "ok");
+    else fb(box.querySelector("#hw-home"), `I can read ${n} of 6. Write: There is a sofa in my living room.`, "bad", "Use There is / There are and in my / in the plus a room or a thing.");
+  });
+
+  box.querySelectorAll("[data-odd]").forEach(row => {
+    row.addEventListener("click", e => {
+      const b = e.target.closest("[data-odd-opt]"); if (!b || b.disabled) return;
+      const i = +row.dataset.odd, o = ODD[i];
+      if (b.dataset.oddOpt === o.a) {
+        fb(row, "Correct!", "ok", o.why);
+        solveHw("hwOdd", i);
+        row.querySelectorAll("[data-odd-opt]").forEach(x => { x.disabled = true; if (x.dataset.oddOpt === o.a) x.classList.add("ok"); });
+      } else {
+        miss("hwOdd", i); shake(b);
+        fb(row, "Not this word. Try again!", "bad", "Look again. Which word is not like the others?");
+      }
+    });
+  });
+
+  box.querySelectorAll("[data-rid]").forEach(row => {
+    row.addEventListener("click", e => {
+      const b = e.target.closest("[data-rid-opt]"); if (!b || b.disabled) return;
+      const i = +row.dataset.rid, r = RIDDLES[i];
+      if (b.dataset.ridOpt === r.a) {
+        say(W[r.a].en);
+        fb(row, `Yes! ${W[r.a].en}.`, "ok", r.q + " — " + W[r.a].en + ".");
+        solveHw("hwRiddle", i);
+        row.querySelectorAll("[data-rid-opt]").forEach(x => { x.disabled = true; if (x.dataset.ridOpt === r.a) x.classList.add("ok"); });
+      } else {
+        miss("hwRiddle", i); shake(b);
+        fb(row, `That is the ${W[b.dataset.ridOpt].en}. Try again!`, "bad", "Read the riddle again. Look at the picture key if you need help.");
+      }
+    });
+  });
+
+  box.querySelectorAll("[data-post]").forEach(inp => {
+    inp.addEventListener("input", () => { S.data.hwPost[+inp.dataset.post] = inp.value; save(); });
+  });
+  box.querySelector("#check-post").addEventListener("click", () => {
+    let n = 0;
+    POST.forEach((q, i) => {
+      const inp = box.querySelector(`[data-post="${i}"]`);
+      const val = norm(inp.value);
+      if (q.test(val)) { solveHw("hwPost", i); inp.readOnly = true; n++; inp.style.borderColor = "#3fbf8a"; }
+      else if (val) { miss("hwPost", i); inp.style.borderColor = "#d4536a"; }
+    });
+    const host = box.querySelector("#hw-post");
+    if (n === 6) fb(host, "Well done! You read the postcard.", "ok");
+    else {
+      const first = POST.findIndex((q, i) => !isSolved("hwPost", i));
+      fb(host, `I can read ${n} of 6. Look at the postcard again.`, "bad", first >= 0 ? POST[first].why : "");
+    }
+  });
+}
+
 function renderEnding() {
   const g = gravity(), full = g >= 100;
   const max = STAGES.reduce((a, s) => a + s.total, 0) * 10;
@@ -520,9 +931,10 @@ function renderEnding() {
     <h3>${full ? "Mission Complete!" : "Mission in progress"} <span>Gravity ${g}%</span></h3>
     <div class="stars" aria-label="${stars} stars of 3">${[1, 2, 3].map(n => `<i class="${n > stars ? "off" : ""}">★</i>`).join("")}</div>
     <p class="lead">${full ? `Well done, Junior Astronaut${who}! The ship is stable.` : "Scan all the rooms to make the gravity 100% stable. You can still read the mission code now."}</p>
-    <div class="stats"><div><b>${S.score}</b><small>Score</small></div><div><b>${STAGES.filter(stComplete).length} / ${STAGES.length}</b><small>Stages</small></div></div>
+    <div class="stats"><div><b>${S.score}</b><small>Score</small></div><div><b>${classStages().filter(stComplete).length} / ${classStages().length}</b><small>Stages</small></div></div>
     <p class="case-code">${CASE_CODE}</p>
-    ${full ? `<p class="note-gap">Все комнаты просканированы. Код миссии: ${CASE_CODE}.</p>` : `<p class="note-gap">Некоторые задания ещё не закончены. Можно продолжить в любом порядке — финал уже открыт.</p>`}`;
+    ${full ? `<p class="note-gap">Все комнаты просканированы. Код миссии: ${CASE_CODE}.</p>` : `<p class="note-gap">Некоторые задания ещё не закончены. Можно продолжить в любом порядке — финал уже открыт.</p>`}
+    <p><a class="btn btn-pink" href="#homework">Дальше: Домашняя миссия</a></p>`;
   $("#rf").innerHTML = WORDS.map(w => `<button type="button" class="chip ${S.reflect.includes(w.id) ? "sel" : ""}" data-r="${w.id}" aria-pressed="${S.reflect.includes(w.id)}"><span class="ico">${ICON[w.id]}</span>${esc(w.en)}</button>`).join("");
   const cert = () => { $("#cert").textContent = S.reflect.length === 3 ? `My top 3 words: ${S.reflect.map(id => W[id].en).join(", ")}.` : `Choose ${3 - S.reflect.length} more.`; };
   cert();
@@ -531,7 +943,7 @@ function renderEnding() {
 function boot() {
   hud();
   const nm = $("#nm"); if (nm) nm.value = S.name || "";
-  renderWords(); renderHelp(); renderPlan(); renderStages(); renderEnding();
+  renderWords(); renderHelp(); renderPlan(); renderStages(); renderEnding(); renderHomework();
 
   document.addEventListener("click", e => {
     const sayb = e.target.closest("[data-say]"); if (sayb) { say(sayb.getAttribute("data-say")); return; }
@@ -544,15 +956,16 @@ function boot() {
       save(); renderEnding(); if (S.reflect.length === 3) toast("Top 3 words locked in!");
     }
   });
-  $("#nm").addEventListener("input", e => { S.name = e.target.value.trim(); save(); });
+  $("#nm").addEventListener("input", e => { S.name = e.target.value.trim(); save(); renderEnding(); });
   $("#snd").addEventListener("click", () => { S.sound = !S.sound; if (!S.sound && window.speechSynthesis) speechSynthesis.cancel(); save(); hud(); });
   $("#reset-btn").addEventListener("click", () => {
     if (!confirm(RESET_MSG)) return;
+    if (window.speechSynthesis) speechSynthesis.cancel();
     localStorage.removeItem(STORAGE_KEY);
     S = defaultState();
     location.hash = "#top";
     hud(); $("#nm").value = "";
-    renderWords(); renderHelp(); renderPlan(); renderStages(); renderEnding();
+    renderWords(); renderHelp(); renderPlan(); renderStages(); renderEnding(); renderHomework();
     window.scrollTo(0, 0);
   });
   const tog = $("#nav-toggle"), nav = $("#site-nav"), head = $("#site-header");
@@ -561,7 +974,7 @@ function boot() {
 
   if ("speechSynthesis" in window) speechSynthesis.getVoices();
 
-  window.__qa = { STORAGE_KEY, CASE_CODE, STAGES, WORDS, MC, G, D, O, T, SP, SPOTS, getState: () => S, save, solve, isSolved, stComplete, gravity, say };
+  window.__qa = { STORAGE_KEY, CASE_CODE, HW_CODE, STAGES, HW, WORDS, MEMORY_IDS, LISTEN, SPELL_IDS, ODD, RIDDLES, POST, MC, G, D, O, T, SP, SPOTS, getState: () => S, save, solve, solveHw, isSolved, stComplete, gravity, hwAllDone, say, homeOk, norm };
 }
 
 document.addEventListener("DOMContentLoaded", boot);
