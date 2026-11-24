@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spaceship Home · Room Scanner Mission · Unit 9 Lesson 1</title>
+  <meta name="description" content="Interactive A1 English lesson (ages 7–9): rooms and furniture on Spaceship Home. Scan the rooms, lock the furniture, and file the captain’s report." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./extras.css" />
+  <script src="../_shared/watermark.js" data-mode="bar" data-position="bottom" defer></script>
+</head>
+<body>
+  <svg class="vh" width="0" height="0" aria-hidden="true" focusable="false">
+    <symbol id="star" viewBox="0 0 20 20"><polygon points="10,1 12.4,7.2 19,7.6 14,12.2 15.5,18.8 10,15.2 4.5,18.8 6,12.2 1,7.6 7.6,7.2"/></symbol>
+  </svg>
+
+  <header class="site-header" id="site-header">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">✦</span>
+      <span>
+        <strong>Spaceship Home</strong>
+        <span class="brand-sub">Room Scanner Mission</span>
+      </span>
+    </a>
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav">Меню</button>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="#top">Старт</a>
+      <a href="#words">Слова</a>
+      <a href="#plan">Задания</a>
+      <a href="#ending">Финал</a>
+      <button type="button" class="tool" id="snd" aria-pressed="true" title="Sound on/off">🔊</button>
+      <button type="button" class="btn-reset" id="reset-btn">↺ Начать заново</button>
+    </nav>
+  </header>
+
+  <div class="hud-bar" aria-label="Mission status">
+    <div class="hud-g">
+      <span>Gravity <b id="gval">0%</b></span>
+      <div class="bar" id="gbar" role="progressbar" aria-label="Gravity" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="fill" id="gfill"></div></div>
+    </div>
+    <div class="hud-score">⭐ <b id="score">0</b></div>
+  </div>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow">Unit 9 · Lesson 1 · A1 · 7–9 years</p>
+        <h1>Room Scanner <em>Mission</em></h1>
+        <div class="brief">
+          <p><strong>Твоя роль.</strong> Ты — юный астронавт на корабле Spaceship Home. В руках у тебя сканер комнат.</p>
+          <p><strong>Что случилось.</strong> Гравитация на корабле нестабильна. Нужно проверить все комнаты и закрепить мебель.</p>
+          <p><strong>Цель.</strong> Выучи 9 слов, пройди миссии сканера и напиши доклад капитана. Когда всё будет готово, шкала Gravity дойдёт до 100% и появится код миссии.</p>
+          <p><strong>С чего начать.</strong> Сначала рассмотри картинку и ключ к дверям, послушай слова, затем открой карточки Scanner Cards. Все задания доступны сразу.</p>
+        </div>
+        <p class="lede">Junior Astronaut, the ship’s gravity is not stable! Scan every room, say its name and lock the furniture.</p>
+        <div class="hero-actions">
+          <a class="btn btn-pink" href="#flip">Начать с карточек</a>
+          <a class="btn" href="#words">Слова миссии</a>
+          <a class="btn" href="#ending">К финалу</a>
+        </div>
+        <label class="name-field"><span>Astronaut name · Твоё имя <small>(по желанию)</small></span>
+          <input id="nm" type="text" maxlength="24" placeholder="Your name" autocomplete="off" />
+        </label>
+      </div>
+      <figure class="hero-art" id="hero-art">
+        <picture>
+          <source srcset="images/hero.webp" type="image/webp" />
+          <img id="img-hero" src="images/hero.jpg" width="1168" height="784" alt="A cheerful junior astronaut in a white suit with orange and lilac accents stands in a spaceship hall and holds a scanner. Four rounded doors open onto a pink living room with a sofa, a blue bathroom with a glass shower capsule, a purple bedroom with a bookcase, and a yellow kitchen with food." />
+        </picture>
+        <figcaption>The hall of Spaceship Home. You are in the hall with the scanner.</figcaption>
+      </figure>
+    </section>
+
+    <section class="section door-key" id="doors">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="section-kicker">Picture key</p>
+          <h2>The four doors.</h2>
+          <p>Look at the picture. Each door has its own colour — just like on the ship.</p>
+        </header>
+        <ul class="door-cards">
+          <li class="c-living"><b>Pink door</b> — living room. There is a sofa (and a lamp).</li>
+          <li class="c-bathroom"><b>Blue door</b> — bathroom. The blue capsule is the shower.</li>
+          <li class="c-bedroom"><b>Purple door</b> — bedroom. There is a bookcase and a bed.</li>
+          <li class="c-kitchen"><b>Yellow door</b> — kitchen. There is food, and a fridge.</li>
+          <li class="c-hall"><b>The hall</b> — the corridor. The astronaut stands here with a scanner.</li>
+          <li class="c-dining"><b>Dining room</b> — this room is on Deck 2. It is not in this photo. We eat dinner there.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="words">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="section-kicker">Mission words</p>
+          <h2>Nine new words.</h2>
+          <p lang="ru" class="ru">Нажми на слово, чтобы услышать его по-британски.</p>
+        </header>
+        <div class="bank" id="word-bank"></div>
+      </div>
+    </section>
+
+    <section class="section" id="grammar">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="section-kicker">Help</p>
+          <h2>Правила миссии.</h2>
+          <p lang="ru" class="ru">Открой правило, когда нужно. Задания остаются на месте.</p>
+        </header>
+        <div class="help-tabs" id="help-tabs" role="tablist"></div>
+        <div class="help-body panel" id="help-body" role="tabpanel"></div>
+      </div>
+    </section>
+
+    <section class="section" id="plan">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="section-kicker">Mission plan</p>
+          <h2>All stages are open.</h2>
+          <p lang="ru" class="ru">Можно идти по порядку или выбрать любое задание. Прогресс сохраняется.</p>
+        </header>
+        <ol class="plan" id="plan-list"></ol>
+      </div>
+    </section>
+
+    <div id="stages"></div>
+
+    <section class="section" id="ending">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="section-kicker">Captain’s report · Финал</p>
+          <h2>Your mission report.</h2>
+          <p lang="ru" class="ru">Этот раздел всегда открыт. Если миссии ещё не закончены, штамп покажет «In progress» — код всё равно можно увидеть.</p>
+        </header>
+        <div class="ending-grid">
+          <article class="panel closed-card" id="closed-card"></article>
+          <article class="panel reflect-card">
+            <h3>Which 3 words do you remember best?</h3>
+            <p class="ru" lang="ru">Выбери 3 слова, которые запомнились лучше всего, и скажи их вслух.</p>
+            <div class="bank" id="rf"></div>
+            <p class="cert" id="cert" role="status"></p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <p>Spaceship Home · Room Scanner Mission · Unit 9 Lesson 1</p>
+  </footer>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js" defer></script>
+</body>
+</html>
