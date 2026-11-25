@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Дело о семейных алиби | Academy Stars 3 Unit 3 Lesson 5</title>
+<meta name="description" content="The Case of the Family Alibis — Academy Stars 3, Unit 3 Lesson 5. Wh-questions with was / were: Where, When, Who, What was the weather like, Why. Допрос родственников, улики, вердикт и домашняя миссия.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800&family=Outfit:wght@500;650;700&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c140c; --stone:#1c1917; --brown:#44403c;
+  --amber:#b45309; --gold:#f5d090; --amber-b:#d97706;
+  --parchment:#faf6ef; --paper:#fffaf3; --cream:#f5ead7;
+  --ok-bg:#ecfdf5; --ok-ink:#064e3b; --ok-line:#047857;
+  --bad-bg:#fff1f2; --bad-ink:#9f1239;
+  --header-h:150px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{scroll-behavior:smooth;background:#1c1917}
+body{
+  font-family:'Outfit',system-ui,sans-serif;
+  color:var(--ink);
+  background:linear-gradient(180deg,#1c1917 0%,#292524 50%,#1c1917 100%);
+  padding-bottom:88px; overflow-x:hidden; min-height:100%;
+}
+.skip{position:absolute;left:-999px;top:0}
+.skip:focus{left:12px;top:12px;background:#fff;z-index:80;padding:8px 12px;border-radius:8px;color:var(--ink)}
+.top{position:sticky;top:0;z-index:40;background:linear-gradient(180deg,#1c1917,#292524);border-bottom:3px solid #d97706;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.top-inner{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 16px 6px;max-width:1120px;margin:0 auto}
+.logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#f59e0b,#b45309);display:grid;place-items:center;font-size:1.2rem;box-shadow:0 0 0 2px #fde68a}
+.brand-title{margin:0;font-family:'Cinzel',serif;font-weight:800;font-size:1.05rem;color:#fef3c7;line-height:1.15}
+.brand-title span{color:#fbbf24}
+.brand-sub{margin:2px 0 0;font-size:.65rem;letter-spacing:.08em;color:#e8d5a3;font-weight:700}
+.top-actions{margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.keys-pill{display:flex;align-items:center;gap:6px;background:#0c0a09;color:#fef3c7;border:2px solid #d97706;border-radius:999px;padding:4px 10px;font-weight:700;font-size:.85rem}
+.key-bar{width:64px;height:8px;background:#44403c;border-radius:8px;overflow:hidden;display:inline-block}
+.key-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#f59e0b,#10b981);border-radius:8px}
+.nav-row{display:flex;flex-wrap:wrap;gap:6px;padding:6px 16px 10px;max-width:1120px;margin:0 auto}
+.chip{border:2px solid #e8d5a3;background:#faf6ef;color:#1c1917;font-weight:700;font-size:.78rem;border-radius:999px;padding:5px 10px;cursor:pointer;font-family:inherit}
+.chip:hover,.chip:focus-visible{background:#fef3c7;border-color:#d97706;outline:none}
+.chip.is-on{background:#b45309;color:#fff;border-color:#fbbf24}
+.chip.is-done{background:#ecfdf5;border-color:#047857;color:#064e3b}
+.wrap{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:18px 14px 40px}
+.section-anchor{scroll-margin-top:var(--header-h)}
+.card{background:var(--parchment);color:var(--ink);border:3px solid #e8d5a3;border-radius:24px;padding:22px 20px;margin:0 0 22px;box-shadow:0 12px 28px rgba(0,0,0,.25)}
+.kicker{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.pill{display:inline-block;background:#1c1917;color:#fde68a;border-radius:999px;font-size:.7rem;font-weight:700;letter-spacing:.04em;padding:4px 10px}
+.pill.alt{background:#fef3c7;color:#92400e;border:2px solid #d97706}
+h1,h2,h3{font-family:'Cinzel',serif;color:#1c1917;margin:0 0 .5rem;font-weight:800}
+h2{font-size:1.45rem}
+.lead{margin:.4rem 0 .8rem;font-size:1.05rem;line-height:1.55}
+.hint{color:#57534e;font-size:.92rem}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:0;border:4px solid #fff;border-radius:28px;overflow:hidden;background:linear-gradient(160deg,#faf6ef,#fde68a);box-shadow:0 20px 40px rgba(0,0,0,.3);margin-bottom:22px}
+.hero-copy{padding:26px 26px 28px}
+.hero h1{font-size:clamp(1.7rem,4.5vw,2.8rem);line-height:1.05;margin:.3rem 0 .7rem}
+.hero h1 em{color:#b45309;font-style:normal}
+.hero-actions{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 12px}
+.hero-visual{position:relative;min-height:280px;background:#1c1917}
+.hero-visual img{width:100%;height:100%;object-fit:cover;min-height:320px}
+.hero-caption{position:absolute;left:12px;bottom:12px;right:12px;background:rgba(28,20,12,.9);color:#fef3c7;padding:8px 12px;border-radius:12px;font-size:.8rem;font-weight:600}
+.photo-frame{border-radius:20px;overflow:hidden;border:4px solid #e8d5a3;box-shadow:0 8px 20px rgba(0,0,0,.15);margin:0 0 16px;background:#1c1917}
+.photo-frame img{width:100%;height:auto;display:block;max-height:460px;object-fit:cover;object-position:center}
+.btn{font-family:inherit;font-weight:700;border-radius:999px;border:2px solid transparent;padding:10px 16px;cursor:pointer;font-size:.95rem}
+.btn:focus-visible{outline:3px solid #d97706;outline-offset:2px}
+.btn-gold{background:#f5d090;color:#1c140c;border-color:#b45309}
+.btn-gold:hover{background:#fde68a}
+.btn-ink{background:#fffaf3;color:#1c140c;border-color:#44403c}
+.btn-ink:hover{background:#fef3c7}
+.btn-navy{background:#1c1917;color:#fef3c7;border-color:#d97706}
+.btn-navy:hover{background:#292524}
+.btn-rose{background:#9f1239;color:#fff;border-color:#881337}
+.icon-btn{width:42px;height:42px;border-radius:50%;border:2px solid #e8d5a3;background:#faf6ef;cursor:pointer;font-size:1.1rem}
+.cast{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin:12px 0}
+.cast figure{margin:0;background:#fffaf3;border:3px solid #e8d5a3;border-radius:18px;overflow:hidden}
+.cast img{width:100%;height:200px;object-fit:cover;object-position:top;display:block}
+.cast figcaption{padding:8px 10px 12px;font-size:.88rem}
+.cast strong{display:block;font-family:'Cinzel',serif}
+.flips{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.flip{perspective:900px;height:120px}
+.flip button{width:100%;height:100%;border:0;padding:0;background:none;cursor:pointer;font-family:inherit}
+.flip-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;transition:transform .45s ease;border-radius:16px}
+.flip.is-on .flip-inner{transform:rotateY(180deg)}
+.flip-face{position:absolute;inset:0;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:3px solid #d97706;background:#fffaf3;color:var(--ink);font-weight:700;padding:8px;text-align:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateY(0deg) translateZ(1px);-webkit-transform:rotateY(0deg) translateZ(1px)}
+.flip-back{position:absolute;inset:0;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;text-align:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#1c1917;color:#fef3c7;border:3px solid #fbbf24;transform:rotateY(180deg) translateZ(1px);-webkit-transform:rotateY(180deg) translateZ(1px);font-size:.82rem}
+.opt{display:block;width:100%;text-align:left;margin:6px 0;padding:10px 12px;border-radius:14px;border:2px solid #e8d5a3;background:#fffaf3;color:var(--ink);font-weight:650;font-family:inherit;cursor:pointer;font-size:.95rem}
+.opt:hover,.opt:focus-visible{border-color:#d97706;background:#fef3c7;outline:none}
+.opt.is-pick{border-color:#b45309;background:#fde68a}
+.opt.is-ok{border-color:#047857;background:#ecfdf5;color:#064e3b}
+.opt.is-bad{border-color:#9f1239;background:#fff1f2;color:#9f1239}
+.chip-word{display:inline-flex;align-items:center;gap:4px;margin:4px;padding:8px 12px;border-radius:12px;border:2px solid #e8d5a3;background:#fff;font-weight:700;cursor:pointer;font-family:inherit}
+.chip-word.placed{background:#f5d090;border-color:#b45309}
+.bank,.drop{min-height:56px;border:2px dashed #d6d3d1;border-radius:16px;padding:8px;background:#fff;margin:8px 0}
+.why{margin:8px 0 0;font-size:.9rem;font-weight:650;border-radius:12px;padding:8px 10px}
+.why.ok{background:#ecfdf5;color:#064e3b}
+.why.bad{background:#fff1f2;color:#9f1239}
+.task{background:#fffaf3;border:2px solid #e8d5a3;border-radius:18px;padding:14px;margin:10px 0}
+.counter{font-weight:700;color:#92400e;font-size:.9rem}
+.rule-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:10px 0}
+.rule{background:#fef3c7;border:2px solid #d97706;border-radius:16px;padding:12px;color:#1c140c}
+.rule h3{color:#92400e;margin:0 0 4px;font-size:1rem}
+select,textarea,input[type=text]{font-family:inherit;font-size:1rem;color:var(--ink);background:#fff;border:2px solid #d6d3d1;border-radius:12px;padding:8px 10px;width:100%}
+textarea{min-height:70px;resize:vertical}
+.stamp{font-family:'Special Elite',cursive;display:inline-block;border:3px dashed #b91c1c;color:#b91c1c;transform:rotate(-8deg);padding:4px 10px;font-weight:700;letter-spacing:.06em}
+.stamp.ok{border-style:solid;border-color:#047857;color:#047857;transform:rotate(4deg)}
+.cert{background:#fffaf3;border:3px dashed #d97706;border-radius:20px;padding:22px 16px;text-align:center;margin:12px 0}
+.cert h2{font-family:'Cinzel',serif;font-size:1.6rem;color:#92400e}
+.code-box{display:inline-block;background:#1c1917;color:#fde68a;border-radius:14px;padding:10px 18px;font-weight:800;letter-spacing:.06em;font-size:1.15rem;margin-top:8px}
+.next{margin:16px 0 8px;margin-bottom:110px}
+.modal{position:fixed;inset:0;background:rgba(28,20,12,.72);z-index:60;display:none;align-items:center;justify-content:center;padding:16px}
+.modal.is-on{display:flex}
+.modal-card{background:var(--parchment);color:var(--ink);border-radius:24px;max-width:640px;width:100%;max-height:86vh;overflow:auto;padding:20px;border:3px solid #d97706}
+.suspect-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.suspect-card{background:#fffaf3;border:3px solid #e8d5a3;border-radius:18px;overflow:hidden}
+.suspect-card img{width:100%;height:220px;object-fit:cover;object-position:top;display:block}
+.suspect-card.is-on{border-color:#d97706;box-shadow:0 0 0 3px #fde68a}
+.suspect-card .body{padding:10px 12px 14px}
+[tabindex="-1"]:focus{outline:none}
+.modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px;position:sticky;top:0;background:var(--parchment);z-index:1;padding-bottom:8px}
+.modal-head h2{margin:0;flex:1}
+@media (max-width:800px){
+  .hero{grid-template-columns:1fr}
+  .hero-visual{order:-1}
+  .hero-visual img{min-height:220px;aspect-ratio:16/11;height:auto}
+  :root{--header-h:200px}
+  .cast img{height:180px}
+}
+@media (max-width:520px){
+  :root{--header-h:260px}
+  body{padding-bottom:110px}
+  .top-inner{flex-wrap:wrap;padding:8px 10px 4px;gap:8px}
+  .logo{width:36px;height:36px}
+  .brand-title{font-size:.92rem}
+  .brand-sub{display:none}
+  .keys-pill .key-bar{display:none}
+  .top-actions{margin-left:0}
+  .btn-rose{padding:8px 10px;font-size:.8rem}
+  .nav-row{padding:4px 10px 8px;gap:5px}
+  .chip{font-size:.7rem;padding:4px 8px}
+  .btn{font-size:.88rem;padding:8px 12px}
+  .next{margin-bottom:120px}
+}
+
+#suspectTabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.reading{background:#fffaf3;border:2px solid #e8d5a3;border-radius:16px;padding:14px 16px;line-height:1.55;margin:0 0 12px}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#intro">К содержанию</a>
+<header class="top">
+  <div class="top-inner">
+    <div class="logo" aria-hidden="true">🔍</div>
+    <div>
+      <p class="brand-title">The Case of the <span>Family Alibis</span></p>
+      <p class="brand-sub">ACADEMY STARS 3 · UNIT 3 LESSON 5 · CASE FILE #305</p>
+    </div>
+    <div class="top-actions">
+      <div class="keys-pill" aria-live="polite">Ключи <span id="keysCount">0</span>/8 <span class="key-bar"><i id="keyBar"></i></span></div>
+      <button type="button" class="icon-btn" id="soundBtn" aria-label="Звук включён">🔊</button>
+      <button type="button" class="btn btn-ink" id="btnRules">Правила</button>
+      <button type="button" class="btn btn-rose" id="resetBtn">↺ Начать заново</button>
+    </div>
+  </div>
+  <nav class="nav-row" aria-label="Карта урока">
+    <button type="button" class="chip is-on" data-nav="intro">Брифинг</button>
+    <button type="button" class="chip" data-nav="m1">Миссия 1</button>
+    <button type="button" class="chip" data-nav="m2">Миссия 2</button>
+    <button type="button" class="chip" data-nav="m3">Допрос</button>
+    <button type="button" class="chip" data-nav="m4">Улики</button>
+    <button type="button" class="chip" data-nav="verdict">Вердикт</button>
+    <button type="button" class="chip" data-nav="end">Код</button>
+    <button type="button" class="chip" data-nav="homework">Домашка</button>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="hero section-anchor" id="intro">
+    <div class="hero-copy">
+      <div class="kicker"><span class="pill">Case File #305</span><span class="pill alt">was / were · Wh-questions</span></div>
+      <h1>Дело о <em>семейных алиби</em></h1>
+      <p class="lead">Суббота, через два часа большая семейная свадьба. Трёхъярусный торт стоял на серебряном блюде на кухне — и вдруг исчез! Остались только крошки и старинная лупа. Четверо родственников были рядом с домом. Твоя миссия: проверить их алиби.</p>
+      <p class="hint"><strong>Цель урока:</strong> задавать и понимать вопросы с <em>Where / When / Who / What was the weather like / Why</em> и <em>was / were</em>.</p>
+      <div class="hero-actions">
+        <button type="button" class="btn btn-gold" data-go="m1">Начать расследование →</button>
+        <button type="button" class="btn btn-ink" id="briefSpeak">🔊 Hear the briefing</button>
+        <button type="button" class="btn btn-navy" data-go="homework">🏠 Домашняя миссия</button>
+      </div>
+      <p>
+        <label for="nameInput"><strong>Имя детектива</strong></label>
+        <input type="text" id="nameInput" placeholder="Напиши своё имя…" autocomplete="name">
+      </p>
+    </div>
+    <figure class="hero-visual">
+      <picture>
+        <source srcset="./images/hero.webp" type="image/webp">
+        <img src="./images/hero.jpg" width="1200" height="800" alt="Семья стоит вокруг пустого серебряного блюда для торта. На деревянной вывеске написано The Case of the Family Alibis.">
+      </picture>
+      <figcaption class="hero-caption">Субботний двор, пустое блюдо, крошки и лупа. Кто видел торт последним?</figcaption>
+    </figure>
+  </section>
+
+  <section class="card">
+    <h2>Attention, Junior Investigator!</h2>
+    <p>It is Saturday afternoon, two hours before the big family wedding. The three-tier wedding cake was sitting on the silver platter in the kitchen. But now, it has completely vanished! Only crumbs and an antique magnifying glass remain. Four suspicious relatives were near the house. Interrogate Aunt Sally, Uncle Bob, the twin cousins Jake and Jess, and Grandpa Joe. Ask the four golden Wh-questions to check their alibis!</p>
+    <div class="cast">
+      <figure>
+        <picture><source srcset="./images/aunt-sally.webp" type="image/webp"><img src="./images/aunt-sally.jpg" width="800" height="1200" alt="Тётя Салли, фуд-блогер, в фиолетовом атласе, с телефоном и табличкой Aunt Sally Food Blogger."></picture>
+        <figcaption><strong>Aunt Sally</strong>The Glamorous Foodie. Flower shop &amp; bakery, 2:15–3:00, with Mum.</figcaption>
+      </figure>
+      <figure>
+        <picture><source srcset="./images/uncle-bob.webp" type="image/webp"><img src="./images/uncle-bob.jpg" width="800" height="1200" alt="Дядя Боб, рыбак, в шляпе с мушками, клетчатой рубашке и зелёном жилете."></picture>
+        <figcaption><strong>Uncle Bob</strong>The Sleepy Angler. Willow Lake, 1:00–4:00, with dog Barnaby.</figcaption>
+      </figure>
+      <figure>
+        <picture><source srcset="./images/twins.webp" type="image/webp"><img src="./images/twins.jpg" width="900" height="600" alt="Близнецы Джейк в синем худи и Джесс в фиолетовом, оба в игровых гарнитурах."></picture>
+        <figcaption><strong>Jake &amp; Jess</strong>The Headset Duo. Attic gaming den, 2:00–3:45, with Leo and Sam.</figcaption>
+      </figure>
+      <figure>
+        <picture><source srcset="./images/grandpa-joe.webp" type="image/webp"><img src="./images/grandpa-joe.jpg" width="800" height="1200" alt="Дедушка Джо с белыми волосами и усами, в круглых очках и бежевом кардигане."></picture>
+        <figcaption><strong>Grandpa Joe</strong>The Forgetful Gentleman. Garden gazebo, then kitchen at 3:15, with a crossword.</figcaption>
+      </figure>
+    </div>
+    <h3>Четыре золотых вопроса</h3>
+    <p class="hint">Нажми карточку, чтобы перевернуть. На обороте — перевод и формула. Нужно открыть хотя бы три, чтобы засчитать ключ брифинга.</p>
+    <div class="flips" id="grammarGrid"></div>
+    <div class="rule-grid">
+      <div class="rule"><h3>was</h3><p>I / he / she / it <strong>was</strong> at the shop.</p></div>
+      <div class="rule"><h3>were</h3><p>you / we / they <strong>were</strong> in the garden.</p></div>
+      <div class="rule"><h3>Who … with?</h3><p>Who were you <strong>with</strong>? — предлог <em>with</em> в конце.</p></div>
+      <div class="rule"><h3>Weather</h3><p>What <strong>was</strong> the weather like? It <strong>was</strong> sunny.</p></div>
+    </div>
+    <div class="next"><button type="button" class="btn btn-gold" data-go="m1">Дальше → Миссия 1</button></div>
+  </section>
+
+  <section class="card section-anchor" id="m1">
+    <div class="kicker"><span class="pill">Mission 1</span><span class="pill alt">Question Scramble</span></div>
+    <h2>Собери вопросы из слов</h2>
+    <p>Слова уже перемешаны. Нажимай их по порядку и собери правильный Wh-вопрос. Порядок сохраняется, даже если ты уйдёшь на другую часть урока.</p>
+    <p class="counter" id="scrCount">0 / 7</p>
+    <div id="scrambleList"></div>
+    <div class="next"><button type="button" class="btn btn-gold" data-go="m2">Дальше → Миссия 2</button></div>
+  </section>
+
+  <section class="card section-anchor" id="m2">
+    <div class="kicker"><span class="pill">Mission 2</span><span class="pill alt">Question Word Detective</span></div>
+    <h2>Какое вопросное слово подходит?</h2>
+    <p>Прочитай ответ свидетеля и выбери Where, When, Who, What или Why. Варианты перемешаны.</p>
+    <p class="counter" id="whCount">0 / 7</p>
+    <div id="whList"></div>
+    <div class="next"><button type="button" class="btn btn-gold" data-go="m3">Дальше → Допрос</button></div>
+  </section>
+
+  <section class="card section-anchor" id="m3">
+    <div class="kicker"><span class="pill">Mission 3</span><span class="pill alt">Interrogation Room</span></div>
+    <h2>Допрос: напиши свои вопросы</h2>
+    <p>Опроси всех четверых родственников. Для каждого сам составь четыре вопроса: <strong>Where</strong>, <strong>When</strong>, <strong>Who … with</strong> и <strong>What was the weather like</strong>. Если вопрос собран верно, откроется официальный ответ и можно послушать голос (en-GB).</p>
+    <p class="counter">Печати алиби: <span id="stampCount">0</span> / 4</p>
+    <div id="suspectTabs"></div>
+    <div id="interviewPane"></div>
+    <div class="next"><button type="button" class="btn btn-gold" data-go="m4">Дальше → Улики</button></div>
+  </section>
+
+  <section class="card section-anchor" id="m4">
+    <div class="kicker"><span class="pill">Mission 4</span><span class="pill alt">Contradiction Hunter</span></div>
+    <h2>Найди противоречия</h2>
+    <div class="photo-frame">
+      <picture>
+        <source srcset="./images/wedding-cake.webp" type="image/webp">
+        <img src="./images/wedding-cake.jpg" width="832" height="1248" alt="Трёхъярусный свадебный торт с белым кремом, ягодами и цветами на серебряном блюде.">
+      </picture>
+    </div>
+    <p>Сравни показание и улику. Торт на фото — тот самый, который пропал с блюда. Куда он мог деться?</p>
+    <p class="counter" id="conCount">0 / 6</p>
+    <div id="contrastList"></div>
+    <div class="next"><button type="button" class="btn btn-gold" data-go="verdict">Дальше → Вердикт</button></div>
+  </section>
+
+  <section class="card section-anchor" id="verdict">
+    <div class="kicker"><span class="pill">Final Verdict</span><span class="pill alt">What really happened?</span></div>
+    <h2>Что случилось с тортом?</h2>
+    <div class="photo-frame">
+      <picture>
+        <source srcset="./images/wedding-cake.webp" type="image/webp">
+        <img src="./images/wedding-cake.jpg" width="832" height="1248" alt="Трёхъярусный свадебный торт — улика дела.">
+      </picture>
+    </div>
+    <p>Перечитай улики миссии 4 и выбери, что произошло на самом деле. Если вердикт верный, откроются объяснения всех четверых родственников.</p>
+    <div id="verdictList"></div>
+    <p>
+      <label for="deduction"><strong>Твой короткий вывод</strong> (по-английски или по-русски)</label>
+      <textarea id="deduction" rows="3" placeholder="The cake was not stolen. It was…"></textarea>
+    </p>
+    <div class="next"><button type="button" class="btn btn-gold" data-go="end">Дальше → Код</button></div>
+  </section>
+
+  <section class="card section-anchor" id="end">
+    <div class="kicker"><span class="pill">Case closed</span></div>
+    <h2>Рапорт детектива</h2>
+    <div class="cert">
+      <h2>Academy Stars Detective Bureau</h2>
+      <p>Junior Investigator <strong id="finalName">Junior Investigator</strong></p>
+      <p>Ключи по делу: <strong id="finalClues">0 / 8</strong></p>
+      <p>The wedding cake is safe. Nobody stole it — the family moved it to a cold place so the cream would not melt.</p>
+      <p><button type="button" class="btn btn-navy" id="btnCode">Получить код дела</button></p>
+      <p id="codeBox" hidden>Код: <span class="code-box" id="codeText"></span></p>
+    </div>
+    <p>
+      <label for="reflect"><strong>Рефлексия.</strong> Что было самым интересным? Какой вопрос с was / were теперь получается лучше?</label>
+      <textarea id="reflect" rows="3" placeholder="Мне понравилось… Теперь я умею спрашивать…"></textarea>
+    </p>
+    <div class="next">
+      <button type="button" class="btn btn-navy" data-go="homework">Дальше → Домашка</button>
+    </div>
+  </section>
+
+  <section class="card section-anchor" id="homework">
+    <div class="kicker"><span class="pill alt">Homework</span><span class="pill">4 tasks · Grade 6 English</span></div>
+    <h2>Home Mission</h2>
+    <p>Do this at home. Write the questions yourself. Use <em>was</em> or <em>were</em> and a Wh-word: Where, When, Who, What or Why.</p>
+
+    <h3>1. Turn the sentence into a Wh-question</h3>
+    <p class="hint">Look at the highlighted idea and start with the right Wh-word. Check each question when you finish it.</p>
+    <p class="counter" id="hwqCount">0 / 7</p>
+    <div id="hwqList"></div>
+
+    <h3>2. Find the correct sentence</h3>
+    <p class="hint">One sentence is wrong. Choose the correct question. The options are in a new order each time.</p>
+    <p class="counter" id="hwfixCount">0 / 7</p>
+    <div id="hwfixList"></div>
+
+    <h3>3. Ask your family</h3>
+    <p class="hint">Write your own question and the person’s answer. Use was / were. Do not copy the example word for word — invent a real question.</p>
+    <p class="counter" id="hwfamCount">0 / 6</p>
+    <div id="hwfamList"></div>
+
+    <h3>4. Read and choose</h3>
+    <div class="reading">
+      <p><strong>The Mystery of the Lemon Pie at Aunt Clara’s Picnic</strong></p>
+      <p>Last Sunday was warm and breezy. Uncle David and Aunt Clara were in Green Park with their twins, Max and Mia. At twelve o'clock, they were all by the big oak tree. Aunt Clara was with Mum, unpacking sandwiches. Uncle David was by the pond with the dog. Max and Mia were on the swings. At one o'clock, the lemon pie was gone from the picnic basket! Uncle David said he was still by the pond. Max and Mia said they were hungry, but they were near the playground. Suddenly, Mia laughed. “Look under the picnic blanket!” The playful puppy Barnaby was asleep with yellow crumbs on his paws!</p>
+    </div>
+    <p class="counter" id="hwreadCount">0 / 6</p>
+    <div id="hwreadList"></div>
+    <div class="next"><button type="button" class="btn btn-gold" data-go="end">К рапорту ↑</button></div>
+  </section>
+</main>
+
+<div class="modal" id="modalRules" role="dialog" aria-modal="true" aria-labelledby="rulesTitle">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h2 id="rulesTitle">Grammar HQ — was / were</h2>
+      <button type="button" class="btn btn-navy" id="rulesClose">Закрыть</button>
+    </div>
+    <div class="rule-grid">
+      <div class="rule"><h3>Where</h3><p>Where + was / were + person + (place)?<br>Where was Aunt Sally on Saturday?</p></div>
+      <div class="rule"><h3>When</h3><p>When + was / were + person + there?<br>When were you at the lake?</p></div>
+      <div class="rule"><h3>Who</h3><p>Who + was / were + person + with?<br>Who was Uncle Bob with?</p></div>
+      <div class="rule"><h3>Weather</h3><p>What was the weather like + (time)?<br>It was sunny and windy.</p></div>
+    </div>
+    <p><strong>was</strong> — I, he, she, it. <strong>were</strong> — you, we, they.</p>
+    <p>Time phrases: <em>at two o'clock, on Saturday, in the morning / afternoon</em>.</p>
+  </div>
+</div>
+
+<script>
+const KEY = "tutorcall-family-alibis-case-v1";
+const CODE = "ALIBI-U3L5-SAFE";
+const $ = (id) => document.getElementById(id);
+const norm = (s) => String(s || "").toLowerCase().replace(/['’]/g, "'").replace(/[^a-z0-9']+/g, " ").replace(/\s+/g, " ").trim();
+const wc = (s) => String(s || "").trim().split(/\s+/).filter(Boolean).length;
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function speak(text) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(String(text));
+  u.lang = "en-GB";
+  u.rate = 0.9;
+  u.pitch = 1.05;
+  speechSynthesis.speak(u);
+}
+
+const SUSPECTS = [
+  { id: "sally", name: "Aunt Sally", role: "The Glamorous Foodie", relation: "Aunt (Food Blogger)",
+    img: "aunt-sally", where: "At the flower shop & sweet bakery", when: "Saturday at 2:30 PM",
+    withWho: "With Mum (choosing wedding bouquets)", weather: "It was sunny and warm",
+    statement: "Darlings, I was at the flower shop with Mum! Look at my story feed: 47 photos of pastel peonies at 2:15 PM, then lemon cupcakes at the bakery at 2:45 PM!",
+    evidence: "Smartphone camera roll with timestamps and geolocation tags.",
+    suspicious: "A photo shows a silver cake platter in the background of her car trunk!",
+    innocent: "Aunt Sally moved the cake to the florist’s professional chiller because the kitchen counter was boiling hot!" },
+  { id: "bob", name: "Uncle Bob", role: "The Sleepy Angler", relation: "Uncle (Fisherman)",
+    img: "uncle-bob", where: "By the Willow Lake riverbank", when: "Saturday from 1:00 PM to 4:00 PM",
+    withWho: "With his faithful dog Barnaby", weather: "It was cloudy, windy and cool",
+    statement: "I was sitting by Willow Lake, catching trout with Barnaby. We had two sandwiches and fell asleep under the willow tree until 4 o’clock!",
+    evidence: "Fishing tackle box, two freshly caught river trout, muddy rubber boots.",
+    suspicious: "Dog Barnaby has white vanilla frosting on his whiskers!",
+    innocent: "Barnaby nudged the kitchen table while chasing a fly! Uncle Bob rushed the cake into the cold cellar pantry to keep it safe from the dog!" },
+  { id: "twins", name: "Jake & Jess", role: "The Headset Duo", relation: "Cousins (Twin Gamers)",
+    img: "twins", where: "In the upstairs attic gaming den", when: "Saturday at 2:00 PM to 3:45 PM",
+    withWho: "With each other and 4 teammates online", weather: "Indoors with blackout curtains, but outside looked sunny.",
+    statement: "GG detective! We were grinding rank in our attic room from 2 to 3:45 PM. Check our live tournament stream timestamp — zero AFK time!",
+    evidence: "Discord tournament chat log and gaming headset recordings.",
+    suspicious: "Jess’s purple hoodie had powdered sugar on the left sleeve pocket!",
+    innocent: "The attic was freezing, so they made hot cocoa with marshmallows (powdered sugar!) and brought cooling ice packs downstairs to rescue the melting cake!" },
+  { id: "joe", name: "Grandpa Joe", role: "The Forgetful Gentleman", relation: "Grandpa (Storyteller)",
+    img: "grandpa-joe", where: "In the garden gazebo and kitchen", when: "Saturday at 3:15 PM",
+    withWho: "By himself with a cup of Earl Grey tea", weather: "It was bright and sunny",
+    statement: "Oh goodness me... Where was I? Ah, I was in the garden reading the detective newspaper. Then I went to the kitchen for hot water... or was that Friday?",
+    evidence: "Antique magnifying glass and pocket watch left on the kitchen table near the crumbs.",
+    suspicious: "Grandpa Joe’s mustache smelled suspiciously of sweet vanilla and strawberries!",
+    innocent: "Grandpa Joe thought it was his 80th birthday surprise cake! He had one little taste, realized it was the wedding cake, and placed it safely in the walk-in fridge!" }
+];
+
+const GRAMMAR = [
+  { id: "where", q: "Where were you on Saturday?", ru: "Где ты был в субботу?", formula: "Where + was / were + person + (time / place)?", ex: "I was at the café. / Aunt Sally was at the flower shop.", notes: 'Use "was" with I, he, she, it. Use "were" with you, we, they.', audio: "Where were you on Saturday? I was at the café." },
+  { id: "when", q: "When were you there?", ru: "Когда ты был там?", formula: "When + was / were + person + there / at the party?", ex: "I was there at two o'clock. / Uncle Bob was there in the morning.", notes: 'Remember: at two o\'clock, on Saturday, in the morning / afternoon.', audio: "When were you there? I was there at two o'clock." },
+  { id: "who", q: "Who were you with?", ru: "С кем ты был?", formula: "Who + was / were + person + with?", ex: "I was with my cousins. / Uncle Bob was with his dog Barnaby.", notes: 'Notice the preposition "with" at the end of the question!', audio: "Who were you with? I was with my cousins Jake and Jess." },
+  { id: "weather", q: "What was the weather like?", ru: "Какая была погода?", formula: "What was the weather like + (on Saturday / yesterday)?", ex: "It was sunny and windy. / It was warm and cloudy.", notes: 'Always use "was" with weather: What WAS the weather like? It WAS sunny.', audio: "What was the weather like on Saturday? It was sunny and windy." }
+];
+
+const SCRAMBLE = [
+  { id: "s1", words: ["Where", "was", "Aunt Sally", "on", "Saturday", "?"], ok: "Where was Aunt Sally on Saturday?", ru: "Где была тётя Салли в субботу?", hint: 'Start with "Where", then the past verb "was".', why: "Where + was + Aunt Sally, потому что she — единственное число." },
+  { id: "s2", words: ["Who", "were", "Jake and Jess", "with", "?"], ok: "Who were Jake and Jess with?", ru: "С кем были Джейк и Джесс?", hint: 'Start with "Who", then "were" because Jake & Jess are two people.', why: "Jake and Jess = they, поэтому were. Предлог with в конце." },
+  { id: "s3", words: ["When", "was", "Uncle Bob", "by", "the lake", "?"], ok: "When was Uncle Bob by the lake?", ru: "Когда дядя Боб был у озера?", hint: '"When" asks about time. Use "was" for Uncle Bob (he).', why: "Uncle Bob = he, поэтому was." },
+  { id: "s4", words: ["What", "was", "the weather", "like", "yesterday", "?"], ok: "What was the weather like yesterday?", ru: "Какая вчера была погода?", hint: 'Remember the phrase: "What was the weather like...?"', why: "Фиксированная фраза: What was the weather like…?" },
+  { id: "s5", words: ["Where", "were", "the twins", "at", "two o'clock", "?"], ok: "Where were the twins at two o'clock?", ru: "Где были близнецы в 2 часа?", hint: 'The twins = they, so we use "were".', why: "The twins = they, поэтому were." },
+  { id: "s6", words: ["Who", "was", "Grandpa Joe", "with", "in the garden", "?"], ok: "Who was Grandpa Joe with in the garden?", ru: "С кем был дедушка Джо в саду?", hint: 'Grandpa Joe = he, so use "was". Put "with" before the place.', why: "Grandpa Joe = he, поэтому was. With стоит перед местом." },
+  { id: "s7", words: ["Why", "was", "the wedding cake", "missing", "?"], ok: "Why was the wedding cake missing?", ru: "Почему свадебный торт исчез?", hint: '"Why" asks for the reason. The cake = it, so use "was".', why: "The cake = it, поэтому was." }
+];
+
+const WH = [
+  { id: "w1", after: "was Aunt Sally on Saturday morning?", opts: ["Where", "When", "Who", "What"], ok: "Where", ctx: "She was at the flower shop and the sweet bakery.", why: "Ответ называет места, поэтому вопрос Where." },
+  { id: "w2", after: "were Jake and Jess with in the afternoon?", opts: ["Where", "When", "Who", "Why"], ok: "Who", ctx: "They were with their online gaming teammates.", why: "Ответ называет людей (teammates), поэтому Who." },
+  { id: "w3", after: "was Uncle Bob at the riverbank?", opts: ["When", "Who", "Where", "What"], ok: "When", ctx: "He was there at two o'clock in the afternoon.", why: "Ответ даёт время (at two o'clock), поэтому When." },
+  { id: "w4", after: "was the weather like by the lake?", opts: ["What", "Where", "How", "When"], ok: "What", ctx: "It was cloudy, windy and cool.", why: "О погоде спрашиваем: What was the weather like?" },
+  { id: "w5", after: "was Grandpa Joe in the kitchen?", opts: ["Why", "Where", "Who", "When"], ok: "Why", ctx: "Because he wanted a hot cup of Earl Grey tea.", why: "Ответ начинается с Because — причина, поэтому Why." },
+  { id: "w6", after: "was Uncle Bob with at the lake?", opts: ["Who", "What", "Where", "When"], ok: "Who", ctx: "He was with his faithful dog Barnaby.", why: "Ответ называет компанию (Barnaby), поэтому Who." },
+  { id: "w7", after: "was Aunt Sally at the bakery?", opts: ["When", "Where", "Who", "What"], ok: "When", ctx: "She was there at half past two (2:30 PM).", why: "Ответ даёт точное время, поэтому When." }
+];
+
+const INTERVIEW = {
+  sally: [
+    { type: "where", q: "Where were you on Saturday afternoon, Aunt Sally?", reply: "I was at the wedding flower boutique and then the French bakery!", audio: "I was at the wedding flower boutique and then the French bakery!", clue: "Photo receipt: La Petite Pâtisserie & Floral Boutique." },
+    { type: "when", q: "When were you there?", reply: "I was there between 2:15 PM and 3:00 PM. Look at my Instagram story timestamps!", audio: "I was there between two fifteen and three o'clock.", clue: "Story post timestamp: 2:28 PM with a geolocation tag." },
+    { type: "who", q: "Who were you with?", reply: "I was with Mum (the bride's mother)! We tested lemon tarts together.", audio: "I was with Mum! We tested lemon tarts together.", clue: "Selfie with Mum in front of flower bouquets." },
+    { type: "weather", q: "What was the weather like?", reply: "It was hot and very sunny — my sunglasses were completely fogged up!", audio: "It was hot and very sunny!", clue: "Aunt Sally in oversized sunglasses in bright sunshine." }
+  ],
+  bob: [
+    { type: "where", q: "Where were you on Saturday, Uncle Bob?", reply: "I was sitting down by Willow Lake with my fishing rod.", audio: "I was sitting down by Willow Lake with my fishing rod.", clue: "Muddy boots and a green tackle box next to the willow tree." },
+    { type: "when", q: "When were you there?", reply: "I was there from one o'clock in the afternoon until four o'clock.", audio: "I was there from one o'clock until four o'clock.", clue: "Watch showing 3:10 PM on the lake dock." },
+    { type: "who", q: "Who were you with?", reply: "I was with Barnaby, my basset hound. He fell asleep right on my feet!", audio: "I was with Barnaby, my basset hound.", clue: "Sleeping dog curled up beside the fishing bait." },
+    { type: "weather", q: "What was the weather like at the lake?", reply: "It was windy, overcast and cool by the water. I needed my fleece vest!", audio: "It was windy, overcast and cool by the water.", clue: "Ripples on the lake blown by strong gusts of wind." }
+  ],
+  twins: [
+    { type: "where", q: "Where were you two on Saturday afternoon?", reply: "We were up in the attic gaming den the entire time!", audio: "We were up in the attic gaming den the entire time!", clue: "Dual gaming monitors in the attic with posters." },
+    { type: "when", q: "When were you there?", reply: "We were there from two o'clock until a quarter to four (3:45 PM).", audio: "We were there from two o'clock until three forty-five.", clue: "Tournament lobby match time logged at 2:45 PM." },
+    { type: "who", q: "Who were you with?", reply: "We were with each other, and on voice chat with our squad teammates Leo and Sam.", audio: "We were with each other and our squad teammates.", clue: "A voice call with four connected icons." },
+    { type: "weather", q: "What was the weather like outside?", reply: "Our room was warm, but through the skylight the sky was bright blue and sunny!", audio: "Through the skylight the sky was bright blue and sunny!", clue: "Sunlight through the attic skylight." }
+  ],
+  joe: [
+    { type: "where", q: "Where were you, Grandpa Joe?", reply: "I was in the garden gazebo, and later in the kitchen to boil the tea kettle.", audio: "I was in the garden gazebo, and later in the kitchen.", clue: "A steaming mug of Earl Grey and a crossword in the gazebo." },
+    { type: "when", q: "When were you there?", reply: "I was in the gazebo around three o'clock, and in the kitchen at a quarter past three (3:15 PM).", audio: "I was in the kitchen at a quarter past three.", clue: "Kitchen wall clock pointing to 3:15 PM." },
+    { type: "who", q: "Who were you with?", reply: "I was alone with my crossword puzzle, and the neighbor's ginger cat walked past.", audio: "I was alone with my crossword puzzle.", clue: "A ginger cat sleeping on the garden bench." },
+    { type: "weather", q: "What was the weather like in the garden?", reply: "It was delightfully sunny and warm. Perfect weather for a stroll!", audio: "It was delightfully sunny and warm.", clue: "Golden sun on blooming pink garden roses." }
+  ]
+};
+
+const CONTRAST = [
+  { id: "c1", title: "Uncle Bob vs Aunt Sally", statement: "Uncle Bob said: “The weather was cold and rainy all afternoon across the entire town.”", evidence: "Aunt Sally’s photo at 2:30 PM outside the bakery shows bright sunshine, blue sky, and people in summer dresses.",
+    opts: [
+      { id: "a", t: "Uncle Bob made up the rain to hide where he really was!", ok: false },
+      { id: "b", t: "Willow Lake had its own breezy microclimate, but Bob exaggerated the rain.", ok: true },
+      { id: "c", t: "Aunt Sally used a fake photo from last summer.", ok: false }
+    ], why: "У озера было ветрено и прохладно, но дождя в городе в субботу не было. Боб преувеличил." },
+  { id: "c2", title: "Grandpa Joe’s Glasses Clue", statement: "Grandpa Joe said: “I did not touch anything near the cake table in the kitchen.”", evidence: "The detective found Grandpa Joe’s reading spectacles and magnifying glass right on the silver cake stand table beside the crumbs!",
+    opts: [
+      { id: "a", t: "Grandpa Joe was definitely right next to the cake table!", ok: true },
+      { id: "b", t: "The cat carried Grandpa’s glasses into the kitchen.", ok: false },
+      { id: "c", t: "Aunt Sally stole Grandpa’s glasses.", ok: false }
+    ], why: "Очки и лупа на столе у торта: дедушка Джо действительно был у стола в 3:15." },
+  { id: "c3", title: "The Mysterious White Cream on Barnaby", statement: "Uncle Bob said: “Barnaby was sleeping by the lake and never went near the wedding house.”", evidence: "Barnaby the dog has sweet vanilla buttercream frosting on his brown nose and ears!",
+    opts: [
+      { id: "a", t: "Barnaby ate a fish with white scales.", ok: false },
+      { id: "b", t: "Barnaby visited the kitchen and snuck near the wedding cake!", ok: true },
+      { id: "c", t: "Barnaby was never at the lake.", ok: false }
+    ], why: "Крем на усах Барнаби: пёс заходил на кухню и нюхал торт." },
+  { id: "c4", title: "The Twins’ Cocoa Powder vs Icing Sugar", statement: "Jake and Jess said: “We never left the gaming attic all afternoon.”", evidence: "Jess had powdered confectionery sugar on her hoodie, and wet cake-box footprints lead down the attic stairs.",
+    opts: [
+      { id: "a", t: "The twins went downstairs to check on the kitchen when they smelled hot air.", ok: true },
+      { id: "b", t: "The twins played a cooking game in Roblox.", ok: false },
+      { id: "c", t: "The twins ordered 10 cakes online.", ok: false }
+    ], why: "Сахарная пудра и следы на лестнице: близнецы спускались на кухню, когда торт начал таять." },
+  { id: "c5", title: "The Kitchen Temperature Alarm", statement: "The bride’s note said: “The cake must stay under 18°C or the cream will melt!”", evidence: "At 2:45 PM the kitchen thermostat read 28°C because the wedding caterers left the oven on!",
+    opts: [
+      { id: "a", t: "The thief stole the cake to sell it on eBay.", ok: false },
+      { id: "b", t: "Someone moved the cake away from the hot kitchen to save it from melting!", ok: true },
+      { id: "c", t: "The cake evaporated in the heat.", ok: false }
+    ], why: "Главная улика: торт не украли, чтобы съесть. Его перенесли в холод, чтобы крем не растаял." },
+  { id: "c6", title: "The Final Location Clue", statement: "The cake stand was empty at 3:30 PM, but there were wheelbarrow and cooler tracks outside.", evidence: "In the garden walk-in cooler, the thermometer is set to 4°C, and there is a note taped on the door.",
+    opts: [
+      { id: "a", t: "The wedding cake is safely resting in the cool pantry/chiller!", ok: true },
+      { id: "b", t: "The cake was taken to Paris on an airplane.", ok: false },
+      { id: "c", t: "The dog buried the three-tier cake in the garden.", ok: false }
+    ], why: "Торт в безопасности! Родственники вместе спрятали его в холодной кладовой." }
+];
+
+const VERDICT = [
+  { id: "safe", t: "The family moved the cake to a cold place to stop it melting. It is safe.", ok: true },
+  { id: "stole", t: "One person stole the cake to eat it at the party.", ok: false },
+  { id: "bury", t: "Barnaby buried the three-tier cake in the garden.", ok: false },
+  { id: "paris", t: "The cake was taken to Paris on an airplane.", ok: false }
+];
+
+const HW_Q = [
+  { id: "h1", statement: "Aunt Sally was at the flower shop on Saturday morning.", hi: "at the flower shop", hint: "Where", ok: ["where was aunt sally on saturday morning", "where was aunt sally"], why: "Место → Where was Aunt Sally…?" },
+  { id: "h2", statement: "Uncle Bob was with his dog Barnaby.", hi: "with his dog Barnaby", hint: "Who", ok: ["who was uncle bob with", "who was he with"], why: "Человек/питомец → Who was Uncle Bob with?" },
+  { id: "h3", statement: "The weather was sunny and windy on Saturday.", hi: "sunny and windy", hint: "What", ok: ["what was the weather like on saturday", "what was the weather like"], why: "Погода → What was the weather like…?" },
+  { id: "h4", statement: "Jake and Jess were in their bedroom at two o'clock.", hi: "at two o'clock", hint: "When", ok: ["when were jake and jess in their bedroom", "when were the twins in their bedroom"], why: "Время → When were Jake and Jess…?" },
+  { id: "h5", statement: "Grandpa Joe was in the kitchen at three o'clock.", hi: "in the kitchen", hint: "Where", ok: ["where was grandpa joe at three o'clock", "where was grandpa joe"], why: "Место → Where was Grandpa Joe…?" },
+  { id: "h6", statement: "My parents were at the bakery yesterday.", hi: "at the bakery", hint: "Where", ok: ["where were your parents yesterday", "where were my parents yesterday"], why: "Можно your или my parents. Were, потому что they." },
+  { id: "h7", statement: "Grandpa was with Mum at the party.", hi: "with Mum", hint: "Who", ok: ["who was grandpa with at the party", "who was grandpa with"], why: "Компания → Who was Grandpa with…?" }
+];
+
+const HW_FIX = [
+  { id: "f1", bad: "Where were Aunt Sally yesterday morning?",
+    opts: [
+      { id: "a", t: "Where was Aunt Sally yesterday morning?", ok: true },
+      { id: "b", t: "Where Aunt Sally was yesterday morning?", ok: false },
+      { id: "c", t: "Where were Aunt Sally and Mum yesterday morning?", ok: false }
+    ], why: "Aunt Sally = she, поэтому was, не were." },
+  { id: "f2", bad: "Who was you with at two o'clock?",
+    opts: [
+      { id: "a", t: "Who were you with at two o'clock?", ok: true },
+      { id: "b", t: "Who you were with at two o'clock?", ok: false },
+      { id: "c", t: "Who was he with at two o'clock?", ok: false }
+    ], why: "С you всегда were, даже если человек один." },
+  { id: "f3", bad: "What were the weather like on Saturday?",
+    opts: [
+      { id: "a", t: "What was the weather like on Saturday?", ok: true },
+      { id: "b", t: "How was the weather like on Saturday?", ok: false },
+      { id: "c", t: "What the weather was like on Saturday?", ok: false }
+    ], why: "The weather = it, поэтому was. Формула: What was the weather like?" },
+  { id: "f4", bad: "When was Jake and Jess in the garden?",
+    opts: [
+      { id: "a", t: "When were Jake and Jess in the garden?", ok: true },
+      { id: "b", t: "When Jake and Jess was in the garden?", ok: false },
+      { id: "c", t: "Where was Jake and Jess in the garden?", ok: false }
+    ], why: "Jake and Jess = they, поэтому were." },
+  { id: "f5", bad: "Where Uncle Bob was at three o'clock?",
+    opts: [
+      { id: "a", t: "Where was Uncle Bob at three o'clock?", ok: true },
+      { id: "b", t: "Where were Uncle Bob at three o'clock?", ok: false },
+      { id: "c", t: "Where did Uncle Bob was at three o'clock?", ok: false }
+    ], why: "В Wh-вопросе глагол стоит перед подлежащим: Where + was + Uncle Bob." },
+  { id: "f6", bad: "Who were Grandpa Joe with yesterday?",
+    opts: [
+      { id: "a", t: "Who was Grandpa Joe with yesterday?", ok: true },
+      { id: "b", t: "Who Grandpa Joe was with yesterday?", ok: false },
+      { id: "c", t: "Who was with Grandpa Joe yesterday?", ok: false }
+    ], why: "Grandpa Joe = he, поэтому was: Who was Grandpa Joe with…?" },
+  { id: "f7", bad: "Why were the cake missing from the kitchen?",
+    opts: [
+      { id: "a", t: "Why was the cake missing from the kitchen?", ok: true },
+      { id: "b", t: "Why the cake was missing from the kitchen?", ok: false },
+      { id: "c", t: "Where were the cake missing from the kitchen?", ok: false }
+    ], why: "The cake = it, поэтому was." }
+];
+
+const HW_FAM = [
+  { id: "m1", who: "Mum", hint: "Where", sample: "Where were you yesterday at 5 o'clock?" },
+  { id: "m2", who: "Dad", hint: "Who", sample: "Who were you with on Saturday morning?" },
+  { id: "m3", who: "Brother / Sister", hint: "When", sample: "When were you at school / the playground?" },
+  { id: "m4", who: "Grandma / Grandpa", hint: "What (weather)", sample: "What was the weather like when you were young?" },
+  { id: "m5", who: "Cousin / Best Friend", hint: "Where", sample: "Where were you last Sunday afternoon?" },
+  { id: "m6", who: "You (self-reflection)", hint: "Who", sample: "Who were you with yesterday evening?" }
+];
+
+const HW_READ = {
+  title: "The Mystery of the Lemon Pie at Aunt Clara’s Picnic",
+  text: "Last Sunday was warm and breezy. Uncle David and Aunt Clara were in Green Park with their twins, Max and Mia. At twelve o'clock, they were all by the big oak tree. Aunt Clara was with Mum, unpacking sandwiches. Uncle David was by the pond with the dog. Max and Mia were on the swings. At one o'clock, the lemon pie was gone from the picnic basket! Uncle David said he was still by the pond. Max and Mia said they were hungry, but they were near the playground. Suddenly, Mia laughed. \"Look under the picnic blanket!\" The playful puppy Barnaby was asleep with yellow crumbs on his paws!",
+  qs: [
+    { id: "r1", q: "What was the weather like last Sunday?", opts: ["It was rainy and cold.", "It was warm and breezy.", "It was stormy and dark."], ok: "It was warm and breezy.", why: "В тексте: Last Sunday was warm and breezy." },
+    { id: "r2", q: "Where were Max and Mia at twelve o'clock?", opts: ["They were on the swings in Green Park.", "They were at school.", "They were at home."], ok: "They were on the swings in Green Park.", why: "В полдень они были на качелях." },
+    { id: "r3", q: "Who was Aunt Clara with?", opts: ["She was with the dog.", "She was with Uncle David.", "She was with Mum."], ok: "She was with Mum.", why: "Aunt Clara was with Mum, unpacking sandwiches." },
+    { id: "r4", q: "When was the lemon pie gone?", opts: ["At one o'clock.", "At ten in the morning.", "At five o'clock."], ok: "At one o'clock.", why: "At one o'clock, the lemon pie was gone." },
+    { id: "r5", q: "Where was Uncle David during the picnic?", opts: ["He was in his car.", "He was by the pond with the dog.", "He was in the bakery."], ok: "He was by the pond with the dog.", why: "Uncle David was by the pond with the dog." },
+    { id: "r6", q: "Who took the lemon pie?", opts: ["Max and Mia.", "The playful puppy Barnaby.", "Uncle David."], ok: "The playful puppy Barnaby.", why: "У Барнаби на лапах были жёлтые крошки." }
+  ]
+};
+
+function qOk(type, text) {
+  const t = norm(text);
+  if (!/\b(was|were)\b/.test(t)) return false;
+  if (type === "where") return t.startsWith("where ");
+  if (type === "when") return t.startsWith("when ");
+  if (type === "who") return t.startsWith("who ") && t.includes("with");
+  if (type === "weather") return t.startsWith("what ") && t.includes("weather") && t.includes("like");
+  return false;
+}
+
+function defaults() {
+  return {
+    name: "",
+    flipped: {},
+    scramble: {},
+    scrambleBank: Object.fromEntries(SCRAMBLE.map((x) => [x.id, shuffle(x.words.map((w, i) => x.id + "-" + i + ":" + w))])),
+    scrambleBuilt: Object.fromEntries(SCRAMBLE.map((x) => [x.id, []])),
+    wh: {},
+    whOpts: Object.fromEntries(WH.map((x) => [x.id, shuffle(x.opts.slice())])),
+    interview: {},
+    contrast: {},
+    contrastOpts: Object.fromEntries(CONTRAST.map((x) => [x.id, shuffle(x.opts.map((o) => o.id))])),
+    verdict: "",
+    verdictOpts: shuffle(VERDICT.map((v) => v.id)),
+    verdictChecked: false,
+    deduction: "",
+    reflect: "",
+    hwq: {},
+    hwfix: {},
+    hwfixOpts: Object.fromEntries(HW_FIX.map((x) => [x.id, shuffle(x.opts.map((o) => o.id))])),
+    hwfam: Object.fromEntries(HW_FAM.map((m) => [m.id, { q: "", a: "" }])),
+    hwread: {},
+    hwreadOpts: Object.fromEntries(HW_READ.qs.map((x) => [x.id, shuffle(x.opts.slice())])),
+    codeOpen: false,
+    soundOn: true,
+    openSuspect: "sally"
+  };
+}
+
+let state = defaults();
+try {
+  const raw = localStorage.getItem(KEY);
+  if (raw) state = Object.assign(defaults(), JSON.parse(raw));
+} catch (e) {}
+
+function save() {
+  try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  renderProgress();
+}
+
+function pic(name, alt, extra) {
+  return `<picture><source srcset="./images/${name}.webp" type="image/webp"><img src="./images/${name}.jpg" alt="${alt}" ${extra || ""}></picture>`;
+}
+
+function scrambleN() {
+  return SCRAMBLE.filter((x) => norm(builtText(x.id)) === norm(x.ok) && state.scramble[x.id] === true).length;
+}
+function whN() { return WH.filter((x) => state.wh[x.id] === x.ok).length; }
+function stampN() {
+  return SUSPECTS.filter((s) => INTERVIEW[s.id].every((q) => qOk(q.type, (state.interview[s.id] || {})[q.type] || ""))).length;
+}
+function contrastN() { return CONTRAST.filter((x) => x.opts.find((o) => o.id === state.contrast[x.id])?.ok).length; }
+function verdictOk() { return state.verdictChecked && VERDICT.find((v) => v.id === state.verdict)?.ok; }
+function hwqN() { return HW_Q.filter((x) => x.ok.includes(norm(state.hwq[x.id] || ""))).length; }
+function hwfixN() { return HW_FIX.filter((x) => x.opts.find((o) => o.id === state.hwfix[x.id])?.ok).length; }
+function hwfamN() {
+  return HW_FAM.filter((m) => {
+    const n = state.hwfam[m.id] || {};
+    return wc(n.q) >= 5 && /was|were/i.test(n.q) && wc(n.a) >= 4 && /was|were/i.test(n.a);
+  }).length;
+}
+function hwreadN() { return HW_READ.qs.filter((x) => state.hwread[x.id] === x.ok).length; }
+function vocabN() { return Object.keys(state.flipped).filter((k) => state.flipped[k]).length; }
+
+function clues() {
+  return [
+    vocabN() >= 3,
+    scrambleN() === 7,
+    whN() === 7,
+    stampN() >= 1,
+    stampN() >= 2,
+    stampN() >= 4,
+    contrastN() === 6,
+    !!verdictOk()
+  ];
+}
+function clueN() { return clues().filter(Boolean).length; }
+
+function renderProgress() {
+  const n = clueN();
+  if ($("keysCount")) $("keysCount").textContent = n;
+  if ($("keyBar")) $("keyBar").style.width = (n / 8 * 100) + "%";
+  const map = {
+    intro: vocabN() >= 3, m1: scrambleN() === 7, m2: whN() === 7,
+    m3: stampN() === 4, m4: contrastN() === 6, verdict: !!verdictOk(),
+    end: !!state.codeOpen, homework: hwqN() + hwfixN() + hwreadN() >= 10
+  };
+  document.querySelectorAll("[data-nav]").forEach((b) => b.classList.toggle("is-done", !!map[b.getAttribute("data-nav")]));
+}
+
+function renderVocab() {
+  const box = $("grammarGrid");
+  if (!box) return;
+  box.innerHTML = GRAMMAR.map((g) => `
+    <div class="flip${state.flipped[g.id] ? " is-on" : ""}" data-flip="${g.id}">
+      <button type="button" aria-label="${g.q}">
+        <div class="flip-inner">
+          <div class="flip-face"><strong>${g.q}</strong><small>нажми</small></div>
+          <div class="flip-face flip-back">${g.ru}<br>${g.formula}</div>
+        </div>
+      </button>
+    </div>`).join("");
+  box.querySelectorAll("[data-flip]").forEach((el) => {
+    el.querySelector("button").onclick = () => {
+      const id = el.getAttribute("data-flip");
+      state.flipped[id] = !state.flipped[id];
+      if (state.flipped[id] && state.soundOn) speak(GRAMMAR.find((g) => g.id === id).audio);
+      save(); renderVocab();
+    };
+  });
+}
+
+function tokenParts(tok) {
+  const i = tok.indexOf(":");
+  return { key: tok.slice(0, i), word: tok.slice(i + 1) };
+}
+function builtText(id) {
+  return (state.scrambleBuilt[id] || []).map((t) => tokenParts(t).word).join(" ");
+}
+function renderScramble() {
+  const box = $("scrambleList");
+  if (!box) return;
+  box.innerHTML = SCRAMBLE.map((item, idx) => {
+    const bank = state.scrambleBank[item.id] || [];
+    const built = state.scrambleBuilt[item.id] || [];
+    const checked = state.scramble[item.id] === true || state.scramble[item.id] === false;
+    const ok = norm(builtText(item.id)) === norm(item.ok);
+    const bankBtns = bank.map((tok) => {
+      const { key, word } = tokenParts(tok);
+      return `<button type="button" class="chip-word" data-s="${item.id}" data-from="bank" data-tok="${tok}">${word}</button>`;
+    }).join("");
+    const builtBtns = built.map((tok, i) => {
+      const { word } = tokenParts(tok);
+      return `<button type="button" class="chip-word placed" data-s="${item.id}" data-from="built" data-i="${i}">${word}</button>`;
+    }).join("");
+    const why = checked ? `<p class="why ${ok ? "ok" : "bad"}">${ok ? item.why : "Порядок неверный. Подсказка: " + item.hint}</p>` : "";
+    return `<div class="task" id="scr-${item.id}">
+      <p style="margin:0 0 6px"><strong>#${idx + 1}.</strong> 🇷🇺 «${item.ru}»</p>
+      <div class="drop" data-drop="${item.id}">${builtBtns || '<span class="hint">Собери вопрос, нажимая слова внизу.</span>'}</div>
+      <div class="bank">${bankBtns}</div>
+      <button type="button" class="btn btn-navy" data-check-s="${item.id}">Проверить</button>
+      <button type="button" class="btn btn-ink" data-reshuf="${item.id}">Перемешать</button>
+      ${why}
+    </div>`;
+  }).join("");
+  box.querySelectorAll("[data-from=bank]").forEach((b) => {
+    b.onclick = () => {
+      const id = b.getAttribute("data-s"); const tok = b.getAttribute("data-tok");
+      state.scrambleBank[id] = (state.scrambleBank[id] || []).filter((t) => t !== tok);
+      state.scrambleBuilt[id] = [...(state.scrambleBuilt[id] || []), tok];
+      state.scramble[id] = null; save(); renderScramble();
+    };
+  });
+  box.querySelectorAll("[data-from=built]").forEach((b) => {
+    b.onclick = () => {
+      const id = b.getAttribute("data-s"); const i = +b.getAttribute("data-i");
+      const built = state.scrambleBuilt[id] || [];
+      const tok = built[i]; if (!tok) return;
+      state.scrambleBuilt[id] = built.filter((_, k) => k !== i);
+      state.scrambleBank[id] = [...(state.scrambleBank[id] || []), tok];
+      state.scramble[id] = null; save(); renderScramble();
+    };
+  });
+  box.querySelectorAll("[data-check-s]").forEach((b) => {
+    b.onclick = () => {
+      const id = b.getAttribute("data-check-s");
+      const item = SCRAMBLE.find((x) => x.id === id);
+      const ok = norm(builtText(id)) === norm(item.ok);
+      state.scramble[id] = ok; save(); renderScramble();
+      $("scrCount").textContent = scrambleN() + " / 7";
+    };
+  });
+  box.querySelectorAll("[data-reshuf]").forEach((b) => {
+    b.onclick = () => {
+      const id = b.getAttribute("data-reshuf");
+      const item = SCRAMBLE.find((x) => x.id === id);
+      const all = [...(state.scrambleBank[id] || []), ...(state.scrambleBuilt[id] || [])];
+      const words = all.length ? all : item.words.map((w, i) => id + "-" + i + ":" + w);
+      state.scrambleBank[id] = shuffle(words);
+      state.scrambleBuilt[id] = [];
+      state.scramble[id] = null; save(); renderScramble();
+    };
+  });
+  $("scrCount").textContent = scrambleN() + " / 7";
+}
+
+function renderWH() {
+  const box = $("whList");
+  if (!box) return;
+  box.innerHTML = WH.map((item, i) => {
+    const order = state.whOpts[item.id] || item.opts;
+    const pick = state.wh[item.id];
+    const checked = !!pick;
+    const ok = pick === item.ok;
+    const btns = order.map((o) => {
+      let cls = "opt";
+      if (checked && pick === o && ok) cls += " is-ok";
+      else if (checked && pick === o && !ok) cls += " is-bad";
+      return `<button type="button" class="${cls}" data-wh="${item.id}" data-opt="${o}">${o} ${item.after}</button>`;
+    }).join("");
+    const why = checked ? `<p class="why ${ok ? "ok" : "bad"}">${ok ? item.why + " " + item.ctx : "Не то слово. Подумай, о чём ответ: место, время, человек или причина."}</p>` : "";
+    return `<div class="task"><p style="margin:0 0 6px"><strong>${i + 1}.</strong> Выбери вопросное слово.</p>
+      <p class="hint" style="margin:0 0 8px">Answer: “${item.ctx}”</p>${btns}${why}</div>`;
+  }).join("");
+  box.querySelectorAll("[data-wh]").forEach((b) => {
+    b.onclick = () => { state.wh[b.getAttribute("data-wh")] = b.getAttribute("data-opt"); save(); renderWH(); $("whCount").textContent = whN() + " / 7"; };
+  });
+  $("whCount").textContent = whN() + " / 7";
+}
+
+function renderInterview() {
+  const tabs = $("suspectTabs");
+  const pane = $("interviewPane");
+  if (!tabs || !pane) return;
+  const cur = state.openSuspect || "sally";
+  tabs.innerHTML = SUSPECTS.map((s) => {
+    const done = INTERVIEW[s.id].every((q) => qOk(q.type, (state.interview[s.id] || {})[q.type] || ""));
+    return `<button type="button" class="chip${cur === s.id ? " is-on" : ""}${done ? " is-done" : ""}" data-sus="${s.id}">${s.name}${done ? " ✓" : ""}</button>`;
+  }).join("");
+  tabs.querySelectorAll("[data-sus]").forEach((b) => b.onclick = () => { state.openSuspect = b.getAttribute("data-sus"); save(); renderInterview(); });
+  const s = SUSPECTS.find((x) => x.id === cur);
+  const recs = INTERVIEW[cur];
+  const answers = state.interview[cur] || {};
+  const checks = state.interview["_c_" + cur] || {};
+  const items = recs.map((q, i) => {
+    const val = answers[q.type] || "";
+    const checked = checks[q.type] === true || checks[q.type] === false;
+    const ok = qOk(q.type, val);
+    const why = checked ? `<p class="why ${ok ? "ok" : "bad"}">${ok ? "Хороший вопрос. Вот ответ свидетеля:" : "Нужен вопрос с " + q.type.toUpperCase() + ", was/were и знаком вопроса. Для Who добавь with. Для погоды: What was the weather like…?"}</p>` : "";
+    const reveal = ok && checked ? `<div class="rule" style="margin-top:8px"><p><strong>${s.name}:</strong> ${q.reply}</p>
+      <p class="hint">Улика: ${q.clue}</p>
+      <button type="button" class="btn btn-ink" data-say="${cur}-${i}">🔊 Hear voice</button></div>` : "";
+    return `<div class="task">
+      <p style="margin:0 0 6px"><strong>${i + 1}. ${q.type === "weather" ? "What (weather)" : q.type[0].toUpperCase() + q.type.slice(1)}</strong> — напиши свой вопрос (не копируй готовый из ключей, но используй правильную формулу).</p>
+      <p class="hint">Образец идеи: ${q.q}</p>
+      <textarea data-iq="${cur}" data-type="${q.type}" rows="2" placeholder="Write your own question…">${val.replace(/</g, "&lt;")}</textarea>
+      <p><button type="button" class="btn btn-navy" data-icheck="${cur}" data-type="${q.type}">Проверить вопрос</button></p>
+      ${why}${reveal}
+    </div>`;
+  }).join("");
+  const all = recs.every((q) => qOk(q.type, (state.interview[cur] || {})[q.type] || ""));
+  pane.innerHTML = `
+    <div class="photo-frame">${pic(s.img, s.name + ", " + s.role, 'width="800" height="1200"')}</div>
+    <p><strong>${s.name}</strong> — ${s.role}. ${s.relation}.</p>
+    <p class="hint">Подозрительная деталь: ${s.suspicious}</p>
+    ${items}
+    ${all ? `<p class="stamp ok">ALIBI STAMP: ${s.name}</p>` : ""}
+  `;
+  pane.querySelectorAll("textarea[data-iq]").forEach((ta) => {
+    ta.oninput = () => {
+      const id = ta.getAttribute("data-iq"); const typ = ta.getAttribute("data-type");
+      state.interview[id] = Object.assign({}, state.interview[id], { [typ]: ta.value });
+      save(); $("stampCount").textContent = stampN() + " / 4";
+    };
+  });
+  pane.querySelectorAll("[data-icheck]").forEach((b) => {
+    b.onclick = () => {
+      const id = b.getAttribute("data-icheck"); const typ = b.getAttribute("data-type");
+      const ok = qOk(typ, (state.interview[id] || {})[typ] || "");
+      state.interview["_c_" + id] = Object.assign({}, state.interview["_c_" + id], { [typ]: ok });
+      save(); renderInterview();
+    };
+  });
+  pane.querySelectorAll("[data-say]").forEach((b) => {
+    b.onclick = () => {
+      const [id, i] = b.getAttribute("data-say").split("-");
+      if (state.soundOn) speak(INTERVIEW[id][+i].audio);
+    };
+  });
+  $("stampCount").textContent = stampN() + " / 4";
+}
+
+function renderContrast() {
+  const box = $("contrastList");
+  if (!box) return;
+  box.innerHTML = CONTRAST.map((item, i) => {
+    const order = state.contrastOpts[item.id] || item.opts.map((o) => o.id);
+    const pick = state.contrast[item.id];
+    const chosen = item.opts.find((o) => o.id === pick);
+    const checked = !!pick;
+    const opts = order.map((oid) => {
+      const o = item.opts.find((x) => x.id === oid);
+      let cls = "opt";
+      if (checked && pick === o.id && o.ok) cls += " is-ok";
+      else if (checked && pick === o.id && !o.ok) cls += " is-bad";
+      return `<button type="button" class="${cls}" data-c="${item.id}" data-opt="${o.id}">${o.t}</button>`;
+    }).join("");
+    const why = checked ? `<p class="why ${chosen?.ok ? "ok" : "bad"}">${chosen?.ok ? item.why : "Сравни показание и улику ещё раз."}</p>` : "";
+    return `<div class="task">
+      <p style="margin:0 0 6px"><strong>${i + 1}. ${item.title}</strong></p>
+      <p>${item.statement}</p>
+      <p class="hint">Улика: ${item.evidence}</p>
+      ${opts}${why}
+    </div>`;
+  }).join("");
+  box.querySelectorAll("[data-c]").forEach((b) => {
+    b.onclick = () => { state.contrast[b.getAttribute("data-c")] = b.getAttribute("data-opt"); save(); renderContrast(); $("conCount").textContent = contrastN() + " / 6"; };
+  });
+  $("conCount").textContent = contrastN() + " / 6";
+}
+
+function renderVerdict() {
+  const box = $("verdictList");
+  if (!box) return;
+  const order = state.verdictOpts || VERDICT.map((v) => v.id);
+  const pick = state.verdict;
+  const checked = state.verdictChecked;
+  const chosen = VERDICT.find((v) => v.id === pick);
+  const opts = order.map((id) => {
+    const o = VERDICT.find((v) => v.id === id);
+    let cls = "opt";
+    if (checked && pick === o.id && o.ok) cls += " is-ok";
+    else if (checked && pick === o.id && !o.ok) cls += " is-bad";
+    return `<button type="button" class="${cls}" data-v="${o.id}">${o.t}</button>`;
+  }).join("");
+  const why = checked ? `<p class="why ${chosen?.ok ? "ok" : "bad"}">${chosen?.ok ? "Верно: торт не украли. Родственники перенесли его в холод, чтобы крем не растаял. Все четверо невиновны." : "Перечитай улики миссии 4. Торт не украли, чтобы съесть."}</p>` : "";
+  const stories = (checked && chosen?.ok) ? `<div class="task">${SUSPECTS.map((s) => `<p><strong>${s.name}:</strong> ${s.innocent}</p>`).join("")}</div>` : "";
+  box.innerHTML = opts + `<p><button type="button" class="btn btn-navy" id="checkVerdict">Проверить вердикт</button></p>` + why + stories;
+  box.querySelectorAll("[data-v]").forEach((b) => {
+    b.onclick = () => { state.verdict = b.getAttribute("data-v"); state.verdictChecked = false; save(); renderVerdict(); };
+  });
+  $("checkVerdict").onclick = () => { state.verdictChecked = true; save(); renderVerdict(); renderEnd(); };
+}
+
+function renderEnd() {
+  if (state.codeOpen) { $("codeBox").hidden = false; $("codeText").textContent = CODE; }
+  else $("codeBox").hidden = true;
+  $("finalName").textContent = state.name.trim() || "Junior Investigator";
+  $("finalClues").textContent = clueN() + " / 8";
+}
+
+function renderHwQ() {
+  const box = $("hwqList");
+  if (!box) return;
+  box.innerHTML = HW_Q.map((item, i) => {
+    const val = state.hwq[item.id] || "";
+    const checked = state.hwq["_c_" + item.id];
+    const ok = item.ok.includes(norm(val));
+    const why = checked ? `<p class="why ${ok ? "ok" : "bad"}">${ok ? item.why : "Подсказка: начни с " + item.hint + " и поставь was/were перед именем."}</p>` : "";
+    return `<div class="task"><p style="margin:0 0 6px"><strong>${i + 1}.</strong> ${item.statement} <em>(${item.hi})</em></p>
+      <p class="hint">Write a Wh-question. Hint: ${item.hint}</p>
+      <input type="text" data-hwq="${item.id}" value="${val.replace(/"/g, "&quot;")}" placeholder="Write the question yourself…">
+      <button type="button" class="btn btn-navy" data-hwqc="${item.id}">Check</button>${why}</div>`;
+  }).join("");
+  box.querySelectorAll("input[data-hwq]").forEach((inp) => {
+    inp.oninput = () => { state.hwq[inp.getAttribute("data-hwq")] = inp.value; save(); $("hwqCount").textContent = hwqN() + " / 7"; };
+  });
+  box.querySelectorAll("[data-hwqc]").forEach((b) => {
+    b.onclick = () => { const id = b.getAttribute("data-hwqc"); state.hwq["_c_" + id] = true; save(); renderHwQ(); };
+  });
+  $("hwqCount").textContent = hwqN() + " / 7";
+}
+
+function renderHwFix() {
+  const box = $("hwfixList");
+  if (!box) return;
+  box.innerHTML = HW_FIX.map((item, i) => {
+    const order = state.hwfixOpts[item.id] || item.opts.map((o) => o.id);
+    const pick = state.hwfix[item.id];
+    const chosen = item.opts.find((o) => o.id === pick);
+    const checked = !!pick;
+    const opts = order.map((oid) => {
+      const o = item.opts.find((x) => x.id === oid);
+      let cls = "opt";
+      if (checked && pick === o.id && o.ok) cls += " is-ok";
+      else if (checked && pick === o.id && !o.ok) cls += " is-bad";
+      return `<button type="button" class="${cls}" data-fix="${item.id}" data-opt="${o.id}">${o.t}</button>`;
+    }).join("");
+    const why = checked ? `<p class="why ${chosen?.ok ? "ok" : "bad"}">${chosen?.ok ? item.why : "Проверь was / were и порядок слов."}</p>` : "";
+    return `<div class="task"><p style="margin:0 0 6px"><strong>${i + 1}.</strong> <em>"${item.bad}"</em></p>${opts}${why}</div>`;
+  }).join("");
+  box.querySelectorAll("[data-fix]").forEach((b) => {
+    b.onclick = () => { state.hwfix[b.getAttribute("data-fix")] = b.getAttribute("data-opt"); save(); renderHwFix(); $("hwfixCount").textContent = hwfixN() + " / 7"; };
+  });
+  $("hwfixCount").textContent = hwfixN() + " / 7";
+}
+
+function renderHwFam() {
+  const box = $("hwfamList");
+  if (!box) return;
+  box.innerHTML = HW_FAM.map((m, i) => {
+    const n = state.hwfam[m.id] || { q: "", a: "" };
+    return `<div class="task"><p style="margin:0 0 6px"><strong>${i + 1}. ${m.who}</strong> — use <em>${m.hint}</em>. Write your own question and the answer. Example idea: ${m.sample}</p>
+      <p><input type="text" data-fam="${m.id}" data-slot="q" value="${(n.q || "").replace(/"/g, "&quot;")}" placeholder="Your question…"></p>
+      <p><input type="text" data-fam="${m.id}" data-slot="a" value="${(n.a || "").replace(/"/g, "&quot;")}" placeholder="The answer…"></p>
+    </div>`;
+  }).join("");
+  box.querySelectorAll("[data-fam]").forEach((inp) => {
+    inp.oninput = () => {
+      const id = inp.getAttribute("data-fam"); const slot = inp.getAttribute("data-slot");
+      state.hwfam[id] = Object.assign({ q: "", a: "" }, state.hwfam[id], { [slot]: inp.value });
+      save(); $("hwfamCount").textContent = hwfamN() + " / 6";
+    };
+  });
+  $("hwfamCount").textContent = hwfamN() + " / 6";
+}
+
+function renderHwRead() {
+  const box = $("hwreadList");
+  if (!box) return;
+  box.innerHTML = HW_READ.qs.map((item, i) => {
+    const order = state.hwreadOpts[item.id] || item.opts;
+    const pick = state.hwread[item.id];
+    const checked = !!pick;
+    const ok = pick === item.ok;
+    const opts = order.map((o) => {
+      let cls = "opt";
+      if (checked && pick === o && ok) cls += " is-ok";
+      else if (checked && pick === o && !ok) cls += " is-bad";
+      return `<button type="button" class="${cls}" data-r="${item.id}" data-opt="${o.replace(/"/g, "&quot;")}">${o}</button>`;
+    }).join("");
+    const why = checked ? `<p class="why ${ok ? "ok" : "bad"}">${ok ? item.why : "Найди предложение в тексте ещё раз."}</p>` : "";
+    return `<div class="task"><p style="margin:0 0 6px"><strong>${i + 1}.</strong> ${item.q}</p>${opts}${why}</div>`;
+  }).join("");
+  box.querySelectorAll("[data-r]").forEach((b) => {
+    b.onclick = () => { state.hwread[b.getAttribute("data-r")] = b.getAttribute("data-opt"); save(); renderHwRead(); $("hwreadCount").textContent = hwreadN() + " / 6"; };
+  });
+  $("hwreadCount").textContent = hwreadN() + " / 6";
+}
+
+function go(id) {
+  const el = $(id);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  document.querySelectorAll("[data-nav]").forEach((b) => b.classList.toggle("is-on", b.getAttribute("data-nav") === id));
+}
+
+function bindAll() {
+  document.querySelectorAll("[data-nav]").forEach((b) => b.onclick = () => go(b.getAttribute("data-nav")));
+  document.querySelectorAll("[data-go]").forEach((b) => b.onclick = () => go(b.getAttribute("data-go")));
+  $("resetBtn").onclick = () => {
+    if (confirm("Начать заново? Весь прогресс, ключи, ответы и домашнее задание будут удалены.")) {
+      if (window.speechSynthesis) speechSynthesis.cancel();
+      localStorage.removeItem(KEY);
+      location.reload();
+    }
+  };
+  $("soundBtn").onclick = () => {
+    state.soundOn = !state.soundOn;
+    if (!state.soundOn && window.speechSynthesis) speechSynthesis.cancel();
+    $("soundBtn").textContent = state.soundOn ? "🔊" : "🔇";
+    $("soundBtn").setAttribute("aria-label", state.soundOn ? "Звук включён" : "Звук выключен");
+    save();
+  };
+  $("soundBtn").textContent = state.soundOn ? "🔊" : "🔇";
+  $("btnRules").onclick = () => $("modalRules").classList.add("is-on");
+  $("rulesClose").onclick = () => $("modalRules").classList.remove("is-on");
+  $("modalRules").addEventListener("click", (e) => { if (e.target.id === "modalRules") $("modalRules").classList.remove("is-on"); });
+  $("nameInput").value = state.name;
+  $("nameInput").oninput = () => { state.name = $("nameInput").value; save(); renderEnd(); };
+  $("btnCode").onclick = () => { state.codeOpen = true; save(); renderEnd(); };
+  $("reflect").value = state.reflect || "";
+  $("reflect").oninput = () => { state.reflect = $("reflect").value; save(); };
+  $("deduction").value = state.deduction || "";
+  $("deduction").oninput = () => { state.deduction = $("deduction").value; save(); };
+  $("briefSpeak").onclick = () => { if (state.soundOn) speak("Attention Junior Investigator! It is Saturday afternoon, two hours before the big family wedding. The three-tier wedding cake has completely vanished! Your mission: ask Where, When, Who and What was the weather like to check the alibis."); };
+}
+
+function stats() {
+  return {
+    vocabN: vocabN(), scrambleN: scrambleN(), whN: whN(), stampN: stampN(),
+    contrastN: contrastN(), verdictOk: !!verdictOk(), clues: clueN(),
+    code: !!state.codeOpen, codeText: state.codeOpen ? CODE : "",
+    hwqN: hwqN(), hwfixN: hwfixN(), hwfamN: hwfamN(), hwreadN: hwreadN(),
+    all: scrambleN() === 7 && whN() === 7 && stampN() === 4 && contrastN() === 6 && !!verdictOk()
+  };
+}
+
+function boot() {
+  bindAll();
+  renderVocab();
+  renderScramble();
+  renderWH();
+  renderInterview();
+  renderContrast();
+  renderVerdict();
+  renderHwQ();
+  renderHwFix();
+  renderHwFam();
+  renderHwRead();
+  renderEnd();
+  renderProgress();
+  window.__alibiqa = { KEY, CODE, stats: () => stats(), state: () => state, SCRAMBLE, WH, CONTRAST, VERDICT, HW_Q, HW_FIX, HW_READ, SUSPECTS, INTERVIEW };
+}
+document.addEventListener("DOMContentLoaded", boot);
+
+</script>
+<script src="../_shared/watermark.js" data-mode="bar" data-position="bottom" defer></script>
+</body>
+</html>
