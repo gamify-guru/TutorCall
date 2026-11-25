@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Учителю — Дело о семейных алиби</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Nunito,system-ui,sans-serif;background:#1c1917;color:#1c140c;padding:24px 16px 80px}
+main{max-width:760px;margin:0 auto;background:#faf6ef;border-radius:24px;padding:28px 24px;border:3px solid #e8d5a3}
+h1,h2,h3{font-weight:800;color:#1c1917}
+h1{font-size:1.6rem}
+h2{margin-top:1.6rem;font-size:1.2rem}
+.note{background:#fef3c7;border-radius:12px;padding:10px 12px;font-weight:700}
+ol,ul{padding-left:1.3rem}
+li{margin:.25rem 0}
+a{color:#92400e}
+.toc{font-weight:700}
+code{background:#fffaf3;padding:1px 6px;border-radius:6px}
+</style>
+</head>
+<body>
+<main>
+<h1>Учителю • Дело о семейных алиби</h1>
+<p class="note">Эта страница не показывается ученикам. Ученический урок: <a href="./">index.html</a>.</p>
+<nav class="toc">
+  <a href="#plan">План</a> ·
+  <a href="#bugs">Что исправлено</a> ·
+  <a href="#flags">Флажки</a> ·
+  <a href="#keys">Ключи</a> ·
+  <a href="#hw">Домашка</a>
+</nav>
+
+<h2 id="plan">План урока (Academy Stars 3, Unit 3 Lesson 5, A2, ~45 мин)</h2>
+<p>Цель: Wh-вопросы с <strong>was / were</strong> — Where, When, Who … with, What was the weather like, Why.</p>
+<ol>
+<li>Брифинг, постер семьи, карточки четырёх родственников, 4 флип-карточки вопросов.</li>
+<li>Миссия 1: собрать 7 Wh-вопросов из слов (порядок перемешан и сохраняется).</li>
+<li>Миссия 2: выбрать вопросное слово (7 пунктов, варианты перемешаны).</li>
+<li>Миссия 3: ученик сам пишет по 4 вопроса каждому из четырёх подозреваемых, затем слышит официальный ответ (en-GB TTS).</li>
+<li>Миссия 4: 6 противоречий / улик (варианты перемешаны).</li>
+<li>Вердикт: что случилось с тортом на самом деле (его перенесли в холод, никто не украл).</li>
+<li>Рапорт, код <strong>ALIBI-U3L5-SAFE</strong>, рефлексия, домашняя миссия из 4 частей внутри карты.</li>
+</ol>
+<p>Все части открыты, гейта нет. «↺ Начать заново» с подтверждением на русском сбрасывает прогресс, останавливает озвучку и заново перемешивает варианты.</p>
+<p>Ключ хранения: <code>tutorcall-family-alibis-case-v1</code>.</p>
+
+<h2 id="bugs">Что исправлено относительно Arena</h2>
+<ul>
+<li>В задании на исправление ошибок правильный вариант всегда стоял первым — теперь варианты перемешиваются и проверяются по значению, не по индексу.</li>
+<li>В миссиях 2, 4 и в чтении правильный ответ часто был первым; проверка шла по индексу. Исправлено так же.</li>
+<li>Порядок плиток в «Question Scramble» сбрасывался при каждом заходе — теперь сохраняется.</li>
+<li>Имя детектива было заранее заполнено («Junior Agent», код «SHERLOCK-07») — поле пустое, ученик пишет сам.</li>
+<li>Финальный вердикт «Who took the cake?» позволял обвинить кого угодно и всё равно «победить», хотя миссия 4 доказывает, что торт спасли, а не украли. Вердикт переписан: «What really happened to the cake?»</li>
+<li>На допросе вопросы были готовые, достаточно было кликнуть. Теперь ученик составляет вопросы сам.</li>
+<li>Сброс был без подтверждения и возвращал предустановленное имя. Теперь есть русское подтверждение, озвучка останавливается, всё перемешивается заново.</li>
+<li>Не было русской цели, кнопок «Дальше», короткого «почему» после ошибки, финального экрана с кодом и рефлексии.</li>
+<li>Миссии открывались по одной; домашка числилась как «3 tasks», хотя в данных было 4. Все части в одной карте, домашка из 4 заданий сохранена.</li>
+<li>Проверка точной строки ломалась на типографике апострофа (two o’clock / o'clock). Сравнение теперь мягкое по регистру, пробелам и апострофам.</li>
+<li>Аватары шли абсолютными путями <code>/images/…</code> — на GitHub Pages это дало бы 404. Стоят относительные <code>./images/</code>.</li>
+</ul>
+
+<h2 id="flags">Флажки для решения</h2>
+<ul>
+<li><strong>Вердикт переписан.</strong> В оригинале финал спрашивал «кто украл торт» и принимал любой ответ. Это противоречило миссии 4. Новый правильный ответ: семья перенесла торт в холод, чтобы крем не растаял. Если нужно вернуть форму «обвини одного» — напиши.</li>
+<li><strong>Баннер домашки говорил «3 tasks», в данных 4.</strong> Оставлены все четыре.</li>
+<li><strong>Погода дяди Боба.</strong> В интервью он говорит «windy, overcast and cool», а в миссии 4 его цитируют: «cold and rainy all afternoon across the entire town». Оставлено как в оригинале: задание как раз про преувеличение.</li>
+</ul>
+
+<h2 id="keys">Ключи класса</h2>
+<h3>Миссия 1 — вопросы</h3>
+<ol>
+<li>Where was Aunt Sally on Saturday?</li>
+<li>Who were Jake and Jess with?</li>
+<li>When was Uncle Bob by the lake?</li>
+<li>What was the weather like yesterday?</li>
+<li>Where were the twins at two o'clock?</li>
+<li>Who was Grandpa Joe with in the garden?</li>
+<li>Why was the wedding cake missing?</li>
+</ol>
+<h3>Миссия 2 — вопросные слова</h3>
+<ol>
+<li>Where</li>
+<li>Who</li>
+<li>When</li>
+<li>What</li>
+<li>Why</li>
+<li>Who</li>
+<li>When</li>
+</ol>
+<h3>Миссия 4 — улики</h3>
+<ol>
+<li>Willow Lake had its own breezy microclimate, but Bob exaggerated the rain.</li>
+<li>Grandpa Joe was definitely right next to the cake table!</li>
+<li>Barnaby visited the kitchen and snuck near the wedding cake!</li>
+<li>The twins went downstairs to check on the kitchen when they smelled hot air.</li>
+<li>Someone moved the cake away from the hot kitchen to save it from melting!</li>
+<li>The wedding cake is safely resting in the cool pantry/chiller!</li>
+</ol>
+<h3>Вердикт</h3>
+<p>The family moved the cake to a cold place to stop it melting. It is safe. (Не украли, не увезли в Париж, не закопали.)</p>
+<p>Код: <strong>ALIBI-U3L5-SAFE</strong>.</p>
+
+<h2 id="hw">Домашка</h2>
+<h3>1. Statement → question</h3>
+<ol>
+<li>Where was Aunt Sally on Saturday morning?</li>
+<li>Who was Uncle Bob with?</li>
+<li>What was the weather like on Saturday?</li>
+<li>When were Jake and Jess in their bedroom? (также: When were the twins in their bedroom?)</li>
+<li>Where was Grandpa Joe at three o'clock?</li>
+<li>Where were your / my parents yesterday?</li>
+<li>Who was Grandpa with at the party?</li>
+</ol>
+<h3>2. Corrections</h3>
+<ol>
+<li>Where was Aunt Sally yesterday morning?</li>
+<li>Who were you with at two o'clock?</li>
+<li>What was the weather like on Saturday?</li>
+<li>When were Jake and Jess in the garden?</li>
+<li>Where was Uncle Bob at three o'clock?</li>
+<li>Who was Grandpa Joe with yesterday?</li>
+<li>Why was the cake missing from the kitchen?</li>
+</ol>
+<h3>3. Family notes</h3>
+<p>Свои вопросы и ответы, не меньше примерно 5 и 4 слов, с was / were. Образцы только как идея, поля пустые.</p>
+<h3>4. Reading</h3>
+<ol>
+<li>It was warm and breezy.</li>
+<li>They were on the swings in Green Park.</li>
+<li>She was with Mum.</li>
+<li>At one o'clock.</li>
+<li>He was by the pond with the dog.</li>
+<li>The playful puppy Barnaby.</li>
+</ol>
+</main>
+</body>
+</html>
