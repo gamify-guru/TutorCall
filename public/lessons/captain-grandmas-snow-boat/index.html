@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Captain Grandma’s Snow Boat — Was / Were | Unit 9 Lesson 2</title>
+<meta name="description" content="Снежная лодка бабушки-капитана: Past Simple was / were, Unit 9 Lesson 2, A1 (7–9 лет). Журнал, каюта, палуба и кот Pickle.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0f2a44; --navy-2:#163a5c; --ink:#1c140c; --amber:#f5b942; --amber-dk:#b45309;
+  --parchment:#fff8e6; --parchment-2:#efe4c8; --wood:#6d421e; --wood-dk:#3a2110;
+  --red:#b23b2a; --knit:#c23c2a; --snow:#f4f7fb; --ok:#0f6b3c; --bad:#9b1c1c;
+  --header-h:118px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Nunito',system-ui,sans-serif;
+  color:var(--ink);
+  background:linear-gradient(180deg,#0c2238 0%,#14344f 40%,#0f2a44 100%);
+  padding-bottom:72px;
+  overflow-x:hidden;
+}
+img{max-width:100%;height:auto;display:block}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+.font-display{font-family:'Fredoka','Nunito',sans-serif}
+.font-hand{font-family:'Caveat',cursive}
+.skip{position:absolute;left:-999px;top:0}
+.skip:focus{left:12px;top:12px;z-index:80;background:#fff;padding:8px 12px;border-radius:8px}
+
+/* snow */
+#snowCanvas{position:fixed;inset:0;pointer-events:none;z-index:5}
+@media (prefers-reduced-motion:reduce){
+  #snowCanvas{display:none}
+  .pop,.floaty,.stamp-anim,.wiggle{animation:none!important}
+  html{scroll-behavior:auto}
+}
+
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(15,42,68,.96);
+  backdrop-filter:blur(10px);
+  border-bottom:4px solid var(--amber);
+}
+.top-inner,.nav-row,.wrap{width:min(1100px,100% - 28px);margin-inline:auto}
+.top-inner{display:flex;align-items:center;gap:10px;padding:10px 0 8px}
+.logo{
+  width:44px;height:44px;border-radius:16px;flex-shrink:0;
+  background:var(--amber);color:var(--navy);
+  display:grid;place-items:center;font-weight:800;font-size:1.25rem;
+  box-shadow:0 4px 0 #b45309;
+}
+.brand-title{font-family:'Fredoka',sans-serif;color:#fff;font-size:1.05rem;line-height:1.1;font-weight:650}
+.brand-title span{color:var(--amber)}
+.brand-sub{color:#cfe6f8;font-size:.72rem;font-weight:800;letter-spacing:.04em}
+.top-actions{margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.keys-pill{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:4px 10px 4px 6px;color:#fff;font-size:.75rem;font-weight:800}
+.key-dot{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.15);font-size:.8rem}
+.key-dot.on{background:var(--amber);color:var(--navy)}
+.key-bar{width:64px;height:8px;background:rgba(255,255,255,.2);border-radius:99px;overflow:hidden}
+.key-bar>i{display:block;height:100%;width:0;background:var(--amber);border-radius:99px}
+.nav-row{display:flex;gap:8px;overflow-x:auto;padding:0 0 10px;scrollbar-width:thin}
+.chip{
+  flex-shrink:0;border:2px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);
+  color:#fff;border-radius:999px;padding:.4rem .85rem;font-size:.75rem;font-weight:800;
+}
+.chip.is-on{background:var(--amber);border-color:#fde68a;color:var(--navy);box-shadow:0 3px 0 #92400e}
+.chip.is-done{background:#ecfdf5;border-color:#047857;color:#064e3b}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.4rem;
+  border:0;border-radius:999px;padding:.65rem 1.15rem;font-weight:800;
+  box-shadow:0 4px 0 #1a1a1a33;
+}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 #1a1a1a33}
+.btn-gold{background:var(--amber);color:var(--navy);box-shadow:0 4px 0 #92400e}
+.btn-navy{background:var(--navy);color:#fff;box-shadow:0 4px 0 #061521}
+.btn-ink{background:#fff;color:var(--navy);border:2px solid #d6c7a6}
+.btn-rose{background:#e11d48;color:#fff;box-shadow:0 4px 0 #881337}
+.btn-ok{background:#059669;color:#fff;box-shadow:0 4px 0 #064e3b}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.icon-btn{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);color:#fff;display:grid;place-items:center}
+
+main.wrap{position:relative;z-index:10;padding:18px 0 40px}
+.section-anchor{scroll-margin-top:150px}
+.hero{
+  display:grid;grid-template-columns:1.05fr .95fr;gap:0;
+  border:4px solid #fff;border-radius:28px;overflow:hidden;
+  background:linear-gradient(160deg,#dbeafe,#fff8e6);
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
+}
+.hero-copy{padding:28px 28px 24px;color:var(--navy)}
+.hero h1{font-family:'Fredoka',sans-serif;font-size:clamp(2rem,5vw,3.6rem);line-height:.95;margin:.4rem 0 .8rem}
+.hero h1 em{color:#d97706;font-style:normal}
+.kicker{display:flex;flex-wrap:wrap;gap:8px}
+.pill{background:var(--navy);color:#fff;border-radius:999px;padding:.3rem .7rem;font-size:.7rem;font-weight:800;letter-spacing:.06em}
+.pill.alt{background:#fff;color:#b45309;border:1px solid #f5c56b}
+.lead{font-weight:700;line-height:1.55;max-width:36rem}
+.chars{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.char{background:#fff;border:2px solid #f0d9a0;border-radius:18px;overflow:hidden;text-align:center;color:var(--ink)}
+.char img,.char picture{width:100%;aspect-ratio:4/3;object-fit:cover}
+.char picture img{width:100%;height:100%;object-fit:cover}
+.char figcaption{padding:8px 8px 10px}
+.char strong{display:block;font-family:'Fredoka',sans-serif}
+.char span{display:block;font-size:.75rem;font-weight:700;color:#5b4a32}
+.hero-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;margin-bottom:16px}
+#intro{padding-bottom:100px}
+.hero-visual{position:relative;min-height:280px}
+.hero-visual img{width:100%;height:100%;object-fit:cover;min-height:320px}
+.hero-caption{position:absolute;left:12px;bottom:12px;background:rgba(15,42,68,.88);color:#fff;padding:8px 12px;border-radius:12px;font-size:.8rem;font-weight:800}
+
+.paper{
+  background:var(--parchment);
+  background-image:radial-gradient(#e8d5a3 1px,transparent 1px);
+  background-size:22px 22px;
+  color:var(--ink);
+  border-radius:24px;padding:22px 22px 20px;
+  border:3px solid #e8d5a3;
+}
+.paper h2,.block h2{font-family:'Fredoka',sans-serif;font-size:1.55rem;color:var(--navy);margin:.2rem 0 .5rem}
+.eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#b45309}
+.block{margin:22px 0;position:relative;z-index:10}
+.block p,.paper p{line-height:1.6;font-weight:700}
+.photo-frame{border-radius:20px;overflow:hidden;border:4px solid #fff;box-shadow:0 10px 24px rgba(0,0,0,.2);margin:12px 0 16px}
+.photo-frame img{width:100%;aspect-ratio:16/10;object-fit:cover}
+.photo-frame figcaption{background:var(--navy);color:#fff;padding:8px 12px;font-size:.85rem;font-weight:800}
+
+/* flip cards */
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:12px 0}
+.flip{perspective:900px;height:160px}
+.flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .5s;border-radius:20px}
+.flip.is-on .flip-inner{transform:rotateY(180deg)}
+.flip-face{
+  position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;
+  border:2px solid #e8c27a;background:linear-gradient(#fff,#fff3d1);
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;
+  padding:12px;color:var(--ink);
+}
+.flip-face.back{transform:rotateY(180deg);background:linear-gradient(#ecfdf5,#fff);border-color:#6ee7b7}
+.flip-face strong{font-family:'Fredoka',sans-serif;font-size:1.25rem}
+.flip-face em{font-style:normal;font-size:.85rem;color:#5b4a32}
+.star{position:absolute;top:8px;right:10px}
+
+.pair-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.opt{
+  border:2px solid #d6c7a6;background:#fff;color:var(--ink);
+  border-radius:999px;padding:.55rem .9rem;font-weight:800;text-align:left;
+}
+.opt.sel{outline:3px solid var(--amber);transform:translateY(-2px)}
+.opt.ok{background:#d1fae5;border-color:#059669;color:#064e3b}
+.opt.bad{background:#fee2e2;border-color:#e11d48;color:#7f1d1d}
+.opt.en{background:#0f2a44;color:#fff;border-color:#082033}
+.opt.en.ok{background:#059669;color:#fff;border-color:#064e3b}
+.opt.ru{background:#fbbf24;color:var(--navy);border-color:#b45309}
+
+.zones{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.zone{
+  min-height:160px;border:3px dashed #c4a574;border-radius:20px;padding:12px;
+  background:#fffdf6;color:var(--ink);
+}
+.zone h3{font-family:'Fredoka',sans-serif;color:var(--navy)}
+.zone.is-over{border-color:#f59e0b;background:#fef3c7}
+.mag-bank{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.magnet{background:var(--navy);color:#fff;border:2px solid #fff3;border-radius:16px;padding:.55rem 1rem;font-family:'Fredoka',sans-serif;font-size:1.1rem;font-weight:700;box-shadow:0 4px 0 #000}
+.magnet.sel{outline:3px solid #fde68a}
+.placed{background:#fff;color:var(--navy);border:2px solid #d6c7a6;border-radius:12px;padding:.35rem .7rem;margin:4px;font-weight:800}
+
+.mcq{list-style:none;display:flex;flex-direction:column;gap:12px;margin:12px 0}
+.mcq li{background:#fff;border:2px solid #e8d5a3;border-radius:18px;padding:12px 14px;color:var(--ink)}
+.mcq .opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+
+.why{margin-top:8px;font-size:.9rem;font-weight:800}
+.why.ok{color:var(--ok)}
+.why.bad{color:var(--bad)}
+.score{font-weight:800;color:var(--navy)}
+.next{margin:16px 0 8px;margin-bottom:110px}
+
+.tf-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.hint{font-size:.9rem;font-weight:700;color:#5b4a32}
+
+.emo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.emo{border:2px solid #f0c7c7;background:#fff;border-radius:20px;padding:12px;text-align:center;color:var(--ink);font-weight:800}
+.emo.is-on{border-color:#059669;background:#ecfdf5}
+.hat{width:84px;height:84px;border-radius:50%;background:var(--navy);color:var(--amber);font-size:2rem;border:3px solid var(--amber);margin:8px auto;display:grid;place-items:center}
+
+.pool{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.built{list-style:decimal;margin:8px 0 8px 1.3rem;font-weight:800;color:var(--ink)}
+.trap{border:2px solid #fecaca;background:#fff7f7;border-radius:16px;padding:12px;margin:8px 0;color:var(--ink)}
+.trap.ok{border-color:#6ee7b7;background:#ecfdf5}
+
+.thermo{width:100%}
+.cert{display:none;text-align:center;border:4px solid var(--amber);border-radius:24px;padding:20px;margin-top:16px;background:#fffdf6}
+.cert.is-on{display:block}
+.code{
+  display:inline-block;margin-top:10px;padding:10px 16px;border-radius:12px;
+  background:var(--navy);color:var(--amber);font-family:'Fredoka',sans-serif;font-size:1.4rem;letter-spacing:.06em;
+}
+.rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.rule{background:#fff;border:2px solid #e8d5a3;border-radius:16px;padding:14px;color:var(--ink)}
+.rule h3{font-family:'Fredoka',sans-serif;color:var(--navy)}
+
+.modal{position:fixed;inset:0;background:rgba(6,15,25,.72);z-index:70;display:none;align-items:center;justify-content:center;padding:18px}
+.modal.is-on{display:flex}
+.modal-card{width:min(640px,100%);max-height:min(86vh,720px);overflow:auto;background:var(--parchment);color:var(--ink);border-radius:24px;padding:20px;border:4px solid var(--amber)}
+
+footer.site{width:min(1100px,100% - 28px);margin:10px auto 24px;color:#dbeafe;font-size:.85rem;font-weight:700}
+footer.site button{margin:4px 6px 0 0}
+
+.toast{
+  position:fixed;right:16px;bottom:80px;z-index:60;max-width:min(360px,calc(100% - 24px));
+  background:#fff8e6;color:var(--ink);border:3px solid var(--amber);border-radius:20px;
+  padding:12px 14px;box-shadow:0 10px 24px rgba(0,0,0,.25);display:none;
+}
+.toast.is-on{display:block}
+.hw-box{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+.hw-box input,.hw-box textarea,textarea,input[type=text]{
+  width:100%;border:2px solid #d6c7a6;border-radius:12px;padding:10px 12px;background:#fff;color:var(--ink);font-weight:700;
+}
+label.field{display:block;margin:10px 0;font-weight:800;color:var(--ink)}
+.count{font-size:.8rem;color:#5b4a32}
+
+@media (max-width:800px){
+  .hero{grid-template-columns:1fr}
+  .chars,.zones,.pair-cols,.rule-grid{grid-template-columns:1fr}
+  .hero-visual img{min-height:220px;aspect-ratio:16/11;height:auto}
+  :root{--header-h:150px}
+}
+@media (max-width:520px){
+  body{padding-bottom:110px}
+  .top-inner{flex-wrap:wrap}
+  .brand-title{font-size:.95rem}
+  .next{margin-bottom:120px}
+  #intro{padding-bottom:120px}
+}
+[tabindex="-1"]:focus{outline:none}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#intro">К уроку</a>
+<canvas id="snowCanvas"></canvas>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="logo" aria-hidden="true">⚓</div>
+    <div>
+      <p class="brand-title">Captain Grandma’s <span>Snow Boat</span></p>
+      <p class="brand-sub">UNIT 9 • LESSON 2 • WAS / WERE • A1 • 7–9 ЛЕТ</p>
+    </div>
+    <div class="top-actions">
+      <div class="keys-pill" aria-live="polite">
+        <span class="key-dot" aria-hidden="true">🔑</span>
+        <span class="key-dot" aria-hidden="true">🔑</span>
+        <span class="key-dot" aria-hidden="true">🔑</span>
+        <span class="key-dot" aria-hidden="true">🔑</span>
+        <span><span id="keysCount">0</span>/4</span>
+        <span class="key-bar"><i id="keyBar"></i></span>
+      </div>
+      <button type="button" class="btn btn-ink" data-open-grammar>Правила ⚓</button>
+      <button type="button" class="icon-btn" id="soundBtn" aria-label="Звук включён">🔊</button>
+      <button type="button" class="btn btn-rose" id="resetBtn" data-ttc-reset="1">↺ Начать заново</button>
+    </div>
+  </div>
+  <nav class="nav-row" aria-label="Части урока">
+    <button type="button" class="chip" data-nav="intro">Вход</button>
+    <button type="button" class="chip" data-nav="m0">Слова</button>
+    <button type="button" class="chip" data-nav="m1">Якоря</button>
+    <button type="button" class="chip" data-nav="m2">Каюта</button>
+    <button type="button" class="chip" data-nav="m3">Комната</button>
+    <button type="button" class="chip" data-nav="m4">Палуба</button>
+    <button type="button" class="chip" data-nav="m5">Отчёт</button>
+    <button type="button" class="chip" data-nav="end">Итог</button>
+    <button type="button" class="chip" data-nav="homework">Домашка</button>
+  </nav>
+</header>
+
+<main class="wrap">
+
+<section class="hero section-anchor" id="intro">
+  <div class="hero-copy">
+    <div class="kicker"><span class="pill">TIME DETECTIVE • ДЕЛО № 9.2</span><span class="pill alt">ВЧЕРА НА СНЕЖНОЙ ЛОДКЕ</span></div>
+    <h1>Captain Grandma’s<br><em>Snow Boat</em></h1>
+    <p class="lead">Лодка вмёрзла в лёд. Сэм и кот Пикл потеряли <b>бортовой журнал</b>. Ты — Time Detective. Восстанови вчерашний день и закрой дело: <b>was / were</b>.</p>
+    <p class="lead" style="margin-top:8px">Цель урока: научиться говорить о вчерашнем дне с <b>was</b> и <b>were</b>. Один человек или предмет — <b>was</b>. Много людей или предметов и <b>you</b> — <b>were</b>.</p>
+    <div class="hero-actions">
+      <button type="button" class="btn btn-gold" data-go="m0">▶ Начать расследование</button>
+      <button type="button" class="btn btn-ink" data-open-grammar>Якоря was / were</button>
+      <button type="button" class="btn btn-navy" data-go="homework">🏠 Домашняя миссия</button>
+    </div>
+    <p class="hint" style="margin-top:10px">Прогресс сохраняется на этом устройстве. Нажми 🔊, чтобы услышать английские фразы.</p>
+    <div class="chars">
+      <figure class="char">
+        <picture>
+  <source srcset="./images/grandma-captain.webp" type="image/webp">
+  <img src="./images/grandma-captain.jpg" alt="Бабушка-капитан в синей фуражке, красном кардигане и тельняшке держит чайник на снежной палубе." width="1152" height="864">
+</picture>
+        <figcaption><strong>Captain Grandma</strong><span>тельняшка, красный кардиган, чайник</span></figcaption>
+      </figure>
+      <figure class="char">
+        <picture>
+  <source srcset="./images/boy-magnifier.webp" type="image/webp">
+  <img src="./images/boy-magnifier.jpg" alt="Мальчик Сэм в жёлтой куртке, вязаной шапке и синем шарфе держит лупу на ледяной палубе." width="1152" height="864">
+</picture>
+        <figcaption><strong>Sam, Time Detective</strong><span>жёлтая куртка, синий шарф, лупа</span></figcaption>
+      </figure>
+      <figure class="char">
+        <picture>
+  <source srcset="./images/cat-sailor.webp" type="image/webp">
+  <img src="./images/cat-sailor.jpg" alt="Рыжий кот Пикл в матросской шапочке и полосатом шарфе сидит на столе в каюте рядом с журналом и кружкой какао." width="1152" height="864">
+</picture>
+        <figcaption><strong>Pickle the Cat</strong><span>шапочка с якорем, шарф, журнал и какао</span></figcaption>
+      </figure>
+    </div>
+  </div>
+  <figure class="hero-visual">
+    <picture>
+  <source srcset="./images/grandma-captain.webp" type="image/webp">
+  <img src="./images/grandma-captain.jpg" alt="Бабушка-капитан улыбается на снежной палубе лодки на закате, в руках белый чайник, за спиной тёплые иллюминаторы." width="1152" height="864">
+</picture>
+    <figcaption class="hero-caption">Captain Grandma на снежной палубе с чайником</figcaption>
+  </figure>
+</section>
+
+<section class="block paper section-anchor" id="rule-card" style="margin-top:18px">
+  <p class="eyebrow">SHIP’S LOG • ПРАВИЛО</p>
+  <h2>Правило времени детектива</h2>
+  <div class="rule-grid">
+    <div class="rule"><h3>WAS — один</h3><p>I was • he was • she was • it was</p></div>
+    <div class="rule"><h3>WERE — много или you</h3><p>you were • we were • they were</p></div>
+  </div>
+  <p>Отрицание: <b>wasn't</b> (was not) и <b>weren't</b> (were not). Grandma wasn't tired. The books were under the table.</p>
+  <div id="heroKeys" class="rule-grid" style="margin-top:12px"></div>
+  <p id="pickleHeroText" class="hint">«Найди 4 ключа — и журнал вернётся! Начни со слов-сокровищ.»</p>
+  <div class="next"><button type="button" class="btn btn-gold" data-go="m0">Дальше: слова-сокровища</button></div>
+</section>
+
+<section class="block paper section-anchor" id="m0">
+  <p class="eyebrow">МИССИЯ 0 • TREASURE HUNT</p>
+  <h2>Слова-сокровища</h2>
+  <p>Нажми карточку, послушай слово и переверни её. Собери все 12 слов, затем найди 6 пар.</p>
+  <figure class="photo-frame">
+    <picture>
+  <source srcset="./images/boy-magnifier.webp" type="image/webp">
+  <img src="./images/boy-magnifier.jpg" alt="Сэм в жёлтой куртке стоит на обледенелой палубе и смотрит в лупу." width="1152" height="864">
+</picture>
+    <figcaption>Сэм смотрит в лупу: он ищет слова вчерашнего дня на ледяной палубе.</figcaption>
+  </figure>
+  <p class="score" id="m0score">0 / 12 ⭐</p>
+  <div id="vocabCats" style="display:flex;flex-wrap:wrap;gap:8px;margin:8px 0"></div>
+  <div class="vocab-grid" id="vocabGrid"></div>
+  <h3 style="font-family:Fredoka,sans-serif;color:var(--navy);margin-top:16px">Mini-matching: EN → RU</h3>
+  <p>Сначала нажми синее английское слово, потом жёлтое русское. Порядок русских слов сохраняется.</p>
+  <p class="score" id="matchScore">Пары: 0/6</p>
+  <div class="pair-cols">
+    <div id="matchEN" class="pool"></div>
+    <div id="matchRU" class="pool"></div>
+  </div>
+  <div class="next"><button type="button" class="btn btn-gold" data-go="m1">Дальше: якоря was / were</button></div>
+</section>
+
+<section class="block paper section-anchor" id="m1">
+  <p class="eyebrow">МИССИЯ 1 • ПОРТ</p>
+  <h2>Якоря WAS и WERE</h2>
+  <p>Нажми местоимение, потом якорь — или перетащи карточку. I, he, she, it — к WAS. You, we, they — к WERE.</p>
+  <div class="zones">
+    <div class="zone" id="zone-was">
+      <h3>⚓ WAS</h3>
+      <p class="hint">I • he • she • it — один</p>
+      <div id="wasBox"></div>
+    </div>
+    <div class="zone" id="zone-were">
+      <h3>⚓ WERE</h3>
+      <p class="hint">you • we • they — много / you</p>
+      <div id="wereBox"></div>
+    </div>
+  </div>
+  <div class="mag-bank" id="magnets"></div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin:10px 0">
+    <button type="button" class="btn btn-gold" id="checkMag">Проверить магниты</button>
+    <button type="button" class="btn btn-ink" id="resetMag">Сбросить якоря</button>
+    <button type="button" class="btn btn-navy" id="chorusBtn">🔊 Ритм: I was, we were…</button>
+  </div>
+  <div id="magnetFeedback"></div>
+  <figure class="photo-frame">
+    <picture>
+  <source srcset="./images/grandma-captain.webp" type="image/webp">
+  <img src="./images/grandma-captain.jpg" alt="Бабушка-капитан с чайником на снежной палубе, рядом деревянные ящики с цветами." width="1152" height="864">
+</picture>
+    <figcaption>Бабушка-капитан в порту: «Yesterday I was on the deck. We were on the boat!»</figcaption>
+  </figure>
+  <p><button type="button" class="btn btn-navy" id="grandmaSpeak">🔊 Слушать бабушку</button></p>
+  <div id="badgeBox" class="rule" style="display:none;margin-top:12px;text-align:center"><strong>🏅 Значок детектива получен!</strong><p>Ты знаешь якоря was / were.</p></div>
+  <div class="next"><button type="button" class="btn btn-gold" data-go="m2">Дальше: тёплая каюта</button></div>
+</section>
+
+<section class="block paper section-anchor" id="m2">
+  <p class="eyebrow">МИССИЯ 2 • КЛЮЧ 1</p>
+  <h2>Тёплая каюта</h2>
+  <p>Снаружи лёд, а внутри тепло. Выбери was / were / wasn't / weren't. Смотри на фото: бабушка держит чайник, в каюте стоит кружка.</p>
+  <figure class="photo-frame">
+    <picture>
+  <source srcset="./images/grandma-captain.webp" type="image/webp">
+  <img src="./images/grandma-captain.jpg" alt="Бабушка-капитан с чайником на снежной палубе, рядом деревянные ящики с цветами." width="1152" height="864">
+</picture>
+    <figcaption>Чайник парит на снежной палубе. В каюте было тепло, и чай не был холодным.</figcaption>
+  </figure>
+  <p class="score" id="m2score">0/7</p>
+  <ol class="mcq" id="kitchenQs"></ol>
+  <button type="button" class="btn btn-gold" id="checkKitchen">Проверить каюту</button>
+  <div id="kitchenFeedback"></div>
+  <h3 style="font-family:Fredoka,sans-serif;color:var(--navy);margin-top:16px">Бонус: что странного на иллюстрациях?</h3>
+  <p>Выбери всё, что действительно видно на фото.</p>
+  <div id="bonusBox" class="pool"></div>
+  <p id="bonusText" class="hint"></p>
+  <div class="next"><button type="button" class="btn btn-gold" data-go="m3">Дальше: комната кота</button></div>
+</section>
+
+<section class="block paper section-anchor" id="m3">
+  <p class="eyebrow">МИССИЯ 3 • КЛЮЧ 2</p>
+  <h2>Комната кота</h2>
+  <p>Предлоги <b>in / on / under / next to</b>. Сверь каждое предложение с фото. Правда или ложь?</p>
+  <figure class="photo-frame">
+    <picture>
+  <source srcset="./images/cat-sailor.webp" type="image/webp">
+  <img src="./images/cat-sailor.jpg" alt="Кот Пикл в матросской шапочке сидит на деревянном столе: рядом старый журнал и кружка какао, под столом стопка книг, в иллюминаторе зимний порт." width="1152" height="864">
+</picture>
+    <figcaption>Пикл сидит на столе рядом с журналом. Кружка какао — на столе, стопка книг — под столом. За иллюминатором — зимний порт.</figcaption>
+  </figure>
+  <p><button type="button" class="btn btn-navy" id="roomSpeak">🔊 The books were under the table…</button></p>
+  <p class="score" id="m3score">0/7</p>
+  <ol class="mcq" id="tfList"></ol>
+  <button type="button" class="btn btn-gold" id="checkTF">Проверить и получить ключ 2</button>
+  <div id="tfFeedback"></div>
+  <div class="next"><button type="button" class="btn btn-gold" data-go="m4">Дальше: снежная палуба</button></div>
+</section>
+
+<section class="block paper section-anchor" id="m4">
+  <p class="eyebrow">МИССИЯ 4 • КЛЮЧ 3</p>
+  <h2>Снежная палуба бабушки</h2>
+  <p>Нажми эмоцию и послушай предложение про бабушку. Потом напиши свои ответы на вопросы.</p>
+  <figure class="photo-frame">
+    <picture>
+  <source srcset="./images/grandma-captain.webp" type="image/webp">
+  <img src="./images/grandma-captain.jpg" alt="Бабушка-капитан с чайником на снежной палубе, рядом деревянные ящики с цветами." width="1152" height="864">
+</picture>
+    <figcaption>Бабушка улыбается у цветочных ящиков на снежной палубе. She was happy. She wasn't tired.</figcaption>
+  </figure>
+  <div class="emo-grid" id="emotionGrid"></div>
+  <h3 style="font-family:Fredoka,sans-serif;color:var(--navy);margin-top:16px">Эмоции из капитанской шляпы</h3>
+  <p>Нажми шляпу — выпадет слово. Выбери верное предложение про бабушку.</p>
+  <button type="button" class="hat" id="drawHat" aria-label="Вытянуть эмоцию из шляпы">🎩</button>
+  <p id="hatWord" class="score" style="text-align:center">?</p>
+  <div id="hatOptions" class="pool"></div>
+  <p id="hatFeedback"></p>
+  <h3 style="font-family:Fredoka,sans-serif;color:var(--navy);margin-top:16px">Твои ответы</h3>
+  <p>Напиши полные предложения. Можно опереться на подсказку, но слова должны быть твоими.</p>
+  <div id="personalQs"></div>
+  <p><button type="button" class="btn btn-navy" id="grandmaEmoSpeak">🔊 She was happy…</button>
+  <button type="button" class="btn btn-gold" id="completeEmo">Проверить ключ 3</button></p>
+  <div id="emoFeedback"></div>
+  <div class="next"><button type="button" class="btn btn-gold" data-go="m5">Дальше: финальный отчёт</button></div>
+</section>
+
+<section class="block paper section-anchor" id="m5">
+  <p class="eyebrow">МИССИЯ 5 • КЛЮЧ 4 • BOSS</p>
+  <h2>Финальный отчёт</h2>
+  <p>Сэм собирает журнал. Нажимай предложения в правильном порядке вчерашнего дня, затем исправь 3 ловушки.</p>
+  <figure class="photo-frame">
+    <picture>
+  <source srcset="./images/boy-magnifier.webp" type="image/webp">
+  <img src="./images/boy-magnifier.jpg" alt="Сэм в жёлтой куртке стоит на обледенелой палубе и смотрит в лупу." width="1152" height="864">
+</picture>
+    <figcaption>Сэм с лупой проверяет каждую строку отчёта, прежде чем закрыть дело.</figcaption>
+  </figure>
+  <p id="caseStamp" class="code" style="display:none">CASE CLOSED ✓</p>
+  <h3 style="font-family:Fredoka,sans-serif;color:var(--navy)">1. Собери отчёт по порядку</h3>
+  <div class="pool" id="reportPool"></div>
+  <p id="reportEmpty" class="hint">Твой отчёт появится здесь…</p>
+  <ol class="built" id="reportBuilt"></ol>
+  <div style="display:flex;flex-wrap:wrap;gap:8px">
+    <button type="button" class="btn btn-ink" id="resetReportBtn">Сбросить и перемешать</button>
+    <button type="button" class="btn btn-navy" id="speakReportBtn">🔊 Прочитать отчёт</button>
+    <button type="button" class="btn btn-gold" id="checkReportBtn">Проверить порядок</button>
+  </div>
+  <div id="reportFeedback"></div>
+  <h3 style="font-family:Fredoka,sans-serif;color:var(--navy);margin-top:16px">2. Ловушки: исправь 3 ошибки</h3>
+  <p>Нажми правильную форму. Не спеши: сначала подумай, один это или много.</p>
+  <div id="traps"></div>
+  <button type="button" class="btn btn-gold" id="bossBtn">Закрыть дело • Case Closed</button>
+  <p id="bossFeedback"></p>
+  <div class="next"><button type="button" class="btn btn-gold" data-go="end">Дальше: итог и код</button></div>
+</section>
+
+<section class="block paper section-anchor" id="end">
+  <p class="eyebrow">РЕФЛЕКСИЯ • СЕРТИФИКАТ</p>
+  <h2>Итог детектива</h2>
+  <p>Что было сложнее? Ответь честно — Пикл оценки не ставит, он гордится тобой.</p>
+  <label class="field">WAS — насколько сложно?
+    <input id="wasRange" class="thermo" type="range" min="0" max="100" value="20">
+    <span id="wasVal">Легко 😊</span>
+  </label>
+  <label class="field">WERE — насколько сложно?
+    <input id="wereRange" class="thermo" type="range" min="0" max="100" value="20">
+    <span id="wereVal">Легко 😊</span>
+  </label>
+  <p>Final question. Напиши своё предложение: <b>Where were you yesterday?</b></p>
+  <div class="pool">
+    <button type="button" class="opt" data-setans="I was at home yesterday.">I was at home</button>
+    <button type="button" class="opt" data-setans="I was at school yesterday.">I was at school</button>
+    <button type="button" class="opt" data-setans="I was in the park yesterday.">I was in the park</button>
+    <button type="button" class="opt" data-setans="We were on a boat yesterday!">We were on a boat!</button>
+  </div>
+  <label class="field">Мой ответ
+    <textarea id="finalAnswer" rows="2" maxlength="240" placeholder="I was… / We were…"></textarea>
+  </label>
+  <button type="button" class="btn btn-navy" id="speakFinal">🔊 Прочитать мой ответ</button>
+  <p style="margin-top:12px">Теперь ты умеешь выбирать <b>was</b> или <b>were</b> и опираться на картинку, а не только на догадку. Это и есть Past Simple для вчерашнего дня.</p>
+  <button type="button" class="btn btn-gold" id="openCode">Открыть код и сертификат</button>
+  <div class="cert" id="cert">
+    <p class="font-hand" style="font-size:2.4rem;color:#b45309">Certificate of Time Detective</p>
+    <p>This certifies that <b>you</b> closed the case of Captain Grandma’s Snow Boat.</p>
+    <p class="hint">was / were • cabin • deck • logbook — MASTERED</p>
+    <p>Код урока:</p>
+    <p class="code" id="endCode">••••-••••-•••</p>
+  </div>
+  <div class="next"><button type="button" class="btn btn-gold" data-go="homework">Дальше: домашняя миссия</button></div>
+</section>
+
+<section class="block paper section-anchor" id="homework">
+  <p class="eyebrow">ДОМАШНЯЯ МИССИЯ</p>
+  <h2>Detective Homework</h2>
+  <p lang="en">Four short tasks, different from the classwork. Write in English. Your work is saved on this device.</p>
+
+  <h3 style="font-family:Fredoka,sans-serif;color:var(--navy);margin-top:14px">1. Write 5 sentences about yesterday</h3>
+  <p lang="en">Use <b>was</b> or <b>were</b>. Do not copy the class sentences — write your own. Example: <i>I was at home yesterday. We were happy.</i></p>
+  <div id="hw1"></div>
+  <label class="field"><input type="checkbox" class="hw-check"> Done! I wrote 5 sentences.</label>
+
+  <h3 style="font-family:Fredoka,sans-serif;color:var(--navy);margin-top:14px">2. Choose was / were / wasn't</h3>
+  <p lang="en">Six questions about the snow boat. This is a short test, not a new story.</p>
+  <ol class="mcq" id="hwQuiz"></ol>
+  <button type="button" class="btn btn-gold" id="checkHWQuiz">Check homework</button>
+  <p id="hwQuizScore" class="score"></p>
+  <label class="field"><input type="checkbox" class="hw-check"> Done! I finished the test.</label>
+
+  <h3 style="font-family:Fredoka,sans-serif;color:var(--navy);margin-top:14px">3. Draw your room at home</h3>
+  <p lang="en">On paper, draw your room yesterday. Then write 3 sentences with <b>in / on / under / next to</b>. Example: <i>The books were under the table. The mug was on the table. I was in my room.</i></p>
+  <p class="hint">🎨 Рисунок делается дома на бумаге и приносится на урок.</p>
+  <label class="field"><input type="checkbox" class="hw-check"> Done! Drawing + 3 sentences.</label>
+
+  <h3 style="font-family:Fredoka,sans-serif;color:var(--navy);margin-top:14px">4. Ask your family</h3>
+  <p lang="en">Write 4 questions with <b>was / were</b> and write their answers.</p>
+  <div id="hwQs"></div>
+  <p lang="en">Write the answers you heard:</p>
+  <div id="hwFamily"></div>
+  <label class="field"><input type="checkbox" class="hw-check"> Done! I asked my family.</label>
+
+  <p id="hwProgress" class="score">Домашняя миссия: 0/4</p>
+  <p class="hint" style="margin-top:12px">⚓ Captain Grandma’s Snow Boat • Unit 9 Lesson 2 • was / were</p>
+  <div class="next"><button type="button" class="btn btn-rose" id="resetBtn2">↺ Начать заново</button></div>
+</section>
+</main>
+
+<footer class="site">
+  <p>Captain Grandma’s Snow Boat • Unit 9 Lesson 2 • Past Simple: was / were</p>
+  <p>
+    <button type="button" class="btn btn-ink" data-go="intro">Вход</button>
+    <button type="button" class="btn btn-ink" data-go="m0">Слова</button>
+    <button type="button" class="btn btn-ink" data-go="m2">Каюта</button>
+    <button type="button" class="btn btn-ink" data-go="end">Итог</button>
+    <button type="button" class="btn btn-ink" data-go="homework">Домашка</button>
+  </p>
+</footer>
+
+<div class="toast" id="toast" role="status">
+  <p><b>🐱 Пикл подсказывает</b></p>
+  <p id="toastText">Почти!</p>
+  <button type="button" class="btn btn-gold" id="toastOk">Понятно!</button>
+</div>
+
+<div class="modal" id="grammarModal" role="dialog" aria-labelledby="gramTitle">
+  <div class="modal-card">
+    <div style="display:flex;justify-content:space-between;gap:8px;align-items:center">
+      <h2 id="gramTitle" style="font-family:Fredoka,sans-serif;color:var(--navy)">⚓ Grammar Cards</h2>
+      <button type="button" class="btn btn-ink" id="grammarClose">✕</button>
+    </div>
+    <div class="rule-grid">
+      <div class="rule"><h3>WAS</h3><p>I was • he was • she was • it was</p></div>
+      <div class="rule"><h3>WERE</h3><p>you were • we were • they were</p></div>
+    </div>
+    <p>wasn't = was not • She wasn't tired.<br>weren't = were not • We weren't cold.</p>
+    <h3 style="font-family:Fredoka,sans-serif;color:var(--navy);margin:10px 0">Примеры — нажми и слушай</h3>
+    <div id="grammarExamples"></div>
+    <p class="hint" style="margin-top:10px">Один человек или предмет → was. Много или you → were. Yesterday = past.</p>
+  </div>
+</div>
+
+<script>
+const KEY = "tutorcall-captain-grandmas-snow-boat-v1";
+const CODE = "SNOW-U9L2-WAS";
+const $ = (id) => document.getElementById(id);
+const norm = (s) => String(s || "").toLowerCase().replace(/['’]/g, "'").replace(/[^a-z0-9' ]+/g, " ").replace(/\s+/g, " ").trim();
+const wc = (s) => String(s || "").trim().split(/\s+/).filter(Boolean).length;
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  if (a.length > 1 && a.every((v, i) => v === arr[i])) a.reverse();
+  return a;
+}
+function speak(t) {
+  if (!state.soundOn || !t || !window.speechSynthesis) return;
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(t);
+    u.lang = "en-GB";
+    u.rate = 0.88;
+    u.pitch = 1.05;
+    speechSynthesis.speak(u);
+  } catch (e) {}
+}
+
+const VOCAB = [
+  { en: "boat", ru: "лодка, корабль", icon: "⛵", cat: "places" },
+  { en: "cabin", ru: "каюта", icon: "🪵", cat: "places" },
+  { en: "deck", ru: "палуба", icon: "🚢", cat: "places" },
+  { en: "table", ru: "стол", icon: "🪵", cat: "places" },
+  { en: "logbook", ru: "бортовой журнал", icon: "📖", cat: "things" },
+  { en: "yesterday", ru: "вчера", icon: "🕐", cat: "things" },
+  { en: "teapot", ru: "чайник", icon: "🫖", cat: "things" },
+  { en: "mug", ru: "кружка", icon: "☕", cat: "things" },
+  { en: "under", ru: "под", icon: "⬇️", cat: "things" },
+  { en: "thirsty", ru: "хочется пить", icon: "🥤", cat: "feel" },
+  { en: "tired", ru: "уставший", icon: "😴", cat: "feel" },
+  { en: "happy", ru: "счастливый", icon: "😊", cat: "feel" }
+];
+const MATCH = [
+  ["boat", "лодка"],
+  ["cabin", "каюта"],
+  ["yesterday", "вчера"],
+  ["happy", "счастливый"],
+  ["tired", "уставший"],
+  ["logbook", "журнал"]
+];
+const PRONOUNS = ["I", "he", "she", "it", "you", "we", "they"];
+const MAG_OK = { I: "was", he: "was", she: "was", it: "was", you: "were", we: "were", they: "were" };
+const KITCHEN = [
+  { id: "k1", q: "It ___ warm in the cabin.", opts: ["was", "were", "weren't"], a: "was", hint: "It — один предмет → was", speak: "It was warm in the cabin." },
+  { id: "k2", q: "We ___ in the cabin.", opts: ["was", "were", "wasn't"], a: "were", hint: "We — мы, много → were", speak: "We were in the cabin." },
+  { id: "k3", q: "We ___ hungry.", opts: ["was", "were", "weren't"], a: "were", hint: "We → were", speak: "We were hungry." },
+  { id: "k4", q: "We ___ thirsty.", opts: ["wasn't", "were", "was"], a: "were", hint: "We → were. Мы хотели пить!", speak: "We were thirsty." },
+  { id: "k5", q: "The mug ___ on the table.", opts: ["was", "were", "wasn't"], a: "was", hint: "The mug — одна кружка → was", speak: "The mug was on the table." },
+  { id: "k6", q: "Grandma ___ tired.", opts: ["were", "wasn't", "weren't"], a: "wasn't", hint: "Grandma = she, отрицание → wasn't. Она НЕ устала!", speak: "Grandma was not tired." },
+  { id: "k7", q: "The tea ___ cold.", opts: ["wasn't", "weren't", "were"], a: "wasn't", hint: "Tea = it, отрицание → wasn't. Чай был горячий!", speak: "The tea was not cold. It was hot!" }
+];
+const TF = [
+  { id: "t1", s: "The books were under the table.", a: true },
+  { id: "t2", s: "The cat was in the box.", a: false, fix: "На фото кот на столе, не в коробке. The cat was ON the table." },
+  { id: "t3", s: "The mug was under the table.", a: false, fix: "Кружка какао стоит на столе. The mug was ON the table." },
+  { id: "t4", s: "The books were on the porthole.", a: false, fix: "Книги лежат под столом. The books were UNDER the table." },
+  { id: "t5", s: "Pickle was next to the logbook.", a: true },
+  { id: "t6", s: "The cabin was big.", a: false, fix: "Каюта уютная и маленькая. The cabin was small." },
+  { id: "t7", s: "We were in the tiny cabin.", a: true }
+];
+const EMOTIONS = [
+  { en: "happy", ru: "счастливая", icon: "😊", sent: "She was happy." },
+  { en: "tired", ru: "уставшая", icon: "😴", sent: "She wasn't tired." },
+  { en: "hungry", ru: "голодная", icon: "🍔", sent: "She was hungry." },
+  { en: "cold", ru: "ей холодно", icon: "🥶", sent: "She wasn't cold." },
+  { en: "thirsty", ru: "хочет пить", icon: "🥤", sent: "She was thirsty." },
+  { en: "hot", ru: "ей тепло", icon: "🔥", sent: "She was warm." }
+];
+const PERSONAL = [
+  { q: "Were you tired yesterday?", hint: "Yes, I was. / No, I wasn't." },
+  { q: "Were you happy yesterday?", hint: "Yes, I was. / No, I wasn't." },
+  { q: "Was your mum happy yesterday?", hint: "Yes, she was. / No, she wasn't." },
+  { q: "Where were you yesterday?", hint: "I was at home. / I was at school." }
+];
+const REPORT = [
+  "Yesterday we were on the snow boat.",
+  "It was very cold outside, but we were happy.",
+  "We were in the cabin.",
+  "The tea was hot and we were thirsty.",
+  "The books were under the table.",
+  "Pickle was on the table.",
+  "Grandma was happy. She wasn't tired.",
+  "It was a good day!"
+];
+const TRAPS = [
+  { id: "x1", bad: "We was in the cabin.", good: "We were in the cabin.", wrong: "was", right: "were", why: "We — много → were." },
+  { id: "x2", bad: "She were happy.", good: "She was happy.", wrong: "were", right: "was", why: "She — одна → was." },
+  { id: "x3", bad: "The books was under the table.", good: "The books were under the table.", wrong: "was", right: "were", why: "The books — много → were." }
+];
+const HW_QUIZ = [
+  { id: "h1", q: "It ___ warm in the cabin.", a: "was" },
+  { id: "h2", q: "We ___ on the snow boat.", a: "were" },
+  { id: "h3", q: "She ___ tired.", a: "wasn't" },
+  { id: "h4", q: "The books ___ under the table.", a: "were" },
+  { id: "h5", q: "You ___ happy.", a: "were" },
+  { id: "h6", q: "Pickle ___ on the table.", a: "was" }
+];
+const HW_OPTS = ["was", "were", "wasn't"];
+const BONUS = [
+  { id: "b1", t: "The cat is wearing a sailor cap in the cabin.", ok: true },
+  { id: "b2", t: "The mug is hanging on the porthole.", ok: false, why: "Кружка стоит на столе, не на иллюминаторе." },
+  { id: "b3", t: "The teapot is steaming on the snowy deck.", ok: true },
+  { id: "b4", t: "The books are on Grandma's head.", ok: false, why: "Книги лежат под столом в каюте." }
+];
+
+function defaults() {
+  return {
+    vocab: {},
+    match: [],
+    matchRU: shuffle(MATCH.map((p) => p[0])),
+    selEN: "",
+    magnets: {},
+    kitchen: {},
+    kitchenOpts: Object.fromEntries(KITCHEN.map((q) => [q.id, shuffle(q.opts.slice())])),
+    kitchenChecked: false,
+    bonus: [],
+    tf: {},
+    tfChecked: false,
+    emotions: [],
+    hatN: 0,
+    personal: ["", "", "", ""],
+    report: [],
+    reportPool: shuffle(REPORT.slice()),
+    reportChecked: false,
+    traps: {},
+    trapOpts: Object.fromEntries(TRAPS.map((t) => [t.id, shuffle([t.right, t.right === "were" ? "was" : "were"])])),
+    trapsChecked: false,
+    thermoWas: 20,
+    thermoWere: 20,
+    finalAnswer: "",
+    reflected: false,
+    codeOpen: false,
+    hwSent: ["", "", "", "", ""],
+    hwQuiz: {},
+    hwQuizOpts: Object.fromEntries(HW_QUIZ.map((q) => [q.id, shuffle(HW_OPTS.slice())])),
+    hwQuizChecked: false,
+    hwFamily: ["", "", ""],
+    hwQs: ["", "", "", ""],
+    hwCheck: [false, false, false, false],
+    soundOn: true,
+    attempts: {}
+  };
+}
+function load() {
+  let raw = {};
+  try { raw = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { raw = {}; }
+  const d = defaults();
+  const out = { ...d, ...raw };
+  out.vocab = { ...d.vocab, ...(raw.vocab || {}) };
+  out.match = Array.isArray(raw.match) ? raw.match : [];
+  out.matchRU = Array.isArray(raw.matchRU) && raw.matchRU.length === MATCH.length ? raw.matchRU : d.matchRU;
+  out.magnets = { ...(raw.magnets || {}) };
+  out.kitchen = { ...(raw.kitchen || {}) };
+  out.kitchenOpts = { ...d.kitchenOpts, ...(raw.kitchenOpts || {}) };
+  out.tf = { ...(raw.tf || {}) };
+  out.emotions = Array.isArray(raw.emotions) ? raw.emotions : [];
+  out.personal = Array.isArray(raw.personal) && raw.personal.length === 4 ? raw.personal : d.personal;
+  out.report = Array.isArray(raw.report) ? raw.report : [];
+  out.reportPool = Array.isArray(raw.reportPool) && raw.reportPool.length ? raw.reportPool : d.reportPool;
+  out.traps = { ...(raw.traps || {}) };
+  out.trapOpts = { ...d.trapOpts, ...(raw.trapOpts || {}) };
+  out.hwSent = Array.isArray(raw.hwSent) && raw.hwSent.length === 5 ? raw.hwSent : d.hwSent;
+  out.hwQuiz = { ...(raw.hwQuiz || {}) };
+  out.hwQuizOpts = { ...d.hwQuizOpts, ...(raw.hwQuizOpts || {}) };
+  out.hwFamily = Array.isArray(raw.hwFamily) && raw.hwFamily.length === 3 ? raw.hwFamily : d.hwFamily;
+  out.hwQs = Array.isArray(raw.hwQs) && raw.hwQs.length === 4 ? raw.hwQs : d.hwQs;
+  out.hwCheck = Array.isArray(raw.hwCheck) && raw.hwCheck.length === 4 ? raw.hwCheck : d.hwCheck;
+  out.attempts = { ...(raw.attempts || {}) };
+  out.bonus = Array.isArray(raw.bonus) ? raw.bonus : [];
+  return out;
+}
+let state = load();
+function save() {
+  try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  renderProgress();
+}
+function bump(id) {
+  state.attempts[id] = (state.attempts[id] || 0) + 1;
+  save();
+  return state.attempts[id];
+}
+
+function stats() {
+  const vocabN = Object.keys(state.vocab).length;
+  const matchN = state.match.length;
+  const magN = PRONOUNS.filter((p) => state.magnets[p] === MAG_OK[p]).length;
+  const magAll = PRONOUNS.every((p) => state.magnets[p] === MAG_OK[p]) && PRONOUNS.every((p) => state.magnets[p]);
+  const kN = KITCHEN.filter((q) => state.kitchen[q.id] === q.a).length;
+  const tfN = TF.filter((q) => state.tf[q.id] === q.a).length;
+  const emoN = state.emotions.length;
+  const reportOk = JSON.stringify(state.report) === JSON.stringify(REPORT);
+  const trapN = TRAPS.filter((t) => state.traps[t.id] === t.right).length;
+  const personOk = state.personal.filter((s) => wc(s) >= 3 && /was|were/i.test(s)).length >= 3;
+  const keys = (kN === 7 ? 1 : 0) + (tfN === 7 ? 1 : 0) + (emoN >= 4 && personOk ? 1 : 0) + (reportOk && trapN === 3 ? 1 : 0);
+  // Keep awarded keys sticky? Better compute from completion so counters reach max reliably.
+  return { vocabN, matchN, magN, magAll, kN, tfN, emoN, reportOk, trapN, keys, m0: vocabN === 12 && matchN === 6, m1: magAll, m2: kN === 7, m3: tfN === 7, m4: emoN >= 4, m5: reportOk && trapN === 3 };
+}
+
+function renderProgress() {
+  const st = stats();
+  const keys = st.keys;
+  $("keysCount").textContent = keys;
+  $("keyBar").style.width = keys * 25 + "%";
+  document.querySelectorAll(".key-dot").forEach((el, i) => el.classList.toggle("on", i < keys));
+  document.querySelectorAll("[data-nav]").forEach((btn) => {
+    const id = btn.getAttribute("data-nav");
+    const map = { m0: st.m0, m1: st.m1, m2: st.m2, m3: st.m3, m4: st.m4, m5: st.m5, end: st.m5 && state.codeOpen, hw: state.hwCheck.filter(Boolean).length === 4 };
+    btn.classList.toggle("is-done", !!map[id]);
+  });
+  $("heroKeys").innerHTML = [1, 2, 3, 4].map((k) =>
+    `<div class="rule" style="text-align:center;padding:8px"><p style="font-size:1.2rem">${k <= keys ? "🔑" : "🔒"}</p><p style="font-size:.7rem;font-weight:800">КЛЮЧ ${k}</p></div>`
+  ).join("");
+}
+
+function go(id) {
+  const el = $(id);
+  if (el) el.scrollIntoView({ behavior: prefersReduce() ? "auto" : "smooth", block: "start" });
+  document.querySelectorAll("[data-nav]").forEach((b) => b.classList.toggle("is-on", b.getAttribute("data-nav") === id || b.dataset.nav === id.replace(/^m/, "m")));
+  // highlight nav by section id
+  document.querySelectorAll("[data-nav]").forEach((b) => {
+    const target = b.getAttribute("data-nav");
+    b.classList.toggle("is-on", target === id);
+  });
+}
+function prefersReduce() {
+  return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+let toastTimer;
+function toast(msg, ok) {
+  const box = $("toast");
+  $("toastText").innerHTML = msg;
+  box.classList.add("is-on");
+  $("pickleHeroText").textContent = String(msg).replace(/<[^>]+>/g, "");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => box.classList.remove("is-on"), 7000);
+}
+function why(ok, text) {
+  return `<p class="why ${ok ? "ok" : "bad"}">${ok ? "✅ " : "🐱 "}${text}</p>`;
+}
+
+/* ===== MISSION 0 ===== */
+let vocabFilter = "all";
+function renderVocab() {
+  const cats = [["all", "Все ⭐"], ["places", "Места"], ["things", "Вещи"], ["feel", "Чувства"]];
+  $("vocabCats").innerHTML = cats.map(([id, lab]) =>
+    `<button type="button" class="chip ${vocabFilter === id ? "is-on" : ""}" style="background:${vocabFilter === id ? "var(--navy)" : "#fff"};color:${vocabFilter === id ? "#fff" : "var(--navy)"};border-color:#d6c7a6" data-cat="${id}">${lab}</button>`
+  ).join("");
+  $("vocabCats").querySelectorAll("button").forEach((b) => b.onclick = () => { vocabFilter = b.dataset.cat; renderVocab(); });
+  const list = VOCAB.filter((v) => vocabFilter === "all" || v.cat === vocabFilter);
+  $("vocabGrid").innerHTML = list.map((v) => {
+    const on = !!state.vocab[v.en];
+    return `<button type="button" class="flip ${on ? "is-on" : ""}" data-en="${v.en}" aria-pressed="${on}">
+      <span class="flip-inner">
+        <span class="flip-face"><span class="star">${on ? "⭐" : "☆"}</span><span style="font-size:2rem">${v.icon}</span><strong>${v.en}</strong><em>Нажми и послушай</em></span>
+        <span class="flip-face back"><span class="star">⭐</span><strong>${v.en}</strong><em>${v.ru}</em></span>
+      </span>
+    </button>`;
+  }).join("");
+  $("vocabGrid").querySelectorAll(".flip").forEach((b) => b.onclick = () => learnWord(b.dataset.en));
+  $("m0score").textContent = Object.keys(state.vocab).length + " / 12 ⭐";
+  renderMatch();
+}
+function learnWord(en) {
+  state.vocab[en] = true;
+  save();
+  speak(en + ". " + en);
+  renderVocab();
+  if (Object.keys(state.vocab).length === 12) toast("🎉 <b>Все 12 слов в сундуке!</b> Теперь сыграй в Matching ниже!");
+}
+let selEN = "";
+function renderMatch() {
+  const matched = new Set(state.match);
+  $("matchEN").innerHTML = MATCH.map((p) =>
+    `<button type="button" class="opt en ${matched.has(p[0]) ? "ok" : ""} ${selEN === p[0] ? "sel" : ""}" data-en="${p[0]}" ${matched.has(p[0]) ? "disabled" : ""}>${p[0]}</button>`
+  ).join("");
+  $("matchRU").innerHTML = state.matchRU.map((en) => {
+    const ru = MATCH.find((p) => p[0] === en)[1];
+    return `<button type="button" class="opt ru ${matched.has(en) ? "ok" : ""}" data-en="${en}" ${matched.has(en) ? "disabled" : ""}>${ru}</button>`;
+  }).join("");
+  $("matchScore").textContent = `Пары: ${matched.size}/6`;
+  $("matchEN").querySelectorAll("button").forEach((b) => b.onclick = () => {
+    selEN = b.dataset.en;
+    speak(selEN);
+    renderMatch();
+  });
+  $("matchRU").querySelectorAll("button").forEach((b) => b.onclick = () => pickRU(b.dataset.en));
+}
+function pickRU(en) {
+  if (!selEN) { toast("Сначала нажми <b>синее английское</b> слово слева!"); return; }
+  if (selEN === en) {
+    if (!state.match.includes(en)) state.match.push(en);
+    speak("Yes! " + en);
+    toast(`✅ <b>Пара найдена:</b> ${en}`);
+  } else {
+    const a = bump("match");
+    toast(a >= 2 ? `Почти! Подсказка: <b>${selEN}</b> — посмотри на карточки выше.` : "Почти! Подумай ещё — не торопись.");
+  }
+  selEN = "";
+  save();
+  renderMatch();
+}
+
+/* ===== MISSION 1 ===== */
+let selMag = "";
+function renderMagnets() {
+  const unplaced = PRONOUNS.filter((p) => !state.magnets[p]);
+  $("magnets").innerHTML = unplaced.length
+    ? unplaced.map((p) => `<button type="button" class="magnet ${selMag === p ? "sel" : ""}" draggable="true" data-p="${p}">${p}</button>`).join("")
+    : '<span class="hint">Все магниты на якорях! Нажми «Проверить».</span>';
+  $("wasBox").innerHTML = '<button type="button" class="btn btn-ink" data-place="was" style="margin-bottom:6px">Поставить сюда</button>';
+  $("wereBox").innerHTML = '<button type="button" class="btn btn-ink" data-place="were" style="margin-bottom:6px">Поставить сюда</button>';
+  Object.entries(state.magnets).forEach(([p, z]) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "placed";
+    b.textContent = p + " ✕";
+    b.onclick = () => { delete state.magnets[p]; save(); renderMagnets(); };
+    (z === "was" ? $("wasBox") : $("wereBox")).appendChild(b);
+  });
+  $("magnets").querySelectorAll(".magnet").forEach((b) => {
+    b.onclick = () => { selMag = b.dataset.p; speak(selMag); renderMagnets(); };
+    b.ondragstart = (e) => e.dataTransfer.setData("text", b.dataset.p);
+  });
+  document.querySelectorAll("[data-place]").forEach((b) => {
+    b.onclick = (e) => {
+      e.stopPropagation();
+      const z = b.getAttribute("data-place");
+      if (!selMag) return;
+      state.magnets[selMag] = z;
+      speak(z);
+      selMag = "";
+      save();
+      renderMagnets();
+    };
+  });
+  ["was", "were"].forEach((z) => {
+    const zone = $("zone-" + z);
+    zone.ondragover = (e) => { e.preventDefault(); zone.classList.add("is-over"); };
+    zone.ondragleave = () => zone.classList.remove("is-over");
+    zone.ondrop = (e) => {
+      e.preventDefault();
+      zone.classList.remove("is-over");
+      const p = e.dataTransfer.getData("text");
+      if (p) { state.magnets[p] = z; selMag = ""; save(); renderMagnets(); }
+    };
+    zone.onclick = (e) => {
+      if (e.target.closest(".placed")) return;
+      if (!selMag) return;
+      state.magnets[selMag] = z;
+      speak(z);
+      selMag = "";
+      save();
+      renderMagnets();
+    };
+  });
+}
+function checkMagnets() {
+  if (PRONOUNS.some((p) => !state.magnets[p])) {
+    toast("Размести <b>все 7 магнитов</b>: I, he, she, it, you, we, they!");
+    return;
+  }
+  const ok = PRONOUNS.every((p) => state.magnets[p] === MAG_OK[p]);
+  const wrong = PRONOUNS.filter((p) => state.magnets[p] !== MAG_OK[p]);
+  $("magnetFeedback").innerHTML = ok
+    ? `<div class="why ok">🎉 Всё верно! I/he/she/it → WAS • you/we/they → WERE. Значок детектива твой!</div>`
+    : `<div class="why bad">Почти! Неверно: ${wrong.join(", ")}. Помни: один → was, много и you → were.</div>`;
+  $("badgeBox").style.display = ok ? "block" : "none";
+  if (ok) speak("Excellent! I was, he was, she was, it was. You were, we were, they were.");
+  else bump("magnets");
+  save();
+}
+function resetMagnets() {
+  state.magnets = {};
+  selMag = "";
+  $("magnetFeedback").innerHTML = "";
+  $("badgeBox").style.display = "none";
+  save();
+  renderMagnets();
+}
+
+/* ===== MISSION 2 ===== */
+function renderKitchen() {
+  $("kitchenQs").innerHTML = KITCHEN.map((q, n) => {
+    const sel = state.kitchen[q.id];
+    const opts = state.kitchenOpts[q.id] || q.opts;
+    const show = state.kitchenChecked;
+    return `<li>
+      <p>${n + 1}. ${q.q.replace("___", `<strong>${sel || "?"}</strong>`)} <button type="button" class="icon-btn" style="width:32px;height:32px;display:inline-grid;vertical-align:middle;background:#e0f2fe;color:var(--navy);border-color:#bae6fd" data-speak="${q.speak}">🔊</button></p>
+      <div class="opts">${opts.map((o) => {
+        let cls = "opt" + (sel === o ? " sel" : "");
+        if (show && o === q.a) cls += " ok";
+        else if (show && sel === o && o !== q.a) cls += " bad";
+        return `<button type="button" class="${cls}" data-kid="${q.id}" data-val="${o}">${o}</button>`;
+      }).join("")}</div>
+      ${show ? why(sel === q.a, sel === q.a ? "Верно! " + q.speak : q.hint) : (sel && sel !== q.a ? why(false, q.hint) : "")}
+    </li>`;
+  }).join("");
+  $("m2score").textContent = KITCHEN.filter((q) => state.kitchen[q.id] === q.a).length + "/7";
+  $("kitchenQs").querySelectorAll("[data-kid]").forEach((b) => b.onclick = () => {
+    state.kitchen[b.dataset.kid] = b.dataset.val;
+    state.kitchenChecked = false;
+    const q = KITCHEN.find((x) => x.id === b.dataset.kid);
+    if (b.dataset.val === q.a) speak(q.speak);
+    else {
+      const a = bump("k" + q.id);
+      toast(a >= 2 ? `Подсказка: <b>${q.hint}</b>` : `Почти! ${q.hint}`);
+    }
+    save();
+    renderKitchen();
+  });
+  $("kitchenQs").querySelectorAll("[data-speak]").forEach((b) => b.onclick = () => speak(b.dataset.speak));
+}
+function checkKitchen() {
+  state.kitchenChecked = true;
+  save();
+  renderKitchen();
+  const c = stats().kN;
+  $("kitchenFeedback").innerHTML = c === 7
+    ? `<div class="why ok">🔑 Ключ 1 получен! Каюта восстановлена — чай был горячий, и кружка стояла на столе.</div>`
+    : `<div class="why bad">Осталось правильно: ${7 - c}. Один → was, много → were.</div>`;
+  if (c === 7) speak("Key one! Excellent!");
+}
+function renderBonus() {
+  $("bonusBox").innerHTML = BONUS.map((b) => {
+    const on = state.bonus.includes(b.id);
+    return `<button type="button" class="opt ${on ? (b.ok ? "ok" : "bad") : ""}" data-bid="${b.id}">${b.t}</button>`;
+  }).join("");
+  $("bonusBox").querySelectorAll("button").forEach((btn) => btn.onclick = () => {
+    const b = BONUS.find((x) => x.id === btn.dataset.bid);
+    if (!state.bonus.includes(b.id)) state.bonus.push(b.id);
+    save();
+    $("bonusText").innerHTML = b.ok ? "✅ Да! Это видно на иллюстрации." : "🐱 " + b.why;
+    if (b.ok) speak("Great detective!");
+    renderBonus();
+  });
+}
+
+/* ===== MISSION 3 ===== */
+function renderTF() {
+  $("tfList").innerHTML = TF.map((t, n) => {
+    const sel = state.tf[t.id];
+    const show = state.tfChecked;
+    const right = sel === t.a;
+    return `<li>
+      <p>${n + 1}. ${t.s} <button type="button" class="icon-btn" style="width:32px;height:32px;display:inline-grid;vertical-align:middle;background:#fff;color:var(--navy);border-color:#d6c7a6" data-speak="${t.s}">🔊</button></p>
+      <div class="tf-row">
+        <button type="button" class="opt ${sel === true ? "sel" : ""} ${show && t.a === true ? "ok" : ""} ${show && sel === true && !t.a ? "bad" : ""}" data-tid="${t.id}" data-val="1">TRUE ✓</button>
+        <button type="button" class="opt ${sel === false ? "sel" : ""} ${show && t.a === false ? "ok" : ""} ${show && sel === false && t.a ? "bad" : ""}" data-tid="${t.id}" data-val="0">FALSE ✗</button>
+      </div>
+      ${show ? why(right, right ? "Верно! Смотри на фото каюты." : (t.fix || "Посмотри на фото ещё раз.")) : ""}
+    </li>`;
+  }).join("");
+  $("m3score").textContent = TF.filter((t) => state.tf[t.id] === t.a).length + "/7";
+  $("tfList").querySelectorAll("[data-tid]").forEach((b) => b.onclick = () => {
+    state.tf[b.dataset.tid] = b.dataset.val === "1";
+    state.tfChecked = false;
+    const t = TF.find((x) => x.id === b.dataset.tid);
+    if (state.tf[t.id] !== t.a) {
+      const a = bump("tf" + t.id);
+      if (a >= 2) toast("Подсказка: " + (t.fix || "Посмотри на фото: книги под столом, кот на столе."));
+    }
+    save();
+    renderTF();
+  });
+  $("tfList").querySelectorAll("[data-speak]").forEach((b) => b.onclick = () => speak(b.dataset.speak));
+}
+function checkTF() {
+  state.tfChecked = true;
+  save();
+  renderTF();
+  const c = stats().tfN;
+  $("tfFeedback").innerHTML = c === 7
+    ? `<div class="why ok">🔑 Ключ 2 получен! Книги были под столом, а Pickle — на столе, рядом с журналом.</div>`
+    : `<div class="why bad">Верно ${c}/7. Сверь каждое предложение с фото каюты.</div>`;
+  if (c === 7) speak("Key two! The books were under the table, and Pickle was on the table!");
+}
+
+/* ===== MISSION 4 ===== */
+function renderEmotions() {
+  $("emotionGrid").innerHTML = EMOTIONS.map((e) => {
+    const on = state.emotions.includes(e.en);
+    return `<button type="button" class="emo ${on ? "is-on" : ""}" data-en="${e.en}"><span style="font-size:2rem">${e.icon}</span><strong style="display:block">${e.en}</strong><em style="font-style:normal;font-size:.8rem">${e.ru}</em><span style="display:block;margin-top:6px;color:${e.sent.includes("n't") ? "var(--bad)" : "var(--ok)"}">${e.sent}</span></button>`;
+  }).join("");
+  $("emotionGrid").querySelectorAll("button").forEach((b) => b.onclick = () => {
+    const e = EMOTIONS.find((x) => x.en === b.dataset.en);
+    if (!state.emotions.includes(e.en)) state.emotions.push(e.en);
+    speak(e.sent);
+    save();
+    renderEmotions();
+  });
+  $("personalQs").innerHTML = PERSONAL.map((p, i) => {
+    const val = state.personal[i] || "";
+    return `<label class="field">${p.q}
+      <input type="text" maxlength="160" value="${val.replace(/"/g, "&quot;")}" data-pq="${i}" placeholder="${p.hint}">
+      <span class="count">${wc(val)} слов · напиши свой ответ: ${p.hint}</span>
+      <button type="button" class="btn btn-navy" style="margin-top:6px" data-spq="${i}">🔊 Вопрос</button>
+    </label>`;
+  }).join("");
+  $("personalQs").querySelectorAll("[data-pq]").forEach((inp) => inp.oninput = () => {
+    const i = +inp.dataset.pq;
+    const next = state.personal.slice();
+    next[i] = inp.value.slice(0, 160);
+    state.personal = next;
+    save();
+    inp.nextElementSibling.textContent = wc(inp.value) + " слов · напиши свой ответ: " + PERSONAL[i].hint;
+  });
+  $("personalQs").querySelectorAll("[data-spq]").forEach((b) => b.onclick = () => speak(PERSONAL[+b.dataset.spq].q));
+}
+let hatCurrent = null;
+function drawHat() {
+  hatCurrent = EMOTIONS[Math.floor(Math.random() * EMOTIONS.length)];
+  $("hatWord").textContent = hatCurrent.icon + " " + hatCurrent.en;
+  $("hatFeedback").textContent = "";
+  const wrongWas = hatCurrent.sent.includes("wasn't") ? hatCurrent.sent.replace("wasn't", "was") : hatCurrent.sent.replace("was", "wasn't");
+  const opts = shuffle([hatCurrent.sent, wrongWas, "They were " + hatCurrent.en + "."]);
+  $("hatOptions").innerHTML = opts.map((o) => `<button type="button" class="opt" data-hat="${o.replace(/"/g, "&quot;")}">${o}</button>`).join("");
+  $("hatOptions").querySelectorAll("button").forEach((b) => b.onclick = () => answerHat(b.dataset.hat));
+  speak(hatCurrent.en);
+}
+function answerHat(v) {
+  if (!hatCurrent) return;
+  if (v === hatCurrent.sent) {
+    state.hatN = (state.hatN || 0) + 1;
+    save();
+    $("hatFeedback").innerHTML = why(true, "Верно! " + hatCurrent.sent);
+    speak(hatCurrent.sent);
+  } else {
+    toast("Почти! Про бабушку (she) говорим: <b>She was / She wasn't...</b>");
+    $("hatFeedback").innerHTML = why(false, "She → was / wasn't. Попробуй ещё.");
+  }
+}
+function completeEmotions() {
+  const okE = state.emotions.length >= 4;
+  const okP = state.personal.filter((s) => wc(s) >= 3 && /was|were/i.test(s)).length >= 3;
+  if (!okE || !okP) {
+    toast("Нажми минимум <b>4 карточки эмоций</b> и напиши свои ответы на вопросы (с was / were).");
+    $("emoFeedback").innerHTML = why(false, "Нужны 4 эмоции и хотя бы 3 своих предложения с was / were.");
+    return;
+  }
+  $("emoFeedback").innerHTML = why(true, "🔑 Ключ 3 получен! Бабушка была счастлива на снежной палубе и не была уставшей.");
+  speak("Key three! She was happy. She wasn't tired.");
+  save();
+  renderProgress();
+}
+
+/* ===== MISSION 5 ===== */
+function leftoverPool() {
+  const used = new Set(state.report);
+  return state.reportPool.filter((s) => !used.has(s));
+}
+function renderReport() {
+  const pool = leftoverPool();
+  $("reportPool").innerHTML = pool.map((s) => `<button type="button" class="opt en" data-rs="${s.replace(/"/g, "&quot;")}">${s}</button>`).join("")
+    || '<span class="hint">Все плитки в отчёте. Нажми «Проверить порядок».</span>';
+  $("reportBuilt").innerHTML = state.report.map((s, i) => {
+    const mark = state.reportChecked ? (s === REPORT[i] ? " ✓" : " — не тот порядок") : "";
+    return `<li>${s}${mark}</li>`;
+  }).join("");
+  $("reportEmpty").style.display = state.report.length ? "none" : "block";
+  $("reportPool").querySelectorAll("button").forEach((b) => b.onclick = () => {
+    state.report.push(b.dataset.rs);
+    state.reportChecked = false;
+    save();
+    renderReport();
+    speak(b.dataset.rs);
+  });
+  $("reportFeedback").innerHTML = state.reportChecked
+    ? why(stats().reportOk, stats().reportOk ? "Порядок верный: сначала лодка, потом каюта, стол, бабушка и хороший день." : "Пока не тот порядок. Подсказка: сначала лодка → каюта → стол и кот → бабушка → хороший день.")
+    : "";
+}
+function resetReport() {
+  state.report = [];
+  state.reportPool = shuffle(REPORT.slice());
+  state.reportChecked = false;
+  save();
+  renderReport();
+}
+function checkReport() {
+  state.reportChecked = true;
+  save();
+  renderReport();
+}
+function speakReport() {
+  speak((state.report.length ? state.report : REPORT).join(" "));
+}
+function renderTraps() {
+  $("traps").innerHTML = TRAPS.map((t) => {
+    const done = state.traps[t.id] === t.right;
+    const opts = state.trapOpts[t.id] || [t.right, "was"];
+    return `<div class="trap ${done ? "ok" : ""}">
+      <p>${done ? "✅ " + t.good : "🪤 " + t.bad.replace(t.wrong, `<span style="background:#e11d48;color:#fff;padding:0 6px;border-radius:8px">${t.wrong}</span>`)}</p>
+      ${done ? why(true, `Исправлено: ${t.wrong} → ${t.right}. ${t.why}`)
+        : `<div class="opts" style="margin-top:8px"><span class="hint">Исправь на:</span>${opts.map((o) => `<button type="button" class="opt" data-tr="${t.id}" data-val="${o}">${o}</button>`).join("")}</div>`}
+    </div>`;
+  }).join("");
+  $("traps").querySelectorAll("[data-tr]").forEach((b) => b.onclick = () => {
+    const t = TRAPS.find((x) => x.id === b.dataset.tr);
+    if (b.dataset.val === t.right) {
+      state.traps[t.id] = t.right;
+      speak(t.good);
+    } else {
+      const a = bump("trap" + t.id);
+      toast(a >= 2 ? `Подсказка: ${t.why}` : "Почти! Подумай: один или много?");
+    }
+    save();
+    renderTraps();
+  });
+}
+function bossCheck() {
+  state.reportChecked = true;
+  state.trapsChecked = true;
+  save();
+  renderReport();
+  const st = stats();
+  if (st.m5) {
+    $("caseStamp").style.display = "block";
+    $("bossFeedback").innerHTML = why(true, "Дело закрыто! Ключ 4 получен. Ты настоящий Time Detective.");
+    speak("Case closed! You are a Time Detective! Yesterday we were on the snow boat. It was a good day!");
+  } else {
+    let msg = "";
+    if (!st.reportOk) msg += "Порядок отчёта ещё неверный (8 предложений по дню). ";
+    if (st.trapN < 3) msg += "Исправь все 3 ловушки.";
+    $("bossFeedback").innerHTML = why(false, msg);
+    toast("🐱 " + msg);
+  }
+  renderProgress();
+}
+
+/* ===== END / HW ===== */
+function updateThermo(el, id) {
+  const v = +el.value;
+  state[id === "wasVal" ? "thermoWas" : "thermoWere"] = v;
+  $(id).textContent = v < 35 ? "Легко 😊" : v < 70 ? "Немного сложно 🤔" : "Сложно! Нужна практика 💪";
+  save();
+}
+function openCode() {
+  state.codeOpen = true;
+  save();
+  renderEnd();
+  speak("Congratulations! Case closed!");
+}
+function renderEnd() {
+  $("finalAnswer").value = state.finalAnswer || "";
+  $("wasRange").value = state.thermoWas;
+  $("wereRange").value = state.thermoWere;
+  updateThermo($("wasRange"), "wasVal");
+  updateThermo($("wereRange"), "wereVal");
+  $("cert").classList.toggle("is-on", !!state.codeOpen);
+  $("endCode").textContent = state.codeOpen ? CODE : "••••-••••-•••";
+}
+function renderHW() {
+  $("hw1").innerHTML = [0, 1, 2, 3, 4].map((i) => {
+    const val = state.hwSent[i] || "";
+    const ok = /was|were/i.test(val) && wc(val) >= 3;
+    return `<label class="field">${i + 1}.
+      <input type="text" maxlength="180" value="${val.replace(/"/g, "&quot;")}" data-hs="${i}" placeholder="e.g. I was on the boat yesterday.">
+      <span class="count">${val ? (ok ? "есть was / were" : "нужны was / were и минимум 3 слова") : "напиши своё предложение"}</span>
+    </label>`;
+  }).join("");
+  $("hw1").querySelectorAll("[data-hs]").forEach((inp) => inp.oninput = () => {
+    const i = +inp.dataset.hs;
+    const next = state.hwSent.slice();
+    next[i] = inp.value.slice(0, 180);
+    state.hwSent = next;
+    save();
+    const val = inp.value;
+    const ok = /was|were/i.test(val) && wc(val) >= 3;
+    const count = inp.parentElement.querySelector(".count");
+    if (count) count.textContent = val ? (ok ? "есть was / were" : "нужны was / were и минимум 3 слова") : "напиши своё предложение";
+  });
+  $("hwQuiz").innerHTML = HW_QUIZ.map((q, n) => {
+    const sel = state.hwQuiz[q.id];
+    const opts = state.hwQuizOpts[q.id] || HW_OPTS;
+    const show = state.hwQuizChecked;
+    return `<li>
+      <p>${n + 1}. ${q.q}</p>
+      <div class="opts">${opts.map((o) => {
+        let cls = "opt" + (sel === o ? " sel" : "");
+        if (show && o === q.a) cls += " ok";
+        else if (show && sel === o && o !== q.a) cls += " bad";
+        return `<button type="button" class="${cls}" data-hq="${q.id}" data-val="${o}">${o}</button>`;
+      }).join("")}</div>
+    </li>`;
+  }).join("");
+  $("hwQuiz").querySelectorAll("[data-hq]").forEach((b) => b.onclick = () => {
+    state.hwQuiz[b.dataset.hq] = b.dataset.val;
+    state.hwQuizChecked = false;
+    save();
+    renderHW();
+  });
+  const famPlace = ["Mum: …", "Dad: …", "A sister or a friend: …"];
+  $("hwFamily").innerHTML = famPlace.map((p, i) =>
+    `<label class="field">${p}<input type="text" maxlength="160" value="${(state.hwFamily[i] || "").replace(/"/g, "&quot;")}" data-fam="${i}" placeholder="She was at home. / He was happy."></label>`
+  ).join("");
+  $("hwFamily").querySelectorAll("[data-fam]").forEach((inp) => inp.oninput = () => {
+    const next = state.hwFamily.slice();
+    next[+inp.dataset.fam] = inp.value.slice(0, 160);
+    state.hwFamily = next;
+    save();
+  });
+  $("hwQs").innerHTML = [0, 1, 2, 3].map((i) => {
+    const val = state.hwQs[i] || "";
+    const ok = /\?$/.test(val.trim()) && /^(what|why|who|where|when|how|which|was|were|did|do|is|are|can|could)\b/i.test(val.trim());
+    return `<label class="field">${i + 1}.
+      <input type="text" maxlength="160" value="${val.replace(/"/g, "&quot;")}" data-qs="${i}" placeholder="e.g. Where were you yesterday?">
+      <span class="count">${val ? (ok ? "форма вопроса верная" : "нужны вопросительное слово или was/were и знак ?") : "свой вопрос семье"}</span>
+    </label>`;
+  }).join("");
+  $("hwQs").querySelectorAll("[data-qs]").forEach((inp) => inp.oninput = () => {
+    const next = state.hwQs.slice();
+    next[+inp.dataset.qs] = inp.value.slice(0, 160);
+    state.hwQs = next;
+    save();
+  });
+  document.querySelectorAll(".hw-check").forEach((c, i) => { c.checked = !!state.hwCheck[i]; });
+  updateHWProgress();
+}
+function checkHWQuiz() {
+  state.hwQuizChecked = true;
+  save();
+  renderHW();
+  const c = HW_QUIZ.filter((q) => state.hwQuiz[q.id] === q.a).length;
+  $("hwQuizScore").textContent = `Результат: ${c}/6 ${c === 6 ? "🏆 Отлично!" : "— попробуй ещё!"}`;
+  if (c === 6) speak("Perfect homework!");
+}
+function saveHWChecks() {
+  state.hwCheck = [...document.querySelectorAll(".hw-check")].map((c) => c.checked);
+  save();
+  updateHWProgress();
+}
+function updateHWProgress() {
+  const c = state.hwCheck.filter(Boolean).length;
+  $("hwProgress").textContent = `Домашняя миссия: ${c}/4 ${c === 4 ? "🏆 Всё готово — покажи учителю!" : ""}`;
+}
+
+function confirmRestart() {
+  if (confirm("Начать заново? Весь прогресс, ключи, ответы и домашнее задание будут удалены.")) {
+    localStorage.removeItem(KEY);
+    location.reload();
+  }
+}
+function toggleSound() {
+  state.soundOn = !state.soundOn;
+  save();
+  $("soundBtn").textContent = state.soundOn ? "🔊" : "🔇";
+  $("soundBtn").setAttribute("aria-label", state.soundOn ? "Звук включён" : "Звук выключен");
+}
+function openGrammar() { $("grammarModal").classList.add("is-on"); }
+function closeGrammar() { $("grammarModal").classList.remove("is-on"); }
+
+/* snow */
+function startSnow() {
+  if (prefersReduce()) return;
+  const cv = $("snowCanvas");
+  if (!cv || !cv.getContext) return;
+  const ctx = cv.getContext("2d");
+  const flakes = [];
+  function resize() { cv.width = innerWidth; cv.height = innerHeight; }
+  resize();
+  addEventListener("resize", resize);
+  for (let i = 0; i < 70; i++) flakes.push({ x: Math.random() * innerWidth, y: Math.random() * innerHeight, r: Math.random() * 2.5 + 1, s: Math.random() * 0.7 + 0.3, o: Math.random() * 0.5 + 0.3 });
+  (function snow() {
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    flakes.forEach((f) => {
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, f.r, 0, 7);
+      ctx.fillStyle = `rgba(255,255,255,${f.o})`;
+      ctx.fill();
+      f.y += f.s;
+      f.x += Math.sin(f.y * 0.01) * 0.4;
+      if (f.y > cv.height) { f.y = -5; f.x = Math.random() * cv.width; }
+    });
+    requestAnimationFrame(snow);
+  })();
+}
+
+function renderAll() {
+  renderProgress();
+  renderVocab();
+  renderMagnets();
+  renderKitchen();
+  renderBonus();
+  renderTF();
+  renderEmotions();
+  renderReport();
+  renderTraps();
+  renderEnd();
+  renderHW();
+  $("soundBtn").textContent = state.soundOn ? "🔊" : "🔇";
+  const examples = ["I was with Grandma.", "We were in the cabin.", "She wasn't tired.", "The books were under the table.", "The tea was hot.", "Pickle was on the table."];
+  $("grammarExamples").innerHTML = examples.map((s) => `<button type="button" class="opt" style="width:100%" data-ex="${s}">${s} 🔊</button>`).join("");
+  $("grammarExamples").querySelectorAll("button").forEach((b) => b.onclick = () => speak(b.dataset.ex));
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderAll();
+  startSnow();
+  document.querySelectorAll("[data-nav]").forEach((b) => b.onclick = () => go(b.getAttribute("data-nav")));
+  $("soundBtn").onclick = toggleSound;
+  $("resetBtn").onclick = confirmRestart;
+  $("resetBtn2").onclick = confirmRestart;
+  document.querySelectorAll("[data-open-grammar]").forEach((b) => b.onclick = openGrammar);
+  $("grammarClose").onclick = closeGrammar;
+  $("grammarModal").addEventListener("click", (e) => { if (e.target === $("grammarModal")) closeGrammar(); });
+  $("checkMag").onclick = checkMagnets;
+  $("resetMag").onclick = resetMagnets;
+  $("chorusBtn").onclick = () => speak("I was, he was, she was, it was. You were, we were, they were.");
+  $("grandmaSpeak").onclick = () => speak("Yesterday I was on the deck. We were on the boat!");
+  $("checkKitchen").onclick = checkKitchen;
+  $("checkTF").onclick = checkTF;
+  $("roomSpeak").onclick = () => speak("The books were under the table. The cat was on the table. The mug was on the table.");
+  $("drawHat").onclick = drawHat;
+  $("completeEmo").onclick = completeEmotions;
+  $("grandmaEmoSpeak").onclick = () => speak("She was happy. She was not tired. She was on the snowy deck.");
+  $("resetReportBtn").onclick = resetReport;
+  $("checkReportBtn").onclick = checkReport;
+  $("speakReportBtn").onclick = speakReport;
+  $("bossBtn").onclick = bossCheck;
+  $("wasRange").oninput = () => updateThermo($("wasRange"), "wasVal");
+  $("wereRange").oninput = () => updateThermo($("wereRange"), "wereVal");
+  $("finalAnswer").oninput = () => { state.finalAnswer = $("finalAnswer").value.slice(0, 240); save(); };
+  document.querySelectorAll("[data-setans]").forEach((b) => b.onclick = () => { state.finalAnswer = b.dataset.setans; $("finalAnswer").value = state.finalAnswer; speak(state.finalAnswer); save(); });
+  $("speakFinal").onclick = () => speak(state.finalAnswer || "Where were you yesterday?");
+  $("openCode").onclick = openCode;
+  $("checkHWQuiz").onclick = checkHWQuiz;
+  document.querySelectorAll(".hw-check").forEach((c) => c.onchange = saveHWChecks);
+  $("toastOk").onclick = () => $("toast").classList.remove("is-on");
+  document.querySelectorAll("[data-go]").forEach((b) => b.onclick = () => go(b.getAttribute("data-go")));
+  window.__snowqa = { KEY, CODE, stats: () => stats(), state: () => state, VOCAB, MATCH, KITCHEN, TF, REPORT, TRAPS, HW_QUIZ };
+});
+
+</script>
+<script src="../_shared/watermark.js" data-mode="bar" data-position="bottom" defer></script>
+</body>
+</html>
