@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Учителю — Отель Winter Wish</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Nunito,system-ui,sans-serif;background:#1c1917;color:#1c140c;padding:24px 16px 80px}
+main{max-width:760px;margin:0 auto;background:#faf6ef;border-radius:24px;padding:28px 24px;border:3px solid #e8d5a3}
+h1,h2,h3{font-weight:800;color:#1c1917}
+h1{font-size:1.6rem}
+h2{margin-top:1.6rem;font-size:1.2rem}
+.note{background:#fef3c7;border-radius:12px;padding:10px 12px;font-weight:700}
+ol,ul{padding-left:1.3rem}
+li{margin:.25rem 0}
+a{color:#92400e}
+.toc{font-weight:700}
+code{background:#fffaf3;padding:1px 6px;border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:.95rem;margin:8px 0 16px}
+th,td{border:1px solid #e8d5a3;padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#f8f0d9}
+</style>
+</head>
+<body>
+<main>
+<h1>Учителю • Winter Wish Hotel — Complex Object</h1>
+<p class="note">Эта страница не показывается ученикам. Ученический урок: <a href="./">index.html</a>.</p>
+<nav class="toc">
+  <a href="#plan">План</a> ·
+  <a href="#method">Методика</a> ·
+  <a href="#bugs">Что исправлено</a> ·
+  <a href="#banks">Банки и форматы</a> ·
+  <a href="#flags">Флажки</a> ·
+  <a href="#keys">Ключи</a> ·
+  <a href="#hw">Домашка</a>
+</nav>
+
+<h2 id="plan">План урока (Grade 7, A2+/B1, ~45 мин)</h2>
+<p>Цель: Complex Object — <strong>want / expect / would like somebody <em>to do</em></strong>, <strong>make / let somebody <em>do</em></strong> (без to) и <strong>see / hear somebody <em>do / doing</em></strong>.</p>
+<ol>
+<li>История отеля и знакомство с гостями (Granny Frost, Norbert, Polar Bear Bob, Pip, Mr Blizzard).</li>
+<li>Вводная иллюстрация квеста: первая смена у стойки мистера Близзарда.</li>
+<li>Welcome briefing (TASK 01): 8 правил — глаголы из банка слов.</li>
+<li>Guests' notes (TASK 02): 8 записок по семьям + 3 правила (выбор варианта).</li>
+<li>Справка по трём типам Complex Object.</li>
+<li>Room service (TASK 03): 8 рапортов из банка фраз.</li>
+<li>The night mystery (TASK 04): показания всех свидетелей открыты, таблица из банка, обвинение.</li>
+<li>Книга отзывов (TASK 05): 7 начал из банка; голос (TASK 06) по четырём образцам.</li>
+<li>Код <strong>WWH-CO-COCOA</strong>, рефлексия, домашка «ещё один гость» (6 строк, свой банк).</li>
+</ol>
+<p>Все части открыты, гейта нет. «↺ Начать заново» с подтверждением на русском сбрасывает прогресс, останавливает озвучку и заново перемешивает банки. Озвучка en-GB только по кнопке.</p>
+<p>Ключ хранения: <code>tutorcall-winter-wish-hotel-v1</code>. Счётчик в шапке доходит до 8/8.</p>
+
+<h2 id="method">Заметки из оригинала (для учителя)</h2>
+<ul>
+<li>Брифинг: прочитай введение и каждое правило вслух, дай парам пересказать; в конце пусть восстановят два полных правила.</li>
+<li>Записки: пусть пары сначала объяснят выбор, потом проверят. Ключ семей: wishes 1, 2, 7; make/let 3, 4, 8; see/hear 5, 6.</li>
+<li>Ресепшен: разным парам — разные карточки, около минуты на звонок, рапорт в третьем лице. Можно добавить деталь make/let или see/hear.</li>
+<li>Загадка в классе была минглом («открой только свою карточку»). В онлайн-версии для одного ученика все показания открыты. Решение: торт взял Polar Bear Bob, пока почти спал.</li>
+<li>Отзыв: 7 минут на письмо. Для поддержки можно опереться на справку; для вызова — <em>would like somebody to do</em> и пассив <em>I saw the cake being taken</em>.</li>
+<li>Голосование в оригинале было классным бюллетенем с именами. Здесь ученик один: четыре готовых отзыва и готовые фразы-причины.</li>
+<li>Домашку можно собрать на следующем уроке: класс угадывает нового гостя по желаниям и ночной улике.</li>
+</ul>
+
+<h2 id="bugs">Что исправлено относительно Arena</h2>
+<ul>
+<li>В Welcome briefing были пустые поля без банка слов — добавлен интерактивный банк глаголов (есть отвлекающие greeting / tidying / work и т.п.).</li>
+<li>В Discover the rule, рапорте, таблице улик, обвинении, отзыве и домашке стояли голые поля (в домашке банк только упоминался). Теперь везде банк или выбор вариантов.</li>
+<li>Карточки свидетелей и части урока больше не закрыты: все задания открыты сразу.</li>
+<li>Сброс был не на русском / не было единой кнопки «Начать заново». Теперь есть подтверждение, остановка озвучки и новая перетасовка банков.</li>
+<li>Прогресс писался в несколько ключей localStorage. Теперь один ключ, сохранение при каждом изменении.</li>
+<li>С ученической страницы убраны Teacher view и Print pack — методика только здесь.</li>
+<li>Добавлены русская цель, кнопки «Дальше», короткие «почему» после ошибок, финал с кодом и рефлексия.</li>
+<li>Картинки лежат рядом с уроком (webp + jpg), пути относительные.</li>
+</ul>
+
+<h2 id="banks">Что было в задании и что стало</h2>
+<table>
+<thead><tr><th>Задание</th><th>В оригинале</th><th>Сейчас</th></tr></thead>
+<tbody>
+<tr><td>Welcome briefing (8)</td><td>Пустые поля для глаголов</td><td>Банк глаголов: нажми на пропуск, потом на слово</td></tr>
+<tr><td>Guests' notes (8)</td><td>Выпадающий список семей</td><td>Выбор из трёх вариантов (wishes / make/let / see/hear)</td></tr>
+<tr><td>Discover the rule (3)</td><td>Пустые поля</td><td>Выбор из трёх вариантов</td></tr>
+<tr><td>Room service (8)</td><td>Текстовое поле + статичный список фраз без проверки</td><td>Интерактивный банк кусочков, проверка рапорта</td></tr>
+<tr><td>Night mystery — таблица</td><td>Свободный текст + Yes/No/Maybe; карточки закрыты</td><td>Банки улик и мест, выбор Yes/No/Maybe; все карточки открыты</td></tr>
+<tr><td>Обвинение</td><td>Свободное поле</td><td>Кто из четырёх + банк причин</td></tr>
+<tr><td>Книга отзывов (7)</td><td>Свободный текст, только рубрика</td><td>Банк фраз, проверка по схеме</td></tr>
+<tr><td>Голосование</td><td>Бюллетень с именами одноклассников</td><td>4 готовых отзыва + готовые фразы-причины</td></tr>
+<tr><td>Домашка (6)</td><td>Пустые поля, «банк» только в подсказке</td><td>Свой банк новых гостей, комнат и фраз</td></tr>
+</tbody>
+</table>
+
+<h2 id="flags">Флажки</h2>
+<ul>
+<li>Вводную иллюстрацию квеста в материалах не было — я нарисовала сцену у стойки рецепции в том же стиле, что и портреты гостей. На заднем плане (доска / баночка) буквы немного нечитаемые, на смысл не влияют.</li>
+<li>Решение загадки, как в оригинале: торт взял Polar Bear Bob, пока почти спал. Нужны улики: свеча, пижама в полоску, крошки или шоколад (или нитка в полоску).</li>
+<li>Голосование и «открой только свою карточку» переделаны под работу одного ученика.</li>
+</ul>
+
+<h2 id="keys">Ключи к классной работе</h2>
+
+<h3>Welcome briefing — глаголы</h3>
+<ol>
+<li>greet — I want you to <em>greet</em> every guest warmly.</li>
+<li>welcome — I expect you to <em>welcome</em> new arrivals with a smile.</li>
+<li>tidy — I will make you <em>tidy</em> the lobby today.</li>
+<li>taste — I will let you <em>taste</em> the chef's cocoa when the shift ends.</li>
+<li>be — I don't want anyone to <em>be</em> late for breakfast.</li>
+<li>listen — I expect you to <em>listen</em> to every request carefully.</li>
+<li>ignore — I will never let you <em>ignore</em> a guest who needs help.</li>
+<li>help — I want you to <em>help</em> one another tonight.</li>
+</ol>
+
+<h3>Guests' notes — семьи</h3>
+<ol>
+<li>wishes (want / expect / would like) — I expect the housekeepers to warm my room…</li>
+<li>wishes — I would like the staff to carry another blanket upstairs.</li>
+<li>actions (make / let) — The manager never lets me enter the sauna late.</li>
+<li>actions — That icy shower made me shout for help.</li>
+<li>senses (see / hear) — I heard a door creaking after midnight.</li>
+<li>senses — I saw a dark shape moving near the kitchen.</li>
+<li>wishes — I want Santa to find my letter beneath the tree.</li>
+<li>actions — Please don't make the carol singers leave.</li>
+</ol>
+
+<h3>Discover the rule</h3>
+<ol>
+<li>After want / expect / would like we use <strong>somebody to do</strong>.</li>
+<li>After make / let we use <strong>somebody do</strong>.</li>
+<li>After see / hear we use <strong>somebody do / doing</strong>.</li>
+</ol>
+
+<h3>Рапорты на ресепшене (официальный вариант; другие верные комбинации из банка тоже засчитываются)</h3>
+<ol>
+<li>Room 7 wants us to bring extra blankets.</li>
+<li>Room 7 expects the maid to clean the room before breakfast.</li>
+<li>Room 12 wants Mr Blizzard to let him use the sauna after ten.</li>
+<li>Room 12 wants us to fix the heating today.</li>
+<li>Room 3 wants us to keep the corridor quiet.</li>
+<li>Room 3 would like us to bring breakfast to his room after eleven. / wants us to let him have breakfast in bed after eleven.</li>
+<li>Room 5 would like the chef to bake a fish-shaped cake.</li>
+<li>Room 5 wants the pianist to play Jingle Bells.</li>
+</ol>
+<p>Рапорт засчитывается, если он совпадает с одним из принятых вариантов или в нём есть нужные слова, want / expect / would like и <em>to</em>.</p>
+
+<h3>Ночная загадка</h3>
+<p>Показания (все открыты):</p>
+<ul>
+<li>Granny Frost: видела, как Norbert шёл к кухне с чем-то блестящим; слышала скрип двери, но не видела, как он вошёл.</li>
+<li>Norbert: видел Bob у кухни со свечой; слышал, как кто-то жуёт за дверью.</li>
+<li>Polar Bear Bob: слышал, как Pip пела по дороге в холл; утром нашёл крошки торта в своей постели.</li>
+<li>Pip: видела, как Norbert проходил мимо кухни к сауне; позже видела, как Bob вернулся с шоколадом на пижаме в сине-белую полоску.</li>
+</ul>
+<p>Таблица: улики и места выбираются из банка по тексту показаний. Подозрительность по ключу оригинала: Granny — Maybe; Norbert — Yes; Bob — Yes; Pip — No.</p>
+<p><strong>Вердикт.</strong> I think Polar Bear Bob took the cake because + хотя бы одна улика: свеча, пижама (pyjamas / pajamas), крошки, шоколад или полосатая нитка.</p>
+<p>Полное решение: Polar Bear Bob took the cake while half-asleep. Norbert saw him at the kitchen with a candle; Pip saw him return with chocolate on his blue-and-white striped pyjamas. The striped thread matches Mr Blizzard's clue, and Bob found crumbs in his own bed.</p>
+
+<h3>Книга отзывов</h3>
+<p>Ученик пишет от лица одного из четырёх гостей и заканчивает 7 начал фразами из банка. Проверка по схеме:</p>
+<ol>
+<li>I want the staff to + глагол (warm / bring / listen…).</li>
+<li>I expect the manager to + глагол.</li>
+<li>I would like someone to + глагол.</li>
+<li>The manager made / let me + глагол <em>без to</em> (have cocoa, wait, use the sauna).</li>
+<li>Last night I saw someone + do / doing (return from the kitchen, singing…).</li>
+<li>I also heard someone + do / doing (singing, munching…).</li>
+<li>I would / would not return because + причина из банка (the room was warm / the cocoa was perfect…).</li>
+</ol>
+
+<h3>Голосование</h3>
+<p>Любой из четырёх отзывов + любая из шести фраз-причин. Образцового «единственного победителя» нет.</p>
+
+<h2 id="hw">Домашка — One more guest arrives</h2>
+<p>Формат другой, чем у классного отзыва: ученик изобретает <em>нового</em> гостя из банка (Snow Fox Lila, Reindeer Max, Ice Owl Olga, Tiny Seal Niko), выбирает комнату 2 / 4 / 6 / 8 / 9 / 11 / 14 и собирает шесть строк:</p>
+<ol>
+<li>My new guest is called + имя (не меньше двух слов).</li>
+<li>They are staying in Room + номер.</li>
+<li>They want the staff to + фраза (bring a second pillow, leave a letter for Santa…).</li>
+<li>They expect the manager to + фраза.</li>
+<li>The hotel lets / makes them + глагол без to в начале (have breakfast in bed, wait by the fire…).</li>
+<li>Last night they saw / heard + улика (someone walking to the kitchen, a door creaking…).</li>
+</ol>
+
+<p>Финальный код: <code>WWH-CO-COCOA</code>.</p>
+</main>
+</body>
+</html>
