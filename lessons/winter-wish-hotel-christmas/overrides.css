@@ -1,0 +1,69 @@
+/* Standing rules on top of the Arena Christmas-hotel design */
+html{background:#0b1826}
+body{padding-bottom:110px;color:var(--color-paper)}
+.skip{position:absolute;left:-999px;top:0;color:var(--color-ink);background:var(--color-paper)}
+.skip:focus{left:12px;top:12px;z-index:80;padding:8px 12px;border-radius:8px;background:var(--color-gold-400);color:#241a05}
+[tabindex="-1"]:focus{outline:none}
+.site-bar{background-color:#0b1826}
+.site-nav a{font-family:var(--font-sans);font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(251,247,236,.75);text-decoration:none}
+.site-nav a:hover{color:var(--color-gold-300)}
+.btn-reset{border:1px solid var(--color-brick-500);background:var(--color-brick-500);color:#fbf7ec;border-radius:999px;padding:8px 12px;font-size:11px;font-weight:700;letter-spacing:.02em;min-height:40px}
+.btn-sound{border:1px solid rgba(236,216,150,.45);background:#12233a;color:var(--color-gold-300);border-radius:999px;width:40px;height:40px;font-size:16px}
+.progress-chip{white-space:nowrap}
+.next-row{margin:22px 0 8px}
+.why{margin:8px 0 0;font-size:.92rem;font-weight:700;border-radius:10px;padding:8px 10px}
+.why.ok{background:#e9efe6;color:#26402f}
+.why.bad{background:#f8ebe4;color:#8d4030}
+.goal-box{background:#e9efe6;border-left:3px solid var(--color-navy-700);padding:14px 18px;margin:16px 0 0;font-size:16px;line-height:1.55;color:var(--color-ink)}
+
+.tile-bank{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 16px}
+.tile{
+  border:1px solid #7d5c1e73;background:#fff;color:var(--color-ink);
+  border-radius:999px;padding:8px 14px;font-weight:600;font-size:14px;
+  min-height:44px;line-height:1.2;
+}
+.tile:hover{background:#f4efe0}
+.built{
+  display:flex;flex-wrap:wrap;align-items:center;gap:6px;
+  min-height:52px;border:1px dashed #7d5c1e73;border-radius:8px;
+  padding:8px 10px;background:#fff;color:var(--color-ink);
+}
+.built.is-focus{border-color:var(--color-navy-700);box-shadow:0 0 0 2px rgba(39,64,96,.28)}
+.built-chip{
+  border:1px solid #c0a062;background:#fbf7ec;color:var(--color-ink);
+  border-radius:999px;padding:6px 10px;font-weight:600;font-size:14px;min-height:36px;
+}
+.built-placeholder{color:#5c4e32;font-style:italic;font-size:14px}
+.choice-row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.choice{
+  border:1px solid #7d5c1e73;background:#fff;color:var(--color-ink);
+  border-radius:8px;padding:8px 12px;min-height:44px;font-weight:600;text-align:left;
+}
+.choice.is-on{border-color:var(--color-navy-700);background:#eef2f0;box-shadow:0 0 0 2px rgba(39,64,96,.25)}
+.choice.is-ok{border-color:var(--color-pine-600);background:#e9efe6}
+.choice.is-bad{border-color:var(--color-brick-500);background:#f8ebe4}
+.gap-slot{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:140px;min-height:40px;padding:4px 10px;margin:0 4px;
+  border:0;border-bottom:2px solid var(--color-gold-500);background:#fff;
+  color:var(--color-ink);font-weight:700;cursor:pointer;border-radius:4px 4px 0 0;
+}
+.gap-slot.is-focus{background:#ead49b;border-bottom-color:var(--color-navy-700)}
+.code-box{text-align:center;border:1px solid #c0a062;padding:22px 16px;margin:18px 0;background:#fbf7ec;color:var(--color-ink)}
+.code-box strong{display:block;margin-top:8px;font-family:var(--font-script);font-size:36px;color:var(--color-navy-800);font-weight:400}
+
+.note-card{cursor:pointer;text-align:left}
+.note-card.is-picked{outline:2px solid var(--color-gold-400);transform:translateY(-2px)}
+.basket{min-height:140px}
+.paper-page,.paper-card,.paper-card-flat,.code-box{background-color:var(--color-paper)}
+.bg-navy-950,.site-bar{background-color:#0b1826}
+.bg-navy-900{background-color:#12233a}
+@media(max-width:900px){
+  .site-nav{display:none}
+  .btn-reset{padding:8px 10px;font-size:10px}
+}
+@media(max-width:520px){body{padding-bottom:120px}}
+#ttc-wm-bar{z-index:20}
+
+.btn-gold{background-color:#d9bc6e;color:#241a05}
+.btn-ghost{background-color:#0b1826;color:#ecd896}
