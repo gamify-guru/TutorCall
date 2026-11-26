@@ -1,1003 +1,148 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Допрос свидетелей | Shadow School · Question tags</title>
-<meta name="description" content="Interview the Witness — Shadow School speaking lesson. Question tags and intonation: Tag Tester, four witnesses, Case File and homework.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Nunito+Sans:opsz,wght@6..12,600;6..12,700;6..12,800&family=Special+Elite&display=swap" rel="stylesheet">
-<style>
-:root{
-  --ink:#070b1a; --ink-2:#10182c; --ink-3:#1a2340;
-  --brass:#c9a36a; --brass-light:#e8c99a; --brass-deep:#8a6a3a;
-  --parch:#f3e9dc; --parch-dim:#cbbba3; --paper:#fffaf3;
-  --tagblue:#7dd3fc; --tagblue-ink:#0c4a6e;
-  --tagamber:#fbbf24; --tagamber-ink:#78350f;
-  --ok-bg:#ecfdf5; --ok-ink:#064e3b; --ok-line:#047857;
-  --bad-bg:#fff1f2; --bad-ink:#9f1239;
-  --header-h:160px;
-}
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-html{scroll-behavior:smooth;background:var(--ink)}
-body{
-  font-family:"Nunito Sans",system-ui,sans-serif;
-  color:var(--parch);
-  background:radial-gradient(1200px 600px at 20% -10%,#1c2748 0%,transparent 60%),linear-gradient(180deg,#070b1a 0%,#10182c 50%,#070b1a 100%);
-  padding-bottom:88px;overflow-x:hidden;min-height:100%;
-}
-.skip{position:absolute;left:-999px;top:0;color:#f3e9dc;background:#070b1a}
-.skip:focus{left:12px;top:12px;background:#fff;z-index:80;padding:8px 12px;border-radius:8px;color:#070b1a}
-.top{position:sticky;top:0;z-index:40;background:linear-gradient(180deg,#070b1a,#121a33);border-bottom:2px solid var(--brass);box-shadow:0 8px 24px rgba(0,0,0,.45)}
-.top-inner{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 16px 6px;max-width:1120px;margin:0 auto}
-.logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#e8c99a,#8a6a3a);display:grid;place-items:center;font-size:1.2rem;box-shadow:0 0 0 2px #f3e9dc33}
-.brand-title{margin:0;font-family:Cinzel,serif;font-weight:700;font-size:1.05rem;color:var(--brass-light);line-height:1.15}
-.brand-title span{color:#fff}
-.brand-sub{margin:2px 0 0;font-size:.65rem;letter-spacing:.12em;color:var(--parch-dim);font-weight:700;text-transform:uppercase}
-.top-actions{margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.keys-pill{display:flex;align-items:center;gap:6px;background:#070b1a;color:var(--brass-light);border:2px solid var(--brass);border-radius:999px;padding:4px 10px;font-weight:700;font-size:.85rem}
-.key-bar{width:64px;height:8px;background:#1a2340;border-radius:8px;overflow:hidden;display:inline-block}
-.key-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#c9a36a,#34d399);border-radius:8px}
-.nav-row{display:flex;flex-wrap:wrap;gap:6px;padding:6px 16px 10px;max-width:1120px;margin:0 auto}
-.chip{border:2px solid #e8c99a55;background:#1a2340;color:var(--parch);font-weight:700;font-size:.78rem;border-radius:999px;padding:5px 10px;cursor:pointer;font-family:inherit}
-.chip:hover,.chip:focus-visible{background:#243056;border-color:var(--brass);outline:none}
-.chip.is-on{background:var(--brass);color:#070b1a;border-color:var(--brass-light)}
-.chip.is-done{background:#ecfdf5;border-color:#047857;color:#064e3b}
-.wrap{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:18px 14px 40px}
-.section-anchor{scroll-margin-top:var(--header-h)}
-.card{background:linear-gradient(180deg,#151c33,#10182c);color:var(--parch);border:2px solid #c9a36a44;border-radius:24px;padding:22px 20px;margin:0 0 22px;box-shadow:0 12px 28px rgba(0,0,0,.35)}
-.kicker{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
-.pill{display:inline-block;background:#070b1a;color:var(--brass-light);border:1px solid var(--brass);border-radius:999px;font-size:.7rem;font-weight:700;letter-spacing:.04em;padding:4px 10px}
-.pill.alt{background:#e8c99a;color:#3b2a12;border-color:transparent}
-h1,h2,h3{font-family:Cinzel,serif;color:var(--brass-light);margin:0 0 .5rem;font-weight:700}
-h2{font-size:1.45rem}
-.lead{margin:.4rem 0 .8rem;font-size:1.05rem;line-height:1.55;color:var(--parch)}
-.hint{color:var(--parch-dim);font-size:.92rem}
-.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:0;border:3px solid #c9a36a66;border-radius:28px;overflow:hidden;background:linear-gradient(160deg,#1a2340,#070b1a);box-shadow:0 20px 40px rgba(0,0,0,.4);margin-bottom:22px}
-.hero-copy{padding:26px 26px 28px}
-.hero h1{font-size:clamp(1.6rem,4.2vw,2.6rem);line-height:1.08;margin:.3rem 0 .7rem;color:#f3e9dc}
-.hero h1 em{color:var(--brass-light);font-style:normal}
-.hero-actions{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 12px}
-.hero-visual{position:relative;min-height:280px;background:#070b1a}
-.hero-visual img{width:100%;height:100%;object-fit:cover;min-height:320px}
-.hero-caption{position:absolute;left:12px;bottom:12px;right:12px;background:rgba(7,11,26,.9);color:var(--brass-light);padding:8px 12px;border-radius:12px;font-size:.8rem;font-weight:600}
-.photo-frame{border-radius:20px;overflow:hidden;border:3px solid #c9a36a55;box-shadow:0 8px 20px rgba(0,0,0,.25);margin:0 0 16px;background:#070b1a}
-.photo-frame img{width:100%;height:auto;display:block;max-height:460px;object-fit:cover;object-position:top}
-.btn{font-family:inherit;font-weight:700;border-radius:999px;border:2px solid transparent;padding:10px 16px;cursor:pointer;font-size:.95rem}
-.btn:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
-.btn-gold{background:var(--brass-light);color:#1c140c;border-color:var(--brass-deep)}
-.btn-gold:hover{background:#f3e9dc}
-.btn-ink{background:#1a2340;color:var(--parch);border-color:#c9a36a66}
-.btn-ink:hover{background:#243056}
-.btn-navy{background:#070b1a;color:var(--brass-light);border-color:var(--brass)}
-.btn-navy:hover{background:#121a33}
-.btn-rose{background:#9f1239;color:#fff;border-color:#881337}
-.icon-btn{width:42px;height:42px;border-radius:50%;border:2px solid #c9a36a66;background:#1a2340;color:var(--parch);cursor:pointer;font-size:1.1rem}
-.cast{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin:12px 0}
-.cast figure,.pick figure{margin:0;background:#10182c;border:3px solid #c9a36a44;border-radius:18px;overflow:hidden}
-.cast img,.pick img{width:100%;height:220px;object-fit:cover;object-position:top;display:block}
-.cast figcaption,.pick figcaption{padding:8px 10px 12px;font-size:.88rem;color:var(--parch)}
-.cast strong,.pick strong{display:block;font-family:Cinzel,serif;color:var(--brass-light)}
-.pick{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:12px 0}
-.pick button{all:unset;cursor:pointer;display:block;border-radius:18px}
-.pick button:focus-visible{outline:3px solid var(--brass);outline-offset:3px}
-.pick button.is-on figure{border-color:var(--brass);box-shadow:0 0 0 3px #e8c99a66}
-.pick button.is-done figure{border-color:#047857}
-.pick img{height:280px}
-.flips{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
-.flip{perspective:900px;height:130px}
-.flip button{width:100%;height:100%;border:0;padding:0;background:none;cursor:pointer;font-family:inherit;color:var(--parch)}
-.flip-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;transition:transform .45s ease;border-radius:16px}
-.flip.is-on .flip-inner{transform:rotateY(180deg)}
-.flip-face{position:absolute;inset:0;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:3px solid var(--brass);background:#1a2340;color:var(--parch);font-weight:700;padding:8px;text-align:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateY(0deg) translateZ(1px);-webkit-transform:rotateY(0deg) translateZ(1px)}
-.flip-back{position:absolute;inset:0;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;text-align:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#f3e9dc;color:#1c140c;border:3px solid var(--brass-deep);transform:rotateY(180deg) translateZ(1px);-webkit-transform:rotateY(180deg) translateZ(1px);font-size:.82rem}
-.opt{display:block;width:100%;text-align:left;margin:6px 0;padding:10px 12px;border-radius:14px;border:2px solid #c9a36a44;background:#1a2340;color:var(--parch);font-weight:650;font-family:inherit;cursor:pointer;font-size:.95rem}
-.opt:hover,.opt:focus-visible{border-color:var(--brass);background:#243056;outline:none}
-.opt.is-ok{border-color:#047857;background:#ecfdf5;color:#064e3b}
-.opt.is-bad{border-color:#9f1239;background:#fff1f2;color:#9f1239}
-.why{margin:8px 0 0;font-size:.9rem;font-weight:650;border-radius:12px;padding:8px 10px}
-.why.ok{background:#ecfdf5;color:#064e3b}
-.why.bad{background:#fff1f2;color:#9f1239}
-.task{background:#10182c;border:2px solid #c9a36a33;border-radius:18px;padding:14px;margin:10px 0}
-.counter{font-weight:700;color:var(--brass-light);font-size:.9rem}
-.rule-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:10px 0}
-.rule{background:#f3e9dc;border:2px solid var(--brass);border-radius:16px;padding:12px;color:#1c140c}
-.rule h3{color:#6b4a1d;margin:0 0 4px;font-size:1rem}
-select,textarea,input[type=text]{font-family:inherit;font-size:1rem;color:#1c140c;background:#fffaf3;border:2px solid #c9a36a66;border-radius:12px;padding:8px 10px;width:100%}
-textarea{min-height:70px;resize:vertical}
-.lamp{display:inline-flex;align-items:center;gap:8px;border:2px solid #c9a36a44;background:#10182c;color:var(--parch);border-radius:999px;padding:8px 14px;cursor:pointer;font-weight:700;font-family:inherit}
-.lamp.is-blue{border-color:#38bdf8;background:#0c4a6e;color:#e0f2fe}
-.lamp.is-amber{border-color:#fbbf24;background:#78350f;color:#fef3c7}
-.stamp{font-family:"Special Elite",cursive;display:inline-block;border:3px dashed #c9a36a;color:var(--brass-light);transform:rotate(-8deg);padding:4px 10px;font-weight:700;letter-spacing:.06em}
-.stamp.ok{border-style:solid;border-color:#34d399;color:#6ee7b7;transform:rotate(4deg)}
-.cert{background:#10182c;border:3px dashed var(--brass);border-radius:20px;padding:22px 16px;text-align:center;margin:12px 0}
-.cert h2{font-family:Cinzel,serif;font-size:1.55rem;color:var(--brass-light)}
-.code-box{display:inline-block;background:#070b1a;color:var(--brass-light);border:2px solid var(--brass);border-radius:14px;padding:10px 18px;font-weight:800;letter-spacing:.06em;font-size:1.15rem;margin-top:8px}
-.next{margin:16px 0 8px;margin-bottom:110px}
-.modal{position:fixed;inset:0;background:rgba(7,11,26,.78);z-index:60;display:none;align-items:center;justify-content:center;padding:16px}
-.modal.is-on{display:flex}
-.modal-card{background:#f3e9dc;color:#1c140c;border-radius:24px;max-width:640px;width:100%;max-height:86vh;overflow:auto;padding:20px;border:3px solid var(--brass)}
-.modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px;position:sticky;top:0;background:#f3e9dc;z-index:1;padding-bottom:8px}
-.modal-head h2{margin:0;flex:1;color:#3b2a12}
-.case{background:#0c1228;border:2px solid #c9a36a33;border-radius:16px;padding:12px 14px;margin:8px 0}
-.case h3{font-size:1rem}
-.bank,.drop{min-height:56px;border:2px dashed #c9a36a55;border-radius:16px;padding:8px;background:#0c1228;margin:8px 0}
-.chip-word{display:inline-flex;margin:4px;padding:8px 12px;border-radius:12px;border:2px solid #c9a36a55;background:#1a2340;color:var(--parch);font-weight:700;cursor:pointer;font-family:inherit}
-.chip-word.placed{background:var(--brass-light);border-color:var(--brass-deep);color:#1c140c}
-.chip-word.is-ok-pos{border-color:#047857;background:#ecfdf5;color:#064e3b}
-.chip-word.is-bad-pos{border-color:#9f1239;background:#fff1f2;color:#9f1239}
-#witnessTabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
-[tabindex="-1"]:focus{outline:none}
-@media (max-width:800px){
-  .hero{grid-template-columns:1fr}
-  .hero-visual{order:-1}
-  .hero-visual img{min-height:220px;aspect-ratio:16/11;height:auto}
-  :root{--header-h:200px}
-  .cast img,.pick img{height:200px}
-  .pick img{height:240px}
-}
-@media (max-width:520px){
-  :root{--header-h:260px}
-  body{padding-bottom:110px}
-  .top-inner{flex-wrap:wrap;padding:8px 10px 4px;gap:8px}
-  .logo{width:36px;height:36px}
-  .brand-title{font-size:.92rem}
-  .brand-sub{display:none}
-  .keys-pill .key-bar{display:none}
-  .top-actions{margin-left:0}
-  .btn-rose{padding:8px 10px;font-size:.8rem}
-  .nav-row{padding:4px 10px 8px;gap:5px}
-  .chip{font-size:.7rem;padding:4px 8px}
-  .btn{font-size:.88rem;padding:8px 12px}
-  .next{margin-bottom:120px}
-}
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interview the Witness · Shadow School</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&family=Special+Elite&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./arena.css">
+  <link rel="stylesheet" href="./overrides.css">
 </head>
-<body>
-<a class="skip" href="#intro">К содержанию</a>
-<header class="top">
-  <div class="top-inner">
-    <div class="logo" aria-hidden="true">🕯️</div>
-    <div>
-      <p class="brand-title">Interview the <span>Witness</span></p>
-      <p class="brand-sub">Shadow School · Speaking · Question tags</p>
-    </div>
-    <div class="top-actions">
-      <div class="keys-pill" aria-live="polite">Ключи <span id="keysCount">0</span>/8 <span class="key-bar"><i id="keyBar"></i></span></div>
-      <button type="button" class="icon-btn" id="soundBtn" aria-label="Звук включён">🔊</button>
-      <button type="button" class="btn btn-ink" id="btnRules">Правила</button>
-      <button type="button" class="btn btn-rose" id="resetBtn">↺ Начать заново</button>
-    </div>
-  </div>
-  <nav class="nav-row" aria-label="Карта урока">
-    <button type="button" class="chip is-on" data-nav="intro">Брифинг</button>
-    <button type="button" class="chip" data-nav="warmup">Tag Tester</button>
-    <button type="button" class="chip" data-nav="choose">Кого первым?</button>
-    <button type="button" class="chip" data-nav="room">Допрос</button>
-    <button type="button" class="chip" data-nav="summary">Дело</button>
-    <button type="button" class="chip" data-nav="end">Код</button>
-    <button type="button" class="chip" data-nav="homework">Домашка</button>
-  </nav>
-</header>
+<body class="bg-library grain text-parch antialiased">
+  <a class="skip" href="#main">К содержанию</a>
 
-<main class="wrap">
-  <section class="hero section-anchor" id="intro">
-    <div class="hero-copy">
-      <div class="kicker"><span class="pill">Shadow School</span><span class="pill alt">Question tags</span></div>
-      <h1>Допрос <em>свидетелей</em></h1>
-      <p class="lead">Добрый вечер, Junior Investigator. Вчера ты уже видел(а) записки Агнес. Три вопроса всё ещё открыты. Сегодня ты проверяешь её Tag Tester: один и тот же хвостик можно сказать голосом вниз или вверх — и свидетель ответит по-разному.</p>
-      <p class="hint"><strong>Цель урока:</strong> собирать question tags (is it? / weren't you? / shall we?), выбирать интонацию falling ↘ или rising ↗ и допросить четырёх свидетелей.</p>
-      <div class="hero-actions">
-        <button type="button" class="btn btn-gold" data-go="warmup">Начать разминку →</button>
-        <button type="button" class="btn btn-navy" data-go="homework">🏠 Домашняя миссия</button>
-      </div>
-      <p>
-        <label for="nameInput"><strong>Имя детектива</strong></label>
-        <input type="text" id="nameInput" placeholder="Напиши своё имя…" autocomplete="name">
-      </p>
-    </div>
-    <figure class="hero-visual">
-      <picture>
-        <source srcset="./images/hero.webp" type="image/webp">
-        <img src="./images/hero.jpg" width="1200" height="900" alt="Вечер в библиотеке Shadow School: латунный Tag Tester горит синим и янтарным на длинном столе, рядом книга Secrets of Shadow School.">
-      </picture>
-      <figcaption class="hero-caption">Библиотека Shadow School. Tag Tester горит синим и янтарным. На столе — Secrets of Shadow School.</figcaption>
-    </figure>
-  </section>
-
-  <section class="card">
-    <h2>Good evening from Agnes</h2>
-    <p>Use the Tag Tester to question four witnesses and find out the truth. <strong>Falling ↘</strong> = fact check. Blue light. The witness <strong>can't</strong> escape. <strong>Rising ↗</strong> = a real question. Amber light. The witness <strong>can</strong> evade.</p>
-    <div class="case">
-      <h3>Three open questions</h3>
-      <ol>
-        <li>Who wrote the secret note with the eye symbol?</li>
-        <li>Who opened the library on Tuesday night?</li>
-        <li>Where did the old, dusty paper come from?</li>
-      </ol>
-    </div>
-    <h3>Карточки правил</h3>
-    <p class="hint">Нажми карточку, чтобы перевернуть. Открой хотя бы три, чтобы засчитать ключ брифинга.</p>
-    <div class="flips" id="grammarGrid"></div>
-    <div class="next"><button type="button" class="btn btn-gold" data-go="warmup">Дальше → Tag Tester</button></div>
-  </section>
-
-  <section class="card section-anchor" id="warmup">
-    <div class="kicker"><span class="pill">Warm-up</span><span class="pill alt">The Tag Tester</span></div>
-    <h2>Разогрей лампы</h2>
-    <div id="warmupBox"></div>
-    <div class="next"><button type="button" class="btn btn-gold" data-go="choose">Дальше → Кого допросить первым</button></div>
-  </section>
-
-  <section class="card section-anchor" id="choose">
-    <div class="kicker"><span class="pill">Your choice</span><span class="pill alt">Who do you interview first?</span></div>
-    <h2>Кого допросить первым?</h2>
-    <p id="firstNote" class="hint"></p>
-    <div class="pick" id="chooseGrid"></div>
-    <div class="next"><button type="button" class="btn btn-gold" data-go="room">Дальше → Комната допроса</button></div>
-  </section>
-
-  <section class="card section-anchor" id="room">
-    <div class="kicker"><span class="pill">Interrogation</span><span class="pill alt">8 questions</span></div>
-    <h2>Комната допроса</h2>
-    <p>Для каждого вопроса сначала послушай оба тона, потом выбери falling или rising и отметь, что сделал свидетель. Чтобы получить улику, нужен falling ↘ (проверка факта).</p>
-    <p class="counter">Печати: <span id="stampCount">0</span> / 4</p>
-    <div id="witnessTabs"></div>
-    <div id="interviewPane"></div>
-    <div class="next"><button type="button" class="btn btn-gold" data-go="summary">Дальше → Дело</button></div>
-  </section>
-
-  <section class="card section-anchor" id="summary">
-    <div class="kicker"><span class="pill">Case File</span></div>
-    <h2>Что прояснилось</h2>
-    <div id="summaryBox"></div>
-    <p>
-      <label for="theory"><strong>Твоя теория</strong> — одно-два предложения по-английски</label>
-      <textarea id="theory" rows="3" placeholder="I think the person with the spare key…"></textarea>
-    </p>
-    <div class="next"><button type="button" class="btn btn-gold" data-go="end">Дальше → Код</button></div>
-  </section>
-
-  <section class="card section-anchor" id="end">
-    <div class="kicker"><span class="pill">Case closed — for tonight</span></div>
-    <h2>Рапорт детектива</h2>
-    <div class="cert">
-      <h2>Shadow School · Tag Tester</h2>
-      <p>Junior Investigator <strong id="finalName">Junior Investigator</strong></p>
-      <p>Ключи по делу: <strong id="finalClues">0 / 8</strong></p>
-      <p>The next page of “Secrets of Shadow School” is waiting. Let's open it, shall we?</p>
-      <p><button type="button" class="btn btn-navy" id="btnCode">Получить код дела</button></p>
-      <p id="codeBox" hidden>Код: <span class="code-box" id="codeText"></span></p>
-    </div>
-    <p>
-      <label for="reflect"><strong>Рефлексия.</strong> Когда тебе удобнее falling, а когда rising? Какой свидетель запомнился больше всего?</label>
-      <textarea id="reflect" rows="3" placeholder="Мне было легче… Я понял(а), что…"></textarea>
-    </p>
-    <div class="next">
-      <button type="button" class="btn btn-navy" data-go="homework">Дальше → Домашка</button>
-    </div>
-  </section>
-
-  <section class="card section-anchor" id="homework">
-    <div class="kicker"><span class="pill alt">Homework</span><span class="pill">Round 2 · Grade 6 English</span></div>
-    <h2>Home Mission</h2>
-    <p>The witnesses came back for a second interview. For each question, choose the correct tag and the best intonation. Then sort the answers and build your oral report for Agnes.</p>
-
-    <h3>A. Choose the tag and the tone</h3>
-    <p class="hint">Read the case note first. Positive sentence → negative tag. Negative sentence → positive tag. Use the same helper verb.</p>
-    <p class="counter" id="hwqCount">0 / 8</p>
-    <div id="hwqList"></div>
-
-    <h3>B. Lie, uncertainty or new fact?</h3>
-    <p class="hint">Look at each answer. Is it a lie, is the witness not sure, or is it a new fact?</p>
-    <p class="counter" id="hwsortCount">0 / 8</p>
-    <div id="hwsortList"></div>
-
-    <h3>C. Build your report</h3>
-    <div id="reportBox"></div>
-    <p>
-      <label for="hwOwn"><strong>Add one sentence of your own</strong> for Agnes (use a question tag if you can).</label>
-      <textarea id="hwOwn" rows="2" placeholder="I'm sure about the tall hat, aren't I?"></textarea>
-    </p>
-    <div class="next"><button type="button" class="btn btn-gold" data-go="end">К рапорту ↑</button></div>
-  </section>
-</main>
-
-<div class="modal" id="modalRules" role="dialog" aria-modal="true" aria-labelledby="rulesTitle">
-  <div class="modal-card">
-    <div class="modal-head">
-      <h2 id="rulesTitle">Agnes's rule cards — Question tags</h2>
-      <button type="button" class="btn btn-navy" id="rulesClose">Закрыть</button>
-    </div>
-    <div class="rule-grid">
-      <div class="rule"><h3>Form</h3><p>Positive ➜ negative tag: You <u>can</u> explain it, <strong>can't you?</strong><br>Negative ➜ positive tag: You <u>weren't</u> honest, <strong>were you?</strong></p></div>
-      <div class="rule"><h3>Helpers</h3><p>Use the same helper: is / are / was / were, can, have. No helper? Use do / does / did: You left it, <strong>didn't you?</strong></p></div>
-      <div class="rule"><h3>Intonation</h3><p>Falling ↘ — you check a fact (blue). Rising ↗ — a real question (amber).</p></div>
-      <div class="rule"><h3>Special</h3><p><strong>I am</strong> ➜ aren't I?<br><strong>Let's</strong> ➜ shall we?<br>There was… ➜ wasn't there?</p></div>
-    </div>
-  </div>
-</div>
-
-<script>
-const KEY = "tutorcall-shadow-school-interview-witness-v1";
-const CODE = "SS-TAG-PAGE13";
-const $ = (id) => document.getElementById(id);
-const norm = (s) => String(s || "").toLowerCase().replace(/['’]/g, "'").replace(/[^a-z0-9']+/g, " ").replace(/\s+/g, " ").trim();
-const wc = (s) => String(s || "").trim().split(/\s+/).filter(Boolean).length;
-function shuffle(arr) {
-  const a = arr.slice();
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-function speak(text, opts = {}) {
-  if (!state.soundOn || !window.speechSynthesis) return;
-  window.speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(String(text));
-  u.lang = "en-GB";
-  u.rate = opts.rate ?? 0.92;
-  u.pitch = opts.pitch ?? 1;
-  const voices = speechSynthesis.getVoices();
-  const v = voices.find((x) => /en-GB/i.test(x.lang) && /female|google uk english female|serena|kate/i.test(x.name))
-    || voices.find((x) => /en-GB/i.test(x.lang))
-    || voices.find((x) => /^en/i.test(x.lang));
-  if (v) u.voice = v;
-  speechSynthesis.speak(u);
-}
-function speakTag(stem, tag, tone, pitch) {
-  if (!state.soundOn || !window.speechSynthesis) return;
-  window.speechSynthesis.cancel();
-  const a = new SpeechSynthesisUtterance(stem);
-  a.lang = "en-GB"; a.rate = 0.95; a.pitch = pitch ?? 1;
-  const b = new SpeechSynthesisUtterance(String(tag).replace("?", tone === "rising" ? "?" : "."));
-  b.lang = "en-GB";
-  b.rate = 0.85;
-  b.pitch = tone === "rising" ? 1.75 : 0.45;
-  const voices = speechSynthesis.getVoices();
-  const v = voices.find((x) => /en-GB/i.test(x.lang)) || voices.find((x) => /^en/i.test(x.lang));
-  if (v) { a.voice = v; b.voice = v; }
-  a.onend = () => speechSynthesis.speak(b);
-  speechSynthesis.speak(a);
-}
-
-const WITNESSES = [
-  { id: "voss", name: "Professor Voss", role: "History teacher", mood: "Calm. She knows old secrets.", img: "professor-voss", pitch: 1.05,
-    questions: [
-      { stem: "This isn't your capital I,", tag: "is it?",
-        falling: { text: "No, it isn't. My capital I has a little hook. This one is straight.", mark: "confirmed" },
-        rising: { text: "Hmm… who can say? Many people write a capital I.", mark: "evaded" }, clue: "voss1" },
-      { stem: "You can explain the eye symbol,", tag: "can't you?",
-        falling: { text: "Yes, I can. It's the old sign of the school archive. And look — it's on the cover of this book.", mark: "new" },
-        rising: { text: "Perhaps another day, young investigator.", mark: "evaded" }, clue: "voss2" }
-    ],
-    special: { title: "Professor Voss leans closer…", lines: ["You came to me first. Good choice.", "She taps the old book: “Look for this sign in the book, not in the laboratory.”"], clue: "vossS" },
-    normalEnd: "Voss closes the book slowly. “That is all for tonight.”" },
-  { id: "theo", name: "Theo", role: "Student, sketch artist", mood: "Nervous. Draws everything.", img: "theo", pitch: 1.25,
-    questions: [
-      { stem: "The ink smelled like library dust,", tag: "didn't it?",
-        falling: { text: "Yes, it did. Old and dusty — like the archive shelves.", mark: "confirmed" },
-        rising: { text: "I don't know… I didn't smell it.", mark: "evaded" }, clue: "theo1" },
-      { stem: "You left your bag open on the table,", tag: "didn't you?",
-        falling: { text: "Yes, I did. And when I came back, there was an old sketch inside!", mark: "new" },
-        rising: { text: "Maybe. I leave it open a lot.", mark: "evaded" }, clue: "theo2" }
-    ],
-    special: { title: "Theo opens his bag…", lines: ["You trusted me first, so I'll show you.", "He takes out the old sketch. When he touches it, the paper crumbles — exactly like the pages of the old book!"], clue: "theoS" },
-    normalEnd: "Theo zips his bag quickly. “Can I go now?”" },
-  { id: "abernathy", name: "Mr Abernathy", role: "Caretaker, keeper of keys", mood: "Quiet and easily rattled. He keeps many doors.", img: "mr-abernathy", pitch: 0.55,
-    questions: [
-      { stem: "You weren't honest in Report 05,", tag: "were you?",
-        falling: { text: "…No, I wasn't. I wrote that the library was locked. It wasn't.", mark: "confirmed" },
-        rising: { text: "My reports are always correct, thank you.", mark: "evaded" }, clue: "aber1" },
-      { stem: "The spare key is still in your coat,", tag: "isn't it?",
-        falling: { text: "Yes… it is. But somebody used it on Tuesday night — not me!", mark: "new" },
-        rising: { text: "What key? I have many keys.", mark: "evaded" }, clue: "aber2" }
-    ],
-    special: { title: "The Tag Tester buzzes!", lines: ["The blue light flickers — he is still hiding something.", "“All right! I had the spare key… and I found the note on the floor. I hid them both. I was scared.”"], clue: "aberS" },
-    normalEnd: "Abernathy pulls his coat closer. “Goodnight, investigator.”" },
-  { id: "lila", name: "Lila", role: "Student, the only eyewitness", mood: "Scared. Wants to help.", img: "lila", pitch: 1.4,
-    questions: [
-      { stem: "There was only one silhouette in the hall,", tag: "wasn't there?",
-        falling: { text: "Yes, there was. Only one.", mark: "confirmed" },
-        rising: { text: "I… it was dark. Maybe more?", mark: "evaded" }, clue: "lila1" },
-      { stem: "You heard one knock, not three people,", tag: "didn't you?",
-        falling: { text: "Yes, I did. One knock. Then footsteps going to the archive.", mark: "new" },
-        rising: { text: "I heard… things. I don't want to talk about it.", mark: "evaded" }, clue: "lila2" }
-    ],
-    special: { title: "Lila looks down…", lines: ["You asked me first. Everyone else thinks I'm silly.", "“I said ‘three people’ because I was afraid. I invented it. There was only one.”"], clue: "lilaS" },
-    normalEnd: "Lila holds her bag tight. “Please find them.”" }
-];
-
-const MARKS = { confirmed: "Confirmed fact", evaded: "Evaded", new: "Added something new" };
-const CATS = { lie: "Lie", uncertainty: "Uncertainty", new: "New fact" };
-
-const CLUES = {
-  p1: { id: "p1", text: "Agnes's notes: the note has a strange capital I and an eye symbol.", source: "Agnes's Notes", q: ["q1"] },
-  p2: { id: "p2", text: "Agnes's notes: Lila said she saw “three people” in the hall.", source: "Agnes's Notes", q: ["q2"] },
-  p3: { id: "p3", text: "Agnes's notes: the paper is yellow and very old.", source: "Agnes's Notes", q: ["q3"] },
-  voss1: { id: "voss1", text: "Professor Voss did not write the capital I in the note.", source: "Professor Voss", q: ["q1"] },
-  voss2: { id: "voss2", text: "The eye is the old sign of the school archive. It is on the cover of the old book.", source: "Professor Voss", q: ["q1", "q3"] },
-  vossS: { id: "vossS", text: "“Look for this sign in the book, not in the laboratory.”", source: "Professor Voss · first interview", q: ["q3"], special: true },
-  theo1: { id: "theo1", text: "The ink smelled like library dust — like the archive shelves.", source: "Theo", q: ["q3"] },
-  theo2: { id: "theo2", text: "Somebody put an old sketch in Theo's open bag.", source: "Theo", q: ["q1"] },
-  theoS: { id: "theoS", text: "The old sketch crumbles exactly like the pages of the old book.", source: "Theo · first interview", q: ["q3"], special: true },
-  aber1: { id: "aber1", text: "Report 05 was not honest: the library was NOT locked.", source: "Mr Abernathy", q: ["q2"] },
-  aber2: { id: "aber2", text: "Somebody used the spare key on Tuesday night.", source: "Mr Abernathy", q: ["q2"] },
-  aberS: { id: "aberS", text: "Abernathy had the spare key AND found the note. He hid both because he was scared.", source: "Mr Abernathy · first interview", q: ["q1", "q2"], special: true },
-  lila1: { id: "lila1", text: "There was only ONE silhouette in the hall.", source: "Lila", q: ["q2"] },
-  lila2: { id: "lila2", text: "Lila heard one knock, then footsteps going to the archive.", source: "Lila", q: ["q2"] },
-  lilaS: { id: "lilaS", text: "Lila invented “three people” because she was afraid.", source: "Lila · first interview", q: ["q2"], special: true },
-  h1: { id: "h1", text: "Voss saw a blue light under the archive door at nine o'clock.", source: "Professor Voss · round 2", q: ["q2"] },
-  h3: { id: "h3", text: "Theo lied: he CAN draw the eye symbol. He is hiding something.", source: "Theo · round 2", q: ["q1"] },
-  h5: { id: "h5", text: "Abernathy lied: the archive was not locked at eight.", source: "Mr Abernathy · round 2", q: ["q2"] },
-  h6: { id: "h6", text: "The old paper is page 13 of “Secrets of Shadow School”.", source: "Mr Abernathy · round 2", q: ["q3"] },
-  h8: { id: "h8", text: "The silhouette wore a tall hat — like in the old school photo.", source: "Lila · round 2", q: ["q1", "q2"] }
-};
-
-const OPENQ = [
-  { id: "q1", title: "Who wrote the secret note with the eye symbol?", short: "The note" },
-  { id: "q2", title: "Who opened the library on Tuesday night?", short: "The library door" },
-  { id: "q3", title: "Where did the old, dusty paper come from?", short: "The old paper" }
-];
-const CLASS_SUM = {
-  q1: "Voss didn't write it. Abernathy found the note — and somebody put an old sketch in Theo's bag.",
-  q2: "The library was NOT locked. Someone used the spare key. Only ONE silhouette was in the hall.",
-  q3: "The ink smells like library dust, and the eye sign leads to “Secrets of Shadow School”."
-};
-const HW_SUM = {
-  q1: "Theo can draw the eye — he is hiding something. The hat links the note to the old school photo.",
-  q2: "A blue light at nine o'clock, an unlocked archive, and a silhouette in a tall hat.",
-  q3: "The old paper is page 13 of “Secrets of Shadow School”. The next page is waiting…"
-};
-
-const GRAMMAR = [
-  { id: "pos", q: "Positive → negative tag", ru: "You can explain it, can't you?", notes: "После утверждения — отрицательный хвостик." },
-  { id: "neg", q: "Negative → positive tag", ru: "You weren't honest, were you?", notes: "После отрицания — положительный хвостик." },
-  { id: "fall", q: "Falling ↘", ru: "Проверяю факт. Свидетель не уйдёт от ответа.", notes: "Голос вниз. Blue light." },
-  { id: "rise", q: "Rising ↗", ru: "Настоящий вопрос. Свидетель может уклониться.", notes: "Голос вверх. Amber light." },
-  { id: "ami", q: "I am → aren't I?", ru: "I'm ready to report, aren't I?", notes: "Особый хвостик для I am." },
-  { id: "lets", q: "Let's → shall we?", ru: "Let's open the next page, shall we?", notes: "Особый хвостик для Let's." }
-];
-
-const WARM = [
-  { id: "w1", situation: "You can see the lamps are off. You just want the witness to agree.", answer: "falling", why: "Ты уже видишь, что темно — это проверка факта, голос вниз (falling ↘, синий свет)." },
-  { id: "w2", situation: "You are outside. You really don't know if the lamps are on or off.", answer: "rising", why: "Ты правда не знаешь — это настоящий вопрос, голос вверх (rising ↗, янтарный свет)." }
-];
-
-const HW = [
-  { id: "h1", witness: "voss", stem: "You were in the library at nine o'clock,", options: ["were you?", "weren't you?", "wasn't you?"], correct: "weren't you?", context: "The library logbook shows Voss's name at 9:00.", tone: "falling", toneWhy: "You already know it from the logbook — you are checking a fact.", answer: "Yes, I was. And I saw a blue light under the archive door.", category: "new", evidence: "Nobody told us about a blue light before.", clue: "h1", whyTag: "Предложение утвердительное (were), поэтому хвостик отрицательный: weren't you?" },
-  { id: "h2", witness: "voss", stem: "You don't trust Mr Abernathy,", options: ["don't you?", "do you?", "are you?"], correct: "do you?", context: "You have no idea what Voss thinks about Abernathy.", tone: "rising", toneWhy: "You really don't know the answer — it's a real question.", answer: "Well… I'm not sure. Maybe. He knows too many doors.", category: "uncertainty", evidence: "“I'm not sure. Maybe.” — she doesn't know.", whyTag: "В предложении уже есть don't — отрицание, поэтому хвостик положительный: do you?" },
-  { id: "h3", witness: "theo", stem: "You can draw the eye symbol,", options: ["can you?", "can't you?", "don't you?"], correct: "can't you?", context: "You saw eye sketches in Theo's notebook yesterday.", tone: "falling", toneWhy: "You saw the sketches — you are checking a fact.", answer: "No, I can't! I can't draw at all!", category: "lie", evidence: "Case File: you saw his eye sketches. The blue light flickers.", clue: "h3", whyTag: "Утверждение с can → отрицательный хвостик can't you?" },
-  { id: "h4", witness: "theo", stem: "Your pen wasn't in your bag,", options: ["wasn't it?", "did it?", "was it?"], correct: "was it?", context: "You really don't know where Theo's pen was.", tone: "rising", toneWhy: "You don't know — it's a real question.", answer: "I think it was… or maybe I left it in class. I don't remember.", category: "uncertainty", evidence: "“I don't remember.” — he isn't sure.", whyTag: "В предложении wasn't — отрицание, поэтому хвостик was it?" },
-  { id: "h5", witness: "abernathy", stem: "You locked the archive at eight,", options: ["didn't you?", "did you?", "weren't you?"], correct: "didn't you?", context: "The archive rules say: lock at 8:00. You want him to confirm.", tone: "falling", toneWhy: "You expect “yes” — you are checking a fact.", answer: "Of course I locked it. I always lock it.", category: "lie", evidence: "Case File: Report 05 — the library was NOT locked.", clue: "h5", whyTag: "Past Simple без вспомогательного глагола в утверждении → didn't you?" },
-  { id: "h6", witness: "abernathy", stem: "You've seen this page before,", options: ["have you?", "didn't you?", "haven't you?"], correct: "haven't you?", context: "Abernathy's fingerprints are on the old page.", tone: "falling", toneWhy: "The fingerprints prove it — you are checking a fact.", answer: "Yes, I have. It's page 13 from “Secrets of Shadow School”. Someone tore it out years ago.", category: "new", evidence: "Now we know the exact page and book!", clue: "h6", whyTag: "Утверждение с have → haven't you?" },
-  { id: "h7", witness: "lila", stem: "You aren't afraid of the library now,", options: ["are you?", "aren't you?", "do you?"], correct: "are you?", context: "You care about Lila and really want to know how she feels.", tone: "rising", toneWhy: "You don't know her feelings — it's a real question.", answer: "I… don't know. It's quieter now, but the shadow still scares me.", category: "uncertainty", evidence: "“I don't know.” — she isn't sure.", whyTag: "Отрицание aren't → положительный хвостик are you?" },
-  { id: "h8", witness: "lila", stem: "The silhouette was wearing a hat,", options: ["was it?", "wasn't it?", "didn't it?"], correct: "wasn't it?", context: "Only Lila saw the silhouette. You don't know what it wore.", tone: "rising", toneWhy: "Only Lila knows — you are asking a real question.", answer: "Yes! A tall hat — like the one in the old school photo.", category: "new", evidence: "A tall hat! Nobody mentioned it before.", clue: "h8", whyTag: "Утверждение was → отрицательный хвостик wasn't it?" }
-];
-
-const REPORT = [
-  { id: "r1", text: "I'm ready to report, aren't I?" },
-  { id: "r2", text: "First, I checked the facts with the Tag Tester." },
-  { id: "r3", text: "Then, Theo said he can't draw — but that was a lie." },
-  { id: "r4", text: "After that, Mr Abernathy's story about the locked archive fell apart." },
-  { id: "r5", text: "Also, Lila remembered a silhouette in a tall hat." },
-  { id: "r6", text: "Finally, we found out the paper is page 13 of the old book." },
-  { id: "r7", text: "So, the note and the page came from the same old book." },
-  { id: "r8", text: "Let's open the next page, shall we?" }
-];
-
-function emptyQ() { return { tone: null, mark: null, solved: false, checked: false }; }
-function emptyInterview() { return { q: [emptyQ(), emptyQ()], specialSeen: false }; }
-
-function defaults() {
-  return {
-    name: "",
-    flipped: {},
-    soundOn: true,
-    warmup: { blue: false, amber: false, checks: {} },
-    firstWitness: null,
-    openWitness: "voss",
-    interviews: { voss: emptyInterview(), theo: emptyInterview(), abernathy: emptyInterview(), lila: emptyInterview() },
-    classSentence: "",
-    classTags: { a: "", b: "" },
-    hwTags: {},
-    hwTones: {},
-    hwOpts: Object.fromEntries(HW.map((x) => [x.id, shuffle(x.options.slice())])),
-    hwSort: {},
-    report: [],
-    reportBank: shuffle(REPORT.map((r) => r.id)),
-    reportChecked: false,
-    hwOwn: "",
-    codeOpen: false,
-    reflect: ""
-  };
-}
-
-let state = defaults();
-try {
-  const raw = localStorage.getItem(KEY);
-  if (raw) state = Object.assign(defaults(), JSON.parse(raw));
-} catch (e) {}
-
-function save() {
-  try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
-  renderProgress();
-}
-
-function pic(name, alt, extra) {
-  return `<picture><source srcset="./images/${name}.webp" type="image/webp"><img src="./images/${name}.jpg" alt="${alt}" ${extra || ""}></picture>`;
-}
-
-function warmDone() {
-  return state.warmup.blue && state.warmup.amber && WARM.every((w) => state.warmup.checks[w.id] === w.answer);
-}
-function interviewDone(id) {
-  const iv = state.interviews[id];
-  return iv && iv.q.every((q) => q.solved);
-}
-function stampN() { return WITNESSES.filter((w) => interviewDone(w.id)).length; }
-function hwTagN() { return HW.filter((x) => state.hwTags[x.id] === x.correct && state.hwTones[x.id] === x.tone).length; }
-function hwSortN() { return HW.filter((x) => state.hwSort[x.id] === x.category).length; }
-function reportOk() { return state.reportChecked && REPORT.every((r, i) => state.report[i] === r.id); }
-function vocabN() { return Object.keys(state.flipped).filter((k) => state.flipped[k]).length; }
-function sentenceOk() { return wc(state.classSentence) >= 5; }
-
-function clues() {
-  return [
-    warmDone(),
-    interviewDone("voss"),
-    interviewDone("theo"),
-    interviewDone("abernathy"),
-    interviewDone("lila"),
-    sentenceOk(),
-    hwTagN() === 8,
-    reportOk() && hwSortN() === 8
-  ];
-}
-function clueN() { return clues().filter(Boolean).length; }
-
-function renderProgress() {
-  const n = clueN();
-  if ($("keysCount")) $("keysCount").textContent = n;
-  if ($("keyBar")) $("keyBar").style.width = (n / 8 * 100) + "%";
-  const map = {
-    intro: vocabN() >= 3,
-    warmup: warmDone(),
-    choose: !!state.firstWitness || stampN() > 0,
-    room: stampN() === 4,
-    summary: sentenceOk(),
-    end: !!state.codeOpen,
-    homework: hwTagN() >= 6
-  };
-  document.querySelectorAll("[data-nav]").forEach((b) => b.classList.toggle("is-done", !!map[b.getAttribute("data-nav")]));
-}
-
-function renderVocab() {
-  const box = $("grammarGrid");
-  if (!box) return;
-  box.innerHTML = GRAMMAR.map((g) => `
-    <div class="flip${state.flipped[g.id] ? " is-on" : ""}" data-flip="${g.id}">
-      <button type="button" aria-label="${g.q}">
-        <div class="flip-inner">
-          <div class="flip-face"><strong>${g.q}</strong><small>нажми</small></div>
-          <div class="flip-face flip-back">${g.ru}<br><span class="hint">${g.notes}</span></div>
+  <header class="sticky top-0 z-40 border-b border-brass/25 bg-ink-900/90 backdrop-blur-md">
+    <div class="mx-auto flex max-w-6xl items-center gap-2 px-3 py-2 sm:px-6">
+      <a href="#top" class="flex items-center gap-2 text-parch no-underline">
+        <span class="grid h-9 w-9 place-items-center rounded-full border border-brass/50 bg-navy font-display text-lg text-brass-light">👁</span>
+        <span class="hidden leading-tight sm:block">
+          <span class="block font-display text-sm font-semibold text-parch">Shadow School</span>
+          <span class="block text-[10px] font-bold uppercase tracking-[0.2em] text-parch-dim">Junior Investigator</span>
+        </span>
+      </a>
+      <div class="mx-auto hidden items-center gap-4 md:flex">
+        <div class="flex items-center gap-2 text-xs font-bold text-parch">
+          <span class="text-parch-dim">Witnesses interviewed</span>
+          <span id="headAvatars" class="flex gap-1"></span>
+          <span class="text-brass-light" id="headWitnessN">0/4</span>
         </div>
-      </button>
-    </div>`).join("");
-  box.querySelectorAll("[data-flip]").forEach((el) => {
-    el.querySelector("button").onclick = () => {
-      const id = el.getAttribute("data-flip");
-      state.flipped[id] = !state.flipped[id];
-      save(); renderVocab();
-    };
-  });
-}
+        <span class="h-5 w-px bg-parch/15"></span>
+        <div class="text-xs font-bold text-parch">
+          <span class="text-parch-dim">Progress</span>
+          <span class="text-brass-light" id="headClues">0/8</span>
+        </div>
+      </div>
+      <div class="ml-auto flex items-center gap-1.5">
+        <span class="mr-1 text-xs font-bold text-brass-light md:hidden" id="headMini">0/4</span>
+        <button type="button" id="btnCase" class="flex items-center gap-1.5 rounded-full border border-brass/40 bg-[#2a1d10]/70 px-3 py-1.5 text-xs font-bold text-parch">📁 <span class="hidden sm:inline">Case File</span> <span id="caseCount" class="rounded-full bg-brass px-1.5 text-[10px] text-ink-900">0</span></button>
+        <button type="button" id="btnSound" class="grid h-8 w-8 place-items-center rounded-full border border-parch/15 text-sm" aria-label="Озвучка" title="Озвучка">🔊</button>
+        <button type="button" id="btnReset" class="btn-reset rounded-full px-3 py-1.5 text-xs font-bold">↺ Начать заново</button>
+      </div>
+    </div>
+  </header>
 
-function renderWarmup() {
-  const box = $("warmupBox");
-  if (!box) return;
-  const checks = WARM.map((w, i) => {
-    const pick = state.warmup.checks[w.id];
-    const checked = !!pick;
-    const ok = pick === w.answer;
-    const btns = ["falling", "rising"].map((t) => {
-      let cls = "opt";
-      if (checked && pick === t && ok) cls += " is-ok";
-      else if (checked && pick === t && !ok) cls += " is-bad";
-      return `<button type="button" class="${cls}" data-w="${w.id}" data-tone="${t}">${t === "falling" ? "↘ Falling · fact check (blue)" : "↗ Rising · real question (amber)"}</button>`;
-    }).join("");
-    const why = checked ? `<p class="why ${ok ? "ok" : "bad"}">${ok ? w.why : "Подумай: ты уже знаешь ответ или нет?"}</p>` : "";
-    return `<div class="task"><p style="margin:0 0 6px"><strong>${i + 1}.</strong> ${w.situation}</p>${btns}${why}</div>`;
-  }).join("");
-  box.innerHTML = `
-    <p>Нажми лампы и послушай один и тот же хвостик с разной интонацией. Потом выбери, какой тон подходит к ситуации.</p>
-    <p>
-      <button type="button" class="lamp${state.warmup.blue ? " is-blue" : ""}" id="lampBlue">🔵 Blue light · falling ↘</button>
-      <button type="button" class="lamp${state.warmup.amber ? " is-amber" : ""}" id="lampAmber">🟡 Amber light · rising ↗</button>
-    </p>
-    <p class="hint">It's dark in the library, <strong>isn't it?</strong></p>
-    ${checks}
-    <p class="counter">Разминка: ${warmDone() ? "готова ✓" : "послушай обе лампы и ответь на 2 ситуации"}</p>
-  `;
-  $("lampBlue").onclick = () => {
-    state.warmup.blue = true; save();
-    speakTag("It's dark in the library,", "isn't it?", "falling", 1);
-    renderWarmup();
-  };
-  $("lampAmber").onclick = () => {
-    state.warmup.amber = true; save();
-    speakTag("It's dark in the library,", "isn't it?", "rising", 1);
-    renderWarmup();
-  };
-  box.querySelectorAll("[data-w]").forEach((b) => {
-    b.onclick = () => {
-      state.warmup.checks[b.getAttribute("data-w")] = b.getAttribute("data-tone");
-      save(); renderWarmup();
-    };
-  });
-}
+  <main id="main" tabindex="-1">
+    <section id="top" class="grain relative">
+      <div class="relative h-[78vh] min-h-[520px] w-full overflow-hidden sm:h-[88vh] sm:max-h-[960px]">
+        <picture>
+          <source srcset="./images/hero.webp" type="image/webp">
+          <img src="./images/hero.jpg" alt="Четыре человека стоят вокруг стола в библиотеке Shadow School. Латунный Tag Tester светится синим и янтарным." class="absolute inset-0 h-full w-full scale-105 object-cover object-[50%_45%]" style="animation:heroZoom 18s ease-out forwards">
+        </picture>
+        <div class="hero-shade absolute inset-0"></div>
+        <div class="hero-fade absolute inset-x-0 bottom-0 h-2/5"></div>
+        <div id="heroDust"></div>
+        <div class="absolute inset-x-0 top-20 flex justify-center px-4 sm:top-24">
+          <div class="plaque pop-in rounded-sm px-6 py-3 text-center sm:px-14 sm:py-4">
+            <h1 class="font-display text-3xl font-medium leading-tight tracking-wide text-parch sm:text-5xl lg:text-6xl">Interview the Witness</h1>
+            <p class="mt-1 font-display text-lg text-parch sm:text-2xl">Shadow School</p>
+          </div>
+        </div>
+      </div>
 
-function renderChoose() {
-  const box = $("chooseGrid");
-  if (!box) return;
-  box.innerHTML = WITNESSES.map((w) => {
-    const done = interviewDone(w.id);
-    const first = state.firstWitness === w.id;
-    return `<button type="button" data-first="${w.id}" class="${first ? "is-on" : ""} ${done ? "is-done" : ""}">
-      <figure>
-        ${pic(w.img, w.name + ", " + w.role, 'width="600" height="900"')}
-        <figcaption><strong>${w.name}</strong>${w.role}. ${w.mood}${first ? " · first interview" : ""}${done ? " · ✓" : ""}</figcaption>
-      </figure>
-    </button>`;
-  }).join("");
-  box.querySelectorAll("[data-first]").forEach((b) => {
-    b.onclick = () => {
-      const id = b.getAttribute("data-first");
-      if (!state.firstWitness) state.firstWitness = id;
-      state.openWitness = id;
-      save();
-      renderChoose();
-      renderRoom();
-      go("room");
-    };
-  });
-  $("firstNote").textContent = state.firstWitness
-    ? "Первый свидетель уже выбран: " + WITNESSES.find((w) => w.id === state.firstWitness).name + ". Особый ключ получишь после его или её двух вопросов. Остальных можно спрашивать сразу."
-    : "Выбери, с кого начнёшь. Первый свидетель даст особую улику. Остальных можно допросить в любом порядке — двери не закрыты.";
-}
+      <div class="relative z-10 mx-auto -mt-40 max-w-6xl px-4 sm:-mt-44 sm:px-6">
+        <div class="panel grid gap-6 rounded-3xl p-6 sm:p-8 md:grid-cols-[1fr_auto] md:items-center">
+          <div>
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-brass-light">Speaking · Year 7 · continues “Reading: Agnes's Notes”</p>
+            <p class="mt-3 max-w-2xl text-base leading-relaxed text-parch sm:text-lg">Цель урока: научиться составлять <b class="text-brass-light">question tags</b> (хвостики) и выбирать интонацию: falling ↘, если проверяешь факт, и rising ↗, если правда спрашиваешь. Вечер в библиотеке Shadow School. Ты — <b class="text-brass-light">Junior Investigator</b>. Прочитай показания каждого свидетеля и сама составь tag questions, чтобы найти правду.</p>
+            <div class="mt-4 grid gap-2 text-sm sm:grid-cols-2">
+              <div class="flex items-start gap-2 rounded-xl border border-tagblue/30 bg-tagblue/[0.07] p-3">
+                <span class="mt-0.5 h-3 w-3 shrink-0 rounded-full bg-tagblue shadow-bulb-blue"></span>
+                <span class="text-parch"><b>Falling ↘</b> = fact check. Blue light. The witness <b>can't</b> escape.</span>
+              </div>
+              <div class="flex items-start gap-2 rounded-xl border border-tagamber/30 bg-tagamber/[0.07] p-3">
+                <span class="mt-0.5 h-3 w-3 shrink-0 rounded-full bg-tagamber shadow-bulb-amber"></span>
+                <span class="text-parch"><b>Rising ↗</b> = real question. Amber light. The witness <b>can</b> evade.</span>
+              </div>
+            </div>
+            <div class="mt-5 flex flex-wrap items-end gap-3">
+              <label class="block text-sm font-bold">Имя детектива
+                <input id="nameField" type="text" maxlength="40" autocomplete="name" placeholder="Напиши своё имя" class="mt-1 block rounded-xl border border-parch/20 bg-ink-850 px-3 py-2 text-parch">
+              </label>
+              <a href="#warmup" class="btn-brass inline-block no-underline">Дальше → разминка</a>
+            </div>
+          </div>
+          <div class="hidden md:block">
+            <div class="brass mx-auto grid w-40 gap-3 rounded-2xl p-4">
+              <div class="flex justify-center gap-3">
+                <span class="bulb on-blue h-8 w-6"></span>
+                <span class="bulb on-amber h-8 w-6"></span>
+              </div>
+              <div class="dial relative mx-auto h-16 w-16 rounded-full">
+                <span class="needle absolute left-1/2 top-3 h-8 w-0.5 -translate-x-1/2 bg-ink-900"></span>
+              </div>
+              <p class="text-center font-type text-[10px] text-ink-900">TAG TESTER</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-function renderRoom() {
-  const tabs = $("witnessTabs");
-  const pane = $("interviewPane");
-  if (!tabs || !pane) return;
-  const cur = state.openWitness || "voss";
-  tabs.innerHTML = WITNESSES.map((w) => {
-    const done = interviewDone(w.id);
-    return `<button type="button" class="chip${cur === w.id ? " is-on" : ""}${done ? " is-done" : ""}" data-open="${w.id}">${w.name}${done ? " ✓" : ""}</button>`;
-  }).join("");
-  tabs.querySelectorAll("[data-open]").forEach((b) => {
-    b.onclick = () => { state.openWitness = b.getAttribute("data-open"); save(); renderRoom(); };
-  });
-  const w = WITNESSES.find((x) => x.id === cur);
-  const iv = state.interviews[w.id];
-  if (!state.firstWitness && stampN() === 0) {
-    // first completed later; selection can also happen here
-  }
-  const items = w.questions.map((q, i) => {
-    const rec = iv.q[i] || emptyQ();
-    const toneBtns = ["falling", "rising"].map((t) => {
-      let cls = "opt";
-      if (rec.tone === t && rec.solved) cls += " is-ok";
-      else if (rec.tone === t && rec.checked && t === "rising") cls += " is-bad";
-      else if (rec.tone === t) cls += "";
-      return `<button type="button" class="${cls}" data-iq="${w.id}" data-i="${i}" data-tone="${t}">${t === "falling" ? "↘ Falling · fact check" : "↗ Rising · real question"}</button>`;
-    }).join("");
-    const reply = rec.tone ? `<div class="rule" style="margin-top:8px"><p><strong>${w.name}:</strong> ${q[rec.tone].text}</p>
-      <button type="button" class="btn btn-ink" data-say-ans="${w.id}-${i}">🔊 Hear the answer</button></div>` : "";
-    const marks = rec.tone ? Object.keys(MARKS).map((m) => {
-      let cls = "opt";
-      if (rec.checked && rec.mark === m && rec.solved) cls += " is-ok";
-      else if (rec.checked && rec.mark === m && !rec.solved) cls += " is-bad";
-      return `<button type="button" class="${cls}" data-mark="${w.id}" data-i="${i}" data-m="${m}">${MARKS[m]}</button>`;
-    }).join("") : "";
-    let why = "";
-    if (rec.checked) {
-      if (rec.solved) why = `<p class="why ok">Верно: falling ↘ проверяет факт, и свидетель отвечает. Улика записана в дело.</p>`;
-      else if (rec.tone === "rising") why = `<p class="why bad">Янтарный свет: rising ↗ — настоящий вопрос, поэтому свидетель может уклониться. Попробуй falling ↘, чтобы получить улику.</p>`;
-      else why = `<p class="why bad">Послушай ответ ещё раз. Это confirmed fact, evaded или something new?</p>`;
-    }
-    return `<div class="task">
-      <p style="margin:0 0 6px"><strong>${i + 1}.</strong> ${q.stem} <em>${q.tag}</em></p>
-      <p>
-        <button type="button" class="btn btn-ink" data-hear="${w.id}-${i}-falling">▶ falling ↘</button>
-        <button type="button" class="btn btn-ink" data-hear="${w.id}-${i}-rising">▶ rising ↗</button>
-      </p>
-      ${toneBtns}${reply}
-      ${rec.tone ? `<p class="hint" style="margin:10px 0 4px">Отметь, что сделал свидетель:</p>${marks}` : ""}
-      ${why}
-    </div>`;
-  }).join("");
-  const done = interviewDone(w.id);
-  if (done && !state.firstWitness) { state.firstWitness = w.id; }
-  const isFirst = state.firstWitness === w.id;
-  const special = done && isFirst ? `<div class="task"><p class="stamp ok">SPECIAL CLUE</p><h3>${w.special.title}</h3>${w.special.lines.map((l) => `<p>${l}</p>`).join("")}
-    <button type="button" class="btn btn-ink" id="hearSpecial">🔊 Hear the clue</button></div>` : "";
-  if (done && isFirst && !iv.specialSeen) {
-    iv.specialSeen = true;
-    save();
-  }
-  pane.innerHTML = `
-    <div class="photo-frame">${pic(w.img, w.name + ", " + w.role, 'width="600" height="900"')}</div>
-    <p><strong>${w.name}</strong> — ${w.role}. ${w.mood}</p>
-    ${items}
-    ${done ? `<p class="stamp ok">INTERVIEWED: ${w.name}</p><p class="hint">${w.normalEnd}</p>` : ""}
-    ${special}
-  `;
-  pane.querySelectorAll("[data-tone]").forEach((b) => {
-    b.onclick = () => {
-      const id = b.getAttribute("data-iq"); const i = +b.getAttribute("data-i"); const t = b.getAttribute("data-tone");
-      const rec = state.interviews[id].q[i];
-      rec.tone = t; rec.mark = null; rec.checked = false; rec.solved = false;
-      save(); renderRoom();
-    };
-  });
-  pane.querySelectorAll("[data-m]").forEach((b) => {
-    b.onclick = () => {
-      const id = b.getAttribute("data-mark"); const i = +b.getAttribute("data-i"); const m = b.getAttribute("data-m");
-      const wobj = WITNESSES.find((x) => x.id === id);
-      const q = wobj.questions[i];
-      const rec = state.interviews[id].q[i];
-      rec.mark = m; rec.checked = true;
-      rec.solved = rec.tone === "falling" && m === q.falling.mark;
-      save(); renderRoom(); renderChoose(); renderSummary();
-    };
-  });
-  pane.querySelectorAll("[data-hear]").forEach((b) => {
-    b.onclick = () => {
-      const [id, i, tone] = b.getAttribute("data-hear").split("-");
-      const wobj = WITNESSES.find((x) => x.id === id);
-      const q = wobj.questions[+i];
-      speakTag(q.stem, q.tag, tone, wobj.pitch);
-    };
-  });
-  pane.querySelectorAll("[data-say-ans]").forEach((b) => {
-    b.onclick = () => {
-      const [id, i] = b.getAttribute("data-say-ans").split("-");
-      const wobj = WITNESSES.find((x) => x.id === id);
-      const rec = state.interviews[id].q[+i];
-      if (rec.tone) speak(wobj.questions[+i][rec.tone].text, { pitch: wobj.pitch });
-    };
-  });
-  const hs = $("hearSpecial");
-  if (hs) hs.onclick = () => speak(w.special.lines.join(" "), { pitch: w.pitch });
-  $("stampCount").textContent = stampN() + " / 4";
-}
+    <nav class="mx-auto mt-6 flex max-w-6xl flex-wrap justify-center gap-2 px-4 sm:px-6" aria-label="Разделы урока">
+      <a class="nav-chip" href="#warmup">Разминка</a>
+      <a class="nav-chip" href="#choose">Свидетели</a>
+      <a class="nav-chip" href="#rooms">Допросы</a>
+      <a class="nav-chip" href="#analysis">Сводка</a>
+      <a class="nav-chip" href="#homework">Домашка</a>
+      <a class="nav-chip" href="#ending">Финал</a>
+      <button type="button" id="btnGrammar" class="nav-chip pulse-ring">Правило</button>
+    </nav>
 
-function renderSummary() {
-  const box = $("summaryBox");
-  if (!box) return;
-  const items = OPENQ.map((q) => {
-    const got = Object.values(CLUES).filter((c) => c.q.includes(q.id) && !String(c.id).startsWith("h") && (c.id.startsWith("p") || discovered(c.id)));
-    return `<div class="case"><h3>${q.short}</h3><p>${q.title}</p>
-      <ul>${got.map((c) => `<li>${c.text} <span class="hint">(${c.source})</span></li>`).join("") || "<li class='hint'>Пока только заметки Агнес.</li>"}</ul>
-      ${stampN() === 4 ? `<p><strong>Class so far:</strong> ${CLASS_SUM[q.id]}</p>` : ""}
-    </div>`;
-  }).join("");
-  box.innerHTML = items;
-}
+    <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+      <section id="warmup" class="scroll-mt-24" tabindex="-1">
+        <div class="panel rounded-3xl p-6 sm:p-8" id="warmupBox"></div>
+        <p class="next-row"><a class="btn-brass inline-block no-underline" href="#choose">Дальше → свидетели</a></p>
+      </section>
 
-function discovered(id) {
-  if (id.endsWith("S")) {
-    const wid = id.replace("S", "").replace("aber", "abernathy").replace("voss", "voss").replace("theo", "theo").replace("lila", "lila");
-    const map = { vossS: "voss", theoS: "theo", aberS: "abernathy", lilaS: "lila" };
-    const w = map[id];
-    return w && interviewDone(w) && state.firstWitness === w;
-  }
-  const map = { voss1: ["voss", 0], voss2: ["voss", 1], theo1: ["theo", 0], theo2: ["theo", 1], aber1: ["abernathy", 0], aber2: ["abernathy", 1], lila1: ["lila", 0], lila2: ["lila", 1] };
-  const pair = map[id];
-  return pair && state.interviews[pair[0]].q[pair[1]].solved;
-}
+      <section id="choose" class="scroll-mt-24" tabindex="-1">
+        <div class="panel rounded-3xl p-6 sm:p-8" id="chooseBox"></div>
+        <p class="next-row"><a class="btn-brass inline-block no-underline" href="#rooms">Дальше → допрос</a></p>
+      </section>
 
-function renderHwQ() {
-  const box = $("hwqList");
-  if (!box) return;
-  box.innerHTML = HW.map((item, i) => {
-    const w = WITNESSES.find((x) => x.id === item.witness);
-    const order = state.hwOpts[item.id] || item.options;
-    const tag = state.hwTags[item.id];
-    const tone = state.hwTones[item.id];
-    const tagOk = tag === item.correct;
-    const toneOk = tone === item.tone;
-    const tagBtns = order.map((o) => {
-      let cls = "opt";
-      if (tag && o === tag && tagOk) cls += " is-ok";
-      else if (tag && o === tag && !tagOk) cls += " is-bad";
-      return `<button type="button" class="${cls}" data-htag="${item.id}" data-opt="${o}">${item.stem} ${o}</button>`;
-    }).join("");
-    const toneBtns = ["falling", "rising"].map((t) => {
-      let cls = "opt";
-      if (tone && t === tone && toneOk) cls += " is-ok";
-      else if (tone && t === tone && !toneOk) cls += " is-bad";
-      return `<button type="button" class="${cls}" data-htone="${item.id}" data-t="${t}">${t === "falling" ? "↘ Falling · fact check" : "↗ Rising · real question"}</button>`;
-    }).join("");
-    const why = (tag || tone) ? `<p class="why ${tagOk && toneOk ? "ok" : "bad"}">${tag && !tagOk ? item.whyTag : ""}${tone && !toneOk ? " " + "Подумай: ты уже знаешь ответ или спрашиваешь по-настоящему?" : ""}${tagOk && toneOk ? item.toneWhy + " " + item.whyTag : ""}</p>` : "";
-    const ans = tagOk && toneOk ? `<div class="rule" style="margin-top:8px"><p><strong>${w.name}:</strong> ${item.answer}</p>
-      <p class="hint">${item.evidence}</p>
-      <button type="button" class="btn btn-ink" data-hwans="${item.id}">🔊 Listen to the answer</button></div>` : "";
-    return `<div class="task">
-      <p style="margin:0 0 6px"><strong>${i + 1}. ${w.name}</strong></p>
-      <p class="hint">${item.context}</p>
-      <p>
-        <button type="button" class="btn btn-ink" data-hhear="${item.id}-falling">▶ falling</button>
-        <button type="button" class="btn btn-ink" data-hhear="${item.id}-rising">▶ rising</button>
-      </p>
-      <p class="hint">a · Choose the tag</p>${tagBtns}
-      <p class="hint">b · Which intonation is better?</p>${toneBtns}
-      ${why}${ans}
-    </div>`;
-  }).join("");
-  box.querySelectorAll("[data-htag]").forEach((b) => {
-    b.onclick = () => { state.hwTags[b.getAttribute("data-htag")] = b.getAttribute("data-opt"); save(); renderHwQ(); $("hwqCount").textContent = hwTagN() + " / 8"; };
-  });
-  box.querySelectorAll("[data-htone]").forEach((b) => {
-    b.onclick = () => { state.hwTones[b.getAttribute("data-htone")] = b.getAttribute("data-t"); save(); renderHwQ(); $("hwqCount").textContent = hwTagN() + " / 8"; };
-  });
-  box.querySelectorAll("[data-hhear]").forEach((b) => {
-    b.onclick = () => {
-      const [id, tone] = b.getAttribute("data-hhear").split("-");
-      const item = HW.find((x) => x.id === id);
-      const w = WITNESSES.find((x) => x.id === item.witness);
-      speakTag(item.stem, item.correct, tone, w.pitch);
-    };
-  });
-  box.querySelectorAll("[data-hwans]").forEach((b) => {
-    b.onclick = () => {
-      const item = HW.find((x) => x.id === b.getAttribute("data-hwans"));
-      const w = WITNESSES.find((x) => x.id === item.witness);
-      speak(item.answer, { pitch: w.pitch });
-    };
-  });
-  $("hwqCount").textContent = hwTagN() + " / 8";
-}
+      <section id="rooms" class="scroll-mt-24 space-y-8" tabindex="-1"></section>
+      <p class="next-row"><a class="btn-brass inline-block no-underline" href="#analysis">Дальше → сводка</a></p>
 
-function renderHwSort() {
-  const box = $("hwsortList");
-  if (!box) return;
-  box.innerHTML = HW.map((item) => {
-    const w = WITNESSES.find((x) => x.id === item.witness);
-    const pick = state.hwSort[item.id];
-    const ok = pick === item.category;
-    const btns = ["lie", "uncertainty", "new"].map((c) => {
-      let cls = "opt";
-      if (pick === c && ok) cls += " is-ok";
-      else if (pick === c && !ok) cls += " is-bad";
-      return `<button type="button" class="${cls}" data-sort="${item.id}" data-c="${c}">${CATS[c]}</button>`;
-    }).join("");
-    const why = pick ? `<p class="why ${ok ? "ok" : "bad"}">${ok ? item.evidence : "Сравни ответ с уликами в деле."}</p>` : "";
-    return `<div class="task"><p style="margin:0 0 6px"><strong>${w.name}:</strong> “${item.answer}”</p>${btns}${why}</div>`;
-  }).join("");
-  box.querySelectorAll("[data-sort]").forEach((b) => {
-    b.onclick = () => { state.hwSort[b.getAttribute("data-sort")] = b.getAttribute("data-c"); save(); renderHwSort(); $("hwsortCount").textContent = hwSortN() + " / 8"; };
-  });
-  $("hwsortCount").textContent = hwSortN() + " / 8";
-}
+      <section id="analysis" class="scroll-mt-24" tabindex="-1">
+        <div class="panel rounded-3xl p-6 sm:p-8" id="analysisBox"></div>
+        <p class="next-row"><a class="btn-brass inline-block no-underline" href="#homework">Дальше → домашка</a></p>
+      </section>
 
-function renderReport() {
-  const box = $("reportBox");
-  if (!box) return;
-  const bank = (state.reportBank || []).filter((id) => !state.report.includes(id));
-  const bankBtns = bank.map((id) => {
-    const r = REPORT.find((x) => x.id === id);
-    return `<button type="button" class="chip-word" data-add="${id}">${r.text}</button>`;
-  }).join("");
-  const built = state.report.map((id, i) => {
-    const r = REPORT.find((x) => x.id === id);
-    let cls = "chip-word placed";
-    if (state.reportChecked) cls += (REPORT[i] && REPORT[i].id === id) ? " is-ok-pos" : " is-bad-pos";
-    return `<button type="button" class="${cls}" data-rm="${i}">${i + 1}. ${r.text}</button>`;
-  }).join("");
-  const ok = reportOk();
-  const why = state.reportChecked ? `<p class="why ${ok ? "ok" : "bad"}">${ok ? "Отличный рапорт! Прочитай его вслух: falling-хвостики в начале и в конце (aren't I? / shall we?)." : "Красным отмечен неверный порядок. Держись связок: First, Then, After that, Also, Finally, So."}</p>` : "";
-  box.innerHTML = `
-    <p class="hint">Собери рапорт по порядку. Части перемешаны. Начни с “I'm ready to report…” и используй First, Then, After that, Also, Finally, So.</p>
-    <div class="drop">${built || '<span class="hint">Нажимай предложения внизу, чтобы собрать рапорт.</span>'}</div>
-    <div class="bank">${bankBtns}</div>
-    <p>
-      <button type="button" class="btn btn-navy" id="checkReport">Check the report</button>
-      <button type="button" class="btn btn-ink" id="readReport">▶ Read aloud</button>
-    </p>
-    ${why}
-    ${ok ? `<div class="case">${OPENQ.map((q) => `<p><strong>${q.short}:</strong> ${HW_SUM[q.id]}</p>`).join("")}</div>` : ""}
-  `;
-  box.querySelectorAll("[data-add]").forEach((b) => {
-    b.onclick = () => { state.report = [...state.report, b.getAttribute("data-add")]; state.reportChecked = false; save(); renderReport(); };
-  });
-  box.querySelectorAll("[data-rm]").forEach((b) => {
-    b.onclick = () => { const i = +b.getAttribute("data-rm"); state.report = state.report.filter((_, k) => k !== i); state.reportChecked = false; save(); renderReport(); };
-  });
-  $("checkReport").onclick = () => { state.reportChecked = true; save(); renderReport(); renderEnd(); };
-  $("readReport").onclick = () => {
-    const text = state.report.map((id) => REPORT.find((x) => x.id === id).text).join(" ");
-    if (text) speak(text);
-  };
-}
+      <section id="homework" class="scroll-mt-24" tabindex="-1">
+        <div class="panel rounded-3xl p-6 sm:p-8" id="hwBox"></div>
+        <p class="next-row"><a class="btn-brass inline-block no-underline" href="#ending">Дальше → финал</a></p>
+      </section>
 
-function renderEnd() {
-  if (state.codeOpen) { $("codeBox").hidden = false; $("codeText").textContent = CODE; }
-  else $("codeBox").hidden = true;
-  $("finalName").textContent = state.name.trim() || "Junior Investigator";
-  $("finalClues").textContent = clueN() + " / 8";
-}
+      <section id="ending" class="scroll-mt-24" tabindex="-1">
+        <div class="panel rounded-3xl p-6 sm:p-8" id="endingBox"></div>
+      </section>
+    </div>
+  </main>
 
-function go(id) {
-  const el = $(id);
-  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  document.querySelectorAll("[data-nav]").forEach((b) => b.classList.toggle("is-on", b.getAttribute("data-nav") === id));
-}
+  <div id="caseModal" hidden></div>
+  <div id="grammarModal" hidden></div>
 
-function bindAll() {
-  document.querySelectorAll("[data-nav]").forEach((b) => b.onclick = () => go(b.getAttribute("data-nav")));
-  document.querySelectorAll("[data-go]").forEach((b) => b.onclick = () => go(b.getAttribute("data-go")));
-  $("resetBtn").onclick = () => {
-    if (confirm("Начать заново? Весь прогресс, ключи, ответы и домашнее задание будут удалены.")) {
-      if (window.speechSynthesis) speechSynthesis.cancel();
-      localStorage.removeItem(KEY);
-      location.reload();
-    }
-  };
-  $("soundBtn").onclick = () => {
-    state.soundOn = !state.soundOn;
-    if (!state.soundOn && window.speechSynthesis) speechSynthesis.cancel();
-    $("soundBtn").textContent = state.soundOn ? "🔊" : "🔇";
-    $("soundBtn").setAttribute("aria-label", state.soundOn ? "Звук включён" : "Звук выключен");
-    save();
-  };
-  $("soundBtn").textContent = state.soundOn ? "🔊" : "🔇";
-  $("btnRules").onclick = () => $("modalRules").classList.add("is-on");
-  $("rulesClose").onclick = () => $("modalRules").classList.remove("is-on");
-  $("modalRules").addEventListener("click", (e) => { if (e.target.id === "modalRules") $("modalRules").classList.remove("is-on"); });
-  $("nameInput").value = state.name;
-  $("nameInput").oninput = () => { state.name = $("nameInput").value; save(); renderEnd(); };
-  $("btnCode").onclick = () => { state.codeOpen = true; save(); renderEnd(); };
-  $("reflect").value = state.reflect || "";
-  $("reflect").oninput = () => { state.reflect = $("reflect").value; save(); };
-  $("theory").value = state.classSentence || "";
-  $("theory").oninput = () => { state.classSentence = $("theory").value; save(); renderEnd(); };
-  $("hwOwn").value = state.hwOwn || "";
-  $("hwOwn").oninput = () => { state.hwOwn = $("hwOwn").value; save(); };
-}
-
-function stats() {
-  return {
-    vocabN: vocabN(), warm: warmDone(), stampN: stampN(),
-    first: state.firstWitness, sentence: sentenceOk(),
-    hwTagN: hwTagN(), hwSortN: hwSortN(), reportOk: reportOk(),
-    clues: clueN(), code: !!state.codeOpen, codeText: state.codeOpen ? CODE : "",
-    all: warmDone() && stampN() === 4 && sentenceOk() && hwTagN() === 8 && hwSortN() === 8 && reportOk()
-  };
-}
-
-function boot() {
-  bindAll();
-  renderVocab();
-  renderWarmup();
-  renderChoose();
-  renderRoom();
-  renderSummary();
-  renderHwQ();
-  renderHwSort();
-  renderReport();
-  renderEnd();
-  renderProgress();
-  window.__tagqa = { KEY, CODE, stats: () => stats(), state: () => state, WITNESSES, HW, REPORT, WARM, GRAMMAR, CLUES };
-}
-document.addEventListener("DOMContentLoaded", boot);
-
-</script>
-<script src="../_shared/watermark.js" data-mode="bar" data-position="bottom" defer></script>
+  <script src="./app.js"></script>
+  <script src="../_shared/watermark.js" data-mode="bar" data-position="bottom" defer></script>
 </body>
 </html>
