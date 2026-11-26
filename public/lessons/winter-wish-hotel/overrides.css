@@ -1,0 +1,103 @@
+/* Standing rules on top of the Arena hotel design */
+html{background:#eee9df}
+body{padding-bottom:110px;color:var(--ink)}
+.skip{position:absolute;left:-999px;top:0;color:var(--ink);background:var(--paper)}
+.skip:focus{left:12px;top:12px;z-index:80;padding:8px 12px;border-radius:8px;background:var(--ink);color:var(--paper)}
+[tabindex="-1"]:focus{outline:none}
+.btn-reset{border:1px solid var(--red);background:var(--red);color:#fffaf0;border-radius:999px;padding:8px 14px;font-size:12px;font-weight:700;letter-spacing:.02em;min-height:40px}
+.btn-sound{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;width:40px;height:40px;font-size:16px}
+.next-row{margin:18px 0 28px}
+.why{margin:8px 0 0;font-size:.92rem;font-weight:700;border-radius:10px;padding:8px 10px}
+.why.ok{background:#e8f6ef;color:#154734}
+.why.bad{background:#fdecea;color:#8a2c22}
+.goal-box{background:#eef2f0;border-left:3px solid var(--blue);padding:14px 18px;margin:0 0 18px;font-size:16px;line-height:1.55;color:var(--ink)}
+
+/* Interactive word / phrase banks — tap-friendly */
+.tile-bank{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 16px}
+.tile{
+  border:1px solid var(--gold);background:#fff;color:var(--ink);
+  border-radius:999px;padding:8px 14px;font-weight:600;font-size:14px;
+  min-height:44px;line-height:1.2;box-shadow:0 1px 0 #d7ac4133;
+}
+.tile:hover,.tile.is-used{background:#f6ecd4}
+.tile.is-on{background:#ead49b;box-shadow:0 0 0 2px #c99b2780}
+.built{
+  display:flex;flex-wrap:wrap;align-items:center;gap:6px;
+  min-height:52px;border:1px dashed var(--line);border-radius:8px;
+  padding:8px 10px;background:#fff;color:var(--ink);
+}
+.built.is-focus{border-color:var(--blue);box-shadow:0 0 0 2px #28536e33}
+.built-chip{
+  border:1px solid var(--gold);background:#fffaf0;color:var(--ink);
+  border-radius:999px;padding:6px 10px;font-weight:600;font-size:14px;min-height:36px;
+}
+.built-placeholder{color:#8a7952;font-style:italic;font-size:14px}
+.gap-slot{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:108px;min-height:40px;padding:4px 10px;margin:0 4px;
+  border:0;border-bottom:2px solid var(--gold);background:#fff;
+  color:var(--ink);font-weight:700;cursor:pointer;border-radius:4px 4px 0 0;
+}
+.gap-slot.is-focus{background:#ead49b;border-bottom-color:var(--blue)}
+.gap-slot:empty:before{content:"…";color:#8a7952;font-weight:600}
+
+.choice-row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.choice{
+  border:1px solid var(--line);background:#fff;color:var(--ink);
+  border-radius:8px;padding:8px 12px;min-height:44px;font-weight:600;text-align:left;
+}
+.choice.is-on{border-color:var(--blue);background:#eef2f0;box-shadow:0 0 0 2px #28536e33}
+.choice.is-ok{border-color:var(--green);background:#e8f6ef}
+.choice.is-bad{border-color:var(--red);background:#fdecea}
+
+.code-box{text-align:center;border:1px solid var(--gold);padding:22px 16px;margin:18px 0}
+.code-box strong{display:block;margin-top:8px;font-family:Pacifico,cursive;font-size:32px;color:var(--ink);font-weight:400}
+
+.site-header-inner{padding-right:4px}
+@media(max-width:870px){
+  .btn-reset{padding:8px 10px;font-size:11px}
+  .site-nav{overflow:auto;gap:12px;max-width:100%}
+}
+@media(max-width:520px){body{padding-bottom:120px}}
+
+/* Intro quest illustration — full width before the briefing */
+.quest-intro-figure{margin:4px -8px 18px;width:calc(100% + 16px)}
+.quest-intro-figure picture,.quest-intro-figure img{display:block;width:100%;height:auto;border-radius:10px;border:1px solid var(--line);box-shadow:0 12px 28px #102d471f}
+.quest-intro-figure figcaption{color:#345670;margin-top:10px;font-family:Cormorant Garamond,Georgia,serif;font-size:20px;font-style:italic;font-weight:600;line-height:1.3}
+.quest-intro-ru{color:var(--ink);margin:8px 0 0;font-size:16px;line-height:1.55}
+@media(min-width:900px){
+  .quest-intro-figure{margin-left:-12px;margin-right:-12px;width:calc(100% + 24px)}
+}
+
+.progress-chip{color:var(--ink);letter-spacing:.04em;font-size:12px;font-weight:700;white-space:nowrap}
+.header-actions{display:flex;align-items:center;gap:8px}
+.homework-lines li{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 8px;padding:8px 0;border-bottom:1px solid #e7d8ae}
+.homework-lines li .built{min-width:200px}
+.writing-prompt{white-space:normal !important}
+@media(max-width:700px){
+  .writing-row{grid-template-columns:25px 1fr; }
+  .writing-row .built{grid-column:1/-1}
+}
+.suspect-table .choice{font-size:12px;padding:6px 8px;min-height:40px}
+.suspect-table td,.suspect-table th{vertical-align:top}
+.answer-correct{background:#e8f6ef}
+.answer-incorrect{background:#fdecea}
+.activity-feedback{color:#3a4a56}
+.site-header{background-color:#fffaf0}
+.paper-page,.review-form,.grammar-block{background-color:var(--paper)}
+.reception-desk{background-color:#1d4059;color:#fffaf0}
+#ttc-wm-bar{z-index:20}
+
+.cover-meta{color:#4f3f22}
+.guest-name-line span{color:#3d4a56}
+.list-number,.writing-number,.homework-lines li span{color:#5c430e}
+.role-card-top{color:#5c450f}
+.guest-portrait figcaption>p{color:#3d4a56}
+.role-request{color:#33404c}
+.activity-feedback{color:#3a4a56}
+.reception-heading span{color:#f0d48a}
+.reception-desk p{color:#fffaf0}
+.built-placeholder{color:#5c4e32}
+
+.reception-desk h3,.reception-desk .activity-feedback{color:#fffaf0}
+.reception-desk .action-button[style]{background:#fffaf0 !important;color:var(--ink) !important;border-color:#fffaf0}
